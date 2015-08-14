@@ -1,0 +1,26 @@
+{
+	"name": "trejjam/thepay-lib",
+	"description": "The pay library",
+	"keywords": [
+		"the pay"
+	],
+	"license": [
+		"MIT"
+	],
+	"require-dev": {
+		"nette/tester": "@dev"
+	},
+	"suggest": {
+		"trejjam/thepay": "to use as nette extension"
+	},
+	"autoload": {
+		"classmap": [
+			"src"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "v2.3.x-dev"
+		}
+	}
+}

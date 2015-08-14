@@ -1,0 +1,23 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+parameters:
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: Test\App\*Module\Presenters\*Presenter
+
+database:
+	dsn: "sqlite::memory:"
+
+services:
+	#routing.router:
+	#	autowired: no
+	router: Test\App\RouterFactory()::createRouter
+	#simpleRouter: Nette\Application\Routers\SimpleRouter
+	url: Nette\Http\Url('http://localhost.tld/')
+	application.linkGenerator: Nette\Application\LinkGenerator(@router, @url)
