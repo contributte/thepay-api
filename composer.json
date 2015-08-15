@@ -7,6 +7,9 @@
 	"license": [
 		"MIT"
 	],
+	"require": {
+		"php": ">=5.3.1"
+	},
 	"require-dev": {
 		"nette/tester": "@dev"
 	},
@@ -14,13 +17,16 @@
 		"trejjam/thepay": "to use as nette extension"
 	},
 	"autoload": {
+		"psr-4": {
+			"Tp\\": "src/"
+		},
 		"classmap": [
-			"src"
+			"src/exceptions/"
 		]
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "v2.3.x-dev"
+			"namespaces": "v2.3.x-dev"
 		}
 	}
 }
