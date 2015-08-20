@@ -1,6 +1,7 @@
-Contents
-=====
+The Pay library
+===============
 
+***This is not official library!*** 
 
 Installation
 ------------
@@ -8,5 +9,5 @@ Installation
 The best way to install trejjam/thepay-lib is using  [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require trejjam/thepay-lib:2.3-psr
+$ composer require trejjam/thepay-lib:dev-namespaces
 ```
