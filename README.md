@@ -1,6 +1,7 @@
-Contents
-=====
+The Pay library
+===============
 
+***This is not official library!*** 
 
 Installation
 ------------
