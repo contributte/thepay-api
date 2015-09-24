@@ -14,7 +14,7 @@ class ReturnedPayment extends Payment {
 	 * @var integer accountId from request
 	 */
 	protected $requestAccountId = null;
-	
+
 	/**
 	 * @var integer Payment status. One of enum values specified in the ThePay API documentation.
 	 */
@@ -76,12 +76,12 @@ class ReturnedPayment extends Payment {
 	 * @var string
 	 */
 	protected $customerAccountNumber = NULL;
-	
+
 	/**
 	 * Name of customer's account. Usually name and surname of customer, but it could be arbitrary name
 	 * which he set for his account in internet banking of his bank.
 	 * Is filled only for some payment methods.
-	 * @var string 
+	 * @var string
 	 */
 	protected $customerAccountName = NULL;
 
@@ -152,7 +152,7 @@ class ReturnedPayment extends Payment {
 		if (is_null($args)) {
 			$args = &$_REQUEST;
 		}
-		
+
 		if( !empty($args['merchantId'])){
 			$this->requestMerchantId = $args['merchantId'];
 		}
@@ -185,6 +185,13 @@ class ReturnedPayment extends Payment {
 	 * @throws InvalidSignatureException, when signature is invalid.
 	 */
 	function verifySignature($signature = NULL) {
+		// check merchantId and accountId from request
+		if ($this->requestMerchantId != $this->config->merchantId
+				|| $this->requestAccountId != $this->config->accountId
+		) {
+			throw new InvalidSignatureException();
+		}
+
 		if($signature === null){
 			$signature = $this->signature;
 		}
@@ -321,7 +328,7 @@ class ReturnedPayment extends Payment {
 	public function getCustomerAccountNumber() {
 		return $this->customerAccountNumber;
 	}
-	
+
 	/**
 	 * @return string Name of customer's account.
 	 */
