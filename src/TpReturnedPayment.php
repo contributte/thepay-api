@@ -186,6 +186,12 @@ class TpReturnedPayment extends TpPayment {
 	 * @throws TpInvalidSignatureException, when signature is invalid.
 	 */
 	function verifySignature($signature = NULL) {
+		// check merchantId and accountId from request
+		if($this->requestMerchantId != $this->config->merchantId
+			|| $this->requestAccountId != $this->config->accountId){
+			throw new TpInvalidSignatureException();
+		}
+
 		if($signature === null){
 			$signature = $this->signature;
 		}
