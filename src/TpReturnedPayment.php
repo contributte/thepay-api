@@ -8,11 +8,11 @@ require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'exceptions',  "TpInval
  */
 class TpReturnedPayment extends TpPayment {
 	/**
-	 * @var iteger merchantId from request
+	 * @var integer merchantId from request
 	 */
 	protected $requestMerchantId = null;
 	/**
-	 * @var iteger accountId from request
+	 * @var integer accountId from request
 	 */
 	protected $requestAccountId = null;
 	
@@ -191,7 +191,7 @@ class TpReturnedPayment extends TpPayment {
 			|| $this->requestAccountId != $this->config->accountId){
 			throw new TpInvalidSignatureException();
 		}
-
+		
 		if($signature === null){
 			$signature = $this->signature;
 		}

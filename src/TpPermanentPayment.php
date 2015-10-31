@@ -51,12 +51,12 @@ class TpPermanentPayment {
 
 	public function getSignature() {
 		$data = array(
-			'merchantId' => $this->config->merchantId,
-			'accountId' => $this->config->accountId,
+			'merchantId'   => $this->config->merchantId,
+			'accountId'    => $this->config->accountId,
 			'merchantData' => $this->merchantData,
-			'description' => $this->description,
-			'returnUrl' => $this->returnUrl,
-			'password' => $this->config->password,
+			'description'  => $this->description,
+			'returnUrl'    => $this->returnUrl,
+			'password'     => $this->config->password,
 		);
 		return md5(http_build_query(array_filter($data)));
 	}
