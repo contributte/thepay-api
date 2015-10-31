@@ -10,14 +10,19 @@ use Tp;
  */
 class PermanentPayment {
 	public static function createPermanentPayment(Tp\PermanentPayment $payment){
-		$client = new \SoapClient($payment->getConfig()->webServicesWsdl);
-		$result = $client->createPermanentPaymentRequest(
-			$payment->getConfig()->merchantId,
-			$payment->getConfig()->accountId,
-			$payment->getMerchantData(),
-			$payment->getDescription(),
-			$payment->getReturnUrl(),
-			$payment->getSignature());
+		$config = $payment->getConfig();
+		$client = new \SoapClient(
+			$config->webServicesWsdl,
+			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
+		);
+		$result = $client->createPermanentPaymentRequest([
+			'merchantId'   => $config->merchantId,
+			'accountId'    => $config->accountId,
+			'merchantData' => $payment->getMerchantData(),
+			'description'  => $payment->getDescription(),
+			'returnUrl'    => $payment->getReturnUrl(),
+			'signature'    => $payment->getSignature()
+		]);
 		if( ! $result){
 			throw new Tp\Exception();
 		}
@@ -25,12 +30,17 @@ class PermanentPayment {
 	}
 
 	public static function getPermanentPayment(Tp\PermanentPayment $payment){
-		$client = new \SoapClient($payment->getConfig()->webServicesWsdl);
-		$result = $client->getPermanentPaymentRequest(
-			$payment->getConfig()->merchantId,
-			$payment->getConfig()->accountId,
-			$payment->getMerchantData(),
-			$payment->getSignatureLite());
+		$config = $payment->getConfig();
+		$client = new \SoapClient(
+			$config->webServicesWsdl,
+			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
+		);
+		$result = $client->getPermanentPaymentRequest([
+			'merchantId'   => $config->merchantId,
+			'accountId'    => $config->accountId,
+			'merchantData' => $payment->getMerchantData(),
+			'signature'    => $payment->getSignatureLite()
+		]);
 		if( ! $result){
 			throw new Tp\Exception();
 		}

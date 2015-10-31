@@ -45,8 +45,8 @@ class MerchantConfig {
 	 * for creating permanent payments.
 	 * @var string
 	 */
-//	public $webServicesWsdl = 'https://www.thepay.cz/gate/api/api.wsdl';
-	public $webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/api-demo.wsdl';
+//	public $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
+	public $webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl';
 
 //	public $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
 	public $dataWebServicesWsdl = 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl';

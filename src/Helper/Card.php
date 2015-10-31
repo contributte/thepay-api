@@ -15,17 +15,18 @@ class Card {
 
 	public static function depositPayment(Tp\MerchantConfig $config, $merchantData){
 		$client = new \SoapClient($config->webServicesWsdl);
-		$signature = static::getSignature(array(
+		$signature = static::getSignature([
 			'merchantId' => $config->merchantId,
 			'accountId' => $config->accountId,
 			'merchantData' => $merchantData,
-			'password' => $config->password,
-		));
-		$result = $client->cardDepositPaymentRequest(
-			$config->merchantId,
-			$config->accountId,
-			$merchantData,
-			$signature);
+			'password' => $config->password
+		]);
+		$result = $client->cardDepositPaymentRequest([
+			'merchantId'   => $config->merchantId,
+			'accountId'    => $config->accountId,
+			'merchantData' => $merchantData,
+			'signature'    => $signature
+		]);
 		if( ! $result){
 			throw new Tp\Exception();
 		}
@@ -34,17 +35,18 @@ class Card {
 
 	public static function stornoPayment(Tp\MerchantConfig $config, $merchantData){
 		$client = new \SoapClient($config->webServicesWsdl);
-		$signature = static::getSignature(array(
-			'merchantId' => $config->merchantId,
-			'accountId' => $config->accountId,
+		$signature = static::getSignature([
+			'merchantId'   => $config->merchantId,
+			'accountId'    => $config->accountId,
 			'merchantData' => $merchantData,
-			'password' => $config->password,
-		));
-		$result = $client->cardStornoPaymentRequest(
-			$config->merchantId,
-			$config->accountId,
-			$merchantData,
-			$signature);
+			'password'     => $config->password
+		]);
+		$result = $client->cardStornoPaymentRequest([
+			'merchantId'   => $config->merchantId,
+			'accountId'    => $config->accountId,
+			'merchantData' => $merchantData,
+			'signature'    => $signature
+		]);
 		if( ! $result){
 			throw new Tp\Exception();
 		}
@@ -53,22 +55,22 @@ class Card {
 
 	public static function createNewRecurrentPayment(Tp\MerchantConfig $config, $merchantData, $newMerchantData, $value){
 		$client = new \SoapClient($config->webServicesWsdl);
-		$signature = static::getSignature(array(
+		$signature = static::getSignature([
 			'merchantId' => $config->merchantId,
 			'accountId' => $config->accountId,
 			'merchantData' => $merchantData,
 			'newMerchantData' => $newMerchantData,
 			'value' => $value,
 			'password' => $config->password,
-		));
-
-		$result = $client->cardCreateRecurrentPaymentRequest(
-			$config->merchantId,
-			$config->accountId,
-			$merchantData,
-			$newMerchantData,
-			$value,
-			$signature);
+		]);
+		$result = $client->cardCreateRecurrentPaymentRequest([
+			'merchantId'      => $config->merchantId,
+			'accountId'       => $config->accountId,
+			'merchantData'    => $merchantData,
+			'newMerchantData' => $newMerchantData,
+			'value'           => $value,
+			'signature'       => $signature
+		]);
 		if( ! $result){
 			throw new Tp\Exception();
 		}

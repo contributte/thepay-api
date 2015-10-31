@@ -12,18 +12,28 @@ class PermanentPaymentResponse {
 	/** @var PermanentPaymentResponseMethod[] */
 	protected $paymentMethods = array();
 
-	function __construct(array $data) {
-		$this->status = $data['status'];
-		$this->errorDescription = $data['errorDescription'];
-		if( !empty($data['paymentMethods']) && is_array($data['paymentMethods'])){
-			foreach ($data['paymentMethods'] as $value) {
+	function __construct(\stdClass $data)
+	{
+		$this->status = $data->status;
+		if (property_exists($data, 'errorDescription')) {
+			$this->errorDescription = $data->errorDescription;
+		}
+		if (
+			property_exists($data, 'paymentMethods') &&
+			$data->paymentMethods instanceof \stdClass &&
+			property_exists($data->paymentMethods, 'paymentMethod') &&
+			is_array($data->paymentMethods->paymentMethod)
+		) {
+			foreach ($data->paymentMethods->paymentMethod as $value) {
 				$this->paymentMethods[] = new PermanentPaymentResponseMethod(
-					$value['methodId'],
-					$value['methodName'],
-					$value['url'],
-					$value['accountNumber'],
-					$value['vs']);
+					$value->methodId,
+					$value->methodName,
+					$value->url,
+					$value->accountNumber,
+					$value->vs
+				);
 			}
+			unset($value);
 		}
 	}
 
