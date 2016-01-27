@@ -1,6 +1,18 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpPermanentPayment.php'));
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpPermanentPaymentResponse.php'));
+// Anonymous function prevents exposing global variables.
+call_user_func(function() {
+	// TpUtils must be loaded manually…
+	$pathArray = array(__DIR__, '..', 'TpUtils.php');
+	$pathString = implode(DIRECTORY_SEPARATOR, $pathArray);
+	require_once $pathString;
+});
+
+// …everything else can be loaded using TpUtils::requirePaths.
+TpUtils::requirePaths(array(
+	array('TpPermanentPayment.php'),
+	array('TpPermanentPaymentResponse.php'),
+	array('exceptions', 'TpException.php')
+));
 /**
  *
  * @author Michal Kandr

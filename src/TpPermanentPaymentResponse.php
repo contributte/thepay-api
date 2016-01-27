@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'TpPermanentPaymentResponseMethod.php';
+TpUtils::requirePaths(array(
+	array('TpPermanentPaymentResponseMethod.php')
+));
+
 /**
  *
  * @author Michal Kandr

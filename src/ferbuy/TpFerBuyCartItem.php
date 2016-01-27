@@ -1,5 +1,4 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpEscaper.php'));
 
 /**
  * Class TpFerBuyCartItem represents one item in users cart.
@@ -30,6 +29,7 @@ class TpFerBuyCartItem {
 	 * @param string $name
 	 * @param int|float $price
 	 * @param int $quantity
+	 * @throws TpInvalidArgumentException
 	 */
 	public function __construct($name, $price, $quantity=1) {
 		$intQuantity = intval($quantity);
@@ -77,13 +77,13 @@ class TpFerBuyCartItem {
 	/**
 	 * Set product price.
 	 * @param int|float $price
-	 * @throws InvalidArgumentException If price parameter is not numeric.
+	 * @throws TpInvalidArgumentException If price parameter is not numeric.
 	 */
 	protected function setPrice($price) {
 		if (!is_numeric($price)) {
-			throw new InvalidArgumentException('Price has to be numeric');
+			throw new TpInvalidArgumentException('Price has to be numeric');
 		}
-		$price = round($price, 2); // Výsledek je vždy desetinný, i když nemá desetinná místa.
+		$price = round($price, 2);
 		$this->price = intval($price * 100);
 	}
 

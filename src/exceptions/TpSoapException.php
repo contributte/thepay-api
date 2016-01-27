@@ -1,5 +1,8 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'TpException.php'));
+TpUtils::requirePaths(array(
+	array('exceptions', 'TpException.php')
+));
+
 class TpSoapException extends TpException {
 
 }

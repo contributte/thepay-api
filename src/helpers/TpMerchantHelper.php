@@ -1,5 +1,7 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', "TpPayment.php"));
+TpUtils::requirePaths(array(
+	array('TpPayment.php')
+));
 
 /**
  * Base class for various ThePay Merchant components.

@@ -1,6 +1,8 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'exceptions', 'TpException.php'));
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpFerBuyCartItem.php";
+TpUtils::requirePaths(array(
+	array('exceptions', 'TpInvalidArgumentException.php'),
+	array('ferbuy', 'TpFerBuyCartItem.php')
+));
 
 /**
  * Class TpFerBuyCart represents user cart.
@@ -42,7 +44,7 @@ class TpFerBuyCart {
 	 * This value is exactly three characters, for example ‘EUR’ for Euro’s.
 	 * Method is private because only CZK is currently supported.
 	 * @param $currency
-	 * @throws TpException
+	 * @throws TpInvalidArgumentException
 	 */
 	private function setCurrency($currency) {
 		if (strlen($currency) == 3){
@@ -63,7 +65,7 @@ class TpFerBuyCart {
 	/**
 	 * Set any tax applied to order.
 	 * @param $tax
-	 * @throws InvalidArgumentException
+	 * @throws TpInvalidArgumentException
 	 */
 	public function setTax($tax) {
 		if (!is_numeric($tax)) {
@@ -83,7 +85,7 @@ class TpFerBuyCart {
 	/**
 	 * Sets discounts applied to order.
 	 * @param $discount
-	 * @throws InvalidArgumentException
+	 * @throws TpInvalidArgumentException
 	 */
 	public function setDiscount($discount) {
 		if (!is_numeric($discount)) {
@@ -106,7 +108,7 @@ class TpFerBuyCart {
 	/**
 	 * Set shipping costs.
 	 * @param $shipping
-	 * @throws InvalidArgumentException
+	 * @throws TpInvalidArgumentException
 	 */
 	public function setShipping($shipping) {
 		if (!is_numeric($shipping)) {
@@ -127,6 +129,7 @@ class TpFerBuyCart {
 	 * Get decimal number without the decimal character, ie for 12.34 will return 1234
 	 * @param $number
 	 * @return int
+	 * @throws TpInvalidArgumentException
 	 */
 	private function getNumberWithoutDecimals($number) {
 		if(!is_numeric($number)) {
@@ -153,6 +156,9 @@ class TpFerBuyCart {
 		return $this->getTotalAmountWithoutDecimal() / 100;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function getTotalAmountWithoutDecimal() {
 		return ($this->subTotal + $this->tax + $this->discount + $this->shipping);
 	}

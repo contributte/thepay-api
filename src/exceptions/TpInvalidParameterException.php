@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpException.php";
+TpUtils::requirePaths(array(
+	array('exceptions', 'TpException.php')
+));
 
 /**
  * Exception thrown when invalid parameter value has been received.

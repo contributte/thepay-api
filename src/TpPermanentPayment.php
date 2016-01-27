@@ -1,4 +1,7 @@
 <?php
+TpUtils::requirePaths(array(
+	array('TpMerchantConfig.php')
+));
 class TpPermanentPayment {
 	/**
 	 * @var TpMerchantConfig

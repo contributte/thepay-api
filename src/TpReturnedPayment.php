@@ -1,7 +1,18 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpPayment.php";
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'exceptions',  "TpMissingParameterException.php"));
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'exceptions',  "TpInvalidSignatureException.php"));
+// Anonymous function prevents exposing global variables.
+call_user_func(function() {
+	// TpUtils must be loaded manually…
+	$pathArray = array(__DIR__, 'TpUtils.php');
+	$pathString = implode(DIRECTORY_SEPARATOR, $pathArray);
+	require_once $pathString;
+});
+
+// …everything else can be loaded using TpUtils::requirePaths.
+TpUtils::requirePaths(array(
+	array('TpPayment.php'),
+	array('exceptions',  'TpMissingParameterException.php'),
+	array('exceptions',  'TpInvalidSignatureException.php')
+));
 
 /**
  * Class to handle returned payment callback from ThePay gate.

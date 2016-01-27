@@ -1,8 +1,4 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'exceptions', 'TpInvalidParameterException.php'));
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpMerchantConfig.php";
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, 'ferbuy', 'TpFerBuyOrder.php'));
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpEscaper.php";
 
 /**
  * Class representing one payment instance.

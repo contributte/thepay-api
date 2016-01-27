@@ -1,4 +1,5 @@
 <?php
+
 class TpCardPaymentResponse {
 	protected $status;
 	protected $errorDescription;

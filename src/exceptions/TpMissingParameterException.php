@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpInvalidParameterException.php";
+TpUtils::requirePaths(array(
+	array('exceptions', 'TpInvalidParameterException.php')
+));
 
 class TpMissingParameterException extends TpInvalidParameterException {
 	function __construct($parameter) {

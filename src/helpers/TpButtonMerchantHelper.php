@@ -1,6 +1,17 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . "TpMerchantHelper.php";
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', "TpEscaper.php"));
+// Anonymous function prevents exposing global variables.
+call_user_func(function() {
+	// TpUtils must be loaded manually…
+	$pathArray = array(__DIR__, '..', 'TpUtils.php');
+	$pathString = implode(DIRECTORY_SEPARATOR, $pathArray);
+	require_once $pathString;
+});
+
+// …everything else can be loaded using TpUtils::requirePaths.
+TpUtils::requirePaths(array(
+	array('helpers', 'TpMerchantHelper.php'),
+	array('TpEscaper.php')
+));
 
 /**
  * Button helper, that generates simple text button that points to the

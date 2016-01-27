@@ -1,5 +1,4 @@
 <?php
-require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'exceptions', 'TpInvalidArgumentException.php'));
 
 class TpFerBuyCustomer {
 
@@ -47,7 +46,7 @@ class TpFerBuyCustomer {
 	 * @param string $address Customer address.
 	 * @param string $postalCode Customer postal code.
 	 * @param string $mobilePhone Customer mobile phone number (Optional).
-	 * @throws InvalidArgumentException If one of parameters is empty or null.
+	 * @throws TpInvalidArgumentException If one of parameters is empty or null.
 	 */
 	public function __construct($firstName, $lastName, $email, $city, $address, $postalCode, $mobilePhone = null) {
 		$firstName = strval($firstName);
