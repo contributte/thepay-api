@@ -2,9 +2,10 @@
 
 namespace Tp\FerBuy;
 
-use Tp;
+use Tp\InvalidArgumentException;
 
-class Customer {
+class Customer
+{
 
 	/**
 	 * @var string
@@ -43,44 +44,47 @@ class Customer {
 
 	/**
 	 * All parameters except $mobilePhone are required.
-	 * @param string $firstName Customer first name.
-	 * @param string $lastName Customer last name.
-	 * @param string $email Customer email.
-	 * @param string $city Customer city.
-	 * @param string $address Customer address.
-	 * @param string $postalCode Customer postal code.
+	 *
+	 * @param string $firstName   Customer first name.
+	 * @param string $lastName    Customer last name.
+	 * @param string $email       Customer email.
+	 * @param string $city        Customer city.
+	 * @param string $address     Customer address.
+	 * @param string $postalCode  Customer postal code.
 	 * @param string $mobilePhone Customer mobile phone number (Optional).
-	 * @throws Tp\InvalidArgumentException If one of parameters is empty or null.
+	 *
+	 * @throws InvalidArgumentException If one of parameters is empty or null.
 	 */
-	public function __construct($firstName, $lastName, $email, $city, $address, $postalCode, $mobilePhone = null) {
+	public function __construct($firstName, $lastName, $email, $city, $address, $postalCode, $mobilePhone = NULL)
+	{
 		$firstName = strval($firstName);
-		if($firstName === "") {
-			throw new Tp\InvalidArgumentException("First name cannot be empty.");
+		if ($firstName === "") {
+			throw new InvalidArgumentException("First name cannot be empty.");
 		}
 
 		$lastName = strval($lastName);
-		if($lastName === "") {
-			throw new Tp\InvalidArgumentException("Last name cannot be empty.");
+		if ($lastName === "") {
+			throw new InvalidArgumentException("Last name cannot be empty.");
 		}
 
 		$email = strval($email);
-		if($email === "") {
-			throw new Tp\InvalidArgumentException("Email cannot be empty.");
+		if ($email === "") {
+			throw new InvalidArgumentException("Email cannot be empty.");
 		}
 
 		$city = strval($city);
-		if($city === "") {
-			throw new Tp\InvalidArgumentException("City cannot be empty.");
+		if ($city === "") {
+			throw new InvalidArgumentException("City cannot be empty.");
 		}
 
 		$address = strval($address);
-		if($address == "") {
-			throw new Tp\InvalidArgumentException("Address cannot be empty.");
+		if ($address == "") {
+			throw new InvalidArgumentException("Address cannot be empty.");
 		}
 
 		$postalCode = strval($postalCode);
-		if($postalCode === "") {
-			throw new Tp\InvalidArgumentException("Postal code cannot be empty.");
+		if ($postalCode === "") {
+			throw new InvalidArgumentException("Postal code cannot be empty.");
 		}
 
 		$this->firstName = $firstName;
@@ -95,74 +99,92 @@ class Customer {
 
 	/**
 	 * Get previously set first name.
+	 *
 	 * @return string
 	 */
-	public function getFirstName(){
+	public function getFirstName()
+	{
 		return $this->firstName;
 	}
 
 	/**
 	 * Get previously set last name.
+	 *
 	 * @return string
 	 */
-	public function getLastName(){
+	public function getLastName()
+	{
 		return $this->lastName;
 	}
 
 	/**
 	 * Set user address.
+	 *
 	 * @param $address
 	 */
-	public function setAddress($address){
+	public function setAddress($address)
+	{
 		$this->address = $address;
 	}
 
 	/**
 	 * Get previously set user address.
+	 *
 	 * @return string
 	 */
-	public function getAddress(){
+	public function getAddress()
+	{
 		return $this->address;
 	}
 
 	/**
 	 * Set user postal code.
+	 *
 	 * @param $postalCode
 	 */
-	private function setPostalCode($postalCode) {
+	private function setPostalCode($postalCode)
+	{
 		$this->postalCode = $postalCode;
 	}
 
 	/**
 	 * Get previously set postal code.
+	 *
 	 * @return string
 	 */
-	public function getPostalCode() {
+	public function getPostalCode()
+	{
 		return $this->postalCode;
 	}
 
 	/**
 	 * Set user city.
+	 *
 	 * @param $city
 	 */
-	private function setCity($city) {
+	private function setCity($city)
+	{
 		$this->city = $city;
 	}
 
 	/**
 	 * Get previously set city.
+	 *
 	 * @return string
 	 */
-	public function getCity() {
+	public function getCity()
+	{
 		return $this->city;
 	}
 
 	/**
 	 * Set user mobile phone number.
+	 *
 	 * @param $mobilePhone
 	 */
-	public function setMobilePhone($mobilePhone) {
-		if(!is_null($mobilePhone)) {
+	public function setMobilePhone($mobilePhone)
+	{
+		if ( !is_null($mobilePhone)) {
 			$mobilePhone = strval($mobilePhone);
 		}
 		$this->mobilePhone = $mobilePhone;
@@ -170,25 +192,32 @@ class Customer {
 
 	/**
 	 * Get previously set mobile phone number.
+	 *
 	 * @return string
 	 */
-	public function getMobilePhone() {
+	public function getMobilePhone()
+	{
 		return $this->mobilePhone;
 	}
 
 	/**
 	 * Set user email.
+	 *
 	 * @param $email
 	 */
-	private function setEmail($email) {
+	private function setEmail($email)
+	{
 		$this->email = $email;
 	}
 
 	/**
 	 * Get previously set user email.
+	 *
 	 * @return string
 	 */
-	public function getEmail() {
+	public function getEmail()
+	{
 		return $this->email;
 	}
+
 }

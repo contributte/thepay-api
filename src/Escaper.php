@@ -2,7 +2,8 @@
 
 namespace Tp;
 
-class Escaper {
+class Escaper
+{
 
 	/**
 	 * JSON-encode with all hex options enabled. Results in values insertable
@@ -10,9 +11,11 @@ class Escaper {
 	 * onclick), the JSON string must be encoded to HTML entities as well.
 	 *
 	 * @param $string
+	 *
 	 * @return string
 	 */
-	public static function jsonEncode($string) {
+	public static function jsonEncode($string)
+	{
 		return json_encode($string, self::jsonEncodeOptions());
 	}
 
@@ -22,7 +25,8 @@ class Escaper {
 	 *
 	 * @return int
 	 */
-	public static function jsonEncodeOptions() {
+	public static function jsonEncodeOptions()
+	{
 		return JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
 	}
 
@@ -30,9 +34,11 @@ class Escaper {
 	 * Only raw json_decode call for consistency with jsonEncode.
 	 *
 	 * @param $string
+	 *
 	 * @return mixed
 	 */
-	public static function jsonDecode($string) {
+	public static function jsonDecode($string)
+	{
 		return json_decode($string);
 	}
 
@@ -42,19 +48,23 @@ class Escaper {
 	 * part of a HTML tag attribute. Single- or double-quoted, both are OK.
 	 *
 	 * @param $string
+	 *
 	 * @return string
 	 */
-	public static function htmlEntityEncode($string) {
-		return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', true);
+	public static function htmlEntityEncode($string)
+	{
+		return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', TRUE);
 	}
 
 	/**
 	 * Translates all HTML &…; entities to plain-text, including &#039 (').
 	 *
 	 * @param $string
+	 *
 	 * @return string
 	 */
-	public static function htmlEntityDecode($string) {
+	public static function htmlEntityDecode($string)
+	{
 		return html_entity_decode($string, ENT_QUOTES, 'UTF-8');
 	}
 }

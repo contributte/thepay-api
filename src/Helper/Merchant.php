@@ -2,25 +2,29 @@
 
 namespace Tp\Helper;
 
-use Tp;
+use Tp\Payment;
 
 /**
  * Base class for various ThePay Merchant components.
  */
-abstract class Merchant {
+abstract class Merchant
+{
 	/**
 	 * Payment that should be rendered using the helper. Specify the
 	 * payment as parameter to the helper constructor.
-	 * @var Tp\Payment
+	 *
+	 * @var Payment
 	 */
 	protected $payment;
 
 	/**
 	 * Constructor. Specify the payment object here.
-	 * @param payment Instace of the Tp\Payment method, that contains
-	 *   inforamtion about the payment to be made.
+	 *
+	 * @param payment Instace of the Tp\TpPayment method, that contains
+	 *                inforamtion about the payment to be made.
 	 */
-	function __construct(Tp\Payment $payment) {
+	function __construct(Payment $payment)
+	{
 		$this->payment = $payment;
 	}
 
@@ -34,21 +38,24 @@ abstract class Merchant {
 	/**
 	 * Build the query part of the URL from payment data and optional
 	 * helper data.
+	 *
 	 * @param args Associative array of optional arguments that should
-	 *   be appended to the URL.
+	 *             be appended to the URL.
+	 *
 	 * @return Query part of the URL with all parameters correctly escaped
 	 *
 	 */
-	function buildQuery($args = array()) {
+	function buildQuery($args = [])
+	{
 		$out = array_merge(
 			$this->payment->getArgs(), // Arguments of the payment
 			$args, // Optional helper arguments
-			array("signature" => $this->payment->getSignature()) // Signature
+			["signature" => $this->payment->getSignature()] // Signature
 		);
 
-		$str = array();
-		foreach ($out as $key=>$val) {
-			$str[] = rawurlencode($key)."=".rawurlencode($val);
+		$str = [];
+		foreach ($out as $key => $val) {
+			$str[] = rawurlencode($key) . "=" . rawurlencode($val);
 		}
 
 		return implode("&amp;", $str);

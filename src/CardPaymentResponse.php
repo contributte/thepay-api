@@ -2,7 +2,8 @@
 
 namespace Tp;
 
-class CardPaymentResponse {
+class CardPaymentResponse
+{
 	protected $status;
 	protected $errorDescription;
 
@@ -14,11 +15,13 @@ class CardPaymentResponse {
 		}
 	}
 
-	public function getStatus() {
+	public function getStatus()
+	{
 		return $this->status;
 	}
 
-	public function getErrorDescription() {
+	public function getErrorDescription()
+	{
 		return $this->errorDescription;
 	}
 }

@@ -2,13 +2,14 @@
 
 namespace Tp\Helper;
 
-use Tp;
+use Tp\Escaper;
 
 /**
  * Button helper, that generates simple text button that points to the
  * ThePay page, where rest of the functionality occurs.
  */
-class ButtonMerchant extends Merchant {
+class ButtonMerchant extends Merchant
+{
 	/**
 	 * Button visual style. If left blank, only simple text link will be
 	 * created. Otherwise, one of button styles specified in ThePay API
@@ -24,15 +25,17 @@ class ButtonMerchant extends Merchant {
 
 	/**
 	 * Sets the buttonStyle property.
+	 *
 	 * @param buttonStyle String specifying the button style. Can be empty
-	 *   for default text button, or one of button styles specified in the
-	 *   ThePay API documentation.
-	 * @param buttonText @optional argument specifying the text that should
-	 *   be displayed on the button.
+	 *                    for default text button, or one of button styles specified in the
+	 *                    ThePay API documentation.
+	 * @param buttonText  Optional argument specifying the text that should
+	 *                    be displayed on the button.
 	 */
-	function setButtonStyle($buttonStyle, $buttonText = NULL) {
+	function setButtonStyle($buttonStyle, $buttonText = NULL)
+	{
 		$this->buttonStyle = $buttonStyle;
-		if (!is_null($buttonText)) {
+		if ( !is_null($buttonText)) {
 			$this->buttonText = $buttonText;
 		}
 	}
@@ -40,31 +43,35 @@ class ButtonMerchant extends Merchant {
 	/**
 	 * Sets the buttonText property.
 	 */
-	function setButtonText($buttonText) {
+	function setButtonText($buttonText)
+	{
 		$this->buttonText = $buttonText;
 	}
 
 	/**
 	 * Returns the buttonStyle property.
 	 */
-	function getButtonStyle() {
+	function getButtonStyle()
+	{
 		return $this->buttonStyle;
 	}
 
 	/**
 	 * Returns the buttonText property.
 	 */
-	function getButtonText() {
+	function getButtonText()
+	{
 		return $this->buttonText;
 	}
 
 	/**
 	 * Return the HTML code for the button.
 	 */
-	function render() {
+	function render()
+	{
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 
-		$targetUrl = Tp\Escaper::htmlEntityEncode("{$gateUrl}iframe/");
+		$targetUrl = Escaper::htmlEntityEncode("{$gateUrl}iframe/");
 		$targetUrl = "$targetUrl?" . $this->buildQuery();
 
 		switch ($this->buttonStyle) {
@@ -75,10 +82,11 @@ class ButtonMerchant extends Merchant {
 			default:
 				$buttonStyle = rawurlencode($this->buttonStyle);
 				$src = "{$gateUrl}buttons/$buttonStyle.png";
-				$src = Tp\Escaper::htmlEntityEncode($src);
+				$src = Escaper::htmlEntityEncode($src);
 
-				$title = Tp\Escaper::htmlEntityEncode($this->buttonText);
-				return "<a href=\"".$targetUrl."\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
+				$title = Escaper::htmlEntityEncode($this->buttonText);
+
+				return "<a href=\"" . $targetUrl . "\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
 				break;
 		}
 	}

@@ -6,11 +6,12 @@ namespace Tp;
  *
  * @author Michal Kandr
  */
-class PermanentPaymentResponse {
+class PermanentPaymentResponse
+{
 	protected $status;
 	protected $errorDescription;
 	/** @var PermanentPaymentResponseMethod[] */
-	protected $paymentMethods = array();
+	protected $paymentMethods = [];
 
 	function __construct(\stdClass $data)
 	{
@@ -38,15 +39,18 @@ class PermanentPaymentResponse {
 	}
 
 
-	public function getStatus() {
+	public function getStatus()
+	{
 		return $this->status;
 	}
 
-	public function getErrorDescription() {
+	public function getErrorDescription()
+	{
 		return $this->errorDescription;
 	}
 
-	public function getPaymentMethods() {
+	public function getPaymentMethods()
+	{
 		return $this->paymentMethods;
 	}
 }

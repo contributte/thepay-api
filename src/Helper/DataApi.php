@@ -2,66 +2,148 @@
 
 namespace Tp\Helper;
 
-use Tp;
+use SoapClient;
+use SoapFault;
+use Tp\DataApi\Parameters\GetPaymentsSearchParams;
+use Tp\DataApi\Parameters\Ordering;
+use Tp\DataApi\Parameters\PaginationRequest;
+use Tp\DataApi\Requests\Request;
+use Tp\DataApi\Requests\RequestFactory;
+use Tp\DataApi\Response;
+use Tp\DataApi\Responses\GetPaymentResponse;
+use Tp\DataApi\Responses\GetPaymentInstructionsResponse;
+use Tp\DataApi\Responses\GetPaymentMethodsResponse;
+use Tp\DataApi\Responses\GetPaymentsResponse;
+use Tp\DataApi\Responses\GetPaymentStateResponse;
+use Tp\DataApi\Responses\ResponseFactory;
+use Tp\SoapException;
+use Tp\MerchantConfig;
 
-class DataApi {
-
-	/**
-	 * @param Tp\MerchantConfig $config
-	 * @param bool $onlyActive
-	 * @return Tp\DataApi\GetPaymentMethodsResponse
-	 * @throws Tp\SoapException
-	 */
-	public static function getPaymentMethods(Tp\MerchantConfig $config, $onlyActive = null) {
-		$request = array_merge(
-			array('accountId' => $config->accountId),
-			(is_null($onlyActive) || $onlyActive === "") ? array() : array('onlyActive' => $onlyActive)
-		);
-		return self::call(__FUNCTION__, $config, $request);
-	}
-
-	/**
-	 * @param Tp\MerchantConfig $config
-	 * @param int $paymentId
-	 * @return Tp\DataApi\GetPaymentResponse
-	 * @throws Tp\SoapException
-	 */
-	public static function getPayment(Tp\MerchantConfig $config, $paymentId) {
-		$request = array('paymentId' => $paymentId);
-		return self::call(__FUNCTION__, $config, $request);
-	}
-
-	public static function getPaymentInstructions(Tp\MerchantConfig $config, $paymentId) {
-		$request = array('paymentId' => $paymentId);
-		return self::call(__FUNCTION__, $config, $request);
-	}
-
-	public static function getPaymentState(Tp\MerchantConfig $config, $paymentId) {
-		$request = array('paymentId' => $paymentId);
-		return self::call(__FUNCTION__, $config, $request);
-	}
+class DataApi
+{
 
 	/**
-	 * @param string $operation
-	 * @param Tp\MerchantConfig $config
-	 * @param array $request
-	 * @return Tp\DataApi\Response
-	 * @throws Tp\SoapException
+	 * @param \Tp\MerchantConfig $config
+	 * @param bool|null          $onlyActive
+	 *
+	 * @return GetPaymentMethodsResponse
+	 * @throws SoapException
 	 */
-	protected static function call($operation, Tp\MerchantConfig $config, array $request) {
-		$request = array_merge(
-			array('merchantId' => $config->merchantId),
-			$request
+	public static function getPaymentMethods(MerchantConfig $config, $onlyActive = NULL)
+	{
+		$data = ['onlyActive' => $onlyActive];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
 		);
 
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
+	 * @param \Tp\MerchantConfig $config
+	 * @param int                $paymentId
+	 *
+	 * @return GetPaymentResponse
+	 * @throws SoapException
+	 */
+	public static function getPayment(MerchantConfig $config, $paymentId)
+	{
+		$data = ['paymentId' => $paymentId];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
+	 * @param MerchantConfig $config
+	 * @param int            $paymentId
+	 *
+	 * @return GetPaymentInstructionsResponse
+	 * @throws SoapException
+	 */
+	public static function getPaymentInstructions(MerchantConfig $config, $paymentId)
+	{
+		$data = ['paymentId' => $paymentId];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
+	 * @param \Tp\MerchantConfig $config
+	 * @param int                $paymentId
+	 *
+	 * @return GetPaymentStateResponse
+	 * @throws SoapException
+	 */
+	public static function getPaymentState(MerchantConfig $config, $paymentId)
+	{
+		$data = ['paymentId' => $paymentId];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
+	 * @param MerchantConfig          $config
+	 * @param GetPaymentsSearchParams $searchParams
+	 * @param PaginationRequest|null  $pagination
+	 * @param Ordering|null           $ordering
+	 *
+	 * @return GetPaymentsResponse
+	 * @throws SoapException
+	 */
+	public static function getPayments(MerchantConfig $config, GetPaymentsSearchParams $searchParams = NULL, PaginationRequest $pagination = NULL, Ordering $ordering = NULL)
+	{
+		$data = [
+			'searchParams' => $searchParams,
+			'pagination'   => $pagination,
+			'ordering'     => $ordering,
+		];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
+	 * @param string         $operation
+	 * @param MerchantConfig $config
+	 * @param Request        $request
+	 *
+	 * @return Response
+	 * @throws SoapException
+	 */
+	protected static function call($operation, MerchantConfig $config, Request $request)
+	{
 		try {
-			$client = new \SoapClient($config->dataWebServicesWsdl);
-			$signedRequest = new Tp\DataApi\SignedArray($request, $config->dataApiPassword);
-			$result = $client->$operation($signedRequest->signed());
-		} catch(\SoapFault $e) {
-			throw new Tp\SoapException($e->getMessage());
+			$options = ['features' => SOAP_SINGLE_ELEMENT_ARRAYS];
+			$client = new SoapClient($config->dataWebServicesWsdl, $options);
+			$signed = $request->toSignedSoapRequestArray();
+			$rawResponse = $client->$operation($signed);
+		}
+		catch (SoapFault $e) {
+			throw new SoapException($e->getMessage());
 		}
 
-		return Tp\DataApi\ResponseFactory::getResponse($operation, $config, $result);
+		$response = ResponseFactory::getResponse(
+			$operation, $config, $rawResponse
+		);
+
+		return $response;
 	}
+
 }

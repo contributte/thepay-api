@@ -2,38 +2,72 @@
 
 namespace Tp\DataApi;
 
-use Tp;
+use Tp\InvalidSignatureException;
+use Tp\Utils;
 
-class Response extends Object {
+class Response extends Object
+{
 
 	/**
-	 * @var array
+	 * @var array[]
 	 */
-	protected static $arrayPaths = array();
+	protected static $listPaths = [];
+
+	/**
+	 * @var array[]
+	 */
+	protected static $dateTimePaths = [];
 
 	/**
 	 * @var int
 	 */
 	protected $merchantId;
 
-	public function __construct(Tp\MerchantConfig $config, \stdClass $result) {
-		$this->validateSignature($config, $result);
+	/**
+	 * @param array $response
+	 *
+	 * @return Response
+	 * @throws InvalidSignatureException
+	 */
+	public static function createFromResponse(array $response)
+	{
+		$keys = ['merchantId'];
+		$data = Utils::filterKeys($response, $keys);
+		$instance = new static($data);
 
-		$this->merchantId = static::formatInt($result->merchantId, false);
+		return $instance;
 	}
 
-	public function getMerchantId() {
+	/**
+	 * @return array[]
+	 */
+	public static function listPaths()
+	{
+		return static::$listPaths;
+	}
+
+	/**
+	 * @return array[]
+	 */
+	public static function dateTimePaths()
+	{
+		return static::$dateTimePaths;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMerchantId()
+	{
 		return $this->merchantId;
 	}
 
-	protected static function validateSignature(Tp\MerchantConfig $config, \stdClass $result) {
-		$resultSigned = SignedArray::createFromStdClass(
-			$result,
-			$config->dataApiPassword,
-			static::$arrayPaths
-		);
-		if(!$resultSigned->valid()) {
-			throw new Tp\InvalidSignatureException;
-		}
+	/**
+	 * @param int $merchantId
+	 */
+	public function setMerchantId($merchantId)
+	{
+		$this->merchantId = ValueFormatter::format('int', $merchantId);
 	}
+
 }

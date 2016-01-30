@@ -2,6 +2,7 @@
 
 namespace Tp;
 
-class InvalidArgumentException extends Exception {
+class InvalidArgumentException extends Exception
+{
 	public $defaultMessage = "ThePay invalid argument exception";
 }
