@@ -51,7 +51,7 @@ abstract class Object implements ArrayAccess
 		// Filter out static properties and those beginning with an underscore.
 		$allProperties = $reflection->getProperties();
 		$dataProperties = array_filter(
-			$allProperties, ['Object', 'filterDataProperties']
+			$allProperties, ['self', 'filterDataProperties']
 		);
 		$sortedDataProperties = static::sortDataProperties($dataProperties);
 
