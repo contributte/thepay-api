@@ -64,7 +64,7 @@ class GetPaymentsRequest extends Request
 	public function setPagination(PaginationRequest $pagination = NULL)
 	{
 		$this->pagination = ValueFormatter::format(
-			'PaginationRequest', $pagination
+			'Tp\DataApi\Parameters\PaginationRequest', $pagination
 		);
 	}
 

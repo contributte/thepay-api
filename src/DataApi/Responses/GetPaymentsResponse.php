@@ -85,7 +85,7 @@ class GetPaymentsResponse extends Response
 	public function setPagination(PaginationResponse $pagination)
 	{
 		$this->pagination = ValueFormatter::format(
-			'PaginationResponse', $pagination
+			'Tp\DataApi\Parameters\PaginationResponse', $pagination
 		);
 	}
 
