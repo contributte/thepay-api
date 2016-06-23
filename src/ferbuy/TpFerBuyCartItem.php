@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class TpFerBuyCartItem represents one item in users cart.
  */

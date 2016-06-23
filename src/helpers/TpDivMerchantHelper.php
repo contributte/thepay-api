@@ -1,11 +1,5 @@
 <?php
-// Anonymous function prevents exposing global variables.
-call_user_func(function() {
-	// TpUtils must be loaded manually…
-	$pathArray = array(__DIR__, '..', 'TpUtils.php');
-	$pathString = implode(DIRECTORY_SEPARATOR, $pathArray);
-	require_once $pathString;
-});
+require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpUtils.php'));
 
 // …everything else can be loaded using TpUtils::requirePaths.
 TpUtils::requirePaths(array(

@@ -1,11 +1,5 @@
 <?php
-// Anonymous function prevents exposing global variables.
-call_user_func(function() {
-	// TpUtils must be loaded manually…
-	$pathArray = array(__DIR__, '..', 'TpUtils.php');
-	$pathString = implode(DIRECTORY_SEPARATOR, $pathArray);
-	require_once $pathString;
-});
+require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpUtils.php'));
 
 // …everything else can be loaded using TpUtils::requirePaths.
 TpUtils::requirePaths(array(
@@ -22,16 +16,16 @@ class TpPermanentPaymentHelper {
 		$config = $payment->getConfig();
 		$client = new SoapClient(
 			$config->webServicesWsdl,
-			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
+			array('features' => SOAP_SINGLE_ELEMENT_ARRAYS)
 		);
-		$result = $client->createPermanentPaymentRequest([
+		$result = $client->createPermanentPaymentRequest(array(
 			'merchantId'   => $config->merchantId,
 			'accountId'    => $config->accountId,
 			'merchantData' => $payment->getMerchantData(),
 			'description'  => $payment->getDescription(),
 			'returnUrl'    => $payment->getReturnUrl(),
 			'signature'    => $payment->getSignature()
-		]);
+		));
 		if( ! $result){
 			throw new TpException();
 		}
@@ -42,14 +36,14 @@ class TpPermanentPaymentHelper {
 		$config = $payment->getConfig();
 		$client = new SoapClient(
 			$config->webServicesWsdl,
-			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
+			array('features' => SOAP_SINGLE_ELEMENT_ARRAYS)
 		);
-		$result = $client->getPermanentPaymentRequest([
+		$result = $client->getPermanentPaymentRequest(array(
 			'merchantId'   => $config->merchantId,
 			'accountId'    => $config->accountId,
 			'merchantData' => $payment->getMerchantData(),
 			'signature'    => $payment->getSignatureLite()
-		]);
+		));
 		if( ! $result){
 			throw new TpException();
 		}

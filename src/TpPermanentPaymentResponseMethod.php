@@ -1,5 +1,4 @@
 <?php
-
 class TpPermanentPaymentResponseMethod {
 	protected $methodId;
 	protected $methodName;

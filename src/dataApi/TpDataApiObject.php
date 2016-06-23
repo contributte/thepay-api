@@ -1,5 +1,4 @@
 <?php
-
 abstract class TpDataApiObject implements ArrayAccess {
 
 	/**

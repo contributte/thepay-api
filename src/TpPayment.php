@@ -1,4 +1,10 @@
 <?php
+TpUtils::requirePaths(array(
+	array('exceptions', 'TpInvalidParameterException.php'),
+	array('ferbuy',     'TpFerBuyOrder.php'),
+	array('TpMerchantConfig.php'),
+	array('TpEscaper.php')
+));
 
 /**
  * Class representing one payment instance.
@@ -345,7 +351,7 @@ class TpPayment {
 		}
 
 		if (!is_null($this->deposit)) {
-			$input["deposit"] = $this->deposit;
+			$input["deposit"] = $this->deposit ? '1' : '0';
 		}
 		if (!is_null($this->isRecurring)) {
 			$input["isRecurring"] = $this->isRecurring;

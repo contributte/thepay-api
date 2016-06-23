@@ -26,7 +26,7 @@ class TpMerchantConfig {
 	 * your login.
 	 * @var integer
 	 */
-	public $accountId = 1;
+	public $accountId = 3;
 
 	/**
 	 * Password for external communication that you can fill in for the
