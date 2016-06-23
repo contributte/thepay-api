@@ -402,7 +402,7 @@ class Payment
 		}
 
 		if ( !is_null($this->deposit)) {
-			$input["deposit"] = $this->deposit;
+			$input["deposit"] = $this->deposit ? '1' : '0';
 		}
 		if ( !is_null($this->isRecurring)) {
 			$input["isRecurring"] = $this->isRecurring;
