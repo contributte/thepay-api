@@ -48,6 +48,15 @@ class TpPayment {
 	protected $returnUrl = NULL;
 
 	/**
+	 * Target of the “Back to e-shop” button on the offline payment info page.
+	 * If not set, defaults to the account URL. Must be a valid HTTP or HTTPS
+	 * URL.
+	 *
+	 * @var string|null
+	 */
+	protected $backToEshopUrl = null;
+
+	/**
 	 * ID of payment method to use for paying. Setting this argument should
 	 * be result of user's selection, not merchant's selection.
 	 * @var integer
@@ -140,6 +149,13 @@ class TpPayment {
 	}
 
 	/**
+	 * @param string|null $backToEshopUrl
+	 */
+	public function setBackToEshopUrl($backToEshopUrl = null) {
+		$this->backToEshopUrl = $backToEshopUrl;
+	}
+
+	/**
 	 * Sets the methodId property.
 	 * @param integer $methodId
 	 */
@@ -198,6 +214,13 @@ class TpPayment {
 	 */
 	public function getReturnUrl() {
 		return $this->returnUrl;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBackToEshopUrl() {
+		return $this->backToEshopUrl;
 	}
 
 	/**
@@ -344,6 +367,11 @@ class TpPayment {
 
 		if (!is_null($this->returnUrl)) {
 			$input["returnUrl"] = $this->returnUrl;
+		}
+
+		$backToEshopUrlIsNull = is_null($this->backToEshopUrl);
+		if(!$backToEshopUrlIsNull) {
+			$input['backToEshopUrl'] = $this->backToEshopUrl;
 		}
 
 		if (!is_null($this->methodId)) {
