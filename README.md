@@ -13,3 +13,9 @@ The best way to install trejjam/thepay-lib is using  [Composer](http://getcompos
 ```sh
 $ composer require trejjam/thepay-lib
 ```
+
+Suggestion
+----------
+
+If you like namespaces you could try use rewrited [namespaced branch](https://github.com/Trejjam/ThePay-lib/tree/namespaces). If you use Nette you could try [Nette 
+extension](https://github.com/Trejjam/ThePay).
