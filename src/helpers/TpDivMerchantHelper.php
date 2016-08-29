@@ -14,7 +14,7 @@ class TpDivMerchantHelper extends TpMerchantHelper {
 
 	/**
 	 * Optional CSS argument, that can contain URL to custom stylesheet,
-	 * that allows to customize the layout of the iframe content.
+	 * that allows to customize the layout of the div content.
 	 */
 	protected $cssUrl;
 
@@ -80,7 +80,7 @@ class TpDivMerchantHelper extends TpMerchantHelper {
 	}
 
 	/**
-	 * Return the HTML code for the iframe.
+	 * Return the HTML code for the div.
 	 */
 	function render() {
 		$url = $this->payment->getMerchantConfig()->gateUrl;

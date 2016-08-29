@@ -340,7 +340,7 @@ class TpPayment {
 		$input["accountId"] = $this->config->accountId;
 
 		if (!is_null($this->value)) {
-			$input["value"] = $this->value;
+			$input["value"] = number_format($this->value, 2, '.', '');
 		}
 
 		if (!is_null($this->currency)) {

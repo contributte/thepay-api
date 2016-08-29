@@ -33,7 +33,7 @@ class TpButtonMerchantHelper extends TpMerchantHelper {
 	 * @param buttonText Optional argument specifying the text that should
 	 *   be displayed on the button.
 	 */
-	function setButtonStyle($buttonStyle, $buttonText = NULL) {
+	public function setButtonStyle($buttonStyle, $buttonText = NULL) {
 		$this->buttonStyle = $buttonStyle;
 		if (!is_null($buttonText)) {
 			$this->buttonText = $buttonText;
@@ -43,32 +43,43 @@ class TpButtonMerchantHelper extends TpMerchantHelper {
 	/**
 	 * Sets the buttonText property.
 	 */
-	function setButtonText($buttonText) {
+	public function setButtonText($buttonText) {
 		$this->buttonText = $buttonText;
 	}
 
 	/**
 	 * Returns the buttonStyle property.
 	 */
-	function getButtonStyle() {
+	public function getButtonStyle() {
 		return $this->buttonStyle;
 	}
 
 	/**
 	 * Returns the buttonText property.
 	 */
-	function getButtonText() {
+	public function getButtonText() {
 		return $this->buttonText;
+	}
+
+	/**
+	 * Button link target URL.
+	 *
+	 * @return string
+	 */
+	public function buildUrl() {
+		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
+		$query   = $this->buildQuery();
+		if(is_null($this->payment->getMethodId())) {
+			$query .= '&methodSelectionAllowed';
+		}
+		return $gateUrl . '?' . $query;
 	}
 
 	/**
 	 * Return the HTML code for the button.
 	 */
-	function render() {
-		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
-
-		$targetUrl = TpEscaper::htmlEntityEncode("{$gateUrl}iframe/");
-		$targetUrl = "$targetUrl?" . $this->buildQuery();
+	public function render() {
+		$targetUrl = TpEscaper::htmlEntityEncode(self::buildUrl());
 
 		switch ($this->buttonStyle) {
 			case "":
@@ -76,9 +87,11 @@ class TpButtonMerchantHelper extends TpMerchantHelper {
 				break;
 
 			default:
+				$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 				$buttonStyle = rawurlencode($this->buttonStyle);
-				$src = "{$gateUrl}buttons/$buttonStyle.png";
-				$src = TpEscaper::htmlEntityEncode($src);
+				$src = TpEscaper::htmlEntityEncode(
+					$gateUrl . 'buttons/' . $buttonStyle . '.png'
+				);
 
 				$title = TpEscaper::htmlEntityEncode($this->buttonText);
 				return "<a href=\"".$targetUrl."\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
