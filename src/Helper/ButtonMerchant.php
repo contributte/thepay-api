@@ -16,7 +16,6 @@ class ButtonMerchant extends Merchant
 	 * documentation can be used.
 	 */
 	protected $buttonStyle = "fullsize";
-
 	/**
 	 * Button text. This text is displayed if button image cannot be loaded
 	 * or when simple text style (empty buttonStyle property) is used.
@@ -32,7 +31,7 @@ class ButtonMerchant extends Merchant
 	 * @param buttonText  Optional argument specifying the text that should
 	 *                    be displayed on the button.
 	 */
-	function setButtonStyle($buttonStyle, $buttonText = NULL)
+	public function setButtonStyle($buttonStyle, $buttonText = NULL)
 	{
 		$this->buttonStyle = $buttonStyle;
 		if ( !is_null($buttonText)) {
@@ -43,7 +42,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Sets the buttonText property.
 	 */
-	function setButtonText($buttonText)
+	public function setButtonText($buttonText)
 	{
 		$this->buttonText = $buttonText;
 	}
@@ -51,7 +50,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Returns the buttonStyle property.
 	 */
-	function getButtonStyle()
+	public function getButtonStyle()
 	{
 		return $this->buttonStyle;
 	}
@@ -59,31 +58,43 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Returns the buttonText property.
 	 */
-	function getButtonText()
+	public function getButtonText()
 	{
 		return $this->buttonText;
 	}
 
 	/**
-	 * Return the HTML code for the button.
+	 * Button link target URL.
+	 *
+	 * @return string
 	 */
-	function render()
+	public function buildUrl()
 	{
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
+		$query = $this->buildQuery();
+		if (is_null($this->payment->getMethodId())) {
+			$query .= '&methodSelectionAllowed';
+		}
 
-		$targetUrl = Escaper::htmlEntityEncode("{$gateUrl}iframe/");
-		$targetUrl = "$targetUrl?" . $this->buildQuery();
+		return $gateUrl . '?' . $query;
+	}
 
+	/**
+	 * Return the HTML code for the button.
+	 */
+	public function render()
+	{
+		$targetUrl = Escaper::htmlEntityEncode(self::buildUrl());
 		switch ($this->buttonStyle) {
 			case "":
 				return "<a href=\"$targetUrl\">$this->buttonText</a>";
 				break;
-
 			default:
+				$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 				$buttonStyle = rawurlencode($this->buttonStyle);
-				$src = "{$gateUrl}buttons/$buttonStyle.png";
-				$src = Escaper::htmlEntityEncode($src);
-
+				$src = Escaper::htmlEntityEncode(
+					$gateUrl . 'buttons/' . $buttonStyle . '.png'
+				);
 				$title = Escaper::htmlEntityEncode($this->buttonText);
 
 				return "<a href=\"" . $targetUrl . "\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";

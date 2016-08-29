@@ -11,7 +11,7 @@ class DivMerchant extends Merchant
 
 	/**
 	 * Optional CSS argument, that can contain URL to custom stylesheet,
-	 * that allows to customize the layout of the iframe content.
+	 * that allows to customize the layout of the div content.
 	 */
 	protected $cssUrl;
 
@@ -83,7 +83,7 @@ class DivMerchant extends Merchant
 	}
 
 	/**
-	 * Return the HTML code for the iframe.
+	 * Return the HTML code for the div.
 	 */
 	function render()
 	{

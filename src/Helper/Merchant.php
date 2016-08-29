@@ -39,10 +39,10 @@ abstract class Merchant
 	 * Build the query part of the URL from payment data and optional
 	 * helper data.
 	 *
-	 * @param args Associative array of optional arguments that should
+	 * @param array $args Associative array of optional arguments that should
 	 *             be appended to the URL.
 	 *
-	 * @return Query part of the URL with all parameters correctly escaped
+	 * @return string Query part of the URL with all parameters correctly escaped
 	 *
 	 */
 	function buildQuery($args = [])
@@ -58,6 +58,6 @@ abstract class Merchant
 			$str[] = rawurlencode($key) . "=" . rawurlencode($val);
 		}
 
-		return implode("&amp;", $str);
+		return implode("&", $str);
 	}
 }
