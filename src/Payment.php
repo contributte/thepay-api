@@ -54,7 +54,7 @@ class Payment
 	 *
 	 * @var string|null
 	 */
-	protected $backToEshopUrl = null;
+	protected $backToEshopUrl = NULL;
 
 	/**
 	 * ID of payment method to use for paying. Setting this argument should
@@ -65,7 +65,8 @@ class Payment
 	protected $methodId = NULL;
 
 	/**
-	 * @var mixed Optional data about customer. Required for FerBuy method.
+	 * @deprecated
+	 * @var string
 	 */
 	protected $customerData = NULL;
 
@@ -89,14 +90,18 @@ class Payment
 	/**
 	 * @var string numerical specific symbol (used only if payment method supports it).
 	 */
-	protected $merchantSpecificSymbol;
+	protected $merchantSpecificSymbol = NULL;
 
+	/**
+	 * @var EetDph VAT decomposition for EET
+	 */
+
+	protected $eetDph = NULL;
 
 	/**
 	 * Constructor. Create the payment.
 	 *
-	 * @param config Instance of Tp\TpMerchantConfig containing merchant's
-	 *               access credentials to the ThePay system.
+	 * @param config MerchantConfig containing merchant's access credentials to the ThePay system.
 	 */
 	public function __construct(MerchantConfig $config = NULL)
 	{
@@ -126,7 +131,6 @@ class Payment
 	}
 
 	/**
-	 *
 	 * @param string $currency
 	 */
 	public function setCurrency($currency)
@@ -167,7 +171,8 @@ class Payment
 	/**
 	 * @param string|null $backToEshopUrl
 	 */
-	public function setBackToEshopUrl($backToEshopUrl = null) {
+	public function setBackToEshopUrl($backToEshopUrl = NULL)
+	{
 		$this->backToEshopUrl = $backToEshopUrl;
 	}
 
@@ -249,7 +254,8 @@ class Payment
 	/**
 	 * @return string|null
 	 */
-	public function getBackToEshopUrl() {
+	public function getBackToEshopUrl()
+	{
 		return $this->backToEshopUrl;
 	}
 
@@ -267,7 +273,7 @@ class Payment
 	/**
 	 * Set customer data.
 	 *
-	 * @param mixed $data
+	 * @param string $data
 	 */
 	public function setCustomerData($data)
 	{
@@ -275,32 +281,13 @@ class Payment
 	}
 
 	/**
-	 * @return mixed previously set customer data
+	 * @deprecated
+	 * @return string previously set customer data
 	 */
 	public function getCustomerData()
 	{
 		return $this->customerData;
 	}
-
-	/**
-	 * Get specific property from the customerData JSON string.
-	 *
-	 * @return mixed
-	 */
-	public function getCustomerDataField($field)
-	{
-		if ( !$this->customerData) {
-			return NULL;
-		}
-
-		$obj = Escaper::jsonDecode($this->customerData);
-		if ( !$obj instanceof \stdClass) {
-			return NULL;
-		}
-
-		return isset($obj->$field) ? $obj->$field : NULL;
-	}
-
 
 	/**
 	 * @param null|string $customerEmail
@@ -379,6 +366,22 @@ class Payment
 
 
 	/**
+	 * @return EetDph VAT decomposition for EET
+	 */
+	function getEetDph()
+	{
+		return $this->eetDph;
+	}
+
+	/**
+	 * @param EetDph $eetDph VAT decomposition for EET
+	 */
+	function setEetDph(EetDph $eetDph = NULL)
+	{
+		$this->eetDph = $eetDph;
+	}
+
+	/**
 	 * List arguments to put into the URL. Returns associative array of
 	 * arguments that should be contained in the ThePay gate call.
 	 *
@@ -408,9 +411,7 @@ class Payment
 		}
 
 		if ( !is_null($this->customerData)) {
-			if ($this->customerData instanceof FerBuy\Order) {
-				$input["customerData"] = $this->customerData->toJSON();
-			}
+			$input["customerData"] = $this->customerData;
 		}
 
 		if ( !is_null($this->customerEmail)) {
@@ -422,11 +423,11 @@ class Payment
 		}
 
 		$backToEshopUrlIsNull = is_null($this->backToEshopUrl);
-		if(!$backToEshopUrlIsNull) {
+		if ( !$backToEshopUrlIsNull) {
 			$input['backToEshopUrl'] = $this->backToEshopUrl;
 		}
 
-		if (!is_null($this->methodId)) {
+		if ( !is_null($this->methodId)) {
 			$input["methodId"] = $this->methodId;
 		}
 
@@ -439,6 +440,10 @@ class Payment
 
 		if ( !is_null($this->merchantSpecificSymbol)) {
 			$input["merchantSpecificSymbol"] = $this->merchantSpecificSymbol;
+		}
+
+		if ( !is_null($this->eetDph) && !$this->eetDph->isEmpty()) {
+			$input = array_merge($input, $this->eetDph->toArray());
 		}
 
 		return $input;

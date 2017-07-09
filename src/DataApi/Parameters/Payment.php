@@ -135,6 +135,31 @@ class Payment extends Object
 	public $customerEmail;
 
 	/**
+	 * @var string|null
+	 */
+	protected $fik;
+
+	/**
+	 * @var string|null
+	 */
+	protected $bkp;
+
+	/**
+	 * @var string|null
+	 */
+	protected $pkp;
+
+	/**
+	 * @var string|null
+	 */
+	protected $receiptUrl;
+
+	/**
+	 * @var bool|null
+	 */
+	protected $firstSuccess;
+
+	/**
 	 * @return int|null
 	 */
 	public function getId()
@@ -144,6 +169,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $id
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setId($id = NULL)
 	{
@@ -160,6 +187,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $account
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setAccount($account = NULL)
 	{
@@ -176,6 +205,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $state
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setState($state = NULL)
 	{
@@ -192,6 +223,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $createdOn
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setCreatedOn($createdOn = NULL)
 	{
@@ -208,6 +241,8 @@ class Payment extends Object
 
 	/**
 	 * @param DateTime|null $finishedOn
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setFinishedOn($finishedOn = NULL)
 	{
@@ -224,6 +259,8 @@ class Payment extends Object
 
 	/**
 	 * @param DateTime|null $canceledOn
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setCanceledOn($canceledOn = NULL)
 	{
@@ -240,6 +277,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $payOff
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setPayOff($payOff = NULL)
 	{
@@ -256,6 +295,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $payOffCancel
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setPayOffCancel($payOffCancel = NULL)
 	{
@@ -272,6 +313,8 @@ class Payment extends Object
 
 	/**
 	 * @param float|null $value
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setValue($value = NULL)
 	{
@@ -288,6 +331,8 @@ class Payment extends Object
 
 	/**
 	 * @param float|null $receivedValue
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setReceivedValue($receivedValue = NULL)
 	{
@@ -304,6 +349,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $currency
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setCurrency($currency)
 	{
@@ -320,6 +367,8 @@ class Payment extends Object
 
 	/**
 	 * @param float|null $fee
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setFee($fee)
 	{
@@ -336,6 +385,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $description
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setDescription($description = NULL)
 	{
@@ -352,6 +403,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $merchantData
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setMerchantData($merchantData = NULL)
 	{
@@ -368,6 +421,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $paymentMethod
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setPaymentMethod($paymentMethod)
 	{
@@ -384,6 +439,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $specificSymbol
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setSpecificSymbol($specificSymbol = NULL)
 	{
@@ -399,7 +456,9 @@ class Payment extends Object
 	}
 
 	/**
-	 * @param $merchantSpecificSymbol = null
+	 * @param string|null $merchantSpecificSymbol
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setMerchantSpecificSymbol($merchantSpecificSymbol = NULL)
 	{
@@ -418,6 +477,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $accountNumber
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setAccountNumber($accountNumber = NULL)
 	{
@@ -436,6 +497,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $accountOwnerName
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setAccountOwnerName($accountOwnerName = NULL)
 	{
@@ -454,8 +517,10 @@ class Payment extends Object
 
 	/**
 	 * @param string|null
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
-	public function setReturnUrl($returnUrl)
+	public function setReturnUrl($returnUrl = NULL)
 	{
 		$this->returnUrl = ValueFormatter::format('string', $returnUrl);
 	}
@@ -470,6 +535,8 @@ class Payment extends Object
 
 	/**
 	 * @param int|null $permanentPayment
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setPermanentPayment($permanentPayment = NULL)
 	{
@@ -488,6 +555,8 @@ class Payment extends Object
 
 	/**
 	 * @param bool|null $deposit
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setDeposit($deposit = NULL)
 	{
@@ -504,6 +573,8 @@ class Payment extends Object
 
 	/**
 	 * @param bool|null $recurring
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setRecurring($recurring = NULL)
 	{
@@ -520,6 +591,8 @@ class Payment extends Object
 
 	/**
 	 * @param string|null $ip
+	 *
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setIp($ip = NULL)
 	{
@@ -535,7 +608,8 @@ class Payment extends Object
 	}
 
 	/**
-	 * @return string|null
+	 * @var string|null $customerEmail
+	 * @throws \Tp\InvalidArgumentException
 	 */
 	public function setCustomerEmail($customerEmail = NULL)
 	{
@@ -544,4 +618,83 @@ class Payment extends Object
 		);
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getFik()
+	{
+		return $this->fik;
+	}
+
+	/**
+	 * @param string|null $fik
+	 */
+	public function setFik($fik = NULL)
+	{
+		$this->fik = ValueFormatter::formatString($fik);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBkp()
+	{
+		return $this->bkp;
+	}
+
+	/**
+	 * @param string|null $bkp
+	 */
+	public function setBkp($bkp = NULL)
+	{
+		$this->bkp = ValueFormatter::formatString($bkp);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getPkp()
+	{
+		return $this->pkp;
+	}
+
+	/**
+	 * @param string|null $pkp
+	 */
+	public function setPkp($pkp = NULL)
+	{
+		$this->pkp = ValueFormatter::formatString($pkp);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getReceiptUrl()
+	{
+		return $this->receiptUrl;
+	}
+
+	/**
+	 * @param string|null $receiptUrl
+	 */
+	public function setReceiptUrl($receiptUrl = NULL)
+	{
+		$this->receiptUrl = ValueFormatter::formatString($receiptUrl);
+	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function getFirstSuccess()
+	{
+		return $this->firstSuccess;
+	}
+
+	/**
+	 * @param bool|null $firstSuccess
+	 */
+	public function setFirstSuccess($firstSuccess = NULL)
+	{
+		$this->firstSuccess = ValueFormatter::formatBool($firstSuccess);
+	}
 }
