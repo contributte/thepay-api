@@ -132,6 +132,31 @@ class TpDataApiPayment extends TpDataApiObject {
 	public $customerEmail;
 
 	/**
+	 * @var string|null
+	 */
+	protected $fik;
+
+	/**
+	 * @var string|null
+	 */
+	protected $bkp;
+
+	/**
+	 * @var string|null
+	 */
+	protected $pkp;
+
+	/**
+	 * @var string|null
+	 */
+	protected $receiptUrl;
+
+	/**
+	 * @var bool|null
+	 */
+	protected $firstSuccess;
+
+	/**
 	 * @return int|null
 	 */
 	public function getId() {
@@ -481,7 +506,7 @@ class TpDataApiPayment extends TpDataApiObject {
 	public function getCustomerEmail() {
 		return $this->customerEmail;
 	}
-	
+
 	/**
 	 * @return string|null
 	 */
@@ -489,6 +514,76 @@ class TpDataApiPayment extends TpDataApiObject {
 		$this->customerEmail = TpValueFormatter::format(
 			'string', $customerEmail
 		);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFik() {
+		return $this->fik;
+	}
+
+	/**
+	 * @param string|null $fik
+	 */
+	public function setFik($fik = null) {
+		$this->fik = TpValueFormatter::formatString($fik);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBkp() {
+		return $this->bkp;
+	}
+
+	/**
+	 * @param string|null $bkp
+	 */
+	public function setBkp($bkp = null) {
+		$this->bkp = TpValueFormatter::formatString($bkp);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getPkp() {
+		return $this->pkp;
+	}
+
+	/**
+	 * @param string|null $pkp
+	 */
+	public function setPkp($pkp = null) {
+		$this->pkp = TpValueFormatter::formatString($pkp);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getReceiptUrl() {
+		return $this->receiptUrl;
+	}
+
+	/**
+	 * @param string|null $receiptUrl
+	 */
+	public function setReceiptUrl($receiptUrl = null) {
+		$this->receiptUrl = TpValueFormatter::formatString($receiptUrl);
+	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function getFirstSuccess() {
+		return $this->firstSuccess;
+	}
+
+	/**
+	 * @param bool|null $firstSuccess
+	 */
+	public function setFirstSuccess($firstSuccess = null) {
+		$this->firstSuccess = TpValueFormatter::formatBool($firstSuccess);
 	}
 
 }

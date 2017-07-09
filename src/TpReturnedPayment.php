@@ -20,7 +20,7 @@ class TpReturnedPayment extends TpPayment {
 	 * @var integer accountId from request
 	 */
 	protected $requestAccountId = null;
-	
+
 	/**
 	 * @var integer Payment status. One of enum values specified in the ThePay API documentation.
 	 */
@@ -82,12 +82,12 @@ class TpReturnedPayment extends TpPayment {
 	 * @var string
 	 */
 	protected $customerAccountNumber = NULL;
-	
+
 	/**
 	 * Name of customer's account. Usually name and surname of customer, but it could be arbitrary name
 	 * which he set for his account in internet banking of his bank.
 	 * Is filled only for some payment methods.
-	 * @var string 
+	 * @var string
 	 */
 	protected $customerAccountName = NULL;
 
@@ -125,25 +125,25 @@ class TpReturnedPayment extends TpPayment {
 	 * @var array required arguments of incoming request.
 	 */
 	protected static $REQUIRED_ARGS = array(
-		"value", "currency", "methodId", "description", "merchantData",
-		"status", "paymentId", "ipRating", "isOffline", "needConfirm"
+		'value', 'currency', 'methodId', 'description', 'merchantData',
+		'status', 'paymentId', 'ipRating', 'isOffline', 'needConfirm'
 	);
 
 	/**
 	 * @var array optional arguments of incoming request.
 	 */
 	protected static $OPTIONAL_ARGS = array(
-		"isConfirm", "variableSymbol", "specificSymbol",
-		"deposit", "isRecurring", "customerAccountNumber",
-		"customerAccountName"
+		'isConfirm', 'variableSymbol', 'specificSymbol',
+		'deposit', 'isRecurring', 'customerAccountNumber',
+		'customerAccountName'
 	);
 	/**
 	 * @var array default values for optional args
 	 */
 	protected static $OPTIONAL_ARGS_DEFAULT = array(
-		"isConfirm" => NULL, "variableSymbol" => NULL, "specificSymbol" => NULL,
-		"deposit" => NULL, "isRecurring" => NULL, "customerAccountNumber" => NULL,
-		"customerAccountName" => NULL
+		'isConfirm' => NULL, 'variableSymbol' => NULL, 'specificSymbol' => NULL,
+		'deposit' => NULL, 'isRecurring' => NULL,
+		'customerAccountNumber' => NULL, 'customerAccountName' => NULL,
 	);
 
 	/**
@@ -151,6 +151,7 @@ class TpReturnedPayment extends TpPayment {
 	 * @param args Optional arguments parameter, that can specify the
 	 *   arguments of the returned payment. If not specified, it is taken
 	 *   from the $_REQUEST superglobal array.
+	 * @throws TpMissingParameterException
 	 */
 	function __construct(TpMerchantConfig $config, $args = NULL) {
 		parent::__construct($config);
@@ -158,7 +159,7 @@ class TpReturnedPayment extends TpPayment {
 		if (is_null($args)) {
 			$args = &$_REQUEST;
 		}
-		
+
 		if( !empty($args['merchantId'])){
 			$this->requestMerchantId = $args['merchantId'];
 		}
@@ -196,7 +197,7 @@ class TpReturnedPayment extends TpPayment {
 			|| $this->requestAccountId != $this->config->accountId){
 			throw new TpInvalidSignatureException();
 		}
-		
+
 		if($signature === null){
 			$signature = $this->signature;
 		}
@@ -333,7 +334,7 @@ class TpReturnedPayment extends TpPayment {
 	public function getCustomerAccountNumber() {
 		return $this->customerAccountNumber;
 	}
-	
+
 	/**
 	 * @return string Name of customer's account.
 	 */

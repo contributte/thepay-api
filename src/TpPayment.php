@@ -1,7 +1,7 @@
 <?php
 TpUtils::requirePaths(array(
 	array('exceptions', 'TpInvalidParameterException.php'),
-	array('ferbuy',     'TpFerBuyOrder.php'),
+	array('TpEetDph.php'),
 	array('TpMerchantConfig.php'),
 	array('TpEscaper.php')
 ));
@@ -64,7 +64,8 @@ class TpPayment {
 	protected $methodId = NULL;
 
 	/**
-	 * @var mixed Optional data about customer. Required for FerBuy method.
+	 * @deprecated
+	 * @var string
 	 */
 	protected $customerData = NULL;
 
@@ -86,7 +87,12 @@ class TpPayment {
 	/**
 	 * @var string numerical specific symbol (used only if payment method supports it).
 	 */
-	protected $merchantSpecificSymbol;
+	protected $merchantSpecificSymbol = NULL;
+
+	/**
+	 * @var TpEetDph VAT decomposition for EET
+	 */
+	protected $eetDph = NULL;
 
 
 	/**
@@ -117,7 +123,7 @@ class TpPayment {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string $currency
 	 */
 	public function setCurrency($currency) {
@@ -233,38 +239,21 @@ class TpPayment {
 	}
 
 	/**
+	 * @deprecated
 	 * Set customer data.
-	 * @param mixed $data
+	 * @param string $data
 	 */
-	public function setCustomerData($data) {
+	public function setCustomerData($data = null) {
 		$this->customerData = $data;
 	}
 
 	/**
-	 * @return mixed previously set customer data
+	 * @deprecated
+	 * @return string previously set customer data
 	 */
 	public function getCustomerData() {
 		return $this->customerData;
 	}
-
-	/**
-	 * Get specific property from the customerData JSON string.
-	 *
-	 * @return mixed
-	 */
-	public function getCustomerDataField($field) {
-		if(!$this->customerData) {
-			return null;
-		}
-
-		$obj = TpEscaper::jsonDecode($this->customerData);
-		if(!$obj instanceof stdClass) {
-			return null;
-		}
-
-		return isset($obj->$field) ? $obj->$field : null;
-	}
-
 
 	/**
 	 * @param null|string $customerEmail
@@ -327,6 +316,19 @@ class TpPayment {
 		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
 
+	/**
+	 * @return TpEetDph VAT decomposition for EET
+	 */
+	function getEetDph() {
+		return $this->eetDph;
+	}
+
+	/**
+	 * @param TpEetDph $eetDph VAT decomposition for EET
+	 */
+	function setEetDph(TpEetDph $eetDph = NULL) {
+		$this->eetDph = $eetDph;
+	}
 
 	/**
 	 * List arguments to put into the URL. Returns associative array of
@@ -355,10 +357,8 @@ class TpPayment {
 			$input["merchantData"] = $this->merchantData;
 		}
 
-		if (!is_null($this->customerData)) {
-			if ($this->customerData instanceof TpFerBuyOrder){
-				$input["customerData"] = $this->customerData->toJSON();
-			}
+		if (!is_null($this->customerData)){
+			$input["customerData"] = $this->customerData;
 		}
 
 		if (!is_null($this->customerEmail)) {
@@ -389,6 +389,10 @@ class TpPayment {
 			$input["merchantSpecificSymbol"] = $this->merchantSpecificSymbol;
 		}
 
+		if (!is_null($this->eetDph) && !$this->eetDph->isEmpty()){
+			$input = array_merge($input, $this->eetDph->toArray());
+		}
+
 		return $input;
 	}
 
@@ -403,7 +407,7 @@ class TpPayment {
 		$input = $this->getArgs();
 
 		$str = "";
-		foreach ($input as $key=>$val) {
+		foreach ($input as $key => $val) {
 			$str .= $key."=".$val."&";
 		}
 
