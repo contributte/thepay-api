@@ -8,16 +8,18 @@ TpUtils::requirePaths(array(
 class TpDataApiResponseFactory {
 
 	/**
-	 * @param string $operation
+	 * @param string           $operation
 	 * @param TpMerchantConfig $config
-	 * @param stdClass $data
+	 * @param stdClass         $data
 	 * @return TpDataApiResponse
 	 * @throws TpInvalidSignatureException
 	 */
 	public static function getResponse($operation, TpMerchantConfig $config, stdClass $data) {
 		/** @var string|TpDataApiResponse $className Only class name. */
 		$className = preg_replace(
-			'/^get(.+)$/', 'TpDataApiGet$1Response', $operation
+			array('/^get(.+)$/', '/^set(.+)$/'),
+			array('TpDataApiGet$1Response', 'TpDataApiSet$1Response'),
+			$operation
 		);
 
 		$fileName = $className . '.php';

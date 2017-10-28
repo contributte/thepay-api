@@ -9,7 +9,9 @@ class TpDataApiRequestFactory {
 	public static function getRequest($operation, TpMerchantConfig $config, array $data) {
 		/** @var TpDataApiRequest $className Only class name. */
 		$className = preg_replace(
-			'/^get(.+)$/', 'TpDataApiGet$1Request', $operation
+			array('/^get(.+)$/', '/^set(.+)$/'),
+			array('TpDataApiGet$1Request', 'TpDataApiSet$1Request'),
+			$operation
 		);
 
 		$fileName = $className . '.php';

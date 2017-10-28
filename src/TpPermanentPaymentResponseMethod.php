@@ -14,23 +14,23 @@ class TpPermanentPaymentResponseMethod {
 		$this->vs = $vs;
 	}
 
-	public function setMethodId($methodId) {
-		$this->methodId = $methodId;
+	function getMethodId() {
+		return $this->methodId;
 	}
 
-	public function setMethodName($methodName) {
-		$this->methodName = $methodName;
+	function getMethodName() {
+		return $this->methodName;
 	}
 
-	public function setUrl($url) {
-		$this->url = $url;
+	function getUrl() {
+		return $this->url;
 	}
 
-	public function setAccountNumber($accountNumber) {
-		$this->accountNumber = $accountNumber;
+	function getAccountNumber() {
+		return $this->accountNumber;
 	}
 
-	public function setVs($vs) {
-		$this->vs = $vs;
+	function getVs() {
+		return $this->vs;
 	}
 }

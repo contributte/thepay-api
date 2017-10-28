@@ -97,6 +97,25 @@ class TpDataApiHelper {
 	}
 
 	/**
+	 * @param TpMerchantConfig $config
+	 * @param type $type
+	 * @param array $paymentMethods
+	 * @return type
+	 */
+	public static function setPaymentMethods(TpMerchantConfig $config, $type, array $paymentMethods = null){
+		$data = array(
+			'type' => $type,
+			'paymentMethods' => $paymentMethods
+		);
+		$request = TpDataApiRequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+
+		$response = self::call(__FUNCTION__, $config, $request);
+		return $response;
+	}
+
+	/**
 	 * @param string $operation
 	 * @param TpMerchantConfig $config
 	 * @param TpDataApiRequest $request
