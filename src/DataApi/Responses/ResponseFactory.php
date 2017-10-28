@@ -26,7 +26,9 @@ class ResponseFactory
 	{
 		/** @var string|Response $className Only class name. */
 		$className = preg_replace(
-			'/^get(.+)$/', 'Tp\DataApi\Responses\Get$1Response', $operation
+			['/^get(.+)$/', '/^set(.+)$/'],
+			['Tp\DataApi\Responses\Get$1Response', 'Tp\DataApi\Responses\Set$1Response'],
+			$operation
 		);
 
 		$array = Utils::toArrayRecursive($data);

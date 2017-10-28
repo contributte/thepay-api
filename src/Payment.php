@@ -435,7 +435,7 @@ class Payment
 			$input["deposit"] = $this->deposit ? '1' : '0';
 		}
 		if ( !is_null($this->isRecurring)) {
-			$input["isRecurring"] = $this->isRecurring;
+			$input["isRecurring"] = $this->isRecurring ? '1' : '0';
 		}
 
 		if ( !is_null($this->merchantSpecificSymbol)) {
@@ -468,7 +468,7 @@ class Payment
 
 		$str .= "password=" . $this->config->password;
 
-		return $this->hashFunction($str);
+		return self::hashFunction($str);
 	}
 
 	/**

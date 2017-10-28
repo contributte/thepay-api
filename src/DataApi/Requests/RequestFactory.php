@@ -18,7 +18,9 @@ class RequestFactory
 	{
 		/** @var Request $className Only class name. */
 		$className = preg_replace(
-			'/^get(.+)$/', 'Tp\DataApi\Requests\Get$1Request', $operation
+			['/^get(.+)$/', '/^set(.+)$/'],
+			['Tp\DataApi\Requests\Get$1Request', 'Tp\DataApi\Requests\Set$1Request'],
+			$operation
 		);
 
 		$request = $className::createWithConfig($config, $data);

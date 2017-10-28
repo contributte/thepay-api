@@ -1,4 +1,5 @@
 <?php
+
 namespace Tp\Helper;
 
 use Tp;
@@ -16,15 +17,17 @@ class PermanentPayment
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
-		$result = $client->createPermanentPaymentRequest([
-															 'merchantId'   => $config->merchantId,
-															 'accountId'    => $config->accountId,
-															 'merchantData' => $payment->getMerchantData(),
-															 'description'  => $payment->getDescription(),
-															 'returnUrl'    => $payment->getReturnUrl(),
-															 'signature'    => $payment->getSignature(),
-														 ]);
-		if ( !$result) {
+		$result = $client->createPermanentPaymentRequest(
+			[
+				'merchantId'   => $config->merchantId,
+				'accountId'    => $config->accountId,
+				'merchantData' => $payment->getMerchantData(),
+				'description'  => $payment->getDescription(),
+				'returnUrl'    => $payment->getReturnUrl(),
+				'signature'    => $payment->getSignature(),
+			]
+		);
+		if (!$result) {
 			throw new Tp\Exception();
 		}
 
@@ -38,13 +41,15 @@ class PermanentPayment
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
-		$result = $client->getPermanentPaymentRequest([
-														  'merchantId'   => $config->merchantId,
-														  'accountId'    => $config->accountId,
-														  'merchantData' => $payment->getMerchantData(),
-														  'signature'    => $payment->getSignatureLite(),
-													  ]);
-		if ( !$result) {
+		$result = $client->getPermanentPaymentRequest(
+			[
+				'merchantId'   => $config->merchantId,
+				'accountId'    => $config->accountId,
+				'merchantData' => $payment->getMerchantData(),
+				'signature'    => $payment->getSignatureLite(),
+			]
+		);
+		if (!$result) {
 			throw new Tp\Exception();
 		}
 

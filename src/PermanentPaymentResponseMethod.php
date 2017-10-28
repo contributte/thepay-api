@@ -19,28 +19,28 @@ class PermanentPaymentResponseMethod
 		$this->vs = $vs;
 	}
 
-	public function setMethodId($methodId)
+	public function getMethodId()
 	{
-		$this->methodId = $methodId;
+		return $this->methodId;
 	}
 
-	public function setMethodName($methodName)
+	public function getMethodName()
 	{
-		$this->methodName = $methodName;
+		return $this->methodName;
 	}
 
-	public function setUrl($url)
+	public function getUrl()
 	{
-		$this->url = $url;
+		return $this->url;
 	}
 
-	public function setAccountNumber($accountNumber)
+	public function getAccountNumber()
 	{
-		$this->accountNumber = $accountNumber;
+		return $this->accountNumber;
 	}
 
-	public function setVs($vs)
+	public function getVs()
 	{
-		$this->vs = $vs;
+		return $this->vs;
 	}
 }

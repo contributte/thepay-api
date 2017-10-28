@@ -16,6 +16,8 @@ use Tp\DataApi\Responses\GetPaymentMethodsResponse;
 use Tp\DataApi\Responses\GetPaymentsResponse;
 use Tp\DataApi\Responses\GetPaymentStateResponse;
 use Tp\DataApi\Responses\ResponseFactory;
+use Tp\DataApi\Responses\SetPaymentMethodsResponse;
+use Tp\InvalidSignatureException;
 use Tp\SoapException;
 use Tp\MerchantConfig;
 
@@ -120,12 +122,36 @@ class DataApi
 	}
 
 	/**
+	 * @param MerchantConfig $config
+	 * @param            $type
+	 * @param array          $paymentMethods
+	 * @return SetPaymentMethodsResponse
+	 * @throws SoapException
+	 * @throws InvalidSignatureException
+	 */
+	public static function setPaymentMethods(MerchantConfig $config, $type, array $paymentMethods = NULL)
+	{
+		$data = [
+			'type'           => $type,
+			'paymentMethods' => $paymentMethods
+		];
+		$request = RequestFactory::getRequest(
+			__FUNCTION__, $config, $data
+		);
+
+		$response = self::call(__FUNCTION__, $config, $request);
+
+		return $response;
+	}
+
+	/**
 	 * @param string         $operation
 	 * @param MerchantConfig $config
 	 * @param Request        $request
 	 *
 	 * @return Response
 	 * @throws SoapException
+	 * @throws InvalidSignatureException
 	 */
 	protected static function call($operation, MerchantConfig $config, Request $request)
 	{
