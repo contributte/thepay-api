@@ -3,8 +3,8 @@
 namespace Tp\DataApi\Responses;
 
 use stdClass;
-use Tp\DataApi\Response;
 use Tp\InvalidSignatureException;
+use Tp\MissingParameterException;
 use Tp\Utils;
 use Tp\DataApi\Processors\DateTimeInflater;
 use Tp\DataApi\Parameters\Signature;
@@ -20,6 +20,7 @@ class ResponseFactory
 	 * @param stdClass           $data
 	 *
 	 * @return Response
+	 * @throws MissingParameterException
 	 * @throws InvalidSignatureException
 	 */
 	public static function getResponse($operation, MerchantConfig $config, stdClass $data)

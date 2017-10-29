@@ -2,6 +2,8 @@
 
 namespace Tp;
 
+use stdClass;
+
 class Utils
 {
 
@@ -29,7 +31,7 @@ class Utils
 	}
 
 	/**
-	 * @param \stdClass|array $value
+	 * @param stdClass|array $value
 	 *
 	 * @return array
 	 */
@@ -40,7 +42,7 @@ class Utils
 			$item =& $array[$k];
 
 			$isArray = is_array($v);
-			if ($isArray || $v instanceof \stdClass) {
+			if ($isArray || $v instanceof stdClass) {
 				$item = static::toArrayRecursive($v);
 			}
 			else {

@@ -3,12 +3,12 @@
 namespace Tp\DataApi\Requests;
 
 use Tp\BadMethodCallException;
-use Tp\DataApi\Object;
+use Tp\DataApi\DataApiObject;
 use Tp\DataApi\Processors\DateTimeDeflater;
 use Tp\DataApi\Parameters\Signature;
 use Tp\MerchantConfig;
 
-abstract class Request extends Object
+abstract class Request extends DataApiObject
 {
 
 	/**

@@ -2,8 +2,9 @@
 
 namespace Tp;
 
+use stdClass;
+
 /**
- *
  * @author Michal Kandr
  */
 class PermanentPaymentResponse
@@ -13,7 +14,7 @@ class PermanentPaymentResponse
 	/** @var PermanentPaymentResponseMethod[] */
 	protected $paymentMethods = [];
 
-	function __construct(\stdClass $data)
+	function __construct(stdClass $data)
 	{
 		$this->status = $data->status;
 		if (property_exists($data, 'errorDescription')) {
@@ -21,7 +22,7 @@ class PermanentPaymentResponse
 		}
 		if (
 			property_exists($data, 'paymentMethods') &&
-			$data->paymentMethods instanceof \stdClass &&
+			$data->paymentMethods instanceof stdClass &&
 			property_exists($data->paymentMethods, 'paymentMethod') &&
 			is_array($data->paymentMethods->paymentMethod)
 		) {

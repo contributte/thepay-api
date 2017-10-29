@@ -2,7 +2,6 @@
 
 namespace Tp\DataApi\Responses;
 
-use Tp\DataApi\Response;
 use Tp\DataApi\Parameters\PaymentInfo;
 use Tp\DataApi\ValueFormatter;
 

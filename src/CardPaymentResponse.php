@@ -2,12 +2,14 @@
 
 namespace Tp;
 
+use stdClass;
+
 class CardPaymentResponse
 {
 	protected $status;
 	protected $errorDescription;
 
-	function __construct(\stdClass $data)
+	function __construct(stdClass $data)
 	{
 		$this->status = $data->status;
 		if (property_exists($data, 'errorDescription')) {

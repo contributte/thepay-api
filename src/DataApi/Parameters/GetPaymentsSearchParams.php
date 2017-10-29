@@ -3,10 +3,10 @@
 namespace Tp\DataApi\Parameters;
 
 use DateTime;
-use Tp\DataApi\Object;
+use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
-class GetPaymentsSearchParams extends Object
+class GetPaymentsSearchParams extends DataApiObject
 {
 
 	/**

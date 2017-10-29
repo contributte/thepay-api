@@ -2,6 +2,8 @@
 
 namespace Tp;
 
+use stdClass;
+
 /**
  * @author Michal Kandr
  */
@@ -10,7 +12,7 @@ class PaymentReturnResponse
 	protected $status;
 	protected $errorDescription;
 
-	function __construct(\stdClass $data)
+	function __construct(stdClass $data)
 	{
 		$this->status = $data->status;
 

@@ -7,7 +7,7 @@ use ReflectionClass;
 use ReflectionProperty;
 use Tp\Utils;
 
-abstract class Object implements ArrayAccess
+abstract class DataApiObject implements ArrayAccess
 {
 
 	/**
@@ -118,7 +118,7 @@ abstract class Object implements ArrayAccess
 	 */
 	protected static function demodelizeRecursive($value)
 	{
-		if ($value instanceof Object) {
+		if ($value instanceof DataApiObject) {
 			$demodelized = $value->toArray();
 		}
 		else {

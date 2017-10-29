@@ -2,10 +2,10 @@
 
 namespace Tp\DataApi\Parameters;
 
-use Tp\DataApi\Object;
+use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
-class MerchantAccountMethod extends Object
+class MerchantAccountMethod extends DataApiObject
 {
 
 	/**

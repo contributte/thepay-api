@@ -1,11 +1,13 @@
 <?php
 
-namespace Tp\DataApi;
+namespace Tp\DataApi\Responses;
 
+use Tp\DataApi\DataApiObject;
+use Tp\DataApi\ValueFormatter;
 use Tp\InvalidSignatureException;
 use Tp\Utils;
 
-class Response extends Object
+class Response extends DataApiObject
 {
 
 	/**

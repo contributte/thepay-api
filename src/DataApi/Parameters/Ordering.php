@@ -2,10 +2,10 @@
 
 namespace Tp\DataApi\Parameters;
 
-use Tp\DataApi\Object;
+use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
-class Ordering extends Object
+class Ordering extends DataApiObject
 {
 
 	/**
