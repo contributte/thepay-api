@@ -123,8 +123,9 @@ class DataApi
 
 	/**
 	 * @param MerchantConfig $config
-	 * @param            $type
+	 * @param                $type
 	 * @param array          $paymentMethods
+	 *
 	 * @return SetPaymentMethodsResponse
 	 * @throws SoapException
 	 * @throws InvalidSignatureException
