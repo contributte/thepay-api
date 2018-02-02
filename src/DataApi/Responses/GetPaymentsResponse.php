@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
@@ -29,13 +30,9 @@ class GetPaymentsResponse extends Response
 	 */
 	protected $pagination;
 
-	/**
-	 * @param array $response
-	 *
-	 * @return GetPaymentsResponse
-	 */
-	public static function createFromResponse(array $response)
-	{
+	public static function createFromResponse(
+		array $response
+	) : self {
 		/** @var GetPaymentsResponse $instance */
 		$instance = parent::createFromResponse($response);
 
@@ -53,9 +50,9 @@ class GetPaymentsResponse extends Response
 	}
 
 	/**
-	 * @return \Tp\DataApi\Parameters\Payment[]
+	 * @return Payment[]
 	 */
-	public function getPayments()
+	public function getPayments() : array
 	{
 		return $this->payments;
 	}
@@ -63,29 +60,21 @@ class GetPaymentsResponse extends Response
 	/**
 	 * @param Payment[] $payments
 	 */
-	public function setPayments(array $payments = [])
+	public function setPayments(array $payments = []) : void
 	{
 		$this->payments = ValueFormatter::formatList(
 			'Tp\DataApi\Parameters\Payment', $payments
 		);
 	}
 
-	/**
-	 * @return PaginationResponse|null
-	 */
-	public function getPagination()
+	public function getPagination() : ?PaginationResponse
 	{
 		return $this->pagination;
 	}
 
-	/**
-	 * @param \Tp\DataApi\Parameters\PaginationResponse|null $pagination
-	 */
-	public function setPagination(PaginationResponse $pagination)
+	public function setPagination(?PaginationResponse $pagination) : void
 	{
-		$this->pagination = ValueFormatter::format(
-			'Tp\DataApi\Parameters\PaginationResponse', $pagination
-		);
+		$this->pagination = $pagination;
 	}
 
 }

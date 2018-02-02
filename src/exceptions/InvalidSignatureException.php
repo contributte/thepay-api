@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -9,6 +10,6 @@ class InvalidSignatureException extends Exception
 {
 	function __construct()
 	{
-		parent::__construct("Invalid signature");
+		parent::__construct('Invalid signature');
 	}
 }

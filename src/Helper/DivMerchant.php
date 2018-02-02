@@ -1,4 +1,5 @@
 <?php
+
 namespace Tp\Helper;
 
 use Tp\Escaper;
@@ -35,7 +36,7 @@ class DivMerchant extends Merchant
 	/**
 	 * @return string
 	 */
-	public function getSkin()
+	public function getSkin() : string
 	{
 		return $this->skin;
 	}
@@ -45,7 +46,7 @@ class DivMerchant extends Merchant
 	 *
 	 * @param string $skin
 	 */
-	public function setSkin($skin)
+	public function setSkin(string $skin) : void
 	{
 		$this->skin = $skin;
 	}
@@ -53,7 +54,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Disable thepay css for button
 	 */
-	public function disableButtonCss()
+	public function disableButtonCss() : void
 	{
 		$this->disableButtonCss = TRUE;
 	}
@@ -61,7 +62,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Enable thepay css for button
 	 */
-	public function enableButtonCss()
+	public function enableButtonCss() : void
 	{
 		$this->disableButtonCss = FALSE;
 	}
@@ -69,7 +70,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Disable thepay css for offline payment popup box
 	 */
-	public function disablePopupCss()
+	public function disablePopupCss() : void
 	{
 		$this->disablePopupCss = TRUE;
 	}
@@ -77,7 +78,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Enable thepay css for offline payment popup box
 	 */
-	public function enablePopupCss()
+	public function enablePopupCss() : void
 	{
 		$this->disablePopupCss = FALSE;
 	}
@@ -85,16 +86,18 @@ class DivMerchant extends Merchant
 	/**
 	 * Return the HTML code for the div.
 	 */
-	function render()
+	function render() : string
 	{
 		$url = $this->payment->getMerchantConfig()->gateUrl;
-		$queryArgs = array_filter([
-									  'skin' => $this->skin,
-								  ]);
+		$queryArgs = array_filter(
+			[
+				'skin' => $this->skin,
+			]
+		);
 
-		$out = "";
+		$out = '';
 		if ( !$this->disableButtonCss) {
-			$skin = $this->skin == "" ? "" : "/$this->skin";
+			$skin = $this->skin === '' ? '' : "/$this->skin";
 			$href = "{$url}div/style$skin/div.css?v=" . time();
 			$href = Escaper::htmlEntityEncode($href);
 			$out .= "<link href=\"$href\" type=\"text/css\" rel=\"stylesheet\" />\n";

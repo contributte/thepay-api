@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -93,222 +94,133 @@ class PaymentInfo extends DataApiObject
 	 */
 	protected $scBarcodeUrl;
 
-	/**
-	 * @return bool|null
-	 */
-	public function getIsOffline()
+	public function getIsOffline() : ?bool
 	{
 		return $this->isOffline;
 	}
 
-	/**
-	 * @param bool|null $isOffline
-	 */
-	public function setIsOffline($isOffline = NULL)
+	public function setIsOffline(bool $isOffline = NULL) : void
 	{
-		$this->isOffline = ValueFormatter::format('bool', $isOffline);
+		$this->isOffline = $isOffline;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getPaymentPageUrl()
+	public function getPaymentPageUrl() : ?string
 	{
 		return $this->paymentPageUrl;
 	}
 
-	/**
-	 * @param string|null $paymentPageUrl
-	 */
-	public function setPaymentPageUrl($paymentPageUrl = NULL)
+	public function setPaymentPageUrl(string $paymentPageUrl = NULL) : void
 	{
-		$this->paymentPageUrl = ValueFormatter::format(
-			'string', $paymentPageUrl
-		);
+		$this->paymentPageUrl = $paymentPageUrl;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	function getPaymentInfoUrl()
+	public function getPaymentInfoUrl() : ?string
 	{
 		return $this->paymentInfoUrl;
 	}
 
-	/**
-	 * @param string|null $paymentInfoUrl
-	 */
-	function setPaymentInfoUrl($paymentInfoUrl = NULL)
+	public function setPaymentInfoUrl(string $paymentInfoUrl = NULL) : void
 	{
-		$this->paymentInfoUrl = ValueFormatter::format(
-			'string', $paymentInfoUrl
-		);
+		$this->paymentInfoUrl = $paymentInfoUrl;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getMethodChangeUrl()
+	public function getMethodChangeUrl() : ?string
 	{
 		return $this->methodChangeUrl;
 	}
 
-	/**
-	 * @param string|null $methodChangeUrl
-	 */
-	public function setMethodChangeUrl($methodChangeUrl = NULL)
+	public function setMethodChangeUrl(string $methodChangeUrl = NULL) : void
 	{
-		$this->methodChangeUrl = ValueFormatter::format(
-			'string', $methodChangeUrl
-		);
+		$this->methodChangeUrl = $methodChangeUrl;
 	}
 
-	/**
-	 * @return float|null
-	 */
-	public function getValue()
+	public function getValue() : ?float
 	{
 		return $this->value;
 	}
 
-	/**
-	 * @param float|null $value
-	 */
-	public function setValue($value)
+	public function setValue(?float $value) : void
 	{
-		$this->value = ValueFormatter::format('float', $value);
+		$this->value = $value;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getAccountNumberPrefix()
+	public function getAccountNumberPrefix() : ?string
 	{
 		return $this->accountNumberPrefix;
 	}
 
-	/**
-	 * @param string|null $accountNumberPrefix
-	 */
-	public function setAccountNumberPrefix($accountNumberPrefix = NULL)
+	public function setAccountNumberPrefix(string $accountNumberPrefix = NULL) : void
 	{
-		$this->accountNumberPrefix = ValueFormatter::format(
-			'string', $accountNumberPrefix
-		);
+		$this->accountNumberPrefix = $accountNumberPrefix;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getAccountNumber()
+	public function getAccountNumber() : ?string
 	{
 		return $this->accountNumber;
 	}
 
-	/**
-	 * @param string|null $accountNumber
-	 */
-	public function setAccountNumber($accountNumber = NULL)
+	public function setAccountNumber(string $accountNumber = NULL) : void
 	{
-		$this->accountNumber = ValueFormatter::format(
-			'string', $accountNumber
-		);
+		$this->accountNumber = $accountNumber;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getBankCode()
+	public function getBankCode() : ?string
 	{
 		return $this->bankCode;
 	}
 
-	/**
-	 * @param string|null $bankCode
-	 */
-	public function setBankCode($bankCode = NULL)
+	public function setBankCode(string $bankCode = NULL) : void
 	{
-		$this->bankCode = ValueFormatter::format('string', $bankCode);
+		$this->bankCode = $bankCode;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getVs()
+	public function getVs() : ?string
 	{
 		return $this->vs;
 	}
 
-	/**
-	 * @param string|null $vs
-	 */
-	public function setVs($vs = NULL)
+	public function setVs(string $vs = NULL) : void
 	{
-		$this->vs = ValueFormatter::format('string', $vs);
+		$this->vs = $vs;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getSs()
+	public function getSs() : ?string
 	{
 		return $this->ss;
 	}
 
-	/**
-	 * @param string|null $ss
-	 */
-	public function setSs($ss = NULL)
+	public function setSs(string $ss = NULL) : void
 	{
-		$this->ss = ValueFormatter::format('string', $ss);
+		$this->ss = $ss;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getEbankingUrl()
+	public function getEbankingUrl() : ?string
 	{
 		return $this->ebankingUrl;
 	}
 
-	/**
-	 * @param string|null $ebankingUrl
-	 */
-	public function setEbankingUrl($ebankingUrl = NULL)
+	public function setEbankingUrl(string $ebankingUrl = NULL) : void
 	{
-		$this->ebankingUrl = ValueFormatter::format('string', $ebankingUrl);
+		$this->ebankingUrl = $ebankingUrl;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getScCode()
+	public function getScCode() : ?string
 	{
 		return $this->scCode;
 	}
 
-	/**
-	 * @param string|null $scCode
-	 */
-	public function setScCode($scCode = NULL)
+	public function setScCode(string $scCode = NULL) : void
 	{
-		$this->scCode = ValueFormatter::format('string', $scCode);
+		$this->scCode = $scCode;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getScBarcodeUrl()
+	public function getScBarcodeUrl() : ?string
 	{
 		return $this->scBarcodeUrl;
 	}
 
-	/**
-	 * @param string|null $scBarcodeUrl
-	 */
-	public function setScBarcodeUrl($scBarcodeUrl = NULL)
+	public function setScBarcodeUrl(string $scBarcodeUrl = NULL) : void
 	{
-		$this->scBarcodeUrl = ValueFormatter::format('string', $scBarcodeUrl);
+		$this->scBarcodeUrl = $scBarcodeUrl;
 	}
-
 }

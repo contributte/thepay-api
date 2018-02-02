@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi;
 
@@ -15,7 +16,7 @@ class ValueFormatter
 	 * @return mixed
 	 * @throws InvalidArgumentException
 	 */
-	public static function format($type, $value)
+	public static function format(string $type, $value)
 	{
 		if (substr($type, -2) == '[]') {
 			return static::formatList(substr($type, 0, -2), $value);
@@ -26,7 +27,7 @@ class ValueFormatter
 			return NULL;
 		}
 		else {
-			$method = "format$type"; // Method names are case-insensitive.
+			$method = 'format' . ucfirst($type);
 			if (method_exists(__CLASS__, $method)) {
 				return static::$method($value);
 			}
@@ -45,7 +46,7 @@ class ValueFormatter
 	 *
 	 * @return int
 	 */
-	public static function formatInt($value)
+	public static function formatInt($value) : ?int
 	{
 		$isNull = is_null($value);
 		if ($isNull) {
@@ -61,7 +62,7 @@ class ValueFormatter
 	 *
 	 * @return float
 	 */
-	public static function formatFloat($value)
+	public static function formatFloat($value) : ?float
 	{
 		$isNull = is_null($value);
 		if ($isNull) {
@@ -77,7 +78,7 @@ class ValueFormatter
 	 *
 	 * @return bool
 	 */
-	public static function formatBool($value)
+	public static function formatBool($value) : ?bool
 	{
 		$isNull = is_null($value);
 		if ($isNull) {
@@ -89,37 +90,37 @@ class ValueFormatter
 	}
 
 	/**
-	 * @param string $value
+	 * @param mixed $value
 	 *
 	 * @return string
 	 */
-	public static function formatString($value)
+	public static function formatString($value) : ?string
 	{
 		$isNull = is_null($value);
 		if ($isNull) {
 			return NULL;
 		}
 		else {
-			return "$value";
+			return strval($value);
 		}
 	}
 
 	/**
-	 * @param $value
+	 * @param DateTime|string|null $value
 	 *
 	 * @return DateTime|null
 	 */
-	public static function formatDateTime($value)
+	public static function formatDateTime($value) : ?DateTime
 	{
 		$isNull = is_null($value);
 		if ($isNull) {
 			return NULL;
 		}
 		else {
-			if ($value == "0000-00-00 00:00:00") {
+			if ($value === '0000-00-00 00:00:00') {
 				return NULL;
 			}
-			elseif ($value instanceof DateTime) {
+			else if ($value instanceof DateTime) {
 				return $value;
 			}
 			else {
@@ -134,7 +135,7 @@ class ValueFormatter
 	 *
 	 * @return array
 	 */
-	public static function formatList($type, array $value)
+	public static function formatList(string $type, array $value) : array
 	{
 		$array = [];
 		foreach ($value as $item) {

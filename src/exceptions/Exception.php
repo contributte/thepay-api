@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -7,9 +8,9 @@ namespace Tp;
  */
 class Exception extends \Exception
 {
-	public $defaultMessage = "Generic ThePay exception";
+	public $defaultMessage = 'Generic ThePay exception';
 
-	function __construct($message = NULL)
+	function __construct(string $message = NULL)
 	{
 		if (is_null($message)) {
 			parent::__construct($this->defaultMessage);

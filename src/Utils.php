@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -15,7 +16,7 @@ class Utils
 	 *
 	 * @return array
 	 */
-	public static function filterKeys(array $array, $keys)
+	public static function filterKeys(array $array, array $keys) : array
 	{
 		$keysKeys = array_flip($keys);
 		$presentKeysKeys = array_intersect_key($keysKeys, $array);
@@ -35,7 +36,7 @@ class Utils
 	 *
 	 * @return array
 	 */
-	public static function toArrayRecursive($value)
+	public static function toArrayRecursive($value) : array
 	{
 		$array = [];
 		foreach ($value as $k => $v) {
@@ -61,7 +62,7 @@ class Utils
 	 *
 	 * @return bool
 	 */
-	public static function isList(array $array)
+	public static function isList(array $array) : bool
 	{
 		$count = count($array);
 		if ($count) {

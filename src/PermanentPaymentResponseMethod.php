@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -10,8 +11,13 @@ class PermanentPaymentResponseMethod
 	protected $accountNumber;
 	protected $vs;
 
-	function __construct($methodId, $methodName, $url, $accountNumber, $vs)
-	{
+	function __construct(
+		$methodId,
+		$methodName,
+		$url,
+		$accountNumber,
+		$vs
+	) {
 		$this->methodId = $methodId;
 		$this->methodName = $methodName;
 		$this->url = $url;

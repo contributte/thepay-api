@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi;
 
@@ -9,12 +10,6 @@ use Tp\Utils;
 
 abstract class DataApiObject implements ArrayAccess
 {
-
-	/**
-	 * TpAbstractModel constructor.
-	 *
-	 * @param array $data
-	 */
 	public function __construct(array $data = [])
 	{
 		$keys = static::keys();
@@ -26,15 +21,12 @@ abstract class DataApiObject implements ArrayAccess
 		unset($value);
 	}
 
-	/**
-	 * @return array
-	 */
-	public function toArray()
+	public function toArray() : array
 	{
 		$data = [];
 		$keys = self::keys();
 		foreach ($keys as $name) {
-			$data[$name] = static::demodelizeRecursive($this->$name);
+			$data[$name] = static::demodelizeRecursive($this->{$name});
 		}
 
 		return $data;
@@ -43,7 +35,7 @@ abstract class DataApiObject implements ArrayAccess
 	/**
 	 * @return string[]
 	 */
-	public static function keys()
+	public static function keys() : array
 	{
 		$calledClass = get_called_class();
 		$reflection = new ReflectionClass($calledClass);
@@ -71,12 +63,12 @@ abstract class DataApiObject implements ArrayAccess
 	 *
 	 * @return bool
 	 */
-	private static function filterDataProperties(ReflectionProperty $property)
-	{
+	private static function filterDataProperties(
+		ReflectionProperty $property
+	) : bool {
 		$underscored = strpos($property->getName(), '_') === 0;
-		$static = $property->isStatic();
 
-		return !$underscored && !$static;
+		return !$underscored && !$property->isStatic();
 	}
 
 	/**
@@ -86,7 +78,7 @@ abstract class DataApiObject implements ArrayAccess
 	 *
 	 * @return ReflectionProperty[]
 	 */
-	private static function sortDataProperties(array $dataProperties)
+	private static function sortDataProperties(array $dataProperties) : array
 	{
 		$inherited = [];
 		$own = [];
@@ -106,29 +98,20 @@ abstract class DataApiObject implements ArrayAccess
 		}
 		unset($property, $propertyClass, $propertyClassName);
 
-		$combined = array_merge($inherited, $own);
-
-		return $combined;
+		return array_merge($inherited, $own);
 	}
 
-	/**
-	 * @param mixed $value
-	 *
-	 * @return mixed
-	 */
 	protected static function demodelizeRecursive($value)
 	{
 		if ($value instanceof DataApiObject) {
 			$demodelized = $value->toArray();
 		}
 		else {
-			$isArray = is_array($value);
-			if ($isArray) {
+			if (is_array($value)) {
 				$demodelized = [];
 				foreach ($value as $k => $v) {
 					$demodelized[$k] = static::demodelizeRecursive($v);
 				}
-				unset($k, $v);
 			}
 			else {
 				$demodelized = $value;
@@ -148,7 +131,7 @@ abstract class DataApiObject implements ArrayAccess
 	public function offsetExists($offset)
 	{
 		$keys = static::keys();
-		$offsetExists = in_array($offset, $keys);
+		$offsetExists = in_array($offset, $keys, TRUE);
 
 		return $offsetExists;
 	}
@@ -161,25 +144,24 @@ abstract class DataApiObject implements ArrayAccess
 	public function offsetGet($offset)
 	{
 		$getterName = 'get' . ucfirst($offset);
-		$value = $this->$getterName();
 
-		return $value;
+		return $this->{$getterName}();
 	}
 
 	/**
 	 * @param string $offset
 	 * @param mixed  $value
 	 */
-	public function offsetSet($offset, $value)
+	public function offsetSet($offset, $value) : void
 	{
 		$setterName = 'set' . ucfirst($offset);
-		$this->$setterName($value);
+		$this->{$setterName}($value);
 	}
 
 	/**
 	 * @param string $offset
 	 */
-	public function offsetUnset($offset)
+	public function offsetUnset($offset) : void
 	{
 		$this->offsetSet($offset, NULL);
 	}

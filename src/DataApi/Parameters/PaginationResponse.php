@@ -1,8 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
-
-use Tp\DataApi\ValueFormatter;
 
 class PaginationResponse extends Pagination
 {
@@ -12,20 +11,14 @@ class PaginationResponse extends Pagination
 	 */
 	protected $totalPages;
 
-	/**
-	 * @return int
-	 */
-	public function getTotalPages()
+	public function getTotalPages() : int
 	{
 		return $this->totalPages;
 	}
 
-	/**
-	 * @param int|null $totalPages
-	 */
-	public function setTotalPages($totalPages = NULL)
+	public function setTotalPages(int $totalPages = NULL) : void
 	{
-		$this->totalPages = ValueFormatter::format('int', $totalPages);
+		$this->totalPages = $totalPages;
 	}
 
 }

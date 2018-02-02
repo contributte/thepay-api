@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\Helper;
 
@@ -8,13 +9,16 @@ use Tp\PaymentReturnResponse;
 
 class ReturnHelper
 {
-	protected static function getSignature($data)
+	protected static function getSignature(array $data)
 	{
 		return md5(http_build_query(array_filter($data)));
 	}
 
-	public static function returnPayment(MerchantConfig $config, $paymentId, $reason = NULL)
-	{
+	public static function returnPayment(
+		MerchantConfig $config,
+		$paymentId,
+		$reason = NULL
+	) : PaymentReturnResponse {
 		$client = new \SoapClient($config->webServicesWsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 		$signature = static::getSignature(
 			[
@@ -22,7 +26,7 @@ class ReturnHelper
 				'accountId'  => $config->accountId,
 				'paymentId'  => $paymentId,
 				'reason'     => $reason,
-				'password'   => $config->password
+				'password'   => $config->password,
 			]
 		);
 		$result = $client->returnPaymentRequest(
@@ -31,10 +35,10 @@ class ReturnHelper
 				'accountId'  => $config->accountId,
 				'paymentId'  => $paymentId,
 				'reason'     => $reason,
-				'signature'  => $signature
+				'signature'  => $signature,
 			]
 		);
-		if (!$result) {
+		if ( !$result) {
 			throw new Exception;
 		}
 

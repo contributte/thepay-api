@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
@@ -6,14 +7,13 @@ use DateTime;
 
 class DateTimeDeflater extends ProcessorWithPaths
 {
-
 	/**
 	 * @param mixed $value
 	 * @param array $currentPath
 	 *
 	 * @return mixed
 	 */
-	protected function processItem($value, array $currentPath)
+	protected function processItem($value, array $currentPath) : array
 	{
 		$isNull = is_null($value);
 		if ($isNull) {

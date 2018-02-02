@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -60,67 +61,67 @@ class EetDph
 	 */
 	protected $eetCerpZuct = NULL;
 
-	function getZaklNepodlDph()
+	function getZaklNepodlDph() : ?float
 	{
 		return $this->eetZaklNepodlDph;
 	}
 
-	function getZaklDan1()
+	function getZaklDan1() : ?float
 	{
 		return $this->eetZaklDan1;
 	}
 
-	function getDan1()
+	function getDan1() : ?float
 	{
 		return $this->eetDan1;
 	}
 
-	function getZaklDan2()
+	function getZaklDan2() : ?float
 	{
 		return $this->eetZaklDan2;
 	}
 
-	function getDan2()
+	function getDan2() : ?float
 	{
 		return $this->eetDan2;
 	}
 
-	function getZaklDan3()
+	function getZaklDan3() : ?float
 	{
 		return $this->eetZaklDan3;
 	}
 
-	function getDan3()
+	function getDan3() : ?float
 	{
 		return $this->eetDan3;
 	}
 
-	function getCestSluz()
+	function getCestSluz() : ?float
 	{
 		return $this->eetCestSluz;
 	}
 
-	function getPouzitZboz1()
+	function getPouzitZboz1() : ?float
 	{
 		return $this->eetPouzitZboz1;
 	}
 
-	function getPouzitZboz2()
+	function getPouzitZboz2() : ?float
 	{
 		return $this->eetPouzitZboz2;
 	}
 
-	function getPouzitZboz3()
+	function getPouzitZboz3() : ?float
 	{
 		return $this->eetPouzitZboz3;
 	}
 
-	function getUrcenoCerpZuct()
+	function getUrcenoCerpZuct() : ?float
 	{
 		return $this->eetUrcenoCerpZuct;
 	}
 
-	function getCerpZuct()
+	function getCerpZuct() : ?float
 	{
 		return $this->eetCerpZuct;
 	}
@@ -128,7 +129,7 @@ class EetDph
 	/**
 	 * @param float $zaklNepodlDph Celková částka plnění osvobozených od DPH, ostatních plnění
 	 */
-	function setZaklNepodlDph($zaklNepodlDph)
+	function setZaklNepodlDph(float $zaklNepodlDph) : void
 	{
 		$this->eetZaklNepodlDph = $zaklNepodlDph;
 	}
@@ -136,7 +137,7 @@ class EetDph
 	/**
 	 * @param float $zaklDan1 Celkový základ daně se základní sazbou DPH
 	 */
-	function setZaklDan1($zaklDan1)
+	function setZaklDan1(float $zaklDan1) : void
 	{
 		$this->eetZaklDan1 = $zaklDan1;
 	}
@@ -144,7 +145,7 @@ class EetDph
 	/**
 	 * @param float $dan1 Celková DPH se základní sazbou
 	 */
-	function setDan1($dan1)
+	function setDan1(float $dan1) : void
 	{
 		$this->eetDan1 = $dan1;
 	}
@@ -152,7 +153,7 @@ class EetDph
 	/**
 	 * @param float $zaklDan2 Celkový základ daně s první sníženou sazbou DPH
 	 */
-	function setZaklDan2($zaklDan2)
+	function setZaklDan2(float $zaklDan2) : void
 	{
 		$this->eetZaklDan2 = $zaklDan2;
 	}
@@ -160,7 +161,7 @@ class EetDph
 	/**
 	 * @param float $dan2 Celková DPH s první sníženou sazbou
 	 */
-	function setDan2($dan2)
+	function setDan2(float $dan2) : void
 	{
 		$this->eetDan2 = $dan2;
 	}
@@ -168,7 +169,7 @@ class EetDph
 	/**
 	 * @param float $zaklDan3 Celkový základ daně s druhou sníženou sazbou DPH
 	 */
-	function setZaklDan3($zaklDan3)
+	function setZaklDan3(float $zaklDan3) : void
 	{
 		$this->eetZaklDan3 = $zaklDan3;
 	}
@@ -176,7 +177,7 @@ class EetDph
 	/**
 	 * @param float $dan3 Celková DPH s druhou sníženou sazbou
 	 */
-	function setDan3($dan3)
+	function setDan3(float $dan3) : void
 	{
 		$this->eetDan3 = $dan3;
 	}
@@ -184,7 +185,7 @@ class EetDph
 	/**
 	 * @param float $cestSluz Celková částka v režimu DPH pro cestovní službu
 	 */
-	function setCestSluz($cestSluz)
+	function setCestSluz(float $cestSluz) : void
 	{
 		$this->eetCestSluz = $cestSluz;
 	}
@@ -192,7 +193,7 @@ class EetDph
 	/**
 	 * @param float $pouzitZboz1 Celková částka v režimu DPH pro prodej použitého zboží se základní sazbou
 	 */
-	function setPouzitZboz1($pouzitZboz1)
+	function setPouzitZboz1(float $pouzitZboz1) : void
 	{
 		$this->eetPouzitZboz1 = $pouzitZboz1;
 	}
@@ -200,7 +201,7 @@ class EetDph
 	/**
 	 * @param float $pouzitZboz2 Celková částka v režimu DPH pro prodej použitého zboží s první sníženou sazbou
 	 */
-	function setPouzitZboz2($pouzitZboz2)
+	function setPouzitZboz2(float $pouzitZboz2) : void
 	{
 		$this->eetPouzitZboz2 = $pouzitZboz2;
 	}
@@ -208,7 +209,7 @@ class EetDph
 	/**
 	 * @param float $pouzitZboz3 Celková částka v režimu DPH pro prodej použitého zboží s druhou sníženou sazbou
 	 */
-	function setPouzitZboz3($pouzitZboz3)
+	function setPouzitZboz3(float $pouzitZboz3) : void
 	{
 		$this->eetPouzitZboz3 = $pouzitZboz3;
 	}
@@ -216,7 +217,7 @@ class EetDph
 	/**
 	 * @param float $urcenoCerpZuct Celková částka plateb určená k následnému čerpání nebo zúčtování
 	 */
-	function setUrcenoCerpZuct($urcenoCerpZuct)
+	function setUrcenoCerpZuct(float $urcenoCerpZuct) : void
 	{
 		$this->eetUrcenoCerpZuct = $urcenoCerpZuct;
 	}
@@ -224,7 +225,7 @@ class EetDph
 	/**
 	 * @param float $cerpZuct Celková částka plateb, které jsou následným čerpáním nebo zúčtováním platby
 	 */
-	function setCerpZuct($cerpZuct)
+	function setCerpZuct(float $cerpZuct) : void
 	{
 		$this->eetCerpZuct = $cerpZuct;
 	}
@@ -232,7 +233,7 @@ class EetDph
 	/**
 	 * @return array values as array for parameters/signature
 	 */
-	public function toArray()
+	public function toArray() : array
 	{
 		$resultArr = [];
 		foreach (get_object_vars($this) as $name => $value) {
@@ -246,9 +247,9 @@ class EetDph
 
 	/**
 	 *
-	 * @return boolean true if this object is empty (all fields are null or zero)
+	 * @return bool true if this object is empty (all fields are null or zero)
 	 */
-	public function isEmpty()
+	public function isEmpty() : bool
 	{
 		foreach (get_object_vars($this) as $value) {
 			if ( !empty($value)) {

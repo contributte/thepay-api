@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\ValueFormatter;
 
 abstract class Pagination extends DataApiObject
 {
@@ -18,36 +18,24 @@ abstract class Pagination extends DataApiObject
 	 */
 	protected $itemsOnPage;
 
-	/**
-	 * @return int|null
-	 */
-	public function getPage()
+	public function getPage() : ?int
 	{
 		return $this->page;
 	}
 
-	/**
-	 * @param int|null $page
-	 */
-	public function setPage($page = NULL)
+	public function setPage(int $page = NULL) : void
 	{
-		$this->page = ValueFormatter::format('int', $page);
+		$this->page = $page;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getItemsOnPage()
+	public function getItemsOnPage() : ?int
 	{
 		return $this->itemsOnPage;
 	}
 
-	/**
-	 * @param int|null $itemsOnPage
-	 */
-	public function setItemsOnPage($itemsOnPage = NULL)
+	public function setItemsOnPage(int $itemsOnPage = NULL) : void
 	{
-		$this->itemsOnPage = ValueFormatter::format('int', $itemsOnPage);
+		$this->itemsOnPage = $itemsOnPage;
 	}
 
 }

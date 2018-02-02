@@ -1,13 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\ValueFormatter;
 
 class Ordering extends DataApiObject
 {
-
 	/**
 	 * @var string|null
 	 */
@@ -18,36 +17,24 @@ class Ordering extends DataApiObject
 	 */
 	protected $orderHow;
 
-	/**
-	 * @return string|null
-	 */
-	public function getOrderBy()
+	public function getOrderBy() : ?string
 	{
 		return $this->orderBy;
 	}
 
-	/**
-	 * @param string|null $orderBy
-	 */
-	public function setOrderBy($orderBy = NULL)
+	public function setOrderBy(string $orderBy = NULL) : void
 	{
-		$this->orderBy = ValueFormatter::format('string', $orderBy);
+		$this->orderBy = $orderBy;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getOrderHow()
+	public function getOrderHow() : ?string
 	{
 		return $this->orderHow;
 	}
 
-	/**
-	 * @param string|null $orderHow
-	 */
-	public function setOrderHow($orderHow = NULL)
+	public function setOrderHow(string $orderHow = NULL) : void
 	{
-		$this->orderHow = ValueFormatter::format('string', $orderHow);
+		$this->orderHow = $orderHow;
 	}
 
 }

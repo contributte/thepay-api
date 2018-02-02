@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
@@ -13,7 +14,6 @@ use Tp\MerchantConfig;
 
 class ResponseFactory
 {
-
 	/**
 	 * @param string             $operation
 	 * @param \Tp\MerchantConfig $config
@@ -23,9 +23,12 @@ class ResponseFactory
 	 * @throws MissingParameterException
 	 * @throws InvalidSignatureException
 	 */
-	public static function getResponse($operation, MerchantConfig $config, stdClass $data)
-	{
-		/** @var string|Response $className Only class name. */
+	public static function getResponse(
+		string $operation,
+		MerchantConfig $config,
+		stdClass $data
+	) : Response {
+		/** @var Response $className Only class name. */
 		$className = preg_replace(
 			['/^get(.+)$/', '/^set(.+)$/'],
 			['Tp\DataApi\Responses\Get$1Response', 'Tp\DataApi\Responses\Set$1Response'],
@@ -46,9 +49,6 @@ class ResponseFactory
 			$flattened, $dateTimePaths
 		);
 
-		$response = $className::createFromResponse($inflated);
-
-		return $response;
+		return $className::createFromResponse($inflated);
 	}
-
 }

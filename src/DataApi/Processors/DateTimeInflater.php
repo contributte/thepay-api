@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
@@ -15,7 +16,7 @@ class DateTimeInflater extends ProcessorWithPaths
 	 * @return mixed
 	 * @throws InvalidParameterException
 	 */
-	protected function processItem($value, array $currentPath)
+	protected function processItem($value, array $currentPath) : array
 	{
 		$isNull = is_null($value);
 		if ($isNull) {

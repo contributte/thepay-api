@@ -1,31 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
-use Tp\DataApi\ValueFormatter;
-
 class GetPaymentRequest extends Request
 {
-
 	/**
 	 * @var int|null
 	 */
 	protected $paymentId;
 
-	/**
-	 * @return int|null
-	 */
-	public function getPaymentId()
+	public function getPaymentId() : int
 	{
 		return $this->paymentId;
 	}
 
-	/**
-	 * @param int|null $paymentId
-	 */
-	public function setPaymentId($paymentId = NULL)
+	public function setPaymentId(int $paymentId = NULL) : void
 	{
-		$this->paymentId = ValueFormatter::format('int', $paymentId);
+		$this->paymentId = $paymentId;
 	}
-
 }

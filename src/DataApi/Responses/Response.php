@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
@@ -25,25 +26,19 @@ class Response extends DataApiObject
 	 */
 	protected $merchantId;
 
-	/**
-	 * @param array $response
-	 *
-	 * @return Response
-	 * @throws InvalidSignatureException
-	 */
-	public static function createFromResponse(array $response)
-	{
+	public static function createFromResponse(
+		array $response
+	) {
 		$keys = ['merchantId'];
 		$data = Utils::filterKeys($response, $keys);
-		$instance = new static($data);
 
-		return $instance;
+		return new static($data);
 	}
 
 	/**
 	 * @return array[]
 	 */
-	public static function listPaths()
+	public static function listPaths() : array
 	{
 		return static::$listPaths;
 	}
@@ -51,25 +46,18 @@ class Response extends DataApiObject
 	/**
 	 * @return array[]
 	 */
-	public static function dateTimePaths()
+	public static function dateTimePaths() : array
 	{
 		return static::$dateTimePaths;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getMerchantId()
+	public function getMerchantId() : int
 	{
 		return $this->merchantId;
 	}
 
-	/**
-	 * @param int $merchantId
-	 */
-	public function setMerchantId($merchantId)
+	public function setMerchantId(int $merchantId) : void
 	{
-		$this->merchantId = ValueFormatter::format('int', $merchantId);
+		$this->merchantId = $merchantId;
 	}
-
 }

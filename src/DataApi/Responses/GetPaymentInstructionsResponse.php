@@ -1,25 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
 use Tp\DataApi\Parameters\PaymentInfo;
-use Tp\DataApi\ValueFormatter;
 
 class GetPaymentInstructionsResponse extends Response
 {
-
 	/**
 	 * @var PaymentInfo|null
 	 */
 	protected $paymentInfo;
 
-	/**
-	 * @param array $response
-	 *
-	 * @return GetPaymentInstructionsResponse
-	 */
-	public static function createFromResponse(array $response)
-	{
+	public static function createFromResponse(
+		array $response
+	) : self {
 		/** @var GetPaymentInstructionsResponse $instance */
 		$instance = parent::createFromResponse($response);
 
@@ -29,22 +24,13 @@ class GetPaymentInstructionsResponse extends Response
 		return $instance;
 	}
 
-	/**
-	 * @return PaymentInfo|null
-	 */
-	public function getPaymentInfo()
+	public function getPaymentInfo() : ?PaymentInfo
 	{
 		return $this->paymentInfo;
 	}
 
-	/**
-	 * @param PaymentInfo|null $paymentInfo
-	 */
-	public function setPaymentInfo(PaymentInfo $paymentInfo = NULL)
+	public function setPaymentInfo(PaymentInfo $paymentInfo = NULL) : void
 	{
-		$this->paymentInfo = ValueFormatter::format(
-			'Tp\DataApi\Parameters\PaymentInfo', $paymentInfo
-		);
+		$this->paymentInfo = $paymentInfo;
 	}
-
 }

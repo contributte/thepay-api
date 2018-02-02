@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
 use Tp\DataApi\Parameters\Payment;
-use Tp\DataApi\ValueFormatter;
 
 class GetPaymentResponse extends Response
 {
@@ -15,17 +15,13 @@ class GetPaymentResponse extends Response
 	];
 
 	/**
-	 * @var \Tp\DataApi\Parameters\Payment|null
+	 * @var Payment|null
 	 */
 	protected $payment;
 
-	/**
-	 * @param array $response
-	 *
-	 * @return GetPaymentResponse
-	 */
-	public static function createFromResponse(array $response)
-	{
+	public static function createFromResponse(
+		array $response
+	) : self {
 		/** @var GetPaymentResponse $instance */
 		$instance = parent::createFromResponse($response);
 
@@ -35,20 +31,14 @@ class GetPaymentResponse extends Response
 		return $instance;
 	}
 
-	/**
-	 * @return Payment|null
-	 */
-	public function getPayment()
+	public function getPayment() : ?Payment
 	{
 		return $this->payment;
 	}
 
-	/**
-	 * @param \Tp\DataApi\Parameters\Payment|null $payment
-	 */
 	public function setPayment(Payment $payment = NULL)
 	{
-		$this->payment = ValueFormatter::format('Tp\DataApi\Parameters\Payment', $payment);
+		$this->payment = $payment;
 	}
 
 }

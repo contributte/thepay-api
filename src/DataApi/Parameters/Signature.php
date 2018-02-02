@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -8,10 +9,6 @@ use Tp\MissingParameterException;
 
 class Signature
 {
-
-	/**
-	 * Tp\DataApi\Parameters\Signature constructor.
-	 */
 	protected function __construct()
 	{
 		// Hidden.
@@ -28,28 +25,26 @@ class Signature
 	 * @return string
 	 * @throws MissingParameterException
 	 */
-	public static function compute(array $data, $password = NULL)
+	public static function compute(array $data, string $password = NULL) : string
 	{
 		unset($data['signature']);
 
-		$passwordIsNull = is_null($password);
-		if ( !$passwordIsNull) {
+		if ( !is_null($password)) {
 			$data['password'] = $password;
 		}
 
-		$dataPasswordKeyExists = array_key_exists('password', $data);
-		if ( !$dataPasswordKeyExists) {
+		if ( !array_key_exists('password', $data)) {
 			throw new MissingParameterException('password');
 		}
 
-		$dataPasswordIsNull = is_null($data['password']);
-		if ($dataPasswordIsNull || $data['password'] === '') {
+		if (
+			is_null($data['password'])
+			|| $data['password'] === ''
+		) {
 			throw new MissingParameterException('password');
 		}
 
-		$processed = Digester::process($data);
-
-		return $processed;
+		return Digester::process($data);
 	}
 
 	/**
@@ -65,12 +60,13 @@ class Signature
 	 * @throws InvalidSignatureException
 	 * @throws MissingParameterException
 	 */
-	public static function validate(array $data, $password, $signature = NULL)
+	public static function validate(array $data, string $password, string $signature = NULL) : void
 	{
-		$signatureIsNull = is_null($signature);
-		if ($signatureIsNull) {
-			$dataSignatureKeyExists = array_key_exists('signature', $data);
-			if ( !$dataSignatureKeyExists || $dataSignatureKeyExists === '') {
+		if (is_null($signature)) {
+			if (
+				!array_key_exists('signature', $data)
+				|| $data['signature'] === ''
+			) {
 				throw new MissingParameterException('signature');
 			}
 
@@ -78,9 +74,8 @@ class Signature
 		}
 
 		$computed = static::compute($data, $password);
-		if ($computed != $signature) {
+		if ($computed !== $signature) {
 			throw new InvalidSignatureException;
 		}
 	}
-
 }

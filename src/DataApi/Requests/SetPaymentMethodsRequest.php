@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
@@ -18,17 +19,15 @@ class SetPaymentMethodsRequest extends Request
 	 */
 	protected $paymentMethods = NULL;
 
-	/**
-	 * @return string
-	 */
-	function getType()
+	function getType(): string
 	{
 		return $this->type;
 	}
+
 	/**
 	 * @param string $type one of TYPE_* constants
 	 */
-	function setType($type)
+	function setType(string $type)
 	{
 		$this->type = $type;
 	}
@@ -36,27 +35,24 @@ class SetPaymentMethodsRequest extends Request
 	/**
 	 * @return int[]
 	 */
-	function getPaymentMethods()
+	function getPaymentMethods() : array
 	{
 		return $this->paymentMethods;
 	}
 
 	/**
 	 * Payment methods which should be available to merchant account
+	 *
 	 * @param int[] $paymentMethods id's of payment methods
 	 */
-	function setPaymentMethods(array $paymentMethods = NULL)
+	function setPaymentMethods(array $paymentMethods = NULL) : void
 	{
 		if ($paymentMethods) {
 			$this->paymentMethods = ValueFormatter::formatList('int', $paymentMethods);
 		}
 	}
 
-
-	/**
-	 * @return array
-	 */
-	protected function configArray()
+	protected function configArray() : array
 	{
 		$configArray = parent::configArray();
 		$configArray['accountId'] = $this->_config->accountId;

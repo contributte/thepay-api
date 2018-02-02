@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\Helper;
 
@@ -25,14 +26,16 @@ class DataApi
 {
 
 	/**
-	 * @param \Tp\MerchantConfig $config
-	 * @param bool|null          $onlyActive
+	 * @param MerchantConfig $config
+	 * @param bool|null      $onlyActive
 	 *
 	 * @return GetPaymentMethodsResponse
 	 * @throws SoapException
 	 */
-	public static function getPaymentMethods(MerchantConfig $config, $onlyActive = NULL)
-	{
+	public static function getPaymentMethods(
+		MerchantConfig $config,
+		bool $onlyActive = NULL
+	) : GetPaymentMethodsResponse {
 		$data = ['onlyActive' => $onlyActive];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
@@ -44,14 +47,16 @@ class DataApi
 	}
 
 	/**
-	 * @param \Tp\MerchantConfig $config
-	 * @param int                $paymentId
+	 * @param MerchantConfig $config
+	 * @param int            $paymentId
 	 *
 	 * @return GetPaymentResponse
 	 * @throws SoapException
 	 */
-	public static function getPayment(MerchantConfig $config, $paymentId)
-	{
+	public static function getPayment(
+		MerchantConfig $config,
+		int $paymentId
+	) : GetPaymentResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
@@ -68,8 +73,10 @@ class DataApi
 	 * @return GetPaymentInstructionsResponse
 	 * @throws SoapException
 	 */
-	public static function getPaymentInstructions(MerchantConfig $config, $paymentId)
-	{
+	public static function getPaymentInstructions(
+		MerchantConfig $config,
+		int $paymentId
+	) : GetPaymentInstructionsResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
@@ -80,14 +87,16 @@ class DataApi
 	}
 
 	/**
-	 * @param \Tp\MerchantConfig $config
-	 * @param int                $paymentId
+	 * @param MerchantConfig $config
+	 * @param int            $paymentId
 	 *
 	 * @return GetPaymentStateResponse
 	 * @throws SoapException
 	 */
-	public static function getPaymentState(MerchantConfig $config, $paymentId)
-	{
+	public static function getPaymentState(
+		MerchantConfig $config,
+		int $paymentId
+	) : GetPaymentStateResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
@@ -106,8 +115,12 @@ class DataApi
 	 * @return GetPaymentsResponse
 	 * @throws SoapException
 	 */
-	public static function getPayments(MerchantConfig $config, GetPaymentsSearchParams $searchParams = NULL, PaginationRequest $pagination = NULL, Ordering $ordering = NULL)
-	{
+	public static function getPayments(
+		MerchantConfig $config,
+		GetPaymentsSearchParams $searchParams = NULL,
+		PaginationRequest $pagination = NULL,
+		Ordering $ordering = NULL
+	) : GetPaymentsResponse {
 		$data = [
 			'searchParams' => $searchParams,
 			'pagination'   => $pagination,
@@ -130,11 +143,14 @@ class DataApi
 	 * @throws SoapException
 	 * @throws InvalidSignatureException
 	 */
-	public static function setPaymentMethods(MerchantConfig $config, $type, array $paymentMethods = NULL)
-	{
+	public static function setPaymentMethods(
+		MerchantConfig $config,
+		$type,
+		array $paymentMethods = NULL
+	) : SetPaymentMethodsResponse {
 		$data = [
 			'type'           => $type,
-			'paymentMethods' => $paymentMethods
+			'paymentMethods' => $paymentMethods,
 		];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
@@ -154,13 +170,16 @@ class DataApi
 	 * @throws SoapException
 	 * @throws InvalidSignatureException
 	 */
-	protected static function call($operation, MerchantConfig $config, Request $request)
-	{
+	protected static function call(
+		string $operation,
+		MerchantConfig $config,
+		Request $request
+	) : Response {
 		try {
 			$options = ['features' => SOAP_SINGLE_ELEMENT_ARRAYS];
 			$client = new SoapClient($config->dataWebServicesWsdl, $options);
 			$signed = $request->toSignedSoapRequestArray();
-			$rawResponse = $client->$operation($signed);
+			$rawResponse = $client->{$operation}($signed);
 		}
 		catch (SoapFault $e) {
 			throw new SoapException($e->getMessage());

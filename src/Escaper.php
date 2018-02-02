@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -10,13 +11,13 @@ class Escaper
 	 * into inline <scripts>. Note that if used in a HTML attribute (e. g.
 	 * onclick), the JSON string must be encoded to HTML entities as well.
 	 *
-	 * @param $string
+	 * @param $value
 	 *
 	 * @return string
 	 */
-	public static function jsonEncode($string)
+	public static function jsonEncode($value)
 	{
-		return json_encode($string, self::jsonEncodeOptions());
+		return json_encode($value, self::jsonEncodeOptions());
 	}
 
 	/**
@@ -37,7 +38,7 @@ class Escaper
 	 *
 	 * @return mixed
 	 */
-	public static function jsonDecode($string)
+	public static function jsonDecode(string $string)
 	{
 		return json_decode($string);
 	}
@@ -47,24 +48,24 @@ class Escaper
 	 * Resulting string is safe to use inline in a HTML document as well as a
 	 * part of a HTML tag attribute. Single- or double-quoted, both are OK.
 	 *
-	 * @param $string
+	 * @param $value
 	 *
 	 * @return string
 	 */
-	public static function htmlEntityEncode($string)
+	public static function htmlEntityEncode(string $value)
 	{
-		return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', TRUE);
+		return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', TRUE);
 	}
 
 	/**
 	 * Translates all HTML &…; entities to plain-text, including &#039 (').
 	 *
-	 * @param $string
+	 * @param $value
 	 *
 	 * @return string
 	 */
-	public static function htmlEntityDecode($string)
+	public static function htmlEntityDecode(string $value)
 	{
-		return html_entity_decode($string, ENT_QUOTES, 'UTF-8');
+		return html_entity_decode($value, ENT_QUOTES, 'UTF-8');
 	}
 }

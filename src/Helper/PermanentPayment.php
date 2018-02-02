@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\Helper;
 
 use Tp;
 
 /**
- *
  * @author Michal Kandr
  */
 class PermanentPayment
 {
-	public static function createPermanentPayment(Tp\PermanentPayment $payment)
-	{
+	public static function createPermanentPayment(
+		Tp\PermanentPayment $payment
+	) : Tp\PermanentPaymentResponse {
 		$config = $payment->getConfig();
 		$client = new \SoapClient(
 			$config->webServicesWsdl,
@@ -27,15 +28,16 @@ class PermanentPayment
 				'signature'    => $payment->getSignature(),
 			]
 		);
-		if (!$result) {
-			throw new Tp\Exception();
+		if ( !$result) {
+			throw new Tp\Exception;
 		}
 
 		return new Tp\PermanentPaymentResponse($result);
 	}
 
-	public static function getPermanentPayment(Tp\PermanentPayment $payment)
-	{
+	public static function getPermanentPayment(
+		Tp\PermanentPayment $payment
+	) : Tp\PermanentPaymentResponse {
 		$config = $payment->getConfig();
 		$client = new \SoapClient(
 			$config->webServicesWsdl,
@@ -49,8 +51,8 @@ class PermanentPayment
 				'signature'    => $payment->getSignatureLite(),
 			]
 		);
-		if (!$result) {
-			throw new Tp\Exception();
+		if ( !$result) {
+			throw new Tp\Exception;
 		}
 
 		return new Tp\PermanentPaymentResponse($result);

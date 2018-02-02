@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -167,534 +168,298 @@ class Payment extends DataApiObject
 		return $this->id;
 	}
 
-	/**
-	 * @param int|null $id
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setId($id = NULL)
+	public function setId(int $id = NULL) : void
 	{
-		$this->id = ValueFormatter::format('int', $id);
+		$this->id = $id;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getAccount()
+	public function getAccount() : ?int
 	{
 		return $this->account;
 	}
 
-	/**
-	 * @param int|null $account
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setAccount($account = NULL)
+	public function setAccount(int $account = NULL) : void
 	{
-		$this->account = ValueFormatter::format('int', $account);
+		$this->account = $account;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getState()
+	public function getState() : ?int
 	{
 		return $this->state;
 	}
 
-	/**
-	 * @param int|null $state
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setState($state = NULL)
+	public function setState(int $state = NULL) : void
 	{
-		$this->state = ValueFormatter::format('int', $state);
+		$this->state = $state;
 	}
 
-	/**
-	 * @return DateTime|null
-	 */
-	public function getCreatedOn()
+	public function getCreatedOn() : ?DateTime
 	{
 		return $this->createdOn;
 	}
 
-	/**
-	 * @param string|null $createdOn
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setCreatedOn($createdOn = NULL)
+	public function setCreatedOn(DateTime $createdOn = NULL) : void
 	{
-		$this->createdOn = ValueFormatter::format('DateTime', $createdOn);
+		$this->createdOn = $createdOn;
 	}
 
-	/**
-	 * @return DateTime|null
-	 */
-	public function getFinishedOn()
+	public function getFinishedOn() : ?DateTime
 	{
 		return $this->finishedOn;
 	}
 
-	/**
-	 * @param DateTime|null $finishedOn
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setFinishedOn($finishedOn = NULL)
+	public function setFinishedOn(DateTime $finishedOn = NULL) : void
 	{
-		$this->finishedOn = ValueFormatter::format('DateTime', $finishedOn);
+		$this->finishedOn = $finishedOn;
 	}
 
-	/**
-	 * @return DateTime|null
-	 */
-	public function getCanceledOn()
+	public function getCanceledOn() : ?DateTime
 	{
 		return $this->canceledOn;
 	}
 
-	/**
-	 * @param DateTime|null $canceledOn
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setCanceledOn($canceledOn = NULL)
+	public function setCanceledOn(DateTime $canceledOn = NULL) : void
 	{
-		$this->canceledOn = ValueFormatter::format('DateTime', $canceledOn);
+		$this->canceledOn = $canceledOn;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getPayOff()
+	public function getPayOff() : ?int
 	{
 		return $this->payOff;
 	}
 
-	/**
-	 * @param int|null $payOff
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setPayOff($payOff = NULL)
+	public function setPayOff(int $payOff = NULL) : void
 	{
-		$this->payOff = ValueFormatter::format('int', $payOff);
+		$this->payOff = $payOff;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getPayOffCancel()
+	public function getPayOffCancel() : ?int
 	{
 		return $this->payOffCancel;
 	}
 
-	/**
-	 * @param int|null $payOffCancel
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setPayOffCancel($payOffCancel = NULL)
+	public function setPayOffCancel(int $payOffCancel = NULL) : void
 	{
-		$this->payOffCancel = ValueFormatter::format('int', $payOffCancel);
+		$this->payOffCancel = $payOffCancel;
 	}
 
-	/**
-	 * @return float|null
-	 */
-	public function getValue()
+	public function getValue() : ?float
 	{
 		return $this->value;
 	}
 
-	/**
-	 * @param float|null $value
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setValue($value = NULL)
+	public function setValue(float $value = NULL) : void
 	{
-		$this->value = ValueFormatter::format('float', $value);
+		$this->value = $value;
 	}
 
-	/**
-	 * @return float|null
-	 */
-	public function getReceivedValue()
+	public function getReceivedValue() : ?float
 	{
 		return $this->receivedValue;
 	}
 
-	/**
-	 * @param float|null $receivedValue
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setReceivedValue($receivedValue = NULL)
+	public function setReceivedValue(float $receivedValue = NULL) : void
 	{
-		$this->receivedValue = ValueFormatter::format('float', $receivedValue);
+		$this->receivedValue = $receivedValue;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getCurrency()
+	public function getCurrency() : ?int
 	{
 		return $this->currency;
 	}
 
-	/**
-	 * @param int|null $currency
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setCurrency($currency)
+	public function setCurrency(?int $currency) : void
 	{
-		$this->currency = ValueFormatter::format('int', $currency);
+		$this->currency = $currency;
 	}
 
-	/**
-	 * @return float|null
-	 */
-	public function getFee()
+	public function getFee() : ?float
 	{
 		return $this->fee;
 	}
 
-	/**
-	 * @param float|null $fee
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setFee($fee)
+	public function setFee(?float $fee) : void
 	{
-		$this->fee = ValueFormatter::format('float', $fee);
+		$this->fee = $fee;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getDescription()
+	public function getDescription() : ?string
 	{
 		return $this->description;
 	}
 
-	/**
-	 * @param string|null $description
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setDescription($description = NULL)
+	public function setDescription(string $description = NULL) : void
 	{
-		$this->description = ValueFormatter::format('string', $description);
+		$this->description = $description;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getMerchantData()
+	public function getMerchantData() : ?string
 	{
 		return $this->merchantData;
 	}
 
-	/**
-	 * @param string|null $merchantData
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setMerchantData($merchantData = NULL)
+	public function setMerchantData(string $merchantData = NULL) : void
 	{
-		$this->merchantData = ValueFormatter::format('string', $merchantData);
+		$this->merchantData = $merchantData;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getPaymentMethod()
+	public function getPaymentMethod() : ?int
 	{
 		return $this->paymentMethod;
 	}
 
-	/**
-	 * @param int|null $paymentMethod
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setPaymentMethod($paymentMethod)
+	public function setPaymentMethod(?int $paymentMethod) : void
 	{
-		$this->paymentMethod = ValueFormatter::format('int', $paymentMethod);
+		$this->paymentMethod = $paymentMethod;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getSpecificSymbol()
+	public function getSpecificSymbol() : ?string
 	{
 		return $this->specificSymbol;
 	}
 
-	/**
-	 * @param string|null $specificSymbol
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setSpecificSymbol($specificSymbol = NULL)
+	public function setSpecificSymbol(string $specificSymbol = NULL) : void
 	{
-		$this->specificSymbol = ValueFormatter::format('string', $specificSymbol);
+		$this->specificSymbol = $specificSymbol;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getMerchantSpecificSymbol()
+	public function getMerchantSpecificSymbol() : ?string
 	{
 		return $this->merchantSpecificSymbol;
 	}
 
-	/**
-	 * @param string|null $merchantSpecificSymbol
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setMerchantSpecificSymbol($merchantSpecificSymbol = NULL)
+	public function setMerchantSpecificSymbol(string $merchantSpecificSymbol = NULL) : void
 	{
-		$this->merchantSpecificSymbol = ValueFormatter::format(
-			'string', $merchantSpecificSymbol
-		);
+		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getAccountNumber()
+	public function getAccountNumber() : ?string
 	{
 		return $this->accountNumber;
 	}
 
-	/**
-	 * @param string|null $accountNumber
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setAccountNumber($accountNumber = NULL)
+	public function setAccountNumber(string $accountNumber = NULL) : void
 	{
-		$this->accountNumber = ValueFormatter::format(
-			'string', $accountNumber
-		);
+		$this->accountNumber = $accountNumber;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getAccountOwnerName()
+	public function getAccountOwnerName() : ?string
 	{
 		return $this->accountOwnerName;
 	}
 
-	/**
-	 * @param string|null $accountOwnerName
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setAccountOwnerName($accountOwnerName = NULL)
+	public function setAccountOwnerName(string $accountOwnerName = NULL) : void
 	{
-		$this->accountOwnerName = ValueFormatter::format(
-			'string', $accountOwnerName
-		);
+		$this->accountOwnerName = $accountOwnerName;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getReturnUrl()
+	public function getReturnUrl() : ?string
 	{
 		return $this->returnUrl;
 	}
 
-	/**
-	 * @param string|null
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setReturnUrl($returnUrl = NULL)
+	public function setReturnUrl(string $returnUrl = NULL) : void
 	{
-		$this->returnUrl = ValueFormatter::format('string', $returnUrl);
+		$this->returnUrl = $returnUrl;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getPermanentPayment()
+	public function getPermanentPayment() : ?int
 	{
 		return $this->permanentPayment;
 	}
 
-	/**
-	 * @param int|null $permanentPayment
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setPermanentPayment($permanentPayment = NULL)
+	public function setPermanentPayment(int $permanentPayment = NULL) : void
 	{
-		$this->permanentPayment = ValueFormatter::format(
-			'int', $permanentPayment
-		);
+		$this->permanentPayment = $permanentPayment;
 	}
 
-	/**
-	 * @return bool|null
-	 */
-	public function getDeposit()
+	public function getDeposit() : ?bool
 	{
 		return $this->deposit;
 	}
 
-	/**
-	 * @param bool|null $deposit
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setDeposit($deposit = NULL)
+	public function setDeposit(bool $deposit = NULL) : void
 	{
-		$this->deposit = ValueFormatter::format('bool', $deposit);
+		$this->deposit = $deposit;
 	}
 
-	/**
-	 * @return bool|null
-	 */
-	public function getRecurring()
+	public function getRecurring() : ?bool
 	{
 		return $this->recurring;
 	}
 
-	/**
-	 * @param bool|null $recurring
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setRecurring($recurring = NULL)
+	public function setRecurring(bool $recurring = NULL) : void
 	{
-		$this->recurring = ValueFormatter::format('bool', $recurring);
+		$this->recurring = $recurring;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getIp()
+	public function getIp() : ?string
 	{
 		return $this->ip;
 	}
 
-	/**
-	 * @param string|null $ip
-	 *
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setIp($ip = NULL)
+	public function setIp(string $ip = NULL) : void
 	{
-		$this->ip = ValueFormatter::format('string', $ip);
+		$this->ip = $ip;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getCustomerEmail()
+	public function getCustomerEmail() : ?string
 	{
 		return $this->customerEmail;
 	}
 
-	/**
-	 * @var string|null $customerEmail
-	 * @throws \Tp\InvalidArgumentException
-	 */
-	public function setCustomerEmail($customerEmail = NULL)
+	public function setCustomerEmail(string $customerEmail = NULL) : void
 	{
-		$this->customerEmail = ValueFormatter::format(
-			'string', $customerEmail
-		);
+		$this->customerEmail = $customerEmail;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getFik()
+	public function getFik() : ?string
 	{
 		return $this->fik;
 	}
 
-	/**
-	 * @param string|null $fik
-	 */
-	public function setFik($fik = NULL)
+	public function setFik(string $fik = NULL) : void
 	{
-		$this->fik = ValueFormatter::formatString($fik);
+		$this->fik = $fik;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getBkp()
+	public function getBkp() : ?string
 	{
 		return $this->bkp;
 	}
 
-	/**
-	 * @param string|null $bkp
-	 */
-	public function setBkp($bkp = NULL)
+	public function setBkp(string $bkp = NULL) : void
 	{
-		$this->bkp = ValueFormatter::formatString($bkp);
+		$this->bkp = $bkp;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getPkp()
+	public function getPkp() : ?string
 	{
 		return $this->pkp;
 	}
 
-	/**
-	 * @param string|null $pkp
-	 */
-	public function setPkp($pkp = NULL)
+	public function setPkp(string $pkp = NULL) : void
 	{
-		$this->pkp = ValueFormatter::formatString($pkp);
+		$this->pkp = $pkp;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getReceiptUrl()
+	public function getReceiptUrl() : ?string
 	{
 		return $this->receiptUrl;
 	}
 
-	/**
-	 * @param string|null $receiptUrl
-	 */
-	public function setReceiptUrl($receiptUrl = NULL)
+	public function setReceiptUrl(string $receiptUrl = NULL) : void
 	{
-		$this->receiptUrl = ValueFormatter::formatString($receiptUrl);
+		$this->receiptUrl = $receiptUrl;
 	}
 
-	/**
-	 * @return bool|null
-	 */
-	public function getFirstSuccess()
+	public function getFirstSuccess() : ?bool
 	{
 		return $this->firstSuccess;
 	}
 
-	/**
-	 * @param bool|null $firstSuccess
-	 */
-	public function setFirstSuccess($firstSuccess = NULL)
+	public function setFirstSuccess(bool $firstSuccess = NULL) : void
 	{
-		$this->firstSuccess = ValueFormatter::formatBool($firstSuccess);
+		$this->firstSuccess = $firstSuccess;
 	}
 }

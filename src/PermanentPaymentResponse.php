@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -50,7 +51,7 @@ class PermanentPaymentResponse
 		return $this->errorDescription;
 	}
 
-	public function getPaymentMethods()
+	public function getPaymentMethods() : array
 	{
 		return $this->paymentMethods;
 	}

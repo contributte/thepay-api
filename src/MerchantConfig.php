@@ -21,7 +21,7 @@ class MerchantConfig
 	/**
 	 * ID of your account in the ThePay system.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	public $merchantId = 1;
 
@@ -30,7 +30,7 @@ class MerchantConfig
 	 * administration interface. You can have multiple accounts under
 	 * your login.
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	public $accountId = 1;
 

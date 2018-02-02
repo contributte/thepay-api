@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -60,7 +61,7 @@ class Payment
 	 * ID of payment method to use for paying. Setting this argument should
 	 * be result of user's selection, not merchant's selection.
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	protected $methodId = NULL;
 
@@ -77,13 +78,13 @@ class Payment
 	protected $customerEmail = NULL;
 
 	/**
-	 * @var boolean If card payment will be charged immediately or only blocked and charged later by paymentDeposit
+	 * @var bool If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *      operation.
 	 */
 	protected $deposit = NULL;
 
 	/**
-	 * @var boolean If card payment is recurring.
+	 * @var bool If card payment is recurring.
 	 */
 	protected $isRecurring = NULL;
 
@@ -101,14 +102,14 @@ class Payment
 	/**
 	 * Constructor. Create the payment.
 	 *
-	 * @param config MerchantConfig containing merchant's access credentials to the ThePay system.
+	 * @param MerchantConfig $config containing merchant's access credentials to the ThePay system.
 	 */
 	public function __construct(MerchantConfig $config = NULL)
 	{
 		$this->config = $config;
 
-		if (is_null($this->returnUrl) && isset($_SERVER["HTTP_HOST"]) && isset($_SERVER["REQUEST_URI"])) {
-			$this->returnUrl = ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]) ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+		if (is_null($this->returnUrl) && isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI'])) {
+			$this->returnUrl = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		}
 	}
 
@@ -119,11 +120,11 @@ class Payment
 	 *
 	 * @throws InvalidParameterException
 	 */
-	public function setValue($value)
+	public function setValue(float $value) : void
 	{
 		// Only positive numbers allowed.
 		if ( !is_numeric($value) || (double)$value < 0) {
-			throw new InvalidParameterException("value");
+			throw new InvalidParameterException('value');
 		}
 		else {
 			$this->value = (double)$value;
@@ -133,7 +134,7 @@ class Payment
 	/**
 	 * @param string $currency
 	 */
-	public function setCurrency($currency)
+	public function setCurrency(string $currency):void
 	{
 		$this->currency = $currency;
 	}
@@ -143,7 +144,7 @@ class Payment
 	 *
 	 * @param string $description
 	 */
-	public function setDescription($description)
+	public function setDescription(string $description) : void
 	{
 		$this->description = $description;
 	}
@@ -153,7 +154,7 @@ class Payment
 	 *
 	 * @param string $data
 	 */
-	public function setMerchantData($data)
+	public function setMerchantData(string $data) : void
 	{
 		$this->merchantData = $data;
 	}
@@ -163,7 +164,7 @@ class Payment
 	 *
 	 * @param string $returnUrl
 	 */
-	public function setReturnUrl($returnUrl)
+	public function setReturnUrl(string $returnUrl) : void
 	{
 		$this->returnUrl = $returnUrl;
 	}
@@ -171,7 +172,7 @@ class Payment
 	/**
 	 * @param string|null $backToEshopUrl
 	 */
-	public function setBackToEshopUrl($backToEshopUrl = NULL)
+	public function setBackToEshopUrl(string $backToEshopUrl = NULL) : void
 	{
 		$this->backToEshopUrl = $backToEshopUrl;
 	}
@@ -179,9 +180,9 @@ class Payment
 	/**
 	 * Sets the methodId property.
 	 *
-	 * @param integer $methodId
+	 * @param string $methodId
 	 */
-	public function setMethodId($methodId)
+	public function setMethodId(string $methodId) : void
 	{
 		$this->methodId = $methodId;
 	}
@@ -191,7 +192,7 @@ class Payment
 	 *
 	 * @return MerchantConfig
 	 */
-	public function getMerchantConfig()
+	public function getMerchantConfig() : MerchantConfig
 	{
 		return $this->config;
 	}
@@ -202,7 +203,7 @@ class Payment
 	 *
 	 * @return float
 	 */
-	public function getValue()
+	public function getValue() : float
 	{
 		return $this->value;
 	}
@@ -213,7 +214,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getCurrency()
+	public function getCurrency() : ?string
 	{
 		return $this->currency;
 	}
@@ -224,7 +225,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getDescription()
+	public function getDescription() : string
 	{
 		return $this->description;
 	}
@@ -235,7 +236,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getMerchantData()
+	public function getMerchantData() : string
 	{
 		return $this->merchantData;
 	}
@@ -246,7 +247,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getReturnUrl()
+	public function getReturnUrl() : string
 	{
 		return $this->returnUrl;
 	}
@@ -254,7 +255,7 @@ class Payment
 	/**
 	 * @return string|null
 	 */
-	public function getBackToEshopUrl()
+	public function getBackToEshopUrl() : ?string
 	{
 		return $this->backToEshopUrl;
 	}
@@ -263,9 +264,9 @@ class Payment
 	 * Returns the methodId property. If methodId was not specified using
 	 * setMethodId() property, NULL is returned.
 	 *
-	 * @return integer
+	 * @return string
 	 */
-	public function getMethodId()
+	public function getMethodId() : string
 	{
 		return $this->methodId;
 	}
@@ -275,7 +276,7 @@ class Payment
 	 *
 	 * @param string $data
 	 */
-	public function setCustomerData($data)
+	public function setCustomerData(string $data) : void
 	{
 		$this->customerData = $data;
 	}
@@ -284,7 +285,7 @@ class Payment
 	 * @deprecated
 	 * @return string previously set customer data
 	 */
-	public function getCustomerData()
+	public function getCustomerData() : string
 	{
 		return $this->customerData;
 	}
@@ -292,7 +293,7 @@ class Payment
 	/**
 	 * @param null|string $customerEmail
 	 */
-	public function setCustomerEmail($customerEmail)
+	public function setCustomerEmail(?string $customerEmail)
 	{
 		$this->customerEmail = $customerEmail;
 	}
@@ -300,16 +301,16 @@ class Payment
 	/**
 	 * @return null|string
 	 */
-	public function getCustomerEmail()
+	public function getCustomerEmail() : ?string
 	{
 		return $this->customerEmail;
 	}
 
 	/**
-	 * @return boolean If card payment will be charged immediately or only blocked and charged later by paymentDeposit
+	 * @return bool If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *                 operation.
 	 */
-	public function getDeposit()
+	public function getDeposit() : bool
 	{
 		return $this->deposit;
 	}
@@ -317,9 +318,9 @@ class Payment
 	/**
 	 * Set if card payment will be charged immediately or only blocked and charged later by paymentDeposit operation.
 	 *
-	 * @param boolean $deposit
+	 * @param bool $deposit
 	 */
-	public function setDeposit($deposit)
+	public function setDeposit(bool $deposit) : void
 	{
 		$this->deposit = $deposit;
 	}
@@ -327,9 +328,9 @@ class Payment
 	/**
 	 * If card payment is recurring.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function getIsRecurring()
+	public function getIsRecurring() : bool
 	{
 		return $this->isRecurring;
 	}
@@ -337,9 +338,9 @@ class Payment
 	/**
 	 * Set if card payment is recurring.
 	 *
-	 * @param boolean $isRecurring
+	 * @param bool $isRecurring
 	 */
-	public function setIsRecurring($isRecurring)
+	public function setIsRecurring(bool $isRecurring) : void
 	{
 		$this->isRecurring = $isRecurring;
 	}
@@ -349,7 +350,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	function getMerchantSpecificSymbol()
+	function getMerchantSpecificSymbol() : string
 	{
 		return $this->merchantSpecificSymbol;
 	}
@@ -357,9 +358,9 @@ class Payment
 	/**
 	 * Numerical specific symbol (used only if payment method supports it).
 	 *
-	 * @return string
+	 * @param string
 	 */
-	function setMerchantSpecificSymbol($merchantSpecificSymbol)
+	function setMerchantSpecificSymbol(string $merchantSpecificSymbol) : void
 	{
 		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
@@ -368,7 +369,7 @@ class Payment
 	/**
 	 * @return EetDph VAT decomposition for EET
 	 */
-	function getEetDph()
+	function getEetDph() : ?EetDph
 	{
 		return $this->eetDph;
 	}
@@ -376,7 +377,7 @@ class Payment
 	/**
 	 * @param EetDph $eetDph VAT decomposition for EET
 	 */
-	function setEetDph(EetDph $eetDph = NULL)
+	function setEetDph(EetDph $eetDph = NULL) : void
 	{
 		$this->eetDph = $eetDph;
 	}
@@ -387,59 +388,58 @@ class Payment
 	 *
 	 * @return array
 	 */
-	public function getArgs()
+	public function getArgs() : array
 	{
 		$input = [];
 
-		$input["merchantId"] = $this->config->merchantId;
-		$input["accountId"] = $this->config->accountId;
+		$input['merchantId'] = $this->config->merchantId;
+		$input['accountId'] = $this->config->accountId;
 
 		if ( !is_null($this->value)) {
-			$input["value"] = number_format($this->value, 2, '.', '');
+			$input['value'] = number_format($this->value, 2, '.', '');
 		}
 
 		if ( !is_null($this->currency)) {
-			$input["currency"] = $this->currency;
+			$input['currency'] = $this->currency;
 		}
 
 		if ( !is_null($this->description)) {
-			$input["description"] = $this->description;
+			$input['description'] = $this->description;
 		}
 
 		if ( !is_null($this->merchantData)) {
-			$input["merchantData"] = $this->merchantData;
+			$input['merchantData'] = $this->merchantData;
 		}
 
 		if ( !is_null($this->customerData)) {
-			$input["customerData"] = $this->customerData;
+			$input['customerData'] = $this->customerData;
 		}
 
 		if ( !is_null($this->customerEmail)) {
-			$input["customerEmail"] = $this->customerEmail;
+			$input['customerEmail'] = $this->customerEmail;
 		}
 
 		if ( !is_null($this->returnUrl)) {
-			$input["returnUrl"] = $this->returnUrl;
+			$input['returnUrl'] = $this->returnUrl;
 		}
 
-		$backToEshopUrlIsNull = is_null($this->backToEshopUrl);
-		if ( !$backToEshopUrlIsNull) {
+		if ( !is_null($this->backToEshopUrl)) {
 			$input['backToEshopUrl'] = $this->backToEshopUrl;
 		}
 
 		if ( !is_null($this->methodId)) {
-			$input["methodId"] = $this->methodId;
+			$input['methodId'] = $this->methodId;
 		}
 
 		if ( !is_null($this->deposit)) {
-			$input["deposit"] = $this->deposit ? '1' : '0';
+			$input['deposit'] = $this->deposit ? '1' : '0';
 		}
 		if ( !is_null($this->isRecurring)) {
-			$input["isRecurring"] = $this->isRecurring ? '1' : '0';
+			$input['isRecurring'] = $this->isRecurring ? '1' : '0';
 		}
 
 		if ( !is_null($this->merchantSpecificSymbol)) {
-			$input["merchantSpecificSymbol"] = $this->merchantSpecificSymbol;
+			$input['merchantSpecificSymbol'] = $this->merchantSpecificSymbol;
 		}
 
 		if ( !is_null($this->eetDph) && !$this->eetDph->isEmpty()) {
@@ -457,16 +457,16 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getSignature()
+	public function getSignature() : string
 	{
 		$input = $this->getArgs();
 
-		$str = "";
+		$str = '';
 		foreach ($input as $key => $val) {
-			$str .= $key . "=" . $val . "&";
+			$str .= $key . '=' . $val . '&';
 		}
 
-		$str .= "password=" . $this->config->password;
+		$str .= 'password=' . $this->config->password;
 
 		return self::hashFunction($str);
 	}
@@ -478,13 +478,13 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public static function hashFunction($str)
+	public static function hashFunction(string $str) : string
 	{
 		return md5($str);
 	}
 
-	public function __toString()
+	public function __toString() : string
 	{
-		return 'TpGatePayment[value: ' . $this->value . '; currency: ' . $this->currency . '; description: ' . $this->description . '; merchantData: ' . $this->merchantData . '; returnUrl: ' . $this->returnUrl . '; methodId: ' . $this->methodId . '; deposit: ' . $this->deposit . '; isRecurring: ' . $this->isRecurring . '; merchantSpecificSymbol: ' . $this->merchantSpecificSymbol . ']';
+		return "TpGatePayment[value: {$this->value}; currency: {$this->currency}; description: {$this->description}; merchantData: {$this->merchantData}; returnUrl: {$this->returnUrl}; methodId: {$this->methodId}; deposit: {$this->deposit}; isRecurring: {$this->isRecurring}; merchantSpecificSymbol: {$this->merchantSpecificSymbol}]";
 	}
 }

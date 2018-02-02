@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
@@ -6,13 +7,7 @@ use Tp\Utils;
 
 abstract class Processor
 {
-
-	/**
-	 * @param array $input
-	 *
-	 * @return array
-	 */
-	public static function process(array $input)
+	public static function process(array $input) : array
 	{
 		$instance = new static;
 		// Start with an empty path [].
@@ -25,45 +20,36 @@ abstract class Processor
 	 * @param array    $value
 	 * @param string[] $currentPath
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	protected function processHash(array $value, array $currentPath)
+	protected function processHash(array $value, array $currentPath) : array
 	{
 		$processed = [];
 		foreach ($value as $key => $item) {
 			// Every level deeper appends the currenty key to the path.
 			$itemPath = array_merge($currentPath, [$key]);
-			$processed[$key] = $this->processItem($item, $itemPath);
+			$processed[$key] = is_array($item)
+				? $this->processItem($item, $itemPath)
+				: $item;
 		}
-		unset($key, $item, $itemPath);
 
 		return $processed;
 	}
 
 	/**
-	 * @param mixed    $value
+	 * @param array    $value
 	 * @param string[] $currentPath
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	protected function processItem($value, array $currentPath)
+	protected function processItem(array $value, array $currentPath) : array
 	{
-		$isArray = is_array($value);
-		if ($isArray) {
-			$isList = Utils::isList($value);
-			if ($isList) {
-				$processed = $this->processList($value, $currentPath);
-			}
-			else {
-				$processed = $this->processHash($value, $currentPath);
-			}
+		if (Utils::isList($value)) {
+			return $this->processList($value, $currentPath);
 		}
 		else {
-			// Only arrays are treated specially.
-			$processed = $value;
+			return $this->processHash($value, $currentPath);
 		}
-
-		return $processed;
 	}
 
 	/**
@@ -75,16 +61,16 @@ abstract class Processor
 	 *
 	 * @return array
 	 */
-	protected function processList(array $list, array $currentPath)
+	protected function processList(array $list, array $currentPath) : array
 	{
 		$processed = [];
 		foreach ($list as $key => $value) {
 			// Numeric list keys are not appended to the path.
-			$processed[$key] = $this->processItem($value, $currentPath);
+			$processed[$key] = is_array($value)
+				? $this->processItem($value, $currentPath)
+				: $value;
 		}
-		unset($key, $value);
 
 		return $processed;
 	}
-
 }

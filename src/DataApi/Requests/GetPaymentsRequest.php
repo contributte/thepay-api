@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
@@ -9,7 +10,6 @@ use Tp\DataApi\ValueFormatter;
 
 class GetPaymentsRequest extends Request
 {
-
 	protected static $dateTimePaths = [
 		['searchParams', 'createdOnFrom'],
 		['searchParams', 'createdOnTo'],
@@ -28,62 +28,43 @@ class GetPaymentsRequest extends Request
 	protected $pagination;
 
 	/**
-	 * @var \Tp\DataApi\Parameters\Ordering|null
+	 * @var Ordering|null
 	 */
 	protected $ordering;
 
-	/**
-	 * @return GetPaymentsSearchParams|null
-	 */
-	public function getSearchParams()
+	public function getSearchParams() : ?GetPaymentsSearchParams
 	{
 		return $this->searchParams;
 	}
 
-	/**
-	 * @param GetPaymentsSearchParams|null $searchParams
-	 */
-	public function setSearchParams(GetPaymentsSearchParams $searchParams = NULL)
+	public function setSearchParams(GetPaymentsSearchParams $searchParams = NULL) : void
 	{
 		$this->searchParams = ValueFormatter::format(
 			'Tp\DataApi\Parameters\GetPaymentsSearchParams', $searchParams
 		);
 	}
 
-	/**
-	 * @return PaginationRequest|null
-	 */
-	public function getPagination()
+	public function getPagination() : ?PaginationRequest
 	{
 		return $this->pagination;
 	}
 
-	/**
-	 * @param PaginationRequest|null $pagination
-	 */
-	public function setPagination(PaginationRequest $pagination = NULL)
+	public function setPagination(PaginationRequest $pagination = NULL) : void
 	{
 		$this->pagination = ValueFormatter::format(
 			'Tp\DataApi\Parameters\PaginationRequest', $pagination
 		);
 	}
 
-	/**
-	 * @return \Tp\DataApi\Parameters\Ordering|null
-	 */
-	public function getOrdering()
+	public function getOrdering() : ?Ordering
 	{
 		return $this->ordering;
 	}
 
-	/**
-	 * @param \Tp\DataApi\Parameters\Ordering|null $ordering
-	 */
-	public function setOrdering(Ordering $ordering = NULL)
+	public function setOrdering(Ordering $ordering = NULL) : void
 	{
 		$this->ordering = ValueFormatter::format(
 			'Tp\DataApi\Parameters\Ordering', $ordering
 		);
 	}
-
 }

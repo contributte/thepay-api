@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
@@ -10,9 +11,8 @@ use Tp\MerchantConfig;
 
 abstract class Request extends DataApiObject
 {
-
 	/**
-	 * @var \Tp\MerchantConfig|null
+	 * @var MerchantConfig|null
 	 */
 	protected $_config;
 
@@ -23,13 +23,15 @@ abstract class Request extends DataApiObject
 	 * account ID, password. Thus, requests must be instantiating by this call
 	 * instead of their constructor.
 	 *
-	 * @param \Tp\MerchantConfig $config
-	 * @param array              $data
+	 * @param MerchantConfig $config
+	 * @param array          $data
 	 *
 	 * @return Request
 	 */
-	public static function createWithConfig(MerchantConfig $config, $data = [])
-	{
+	public static function createWithConfig(
+		MerchantConfig $config,
+		array $data = []
+	) : self {
 		$instance = new static($data);
 		$instance->_config = $config;
 
@@ -44,7 +46,7 @@ abstract class Request extends DataApiObject
 	 * @return array
 	 * @throws BadMethodCallException
 	 */
-	public function toSoapRequestArray()
+	public function toSoapRequestArray() : array
 	{
 		$configArray = $this->configArray();
 		$data = parent::toArray();
@@ -61,7 +63,7 @@ abstract class Request extends DataApiObject
 	 * @return array
 	 * @throws BadMethodCallException
 	 */
-	public function toSignedSoapRequestArray()
+	public function toSignedSoapRequestArray() : array
 	{
 		$this->assertConfig();
 
@@ -78,8 +80,9 @@ abstract class Request extends DataApiObject
 
 	/**
 	 * @return array
+	 * @throws BadMethodCallException
 	 */
-	protected function configArray()
+	protected function configArray() : array
 	{
 		$this->assertConfig();
 
@@ -91,12 +94,11 @@ abstract class Request extends DataApiObject
 	/**
 	 * @throws BadMethodCallException
 	 */
-	protected function assertConfig()
+	protected function assertConfig() : void
 	{
 		if ( !$this->_config) {
 			$message = 'Tp\DataApi\Requests\Request instantiated without providing Tp\TpMerchantConfig. Use Tp\DataApi\Requests\Request::createWithConfig method instead of new Tp\DataApi\Requests\Request constructor.';
 			throw new BadMethodCallException($message);
 		}
 	}
-
 }

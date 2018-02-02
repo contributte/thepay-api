@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -8,21 +9,21 @@ namespace Tp;
 class ReturnedPayment extends Payment
 {
 	/**
-	 * @var integer merchantId from request
+	 * @var int merchantId from request
 	 */
 	protected $requestMerchantId = NULL;
 	/**
-	 * @var integer accountId from request
+	 * @var int accountId from request
 	 */
 	protected $requestAccountId = NULL;
 
 	/**
-	 * @var integer Payment status. One of enum values specified in the ThePay API documentation.
+	 * @var int Payment status. One of enum values specified in the ThePay API documentation.
 	 */
 	protected $status;
 
 	/**
-	 * @var integer Unique payment ID in the ThePay system.
+	 * @var int Unique payment ID in the ThePay system.
 	 */
 	protected $paymentId;
 
@@ -42,18 +43,18 @@ class ReturnedPayment extends Payment
 	protected $signature;
 
 	/**
-	 * @var boolean if payment method is offline or online
+	 * @var bool if payment method is offline or online
 	 */
 	protected $isOffline;
 
 	/**
-	 * @var boolean if payment needs additional confirmation about it's state - for online methods with additional
+	 * @var bool if payment needs additional confirmation about it's state - for online methods with additional
 	 *      confirmation
 	 */
 	protected $needConfirm;
 
 	/**
-	 * @var boolean if actual action is confirmation about payment state - for online methods with additional
+	 * @var bool if actual action is confirmation about payment state - for online methods with additional
 	 *      confirmation
 	 */
 	protected $isConfirm;
@@ -62,17 +63,6 @@ class ReturnedPayment extends Payment
 	 * @var string specific symbol from bank transaction. Used only for permanent payments.
 	 */
 	protected $specificSymbol = NULL;
-
-	/**
-	 * @var boolean If card payment will be charged immediately or only blocked and charged later by paymentDeposit
-	 *      operation.
-	 */
-	protected $deposit = NULL;
-
-	/**
-	 * @var boolean If card payment is recurring.
-	 */
-	protected $isRecurring = NULL;
 
 	/**
 	 * Number of customer's account in full format including bank code.
@@ -94,32 +84,32 @@ class ReturnedPayment extends Payment
 	/**
 	 * Correctly paid.
 	 */
-	const STATUS_OK = 2;
+	public const STATUS_OK = 2;
 	/**
 	 * Canceled by customer.
 	 */
-	const STATUS_CANCELED = 3;
+	public const STATUS_CANCELED = 3;
 	/**
 	 * Some error occurred during payment process.
 	 * Probably not payed.
 	 */
-	const STATUS_ERROR = 4;
+	public const STATUS_ERROR = 4;
 
 	/**
 	 * Payment was underpaid
 	 */
-	const STATUS_UNDERPAID = 6;
+	public const STATUS_UNDERPAID = 6;
 
 	/**
 	 * Payment was paid, but waiting for confirmation from payment system.
 	 */
-	const STATUS_WAITING = 7;
+	public const STATUS_WAITING = 7;
 
 	/**
 	 * Payment amount is blocked on customer's account. Money is charged after sending paymentDeposit request through
 	 * API. Used only for card payments.
 	 */
-	const STATUS_CARD_DEPOSIT = 9;
+	public const STATUS_CARD_DEPOSIT = 9;
 
 	/**
 	 * @var array required arguments of incoming request.
@@ -147,15 +137,14 @@ class ReturnedPayment extends Payment
 	];
 
 	/**
-	 * Constructor.
-	 *
-	 * @param args array Optional arguments parameter, that can specify the
-	 *             arguments of the returned payment. If not specified, it is taken
-	 *             from the $_REQUEST superglobal array.
+	 * @param MerchantConfig $config
+	 * @param array          $args array Optional arguments parameter, that can specify the
+	 *                             arguments of the returned payment. If not specified, it is taken
+	 *                             from the $_REQUEST superglobal array.
 	 *
 	 * @throws MissingParameterException
 	 */
-	function __construct(MerchantConfig $config, $args = NULL)
+	function __construct(MerchantConfig $config, array $args = NULL)
 	{
 		parent::__construct($config);
 
@@ -173,19 +162,20 @@ class ReturnedPayment extends Payment
 			if ( !isset($args[$arg])) {
 				throw new MissingParameterException($arg);
 			}
-			$this->$arg = $args[$arg];
+
+			$this->{$arg} = $args[$arg];
 		}
 
 		foreach (self::$OPTIONAL_ARGS_DEFAULT as $arg => $defaultValue) {
 			if ( !isset($args[$arg])) {
-				$this->$arg = $defaultValue;
+				$this->{$arg} = $defaultValue;
 			}
 			else {
-				$this->$arg = $args[$arg];
+				$this->{$arg} = $args[$arg];
 			}
 		}
 
-		$this->signature = $args["signature"];
+		$this->signature = $args['signature'];
 	}
 
 	/**
@@ -196,13 +186,13 @@ class ReturnedPayment extends Payment
 	 *   a Tp\TpInvalidSignatureException.
 	 * @throws InvalidSignatureException, when signature is invalid.
 	 */
-	function verifySignature($signature = NULL)
+	function verifySignature(string $signature = NULL) : bool
 	{
 		// check merchantId and accountId from request
-		if ($this->requestMerchantId != $this->config->merchantId
-			|| $this->requestAccountId != $this->config->accountId
+		if (intval($this->requestMerchantId) !== $this->config->merchantId
+			|| intval($this->requestAccountId) !== $this->config->accountId
 		) {
-			throw new InvalidSignatureException();
+			throw new InvalidSignatureException;
 		}
 
 		if ($signature === NULL) {
@@ -212,21 +202,21 @@ class ReturnedPayment extends Payment
 		// it to the specified signature.
 
 		$out = [];
-		$out[] = "merchantId=" . $this->requestMerchantId;
-		$out[] = "accountId=" . $this->requestAccountId;
+		$out[] = 'merchantId=' . $this->requestMerchantId;
+		$out[] = 'accountId=' . $this->requestAccountId;
 		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $arg) {
-			if ( !is_null($this->$arg)) {
-				$out[] = $arg . "=" . $this->$arg;
+			if ( !is_null($this->{$arg})) {
+				$out[] = $arg . '=' . $this->{$arg};
 			}
 		}
-		$out[] = "password=" . $this->config->password;
+		$out[] = 'password=' . $this->config->password;
 
-		$sig = $this->hashFunction(implode("&", $out));
+		$sig = $this->hashFunction(implode('&', $out));
 		if ($sig == $signature) {
 			return TRUE;
 		}
 		else {
-			throw new InvalidSignatureException();
+			throw new InvalidSignatureException;
 		}
 	}
 
@@ -238,10 +228,10 @@ class ReturnedPayment extends Payment
 	 *
 	 * @return string
 	 */
-	function getCurrency()
+	function getCurrency() : string
 	{
 		if (is_null($this->currency)) {
-			return "CZK";
+			return 'CZK';
 		}
 		else {
 			return $this->currency;
@@ -257,7 +247,7 @@ class ReturnedPayment extends Payment
 	 *
 	 * @return string
 	 */
-	function getSignature()
+	function getSignature() : string
 	{
 		return $this->signature;
 	}
@@ -265,19 +255,19 @@ class ReturnedPayment extends Payment
 	/**
 	 * Gets status of the payment.
 	 *
-	 * @return integer one of STATUS_* constants.
+	 * @return int one of STATUS_* constants.
 	 */
-	function getStatus()
+	function getStatus() : int
 	{
-		return $this->status;
+		return intval($this->status);
 	}
 
 	/**
-	 * @return integer Gets unique ID of the payment in the ThePay system.
+	 * @return int Gets unique ID of the payment in the ThePay system.
 	 */
-	function getPaymentId()
+	function getPaymentId() : int
 	{
-		return $this->paymentId;
+		return intval($this->paymentId);
 	}
 
 	/**
@@ -291,75 +281,57 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Returns the variable symbol, if valid, for offline payment method.
 	 */
-	function getVariableSymbol()
+	function getVariableSymbol() : ?string
 	{
 		return $this->variableSymbol;
 	}
 
 	/**
-	 * @return boolean true if payment method is offline
+	 * @return bool true if payment method is offline
 	 */
-	function isOffline()
+	function isOffline() : bool
 	{
 		return $this->isOffline;
 	}
 
 	/**
-	 * @return boolean if payment needs additional confirmation about it's state - for online methods with additional
+	 * @return bool if payment needs additional confirmation about it's state - for online methods with additional
 	 *                 confirmation
 	 */
-	public function getNeedConfirm()
+	public function getNeedConfirm() : bool
 	{
-		return $this->needConfirm;
+		return $this->needConfirm === '1';
 	}
 
 	/**
-	 * @return boolean if actual action is confirmation about payment state - for online methods with additional
+	 * @return bool if actual action is confirmation about payment state - for online methods with additional
 	 *                 confirmation
 	 */
-	public function getIsConfirm()
+	public function getIsConfirm() : ?bool
 	{
-		return $this->isConfirm;
+		return is_null($this->isConfirm) ? NULL : $this->isConfirm === '1';
 	}
 
 	/**
 	 * @return string specific symbol from bank transaction. Used only for permanent payments.
 	 */
-	public function getSpecificSymbol()
+	public function getSpecificSymbol() : ?string
 	{
 		return $this->specificSymbol;
 	}
 
 	/**
-	 * @return boolean if payment method is offline or online
+	 * @return bool if payment method is offline or online
 	 */
-	public function getIsOffline()
+	public function getIsOffline() : bool
 	{
-		return $this->isOffline;
-	}
-
-	/**
-	 *
-	 * @return boolean  If card payment will be charged immediately or only blocked and charged later by paymentDeposit
-	 *                  operation.
-	 */
-	public function getDeposit()
-	{
-		return $this->deposit;
-	}
-
-	/**
-	 * @return boolean If card payment is reccuring.
-	 */
-	public function getIsRecurring()
-	{
-		return $this->isRecurring;
+		return $this->isOffline === '1';
 	}
 
 	/**
 	 * @return string Number of customer's account in full format including bank code.
 	 */
-	public function getCustomerAccountNumber()
+	public function getCustomerAccountNumber() : ?string
 	{
 		return $this->customerAccountNumber;
 	}
@@ -367,7 +339,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Name of customer's account.
 	 */
-	public function getCustomerAccountName()
+	public function getCustomerAccountName() : ?string
 	{
 		return $this->customerAccountName;
 	}

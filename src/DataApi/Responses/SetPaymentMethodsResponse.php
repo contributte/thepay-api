@@ -1,14 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
 
-use Tp\DataApi\ValueFormatter;
 use Tp\Utils;
 
 class SetPaymentMethodsResponse extends Response
 {
-	const STATUS_OK    = 'OK';
-	const STATUS_ERROR = 'ERROR';
+	public const STATUS_OK    = 'OK';
+	public const STATUS_ERROR = 'ERROR';
 
 	/**
 	 * @var int
@@ -19,48 +19,32 @@ class SetPaymentMethodsResponse extends Response
 	 */
 	protected $status;
 
-	/**
-	 * @param array $response
-	 * @return SetPaymentMethodsResponse
-	 */
-	public static function createFromResponse(array $response)
-	{
-		$keys = array('merchantId', 'accountId', 'status');
+	public static function createFromResponse(
+		array $response
+	) : self {
+		$keys = ['merchantId', 'accountId', 'status'];
 		$data = Utils::filterKeys($response, $keys);
-		$instance = new static($data);
 
-		return $instance;
+		return new static($data);
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getAccountId()
+	public function getAccountId() : int
 	{
 		return $this->accountId;
 	}
 
-	/**
-	 * @param int $accountId
-	 */
-	public function setAccountId($accountId)
+	public function setAccountId(int $accountId)
 	{
-		$this->accountId = ValueFormatter::format('int', $accountId);
+		$this->accountId = $accountId;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getStatus()
+	public function getStatus() : ?string
 	{
 		return $this->status;
 	}
 
-	/**
-	 * @param string $status
-	 */
-	public function setStatus($status = NULL)
+	public function setStatus(string $status = NULL)
 	{
-		$this->status = ValueFormatter::formatString($status);
+		$this->status = $status;
 	}
 }

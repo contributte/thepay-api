@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\Helper;
 
@@ -15,24 +16,26 @@ class ButtonMerchant extends Merchant
 	 * created. Otherwise, one of button styles specified in ThePay API
 	 * documentation can be used.
 	 */
-	protected $buttonStyle = "fullsize";
+	protected $buttonStyle = 'fullsize';
 	/**
 	 * Button text. This text is displayed if button image cannot be loaded
 	 * or when simple text style (empty buttonStyle property) is used.
 	 */
-	protected $buttonText = "Donate!";
+	protected $buttonText = 'Donate!';
 
 	/**
 	 * Sets the buttonStyle property.
 	 *
-	 * @param buttonStyle String specifying the button style. Can be empty
-	 *                    for default text button, or one of button styles specified in the
-	 *                    ThePay API documentation.
-	 * @param buttonText  Optional argument specifying the text that should
-	 *                    be displayed on the button.
+	 * @param string $buttonStyle String specifying the button style. Can be empty
+	 *                            for default text button, or one of button styles specified in the
+	 *                            ThePay API documentation.
+	 * @param string $buttonText  Optional argument specifying the text that should
+	 *                            be displayed on the button.
 	 */
-	public function setButtonStyle($buttonStyle, $buttonText = NULL)
-	{
+	public function setButtonStyle(
+		string $buttonStyle,
+		string $buttonText = NULL
+	) : void {
 		$this->buttonStyle = $buttonStyle;
 		if ( !is_null($buttonText)) {
 			$this->buttonText = $buttonText;
@@ -42,7 +45,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Sets the buttonText property.
 	 */
-	public function setButtonText($buttonText)
+	public function setButtonText(string $buttonText) : void
 	{
 		$this->buttonText = $buttonText;
 	}
@@ -50,7 +53,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Returns the buttonStyle property.
 	 */
-	public function getButtonStyle()
+	public function getButtonStyle() : string
 	{
 		return $this->buttonStyle;
 	}
@@ -58,7 +61,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Returns the buttonText property.
 	 */
-	public function getButtonText()
+	public function getButtonText() : string
 	{
 		return $this->buttonText;
 	}
@@ -68,7 +71,7 @@ class ButtonMerchant extends Merchant
 	 *
 	 * @return string
 	 */
-	public function buildUrl()
+	public function buildUrl() : string
 	{
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 		$query = $this->buildQuery();
@@ -82,7 +85,7 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Return the HTML code for the button.
 	 */
-	public function render()
+	public function render() : string
 	{
 		$targetUrl = Escaper::htmlEntityEncode(self::buildUrl());
 		switch ($this->buttonStyle) {

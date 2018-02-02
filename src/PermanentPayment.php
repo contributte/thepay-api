@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp;
 
@@ -14,8 +15,12 @@ class PermanentPayment
 	protected $returnUrl;
 	protected $signature;
 
-	function __construct(MerchantConfig $config, $merchantData, $description, $returnUrl)
-	{
+	function __construct(
+		MerchantConfig $config,
+		?string $merchantData,
+		?string $description,
+		?string $returnUrl
+	) {
 		$this->config = $config;
 		$this->merchantData = $merchantData;
 		$this->description = $description;
@@ -27,49 +32,49 @@ class PermanentPayment
 		return $this->config;
 	}
 
-	public function getMerchantData()
+	public function getMerchantData() : ?string
 	{
 		return $this->merchantData;
 	}
 
-	public function getDescription()
+	public function getDescription() : ?string
 	{
 		return $this->description;
 	}
 
-	public function getReturnUrl()
+	public function getReturnUrl() : ?string
 	{
 		return $this->returnUrl;
 	}
 
-	public function setConfig(MerchantConfig $config)
+	public function setConfig(MerchantConfig $config) : void
 	{
 		$this->config = $config;
 	}
 
-	public function setMerchantData($merchantData)
+	public function setMerchantData(string $merchantData) : void
 	{
 		$this->merchantData = $merchantData;
 	}
 
-	public function setDescription($description)
+	public function setDescription(string $description) : void
 	{
 		$this->description = $description;
 	}
 
-	public function setReturnUrl($returnUrl)
+	public function setReturnUrl(string $returnUrl) : void
 	{
 		$this->returnUrl = $returnUrl;
 	}
 
-	public function getSignature()
+	public function getSignature() : string
 	{
 		$data = [
 			'merchantId'   => $this->config->merchantId,
 			'accountId'    => $this->config->accountId,
-			'merchantData' => $this->merchantData,
-			'description'  => $this->description,
-			'returnUrl'    => $this->returnUrl,
+			'merchantData' => $this->getMerchantData(),
+			'description'  => $this->getDescription(),
+			'returnUrl'    => $this->getReturnUrl(),
 			'password'     => $this->config->password,
 		];
 
@@ -81,12 +86,12 @@ class PermanentPayment
 	 *
 	 * @return string
 	 */
-	public function getSignatureLite()
+	public function getSignatureLite() : string
 	{
 		$data = [
 			'merchantId'   => $this->config->merchantId,
 			'accountId'    => $this->config->accountId,
-			'merchantData' => $this->merchantData,
+			'merchantData' => $this->getMerchantData(),
 			'password'     => $this->config->password,
 		];
 

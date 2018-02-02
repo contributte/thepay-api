@@ -1,12 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
-use Tp\DataApi\ValueFormatter;
-
 class GetPaymentMethodsRequest extends Request
 {
-
 	/**
 	 * @var bool|null
 	 */
@@ -15,28 +13,21 @@ class GetPaymentMethodsRequest extends Request
 	/**
 	 * @return bool|null
 	 */
-	public function getOnlyActive()
+	public function getOnlyActive() : ?bool
 	{
 		return $this->onlyActive;
 	}
 
-	/**
-	 * @param bool|null $onlyActive
-	 */
-	public function setOnlyActive($onlyActive = NULL)
+	public function setOnlyActive(bool $onlyActive = NULL) : void
 	{
-		$this->onlyActive = ValueFormatter::format('bool', $onlyActive);
+		$this->onlyActive = $onlyActive;
 	}
 
-	/**
-	 * @return array
-	 */
-	protected function configArray()
+	protected function configArray() : array
 	{
 		$configArray = parent::configArray();
 		$configArray['accountId'] = $this->_config->accountId;
 
 		return $configArray;
 	}
-
 }

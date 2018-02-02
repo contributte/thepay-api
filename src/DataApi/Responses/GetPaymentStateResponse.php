@@ -1,8 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Responses;
-
-use Tp\DataApi\ValueFormatter;
 
 class GetPaymentStateResponse extends Response
 {
@@ -12,13 +11,9 @@ class GetPaymentStateResponse extends Response
 	 */
 	protected $state;
 
-	/**
-	 * @param array $response
-	 *
-	 * @return GetPaymentStateResponse
-	 */
-	public static function createFromResponse(array $response)
-	{
+	public static function createFromResponse(
+		array $response
+	) : self {
 		/** @var GetPaymentStateResponse $instance */
 		$instance = parent::createFromResponse($response);
 		$instance->setState($response['state']);
@@ -26,20 +21,14 @@ class GetPaymentStateResponse extends Response
 		return $instance;
 	}
 
-	/**
-	 * @return int|null
-	 */
-	public function getState()
+	public function getState() : ?int
 	{
 		return $this->state;
 	}
 
-	/**
-	 * @param int|null $state
-	 */
-	public function setState($state = NULL)
+	public function setState(int $state = NULL) : void
 	{
-		$this->state = ValueFormatter::format('int', $state);
+		$this->state = $state;
 	}
 
 }

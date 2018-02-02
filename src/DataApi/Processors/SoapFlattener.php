@@ -1,17 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
 class SoapFlattener extends ProcessorWithPaths
 {
 
-	/**
-	 * @param array    $value
-	 * @param string[] $currentPath
-	 *
-	 * @return mixed
-	 */
-	protected function processHash(array $value, array $currentPath)
+	protected function processHash(array $value, array $currentPath) : array
 	{
 		// If the hash contains only one item and its key appended to the path
 		// is on the list of list paths, this one item is skipped and the list

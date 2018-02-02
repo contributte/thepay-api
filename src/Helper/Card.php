@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\Helper;
 
@@ -12,13 +13,15 @@ use Tp\MerchantConfig;
  */
 class Card
 {
-	protected static function getSignature($data)
+	protected static function getSignature(array $data)
 	{
 		return md5(http_build_query(array_filter($data)));
 	}
 
-	public static function depositPayment(MerchantConfig $config, $merchantData)
-	{
+	public static function depositPayment(
+		MerchantConfig $config,
+		$merchantData
+	) : CardPaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(
 			[
@@ -36,15 +39,17 @@ class Card
 				'signature'    => $signature,
 			]
 		);
-		if (!$result) {
-			throw new Exception();
+		if ( !$result) {
+			throw new Exception;
 		}
 
 		return new CardPaymentResponse($result);
 	}
 
-	public static function stornoPayment(MerchantConfig $config, $merchantData)
-	{
+	public static function stornoPayment(
+		MerchantConfig $config,
+		$merchantData
+	) : CardPaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(
 			[
@@ -62,15 +67,19 @@ class Card
 				'signature'    => $signature,
 			]
 		);
-		if (!$result) {
-			throw new Exception();
+		if ( !$result) {
+			throw new Exception;
 		}
 
 		return new CardPaymentResponse($result);
 	}
 
-	public static function createNewRecurrentPayment(MerchantConfig $config, $merchantData, $newMerchantData, $value)
-	{
+	public static function createNewRecurrentPayment(
+		MerchantConfig $config,
+		$merchantData,
+		$newMerchantData,
+		$value
+	) : CardPaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(
 			[
@@ -93,8 +102,8 @@ class Card
 				'signature'       => $signature,
 			]
 		);
-		if (!$result) {
-			throw new Exception();
+		if ( !$result) {
+			throw new Exception;
 		}
 
 		return new CardPaymentResponse($result);

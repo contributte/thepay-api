@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Tp\Helper;
 
 use Tp\Exception;
@@ -30,16 +32,22 @@ class RadioMerchant
 	protected $disablePopupCss = FALSE;
 
 	/**
-	 * @param \Tp\MerchantConfig $config          merchant configuration
-	 * @param string             $name            name of original radio buttons with payment methods
-	 * @param string             $value           value of radio button that originally represents ThePay payment method
-	 * @param boolean            $showIcon        if payment method graphical icon should be rendered in radiobutton's
-	 *                                          label
-	 * @param boolean            $disablePopupCss disable default CSS styling for popup div with payment instructions
-	 * @param string             $currency        payment's currency. Null for default currency
+	 * @param MerchantConfig $config              merchant configuration
+	 * @param string         $name                name of original radio buttons with payment methods
+	 * @param string         $value               value of radio button that originally represents ThePay payment method
+	 * @param bool           $showIcon            if payment method graphical icon should be rendered in radiobutton's
+	 *                                            label
+	 * @param bool           $disablePopupCss     disable default CSS styling for popup div with payment instructions
+	 * @param string         $currency            payment's currency. Null for default currency
 	 */
-	function __construct(MerchantConfig $config, $name = NULL, $value = NULL, $showIcon = TRUE, $disablePopupCss = FALSE, $currency = NULL)
-	{
+	function __construct(
+		MerchantConfig $config,
+		string $name = NULL,
+		$value = NULL,
+		bool $showIcon = TRUE,
+		bool $disablePopupCss = FALSE,
+		string $currency = NULL
+	) {
 		$this->config = $config;
 		$this->name = $name;
 		$this->value = $value;
@@ -49,17 +57,17 @@ class RadioMerchant
 	}
 
 	/**
-	 * @return \Tp\MerchantConfig merchant configuration
+	 * @return MerchantConfig merchant configuration
 	 */
-	public function getConfig()
+	public function getConfig() : MerchantConfig
 	{
 		return $this->config;
 	}
 
 	/**
-	 * @param \Tp\MerchantConfig $config merchant configuration
+	 * @param MerchantConfig $config merchant configuration
 	 */
-	public function setConfig(MerchantConfig $config)
+	public function setConfig(MerchantConfig $config) : void
 	{
 		$this->config = $config;
 	}
@@ -67,7 +75,7 @@ class RadioMerchant
 	/**
 	 * @return string name of original radio buttons with payment methods;
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -75,13 +83,13 @@ class RadioMerchant
 	/**
 	 * @param string $name name of original radio buttons with payment methods
 	 */
-	public function setName($name)
+	public function setName(string $name) : void
 	{
 		$this->name = $name;
 	}
 
 	/**
-	 * @return string|integer value of radio button that originally represents ThePay payment method
+	 * @return string|int value of radio button that originally represents ThePay payment method
 	 */
 	public function getValue()
 	{
@@ -89,25 +97,25 @@ class RadioMerchant
 	}
 
 	/**
-	 * @param string|integer $value value of radio button that originally represents ThePay payment method
+	 * @param string|int $value value of radio button that originally represents ThePay payment method
 	 */
-	public function setValue($value)
+	public function setValue($value) : void
 	{
 		$this->value = $value;
 	}
 
 	/**
-	 * @param boolean $showIcon if payment method graphical icon should be rendered in radiobutton's label
+	 * @param bool $showIcon if payment method graphical icon should be rendered in radiobutton's label
 	 */
-	public function setShowIcon($showIcon)
+	public function setShowIcon(bool $showIcon) : void
 	{
 		$this->showIcon = $showIcon;
 	}
 
 	/**
-	 * @return boolean if payment method graphical icon should be rendered in radiobutton's label
+	 * @return bool if payment method graphical icon should be rendered in radiobutton's label
 	 */
-	public function getShowIcon()
+	public function getShowIcon() : bool
 	{
 		return $this->showIcon;
 	}
@@ -117,7 +125,7 @@ class RadioMerchant
 		return $this->appendCode;
 	}
 
-	public function setAppendCode($appendCode)
+	public function setAppendCode($appendCode) : void
 	{
 		$this->appendCode = $appendCode;
 	}
@@ -130,7 +138,7 @@ class RadioMerchant
 	/**
 	 * Disable/enable thepay css for offline payment popup box
 	 */
-	public function setDisablePopupCss($disablePopupCss)
+	public function setDisablePopupCss(bool $disablePopupCss) : void
 	{
 		$this->disablePopupCss = $disablePopupCss;
 	}
@@ -140,7 +148,7 @@ class RadioMerchant
 		return $this->currency;
 	}
 
-	private function createSignature(array $params)
+	private function createSignature(array $params) : string
 	{
 		$str = http_build_query(array_filter(array_merge($params, ['password' => $this->config->password])));
 
@@ -152,7 +160,7 @@ class RadioMerchant
 	 *
 	 * @return string HTML code
 	 */
-	public function renderRadio()
+	public function renderRadio() : string
 	{
 		$gateUrl = $this->config->gateUrl;
 		$queryArgs = [
@@ -196,14 +204,14 @@ class RadioMerchant
 	}
 
 	/**
-	 * @return boolean true if some of ThePay payment methods was selected
+	 * @return bool true if some of ThePay payment methods was selected
 	 */
-	public function isTpMethodChosen()
+	public function isTpMethodChosen() : bool
 	{
 		return !empty($_REQUEST['tp_radio_value']);
 	}
 
-	protected function clearCookies()
+	protected function clearCookies() : void
 	{
 		setcookie('tp_selected_val', '', 1);
 	}
@@ -216,13 +224,17 @@ class RadioMerchant
 	 * @param callable $redirectFunc      if you use some framework with own redirect mechanism, provide redirect
 	 *                                    function with one argument - destination url
 	 * @param bool     $dieAfterRedirect  In case of successful redirect, exit (die) instead of just returning true.
-	 * @param integer  $forcedValue       allowes you to explicitly set selected payment method id (when you need it to
+	 * @param int      $forcedValue       allowes you to explicitly set selected payment method id (when you need it to
 	 *                                    by set differently then from request variable)
 	 *
 	 * @throws Exception if headers was already sent
 	 */
-	public function redirectOnlinePayment(Payment $payment, $redirectFunc = NULL, $dieAfterRedirect = FALSE, $forcedValue = NULL)
-	{
+	public function redirectOnlinePayment(
+		Payment $payment,
+		callable $redirectFunc = NULL,
+		bool $dieAfterRedirect = FALSE,
+		bool $forcedValue = NULL
+	) : bool {
 		if (( !empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
 			if (headers_sent()) {
 				throw new Exception('Redirect error - headers have been already sent');
@@ -268,7 +280,7 @@ class RadioMerchant
 	/**
 	 * @deprecated
 	 */
-	public function redirectOfflinePayment(Payment $payment, $redirecFunc = NULL)
+	public function redirectOfflinePayment(Payment $payment, callable $redirecFunc = NULL) : void
 	{
 		$this->redirectOnlinePayment($payment, $redirecFunc);
 	}
@@ -281,7 +293,7 @@ class RadioMerchant
 	 *
 	 * @return string HTML code with component
 	 */
-	public function showPaymentInstructions(Payment $payment)
+	public function showPaymentInstructions(Payment $payment) : string
 	{
 		if (empty($_REQUEST['tp_radio_value']) || empty($_REQUEST['tp_radio_is_offline'])) {
 			return '';

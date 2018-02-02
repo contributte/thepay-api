@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
 abstract class ProcessorWithPaths extends Processor
 {
-
 	/**
 	 * @var array[]
 	 */
@@ -26,13 +26,12 @@ abstract class ProcessorWithPaths extends Processor
 	 *
 	 * @return array
 	 */
-	public static function processWithPaths(array $input, array $paths)
+	public static function processWithPaths(array $input, array $paths) : array
 	{
 		$instance = new static($paths);
-		// Starting with an empty path [].
-		$processed = $instance->processHash($input, []);
 
-		return $processed;
+		// Starting with an empty path [].
+		return $instance->processHash($input, []);
 	}
 
 	/**
@@ -40,11 +39,9 @@ abstract class ProcessorWithPaths extends Processor
 	 *
 	 * @return bool
 	 */
-	protected function onPath(array $itemPath)
+	protected function onPath(array $itemPath) : bool
 	{
-		$onPath = in_array($itemPath, $this->paths, TRUE /* strict */);
-
-		return $onPath;
+		return in_array($itemPath, $this->paths, TRUE);
 	}
 
 }

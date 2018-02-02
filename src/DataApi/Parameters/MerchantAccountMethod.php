@@ -1,13 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\ValueFormatter;
 
 class MerchantAccountMethod extends DataApiObject
 {
-
 	/**
 	 * @var int|null
 	 */
@@ -23,52 +22,34 @@ class MerchantAccountMethod extends DataApiObject
 	 */
 	protected $active;
 
-	/**
-	 * @return int|null
-	 */
-	public function getId()
+	public function getId() : ?int
 	{
 		return $this->id;
 	}
 
-	/**
-	 * @param int|null $id
-	 */
-	public function setId($id = NULL)
+	public function setId(int $id = NULL) : void
 	{
-		$this->id = ValueFormatter::format('int', $id);
+		$this->id = $id;
 	}
 
-	/**
-	 * @return string|null
-	 */
-	public function getName()
+	public function getName() : ?string
 	{
 		return $this->name;
 	}
 
-	/**
-	 * @param string|null $name
-	 */
-	public function setName($name = NULL)
+	public function setName(string $name = NULL) : void
 	{
-		$this->name = ValueFormatter::format('string', $name);
+		$this->name = $name;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function getActive()
+	public function getActive() : bool
 	{
 		return $this->active;
 	}
 
-	/**
-	 * @param bool|null $active
-	 */
-	public function setActive($active = NULL)
+	public function setActive(bool $active = NULL) : void
 	{
-		$this->active = ValueFormatter::format('bool', $active);
+		$this->active = $active;
 	}
 
 }
