@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
-use Tp\DataApi\ValueFormatter;
-
 class GetPaymentStateRequest extends Request
 {
 	/**
@@ -19,6 +17,6 @@ class GetPaymentStateRequest extends Request
 
 	public function setPaymentId(int $paymentId = NULL) : void
 	{
-		$this->paymentId = ValueFormatter::format('int', $paymentId);
+		$this->paymentId = $paymentId;
 	}
 }

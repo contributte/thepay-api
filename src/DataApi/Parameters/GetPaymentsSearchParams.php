@@ -174,14 +174,9 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->createdOnFrom;
 	}
 
-	/**
-	 * @param DateTime|string|null $createdOnFrom
-	 */
-	public function setCreatedOnFrom($createdOnFrom = NULL) : void
+	public function setCreatedOnFrom(DateTime $createdOnFrom = NULL) : void
 	{
-		$this->createdOnFrom = ValueFormatter::format(
-			'DateTime', $createdOnFrom
-		);
+		$this->createdOnFrom = $createdOnFrom;
 	}
 
 	public function getCreatedOnTo() : ?DateTime
@@ -192,11 +187,9 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param DateTime|string|null $createdOnTo
 	 */
-	public function setCreatedOnTo($createdOnTo = NULL) : void
+	public function setCreatedOnTo(DateTime $createdOnTo = NULL) : void
 	{
-		$this->createdOnTo = ValueFormatter::format(
-			'DateTime', $createdOnTo
-		);
+		$this->createdOnTo = $createdOnTo;
 	}
 
 	public function getFinishedOnFrom() : ?DateTime
@@ -207,11 +200,9 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param DateTime|string|null $finishedOnFrom
 	 */
-	public function setFinishedOnFrom($finishedOnFrom = NULL) : void
+	public function setFinishedOnFrom(DateTime $finishedOnFrom = NULL) : void
 	{
-		$this->finishedOnFrom = ValueFormatter::format(
-			'DateTime', $finishedOnFrom
-		);
+		$this->finishedOnFrom = $finishedOnFrom;
 	}
 
 	public function getFinishedOnTo() : ?DateTime
@@ -222,11 +213,9 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param DateTime|string|null $finishedOnTo
 	 */
-	public function setFinishedOnTo(DateTime $finishedOnTo = NULL) : void
+	public function setFinishedOnTo(\DateTime $finishedOnTo = NULL) : void
 	{
-		$this->finishedOnTo = ValueFormatter::format(
-			'DateTime', $finishedOnTo
-		);
+		$this->finishedOnTo = $finishedOnTo;
 	}
 
 	/**

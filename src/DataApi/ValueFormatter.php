@@ -131,14 +131,14 @@ class ValueFormatter
 
 	/**
 	 * @param string $type
-	 * @param array  $value
+	 * @param array  $list
 	 *
 	 * @return array
 	 */
-	public static function formatList(string $type, array $value) : array
+	public static function formatList(string $type, array $list) : array
 	{
 		$array = [];
-		foreach ($value as $item) {
+		foreach ($list as $item) {
 			$array[] = ValueFormatter::format($type, $item);
 		}
 
