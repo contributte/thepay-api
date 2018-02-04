@@ -10,7 +10,6 @@ use Tp\Utils;
 
 class Response extends DataApiObject
 {
-
 	/**
 	 * @var array[]
 	 */

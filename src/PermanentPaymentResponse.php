@@ -10,9 +10,17 @@ use stdClass;
  */
 class PermanentPaymentResponse
 {
+	/**
+	 * @var bool
+	 */
 	protected $status;
+	/**
+	 * @var string
+	 */
 	protected $errorDescription;
-	/** @var PermanentPaymentResponseMethod[] */
+	/**
+	 * @var PermanentPaymentResponseMethod[]
+	 */
 	protected $paymentMethods = [];
 
 	function __construct(stdClass $data)
@@ -41,12 +49,12 @@ class PermanentPaymentResponse
 	}
 
 
-	public function getStatus()
+	public function getStatus() : bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription()
+	public function getErrorDescription() : ?string
 	{
 		return $this->errorDescription;
 	}

@@ -5,18 +5,33 @@ namespace Tp;
 
 class PermanentPaymentResponseMethod
 {
+	/**
+	 * @var int
+	 */
 	protected $methodId;
+	/**
+	 * @var string
+	 */
 	protected $methodName;
+	/**
+	 * @var string
+	 */
 	protected $url;
+	/**
+	 * @var string
+	 */
 	protected $accountNumber;
+	/**
+	 * @var int
+	 */
 	protected $vs;
 
 	function __construct(
-		$methodId,
-		$methodName,
-		$url,
-		$accountNumber,
-		$vs
+		int $methodId,
+		string $methodName,
+		string $url,
+		string $accountNumber,
+		int $vs
 	) {
 		$this->methodId = $methodId;
 		$this->methodName = $methodName;
@@ -25,27 +40,27 @@ class PermanentPaymentResponseMethod
 		$this->vs = $vs;
 	}
 
-	public function getMethodId()
+	public function getMethodId() : int
 	{
 		return $this->methodId;
 	}
 
-	public function getMethodName()
+	public function getMethodName() : string
 	{
 		return $this->methodName;
 	}
 
-	public function getUrl()
+	public function getUrl() : string
 	{
 		return $this->url;
 	}
 
-	public function getAccountNumber()
+	public function getAccountNumber() : string
 	{
 		return $this->accountNumber;
 	}
 
-	public function getVs()
+	public function getVs() : int
 	{
 		return $this->vs;
 	}

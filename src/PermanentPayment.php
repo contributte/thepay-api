@@ -10,9 +10,21 @@ class PermanentPayment
 	 */
 	protected $config;
 
+	/**
+	 * @var string
+	 */
 	protected $merchantData;
+	/**
+	 * @var string
+	 */
 	protected $description;
+	/**
+	 * @var string
+	 */
 	protected $returnUrl;
+	/**
+	 * @var string
+	 */
 	protected $signature;
 
 	function __construct(
@@ -27,7 +39,7 @@ class PermanentPayment
 		$this->returnUrl = $returnUrl;
 	}
 
-	public function getConfig()
+	public function getMerchantConfig()
 	{
 		return $this->config;
 	}
@@ -47,7 +59,7 @@ class PermanentPayment
 		return $this->returnUrl;
 	}
 
-	public function setConfig(MerchantConfig $config) : void
+	public function setMerchantConfig(MerchantConfig $config) : void
 	{
 		$this->config = $config;
 	}
@@ -70,15 +82,19 @@ class PermanentPayment
 	public function getSignature() : string
 	{
 		$data = [
-			'merchantId'   => $this->config->merchantId,
-			'accountId'    => $this->config->accountId,
+			'merchantId'   => $this->getMerchantConfig()->merchantId,
+			'accountId'    => $this->getMerchantConfig()->accountId,
 			'merchantData' => $this->getMerchantData(),
 			'description'  => $this->getDescription(),
 			'returnUrl'    => $this->getReturnUrl(),
-			'password'     => $this->config->password,
+			'password'     => $this->getMerchantConfig()->password,
 		];
 
-		return md5(http_build_query(array_filter($data)));
+		return md5(
+			http_build_query(
+				array_filter($data)
+			)
+		);
 	}
 
 	/**
@@ -89,12 +105,16 @@ class PermanentPayment
 	public function getSignatureLite() : string
 	{
 		$data = [
-			'merchantId'   => $this->config->merchantId,
-			'accountId'    => $this->config->accountId,
+			'merchantId'   => $this->getMerchantConfig()->merchantId,
+			'accountId'    => $this->getMerchantConfig()->accountId,
 			'merchantData' => $this->getMerchantData(),
-			'password'     => $this->config->password,
+			'password'     => $this->getMerchantConfig()->password,
 		];
 
-		return md5(http_build_query(array_filter($data)));
+		return md5(
+			http_build_query(
+				array_filter($data)
+			)
+		);
 	}
 }

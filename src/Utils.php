@@ -7,7 +7,6 @@ use stdClass;
 
 class Utils
 {
-
 	/**
 	 * Filters out all keys that are not in the $keys list.
 	 *
@@ -89,5 +88,4 @@ class Utils
 		}
 		unset($path, $fullPathArray, $fullPathString);
 	}
-
 }

@@ -10,7 +10,13 @@ use stdClass;
  */
 class PaymentReturnResponse
 {
+	/**
+	 * @var bool
+	 */
 	protected $status;
+	/**
+	 * @var string
+	 */
 	protected $errorDescription;
 
 	function __construct(stdClass $data)
@@ -22,12 +28,12 @@ class PaymentReturnResponse
 		}
 	}
 
-	public function getStatus()
+	public function getStatus() : bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription()
+	public function getErrorDescription() : ?string
 	{
 		return $this->errorDescription;
 	}

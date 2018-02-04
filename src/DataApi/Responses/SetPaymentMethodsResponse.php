@@ -33,7 +33,7 @@ class SetPaymentMethodsResponse extends Response
 		return $this->accountId;
 	}
 
-	public function setAccountId(int $accountId)
+	public function setAccountId(int $accountId) : void
 	{
 		$this->accountId = $accountId;
 	}
@@ -43,7 +43,7 @@ class SetPaymentMethodsResponse extends Response
 		return $this->status;
 	}
 
-	public function setStatus(string $status = NULL)
+	public function setStatus(string $status = NULL) : void
 	{
 		$this->status = $status;
 	}

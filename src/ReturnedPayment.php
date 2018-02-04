@@ -189,8 +189,8 @@ class ReturnedPayment extends Payment
 	function verifySignature(string $signature = NULL) : bool
 	{
 		// check merchantId and accountId from request
-		if (intval($this->requestMerchantId) !== $this->config->merchantId
-			|| intval($this->requestAccountId) !== $this->config->accountId
+		if ($this->getRequestMerchantId() !== $this->getMerchantConfig()->merchantId
+			|| $this->getRequestAccountId() !== $this->getMerchantConfig()->accountId
 		) {
 			throw new InvalidSignatureException;
 		}
@@ -202,14 +202,14 @@ class ReturnedPayment extends Payment
 		// it to the specified signature.
 
 		$out = [];
-		$out[] = 'merchantId=' . $this->requestMerchantId;
-		$out[] = 'accountId=' . $this->requestAccountId;
+		$out[] = 'merchantId=' . $this->getRequestMerchantId();
+		$out[] = 'accountId=' . $this->getRequestAccountId();
 		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $arg) {
 			if ( !is_null($this->{$arg})) {
 				$out[] = $arg . '=' . $this->{$arg};
 			}
 		}
-		$out[] = 'password=' . $this->config->password;
+		$out[] = 'password=' . $this->getMerchantConfig()->password;
 
 		$sig = $this->hashFunction(implode('&', $out));
 		if ($sig == $signature) {
@@ -218,6 +218,16 @@ class ReturnedPayment extends Payment
 		else {
 			throw new InvalidSignatureException;
 		}
+	}
+
+	public function getRequestMerchantId() : int
+	{
+		return intval($this->requestMerchantId);
+	}
+
+	public function getRequestAccountId() : int
+	{
+		return intval($this->requestAccountId);
 	}
 
 	/**
@@ -234,7 +244,7 @@ class ReturnedPayment extends Payment
 			return 'CZK';
 		}
 		else {
-			return $this->currency;
+			return parent::getCurrency();
 		}
 	}
 
@@ -273,9 +283,9 @@ class ReturnedPayment extends Payment
 	/**
 	 * Returns the IP rating of the IP that sent the payment.
 	 */
-	function getIpRating()
+	function getIpRating() : int
 	{
-		return $this->ipRating;
+		return intval($this->ipRating);
 	}
 
 	/**
@@ -291,7 +301,7 @@ class ReturnedPayment extends Payment
 	 */
 	function isOffline() : bool
 	{
-		return $this->isOffline;
+		return $this->getIsOffline();
 	}
 
 	/**
@@ -300,7 +310,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getNeedConfirm() : bool
 	{
-		return $this->needConfirm === '1';
+		return $this->needConfirm !== '0';
 	}
 
 	/**
@@ -309,7 +319,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getIsConfirm() : ?bool
 	{
-		return is_null($this->isConfirm) ? NULL : $this->isConfirm === '1';
+		return is_null($this->isConfirm) ? NULL : $this->isConfirm !== '0';
 	}
 
 	/**
@@ -325,7 +335,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getIsOffline() : bool
 	{
-		return $this->isOffline === '1';
+		return $this->isOffline !== '0';
 	}
 
 	/**

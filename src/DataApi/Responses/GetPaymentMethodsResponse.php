@@ -34,7 +34,6 @@ class GetPaymentMethodsResponse extends Response
 		foreach ($response['methods'] as $method) {
 			$methods[] = new MerchantAccountMethod($method);
 		}
-		unset($method);
 		$instance->setMethods($methods);
 
 		return $instance;

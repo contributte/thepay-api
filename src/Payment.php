@@ -61,7 +61,7 @@ class Payment
 	 * ID of payment method to use for paying. Setting this argument should
 	 * be result of user's selection, not merchant's selection.
 	 *
-	 * @var string
+	 * @var int
 	 */
 	protected $methodId = NULL;
 
@@ -123,18 +123,18 @@ class Payment
 	public function setValue(float $value) : void
 	{
 		// Only positive numbers allowed.
-		if ( !is_numeric($value) || (double)$value < 0) {
+		if ($value < 0) {
 			throw new InvalidParameterException('value');
 		}
 		else {
-			$this->value = (double)$value;
+			$this->value = $value;
 		}
 	}
 
 	/**
 	 * @param string $currency
 	 */
-	public function setCurrency(string $currency):void
+	public function setCurrency(string $currency) : void
 	{
 		$this->currency = $currency;
 	}
@@ -180,9 +180,9 @@ class Payment
 	/**
 	 * Sets the methodId property.
 	 *
-	 * @param string $methodId
+	 * @param int $methodId
 	 */
-	public function setMethodId(string $methodId) : void
+	public function setMethodId(int $methodId) : void
 	{
 		$this->methodId = $methodId;
 	}
@@ -205,7 +205,7 @@ class Payment
 	 */
 	public function getValue() : float
 	{
-		return $this->value;
+		return doubleval($this->value);
 	}
 
 	/**
@@ -264,9 +264,9 @@ class Payment
 	 * Returns the methodId property. If methodId was not specified using
 	 * setMethodId() property, NULL is returned.
 	 *
-	 * @return string
+	 * @return int
 	 */
-	public function getMethodId() : string
+	public function getMethodId() : int
 	{
 		return $this->methodId;
 	}
@@ -396,7 +396,7 @@ class Payment
 		$input['accountId'] = $this->config->accountId;
 
 		if ( !is_null($this->value)) {
-			$input['value'] = number_format($this->value, 2, '.', '');
+			$input['value'] = number_format($this->getValue(), 2, '.', '');
 		}
 
 		if ( !is_null($this->currency)) {
@@ -432,10 +432,10 @@ class Payment
 		}
 
 		if ( !is_null($this->deposit)) {
-			$input['deposit'] = $this->deposit ? '1' : '0';
+			$input['deposit'] = $this->getDeposit() ? '1' : '0';
 		}
 		if ( !is_null($this->isRecurring)) {
-			$input['isRecurring'] = $this->isRecurring ? '1' : '0';
+			$input['isRecurring'] = $this->getIsRecurring() ? '1' : '0';
 		}
 
 		if ( !is_null($this->merchantSpecificSymbol)) {
@@ -466,7 +466,7 @@ class Payment
 			$str .= $key . '=' . $val . '&';
 		}
 
-		$str .= 'password=' . $this->config->password;
+		$str .= 'password=' . $this->getMerchantConfig()->password;
 
 		return self::hashFunction($str);
 	}

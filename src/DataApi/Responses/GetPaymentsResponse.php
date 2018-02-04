@@ -76,5 +76,4 @@ class GetPaymentsResponse extends Response
 	{
 		$this->pagination = $pagination;
 	}
-
 }

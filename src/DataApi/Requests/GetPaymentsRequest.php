@@ -39,9 +39,7 @@ class GetPaymentsRequest extends Request
 
 	public function setSearchParams(GetPaymentsSearchParams $searchParams = NULL) : void
 	{
-		$this->searchParams = ValueFormatter::format(
-			'Tp\DataApi\Parameters\GetPaymentsSearchParams', $searchParams
-		);
+		$this->searchParams = $searchParams;
 	}
 
 	public function getPagination() : ?PaginationRequest
@@ -51,9 +49,7 @@ class GetPaymentsRequest extends Request
 
 	public function setPagination(PaginationRequest $pagination = NULL) : void
 	{
-		$this->pagination = ValueFormatter::format(
-			'Tp\DataApi\Parameters\PaginationRequest', $pagination
-		);
+		$this->pagination = $pagination;
 	}
 
 	public function getOrdering() : ?Ordering
@@ -63,8 +59,6 @@ class GetPaymentsRequest extends Request
 
 	public function setOrdering(Ordering $ordering = NULL) : void
 	{
-		$this->ordering = ValueFormatter::format(
-			'Tp\DataApi\Parameters\Ordering', $ordering
-		);
+		$this->ordering = $ordering;
 	}
 }

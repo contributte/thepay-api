@@ -13,7 +13,7 @@ class PermanentPayment
 	public static function createPermanentPayment(
 		Tp\PermanentPayment $payment
 	) : Tp\PermanentPaymentResponse {
-		$config = $payment->getConfig();
+		$config = $payment->getMerchantConfig();
 		$client = new \SoapClient(
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
@@ -38,7 +38,7 @@ class PermanentPayment
 	public static function getPermanentPayment(
 		Tp\PermanentPayment $payment
 	) : Tp\PermanentPaymentResponse {
-		$config = $payment->getConfig();
+		$config = $payment->getMerchantConfig();
 		$client = new \SoapClient(
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]

@@ -11,7 +11,7 @@ class PaginationResponse extends Pagination
 	 */
 	protected $totalPages;
 
-	public function getTotalPages() : int
+	public function getTotalPages() : ?int
 	{
 		return $this->totalPages;
 	}
@@ -20,5 +20,4 @@ class PaginationResponse extends Pagination
 	{
 		$this->totalPages = $totalPages;
 	}
-
 }

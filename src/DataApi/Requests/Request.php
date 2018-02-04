@@ -12,7 +12,7 @@ use Tp\MerchantConfig;
 abstract class Request extends DataApiObject
 {
 	/**
-	 * @var MerchantConfig|null
+	 * @var MerchantConfig
 	 */
 	protected $_config;
 
