@@ -15,7 +15,7 @@ class SetPaymentMethodsResponse extends Response
 	 */
 	protected $accountId;
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $status;
 

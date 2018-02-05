@@ -81,17 +81,17 @@ class GetPaymentsSearchParams extends DataApiObject
 	protected $specificSymbol;
 
 	/**
-	 * @return int[]|null
+	 * @return int[]
 	 */
-	public function getAccountId() : ?array
+	public function getAccountId() : array
 	{
 		return $this->accountId;
 	}
 
 	/**
-	 * @param int[]|null $accountId
+	 * @param int[] $accountId
 	 */
-	public function setAccountId(?array $accountId = []) : void
+	public function setAccountId(array $accountId = []) : void
 	{
 		$this->accountId = ValueFormatter::formatList(
 			'int', $accountId
@@ -99,15 +99,15 @@ class GetPaymentsSearchParams extends DataApiObject
 	}
 
 	/**
-	 * @return int[]|null
+	 * @return int[]
 	 */
-	public function getState() : ?array
+	public function getState() : array
 	{
 		return $this->state;
 	}
 
 	/**
-	 * @param int[]|null $state
+	 * @param int[] $state
 	 */
 	public function setState(array $state = []) : void
 	{
@@ -117,15 +117,15 @@ class GetPaymentsSearchParams extends DataApiObject
 	}
 
 	/**
-	 * @return int[]|null
+	 * @return int[]
 	 */
-	public function getCurrency() : ?array
+	public function getCurrency() : array
 	{
 		return $this->currency;
 	}
 
 	/**
-	 * @param int[]|null $currency
+	 * @param int[] $currency
 	 */
 	public function setCurrency(array $currency = []) : void
 	{
@@ -134,41 +134,26 @@ class GetPaymentsSearchParams extends DataApiObject
 		);
 	}
 
-	/**
-	 * @return float|null
-	 */
 	public function getValueFrom() : ?float
 	{
 		return $this->valueFrom;
 	}
 
-	/**
-	 * @param float|null $valueFrom
-	 */
 	public function setValueFrom(?float $valueFrom = NULL) : void
 	{
 		$this->valueFrom = $valueFrom;
 	}
 
-	/**
-	 * @return float|null
-	 */
 	public function getValueTo() : ?float
 	{
 		return $this->valueTo;
 	}
 
-	/**
-	 * @param float|null $valueTo
-	 */
 	public function setValueTo(?float $valueTo = NULL) : void
 	{
 		$this->valueTo = $valueTo;
 	}
 
-	/**
-	 * @return DateTime|null
-	 */
 	public function getCreatedOnFrom() : ?DateTime
 	{
 		return $this->createdOnFrom;
@@ -184,9 +169,6 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->createdOnTo;
 	}
 
-	/**
-	 * @param DateTime|string|null $createdOnTo
-	 */
 	public function setCreatedOnTo(DateTime $createdOnTo = NULL) : void
 	{
 		$this->createdOnTo = $createdOnTo;
@@ -197,9 +179,6 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->finishedOnFrom;
 	}
 
-	/**
-	 * @param DateTime|string|null $finishedOnFrom
-	 */
 	public function setFinishedOnFrom(DateTime $finishedOnFrom = NULL) : void
 	{
 		$this->finishedOnFrom = $finishedOnFrom;
@@ -210,26 +189,23 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->finishedOnTo;
 	}
 
-	/**
-	 * @param DateTime|string|null $finishedOnTo
-	 */
 	public function setFinishedOnTo(\DateTime $finishedOnTo = NULL) : void
 	{
 		$this->finishedOnTo = $finishedOnTo;
 	}
 
 	/**
-	 * @return int[]|null
+	 * @return int[]
 	 */
-	public function getAccounting() : ?array
+	public function getAccounting() : array
 	{
 		return $this->accounting;
 	}
 
 	/**
-	 * @param int[]|null $accounting
+	 * @param int[] $accounting
 	 */
-	public function setAccounting(?array $accounting = []) : void
+	public function setAccounting(array $accounting = []) : void
 	{
 		$this->accounting = ValueFormatter::formatList(
 			'int', $accounting
@@ -257,17 +233,17 @@ class GetPaymentsSearchParams extends DataApiObject
 	}
 
 	/**
-	 * @return int[]|null
+	 * @return int[]
 	 */
-	public function getMethod() : ?array
+	public function getMethod() : array
 	{
 		return $this->method;
 	}
 
 	/**
-	 * @param int[]|null $method
+	 * @param int[] $method
 	 */
-	public function setMethod(?array $method = [])
+	public function setMethod(array $method = [])
 	{
 		$this->method = ValueFormatter::formatList(
 			'int', $method

@@ -42,50 +42,47 @@ class ValueFormatter
 	}
 
 	/**
-	 * @param int $value
+	 * @param int|null $value
 	 *
 	 * @return int
 	 */
 	public static function formatInt($value) : ?int
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
+		if (is_null($value)) {
 			return NULL;
 		}
 		else {
-			return (int)$value;
+			return intval($value);
 		}
 	}
 
 	/**
-	 * @param float $value
+	 * @param float|null $value
 	 *
 	 * @return float
 	 */
 	public static function formatFloat($value) : ?float
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
+		if (is_null($value)) {
 			return NULL;
 		}
 		else {
-			return (float)$value;
+			return floatval($value);
 		}
 	}
 
 	/**
-	 * @param bool $value
+	 * @param bool|null $value
 	 *
 	 * @return bool
 	 */
 	public static function formatBool($value) : ?bool
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
+		if (is_null($value)) {
 			return NULL;
 		}
 		else {
-			return (bool)$value;
+			return boolval($value);
 		}
 	}
 
@@ -96,8 +93,7 @@ class ValueFormatter
 	 */
 	public static function formatString($value) : ?string
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
+		if (is_null($value)) {
 			return NULL;
 		}
 		else {
@@ -112,8 +108,7 @@ class ValueFormatter
 	 */
 	public static function formatDateTime($value) : ?DateTime
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
+		if (is_null($value)) {
 			return NULL;
 		}
 		else {

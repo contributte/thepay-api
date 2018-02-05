@@ -8,19 +8,10 @@ use Tp\InvalidParameterException;
 
 class DateTimeInflater extends ProcessorWithPaths
 {
-
-	/**
-	 * @param mixed    $value
-	 * @param string[] $currentPath
-	 *
-	 * @return mixed
-	 * @throws InvalidParameterException
-	 */
 	protected function processItem($value, array $currentPath) : array
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
-			$processed = parent::processItem($value, $currentPath);
+		if (is_null($value)) {
+			$processed = NULL;
 		}
 		else {
 			$onPath = $this->onPath($currentPath);

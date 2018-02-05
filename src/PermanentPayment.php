@@ -11,21 +11,17 @@ class PermanentPayment
 	protected $config;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $merchantData;
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $description;
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	protected $returnUrl;
-	/**
-	 * @var string
-	 */
-	protected $signature;
 
 	function __construct(
 		MerchantConfig $config,

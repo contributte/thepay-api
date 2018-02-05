@@ -1,2 +1,5 @@
 .idea
+composer.lock
 vendor
+
+tests/php-unix.generated.ini

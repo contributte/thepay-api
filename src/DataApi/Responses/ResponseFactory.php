@@ -35,7 +35,7 @@ class ResponseFactory
 			$operation
 		);
 
-		$array = Utils::toArrayRecursive($data);
+		$array = Utils::toArrayRecursive((array)$data);
 
 		$listPaths = $className::listPaths();
 		$flattened = SoapFlattener::processWithPaths(

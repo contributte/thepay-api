@@ -21,8 +21,8 @@ abstract class Merchant
 	/**
 	 * Constructor. Specify the payment object here.
 	 *
-	 * @param payment Instace of the Tp\TpPayment method, that contains
-	 *                inforamtion about the payment to be made.
+	 * @param Payment $payment Instace of the Tp\TpPayment method, that contains
+	 *                         inforamtion about the payment to be made.
 	 */
 	function __construct(Payment $payment)
 	{

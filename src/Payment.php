@@ -17,17 +17,17 @@ class Payment
 	protected $config;
 
 	/**
-	 * @var float value indicating the amount of money that should be paid.
+	 * @var float|null value indicating the amount of money that should be paid.
 	 */
 	protected $value = NULL;
 
 	/**
-	 * @var string Currency identifier.
+	 * @var string|null Currency identifier.
 	 */
 	protected $currency = NULL;
 
 	/**
-	 * @var string Payment description that should be visible to the customer.
+	 * @var string|null Payment description that should be visible to the customer.
 	 */
 	protected $description = NULL;
 
@@ -35,7 +35,7 @@ class Payment
 	 * Any merchant-specific data, that will be returned to the site after
 	 * the payment has been completed.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $merchantData = NULL;
 
@@ -44,7 +44,7 @@ class Payment
 	 * It defaults to value configured in administration interface, but
 	 * can be overwritten using this property.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $returnUrl = NULL;
 
@@ -61,13 +61,13 @@ class Payment
 	 * ID of payment method to use for paying. Setting this argument should
 	 * be result of user's selection, not merchant's selection.
 	 *
-	 * @var int
+	 * @var int|null
 	 */
 	protected $methodId = NULL;
 
 	/**
 	 * @deprecated
-	 * @var string
+	 * @var string|null
 	 */
 	protected $customerData = NULL;
 
@@ -78,25 +78,24 @@ class Payment
 	protected $customerEmail = NULL;
 
 	/**
-	 * @var bool If card payment will be charged immediately or only blocked and charged later by paymentDeposit
+	 * @var bool|null If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *      operation.
 	 */
 	protected $deposit = NULL;
 
 	/**
-	 * @var bool If card payment is recurring.
+	 * @var bool|null If card payment is recurring.
 	 */
 	protected $isRecurring = NULL;
 
 	/**
-	 * @var string numerical specific symbol (used only if payment method supports it).
+	 * @var string|null numerical specific symbol (used only if payment method supports it).
 	 */
 	protected $merchantSpecificSymbol = NULL;
 
 	/**
-	 * @var EetDph VAT decomposition for EET
+	 * @var EetDph|null VAT decomposition for EET
 	 */
-
 	protected $eetDph = NULL;
 
 	/**
@@ -104,7 +103,7 @@ class Payment
 	 *
 	 * @param MerchantConfig $config containing merchant's access credentials to the ThePay system.
 	 */
-	public function __construct(MerchantConfig $config = NULL)
+	public function __construct(MerchantConfig $config)
 	{
 		$this->config = $config;
 
@@ -131,9 +130,6 @@ class Payment
 		}
 	}
 
-	/**
-	 * @param string $currency
-	 */
 	public function setCurrency(string $currency) : void
 	{
 		$this->currency = $currency;
@@ -169,9 +165,6 @@ class Payment
 		$this->returnUrl = $returnUrl;
 	}
 
-	/**
-	 * @param string|null $backToEshopUrl
-	 */
 	public function setBackToEshopUrl(string $backToEshopUrl = NULL) : void
 	{
 		$this->backToEshopUrl = $backToEshopUrl;
@@ -203,9 +196,9 @@ class Payment
 	 *
 	 * @return float
 	 */
-	public function getValue() : float
+	public function getValue() : ?float
 	{
-		return doubleval($this->value);
+		return $this->value;
 	}
 
 	/**
@@ -225,7 +218,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getDescription() : string
+	public function getDescription() : ?string
 	{
 		return $this->description;
 	}
@@ -236,7 +229,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getMerchantData() : string
+	public function getMerchantData() : ?string
 	{
 		return $this->merchantData;
 	}
@@ -247,7 +240,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	public function getReturnUrl() : string
+	public function getReturnUrl() : ?string
 	{
 		return $this->returnUrl;
 	}
@@ -266,16 +259,11 @@ class Payment
 	 *
 	 * @return int
 	 */
-	public function getMethodId() : int
+	public function getMethodId() : ?int
 	{
 		return $this->methodId;
 	}
 
-	/**
-	 * Set customer data.
-	 *
-	 * @param string $data
-	 */
 	public function setCustomerData(string $data) : void
 	{
 		$this->customerData = $data;
@@ -285,22 +273,16 @@ class Payment
 	 * @deprecated
 	 * @return string previously set customer data
 	 */
-	public function getCustomerData() : string
+	public function getCustomerData() : ?string
 	{
 		return $this->customerData;
 	}
 
-	/**
-	 * @param null|string $customerEmail
-	 */
 	public function setCustomerEmail(?string $customerEmail)
 	{
 		$this->customerEmail = $customerEmail;
 	}
 
-	/**
-	 * @return null|string
-	 */
 	public function getCustomerEmail() : ?string
 	{
 		return $this->customerEmail;
@@ -310,7 +292,7 @@ class Payment
 	 * @return bool If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *                 operation.
 	 */
-	public function getDeposit() : bool
+	public function getDeposit() : ?bool
 	{
 		return $this->deposit;
 	}
@@ -330,7 +312,7 @@ class Payment
 	 *
 	 * @return bool
 	 */
-	public function getIsRecurring() : bool
+	public function getIsRecurring() : ?bool
 	{
 		return $this->isRecurring;
 	}
@@ -350,7 +332,7 @@ class Payment
 	 *
 	 * @return string
 	 */
-	function getMerchantSpecificSymbol() : string
+	function getMerchantSpecificSymbol() : ?string
 	{
 		return $this->merchantSpecificSymbol;
 	}
@@ -358,7 +340,7 @@ class Payment
 	/**
 	 * Numerical specific symbol (used only if payment method supports it).
 	 *
-	 * @param string
+	 * @param string $merchantSpecificSymbol
 	 */
 	function setMerchantSpecificSymbol(string $merchantSpecificSymbol) : void
 	{

@@ -42,7 +42,7 @@ class MerchantAccountMethod extends DataApiObject
 		$this->name = $name;
 	}
 
-	public function getActive() : bool
+	public function getActive() : ?bool
 	{
 		return $this->active;
 	}

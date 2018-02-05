@@ -9,11 +9,11 @@ namespace Tp;
 class ReturnedPayment extends Payment
 {
 	/**
-	 * @var int merchantId from request
+	 * @var int|null merchantId from request
 	 */
 	protected $requestMerchantId = NULL;
 	/**
-	 * @var int accountId from request
+	 * @var int|null accountId from request
 	 */
 	protected $requestAccountId = NULL;
 
@@ -60,7 +60,7 @@ class ReturnedPayment extends Payment
 	protected $isConfirm;
 
 	/**
-	 * @var string specific symbol from bank transaction. Used only for permanent payments.
+	 * @var string|null specific symbol from bank transaction. Used only for permanent payments.
 	 */
 	protected $specificSymbol = NULL;
 
@@ -68,7 +68,7 @@ class ReturnedPayment extends Payment
 	 * Number of customer's account in full format including bank code.
 	 * Is set only if merchant has turned on this functionality and account number is available for used payment method.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $customerAccountNumber = NULL;
 
@@ -77,7 +77,7 @@ class ReturnedPayment extends Payment
 	 * which he set for his account in internet banking of his bank.
 	 * Is filled only for some payment methods.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	protected $customerAccountName = NULL;
 
@@ -110,6 +110,20 @@ class ReturnedPayment extends Payment
 	 * API. Used only for card payments.
 	 */
 	public const STATUS_CARD_DEPOSIT = 9;
+
+	protected static $BOOL_ARGS = [
+		'isOffline', 'needConfirm', 'isConfirm',
+		'deposit', 'isRecurring',
+	];
+
+	protected static $INT_ARGS = [
+		'requestMerchantId', 'requestAccountId', 'status',
+		'paymentId', 'methodId',
+	];
+
+	protected static $FLOAT_ARGS = [
+		'value',
+	];
 
 	/**
 	 * @var array required arguments of incoming request.
@@ -153,11 +167,12 @@ class ReturnedPayment extends Payment
 		}
 
 		if ( !empty($args['merchantId'])) {
-			$this->requestMerchantId = $args['merchantId'];
+			$this->requestMerchantId = intval($args['merchantId']);
 		}
 		if ( !empty($args['accountId'])) {
-			$this->requestAccountId = $args['accountId'];
+			$this->requestAccountId = intval($args['accountId']);
 		}
+
 		foreach (self::$REQUIRED_ARGS as $arg) {
 			if ( !isset($args[$arg])) {
 				throw new MissingParameterException($arg);
@@ -172,6 +187,24 @@ class ReturnedPayment extends Payment
 			}
 			else {
 				$this->{$arg} = $args[$arg];
+			}
+		}
+
+		foreach (self::$BOOL_ARGS as $key) {
+			if ( !is_null($this->{$key})) {
+				$this->{$key} = $this->{$key} === '1';
+			}
+		}
+
+		foreach (self::$INT_ARGS as $key) {
+			if ( !is_null($this->{$key})) {
+				$this->{$key} = intval($this->{$key});
+			}
+		}
+
+		foreach (self::$FLOAT_ARGS as $key) {
+			if ( !is_null($this->{$key})) {
+				$this->{$key} = doubleval($this->{$key});
 			}
 		}
 
@@ -220,14 +253,14 @@ class ReturnedPayment extends Payment
 		}
 	}
 
-	public function getRequestMerchantId() : int
+	public function getRequestMerchantId() : ?int
 	{
-		return intval($this->requestMerchantId);
+		return $this->requestMerchantId;
 	}
 
-	public function getRequestAccountId() : int
+	public function getRequestAccountId() : ?int
 	{
-		return intval($this->requestAccountId);
+		return $this->requestAccountId;
 	}
 
 	/**
@@ -244,7 +277,7 @@ class ReturnedPayment extends Payment
 			return 'CZK';
 		}
 		else {
-			return parent::getCurrency();
+			return $this->currency;
 		}
 	}
 
@@ -269,7 +302,7 @@ class ReturnedPayment extends Payment
 	 */
 	function getStatus() : int
 	{
-		return intval($this->status);
+		return $this->status;
 	}
 
 	/**
@@ -277,7 +310,7 @@ class ReturnedPayment extends Payment
 	 */
 	function getPaymentId() : int
 	{
-		return intval($this->paymentId);
+		return $this->paymentId;
 	}
 
 	/**
@@ -285,7 +318,7 @@ class ReturnedPayment extends Payment
 	 */
 	function getIpRating() : int
 	{
-		return intval($this->ipRating);
+		return $this->ipRating;
 	}
 
 	/**
@@ -310,7 +343,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getNeedConfirm() : bool
 	{
-		return $this->needConfirm !== '0';
+		return $this->needConfirm;
 	}
 
 	/**
@@ -319,7 +352,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getIsConfirm() : ?bool
 	{
-		return is_null($this->isConfirm) ? NULL : $this->isConfirm !== '0';
+		return $this->isConfirm;
 	}
 
 	/**
@@ -335,7 +368,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getIsOffline() : bool
 	{
-		return $this->isOffline !== '0';
+		return $this->isOffline;
 	}
 
 	/**

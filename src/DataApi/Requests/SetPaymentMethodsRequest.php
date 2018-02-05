@@ -15,11 +15,11 @@ class SetPaymentMethodsRequest extends Request
 	 */
 	protected $type = self::TYPE_WHITELIST;
 	/**
-	 * @var int[]|null
+	 * @var int[]
 	 */
-	protected $paymentMethods = NULL;
+	protected $paymentMethods = [];
 
-	function getType(): string
+	function getType() : string
 	{
 		return $this->type;
 	}
@@ -45,11 +45,10 @@ class SetPaymentMethodsRequest extends Request
 	 *
 	 * @param int[] $paymentMethods id's of payment methods
 	 */
-	function setPaymentMethods(array $paymentMethods = NULL) : void
+	function setPaymentMethods(array $paymentMethods) : void
 	{
-		if ($paymentMethods) {
-			$this->paymentMethods = ValueFormatter::formatList('int', $paymentMethods);
-		}
+		$this->paymentMethods = ValueFormatter::formatList('int', $paymentMethods);
+
 	}
 
 	protected function configArray() : array

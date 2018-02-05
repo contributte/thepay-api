@@ -41,6 +41,7 @@ class DataApi
 			__FUNCTION__, $config, $data
 		);
 
+		/** @var GetPaymentMethodsResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;
@@ -61,6 +62,8 @@ class DataApi
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
 		);
+
+		/** @var GetPaymentResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;
@@ -81,6 +84,8 @@ class DataApi
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
 		);
+
+		/** @var GetPaymentInstructionsResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;
@@ -101,6 +106,8 @@ class DataApi
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
 		);
+
+		/** @var GetPaymentStateResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;
@@ -129,6 +136,8 @@ class DataApi
 		$request = RequestFactory::getRequest(
 			__FUNCTION__, $config, $data
 		);
+
+		/** @var GetPaymentsResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;
@@ -136,7 +145,7 @@ class DataApi
 
 	/**
 	 * @param MerchantConfig $config
-	 * @param                $type
+	 * @param mixed          $type
 	 * @param array          $paymentMethods
 	 *
 	 * @return SetPaymentMethodsResponse
@@ -156,6 +165,7 @@ class DataApi
 			__FUNCTION__, $config, $data
 		);
 
+		/** @var SetPaymentMethodsResponse $response */
 		$response = self::call(__FUNCTION__, $config, $request);
 
 		return $response;

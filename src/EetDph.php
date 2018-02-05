@@ -9,55 +9,55 @@ namespace Tp;
 class EetDph
 {
 	/**
-	 * @var float Celková částka plnění osvobozených od DPH, ostatních plnění
+	 * @var float|null Celková částka plnění osvobozených od DPH, ostatních plnění
 	 */
 	protected $eetZaklNepodlDph = NULL;
 	/**
-	 * @var float Celkový základ daně se základní sazbou DPH
+	 * @var float|null Celkový základ daně se základní sazbou DPH
 	 */
 	protected $eetZaklDan1 = NULL;
 	/**
-	 * @var float Celková DPH se základní sazbou
+	 * @var float|null Celková DPH se základní sazbou
 	 */
 	protected $eetDan1 = NULL;
 	/**
-	 * @var float Celkový základ daně s první sníženou sazbou DPH
+	 * @var float|null Celkový základ daně s první sníženou sazbou DPH
 	 */
 	protected $eetZaklDan2 = NULL;
 	/**
-	 * @var float Celková DPH s první sníženou sazbou
+	 * @var float|null Celková DPH s první sníženou sazbou
 	 */
 	protected $eetDan2 = NULL;
 	/**
-	 * @var float Celkový základ daně s druhou sníženou sazbou DPH
+	 * @var float|null Celkový základ daně s druhou sníženou sazbou DPH
 	 */
 	protected $eetZaklDan3 = NULL;
 	/**
-	 * @var float Celková DPH s druhou sníženou sazbou
+	 * @var float|null Celková DPH s druhou sníženou sazbou
 	 */
 	protected $eetDan3 = NULL;
 	/**
-	 * @var float Celková částka v režimu DPH pro cestovní službu
+	 * @var float|null Celková částka v režimu DPH pro cestovní službu
 	 */
 	protected $eetCestSluz = NULL;
 	/**
-	 * @var float Celková částka v režimu DPH pro prodej použitého zboží se základní sazbou
+	 * @var float|null Celková částka v režimu DPH pro prodej použitého zboží se základní sazbou
 	 */
 	protected $eetPouzitZboz1 = NULL;
 	/**
-	 * @var float Celková částka v režimu DPH pro prodej použitého zboží s první sníženou sazbou
+	 * @var float|null Celková částka v režimu DPH pro prodej použitého zboží s první sníženou sazbou
 	 */
 	protected $eetPouzitZboz2 = NULL;
 	/**
-	 * @var float Celková částka v režimu DPH pro prodej použitého zboží s druhou sníženou sazbou
+	 * @var float|null Celková částka v režimu DPH pro prodej použitého zboží s druhou sníženou sazbou
 	 */
 	protected $eetPouzitZboz3 = NULL;
 	/**
-	 * @var float Celková částka plateb určená k následnému čerpání nebo zúčtování
+	 * @var float|null Celková částka plateb určená k následnému čerpání nebo zúčtování
 	 */
 	protected $eetUrcenoCerpZuct = NULL;
 	/**
-	 * @var float Celková částka plateb, které jsou následným čerpáním nebo zúčtováním platby
+	 * @var float|null Celková částka plateb, které jsou následným čerpáním nebo zúčtováním platby
 	 */
 	protected $eetCerpZuct = NULL;
 

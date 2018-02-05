@@ -233,7 +233,7 @@ class RadioMerchant
 		Payment $payment,
 		callable $redirectFunc = NULL,
 		bool $dieAfterRedirect = FALSE,
-		bool $forcedValue = NULL
+		int $forcedValue = NULL
 	) : bool {
 		if (( !empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
 			if (headers_sent()) {
@@ -253,7 +253,7 @@ class RadioMerchant
 				ob_start();
 			}
 
-			$payment->setMethodId((int)(isset($_REQUEST['tp_radio_value']) ? $_REQUEST['tp_radio_value'] : $forcedValue));
+			$payment->setMethodId((isset($_REQUEST['tp_radio_value']) ? intval($_REQUEST['tp_radio_value']) : $forcedValue));
 			$queryArgs = $payment->getArgs();
 			$queryArgs['signature'] = $payment->getSignature();
 			$url = $this->config->gateUrl . '?' . http_build_query($queryArgs);

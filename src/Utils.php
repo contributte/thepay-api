@@ -31,19 +31,21 @@ class Utils
 	}
 
 	/**
-	 * @param stdClass|array $value
+	 * @param array $value
 	 *
 	 * @return array
 	 */
-	public static function toArrayRecursive($value) : array
+	public static function toArrayRecursive(array $value) : array
 	{
 		$array = [];
 		foreach ($value as $k => $v) {
 			$item =& $array[$k];
 
-			$isArray = is_array($v);
-			if ($isArray || $v instanceof stdClass) {
-				$item = static::toArrayRecursive($v);
+			if (
+				is_array($v)
+				|| $v instanceof stdClass
+			) {
+				$item = static::toArrayRecursive((array)$v);
 			}
 			else {
 				$item = $v;
