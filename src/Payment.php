@@ -443,14 +443,14 @@ class Payment
 	{
 		$input = $this->getArgs();
 
-		$str = '';
+		$items = [];
 		foreach ($input as $key => $val) {
-			$str .= $key . '=' . $val . '&';
+			$items[] = "{$key}={$val}";
 		}
 
-		$str .= 'password=' . $this->getMerchantConfig()->password;
+		$items[] = 'password=' . $this->getMerchantConfig()->password;
 
-		return self::hashFunction($str);
+		return self::hashFunction(implode('&', $items));
 	}
 
 	/**

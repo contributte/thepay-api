@@ -222,7 +222,8 @@ class ReturnedPayment extends Payment
 	function verifySignature(string $signature = NULL) : bool
 	{
 		// check merchantId and accountId from request
-		if ($this->getRequestMerchantId() !== $this->getMerchantConfig()->merchantId
+		if (
+			$this->getRequestMerchantId() !== $this->getMerchantConfig()->merchantId
 			|| $this->getRequestAccountId() !== $this->getMerchantConfig()->accountId
 		) {
 			throw new InvalidSignatureException;
@@ -237,15 +238,25 @@ class ReturnedPayment extends Payment
 		$out = [];
 		$out[] = 'merchantId=' . $this->getRequestMerchantId();
 		$out[] = 'accountId=' . $this->getRequestAccountId();
-		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $arg) {
-			if ( !is_null($this->{$arg})) {
-				$out[] = $arg . '=' . $this->{$arg};
+		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $property) {
+			if ( !is_null($this->{$property})) {
+				$value = $this->{$property};
+
+				if (in_array($property, self::$FLOAT_ARGS, TRUE)) {
+					$value = number_format($value, 2, '.', '');
+				}
+				else if (in_array($property, self::$BOOL_ARGS, TRUE)) {
+					$value = $value ? '1' : '0';
+				}
+
+				$out[] = "{$property}={$value}";
 			}
 		}
 		$out[] = 'password=' . $this->getMerchantConfig()->password;
 
 		$sig = $this->hashFunction(implode('&', $out));
-		if ($sig == $signature) {
+
+		if ($sig === $signature) {
 			return TRUE;
 		}
 		else {
