@@ -189,6 +189,7 @@ class DataApi
 			$options = ['features' => SOAP_SINGLE_ELEMENT_ARRAYS];
 			$client = new SoapClient($config->dataWebServicesWsdl, $options);
 			$signed = $request->toSignedSoapRequestArray();
+
 			$rawResponse = $client->{$operation}($signed);
 		}
 		catch (SoapFault $e) {

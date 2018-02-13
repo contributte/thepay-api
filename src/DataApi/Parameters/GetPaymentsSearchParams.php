@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
@@ -36,22 +37,22 @@ class GetPaymentsSearchParams extends DataApiObject
 	protected $valueTo;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	protected $createdOnFrom;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	protected $createdOnTo;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	protected $finishedOnFrom;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	protected $finishedOnTo;
 
@@ -154,42 +155,42 @@ class GetPaymentsSearchParams extends DataApiObject
 		$this->valueTo = $valueTo;
 	}
 
-	public function getCreatedOnFrom() : ?DateTime
+	public function getCreatedOnFrom() : ?DateTimeImmutable
 	{
 		return $this->createdOnFrom;
 	}
 
-	public function setCreatedOnFrom(DateTime $createdOnFrom = NULL) : void
+	public function setCreatedOnFrom(DateTimeImmutable $createdOnFrom = NULL) : void
 	{
 		$this->createdOnFrom = $createdOnFrom;
 	}
 
-	public function getCreatedOnTo() : ?DateTime
+	public function getCreatedOnTo() : ?DateTimeImmutable
 	{
 		return $this->createdOnTo;
 	}
 
-	public function setCreatedOnTo(DateTime $createdOnTo = NULL) : void
+	public function setCreatedOnTo(DateTimeImmutable $createdOnTo = NULL) : void
 	{
 		$this->createdOnTo = $createdOnTo;
 	}
 
-	public function getFinishedOnFrom() : ?DateTime
+	public function getFinishedOnFrom() : ?DateTimeImmutable
 	{
 		return $this->finishedOnFrom;
 	}
 
-	public function setFinishedOnFrom(DateTime $finishedOnFrom = NULL) : void
+	public function setFinishedOnFrom(DateTimeImmutable $finishedOnFrom = NULL) : void
 	{
 		$this->finishedOnFrom = $finishedOnFrom;
 	}
 
-	public function getFinishedOnTo() : ?DateTime
+	public function getFinishedOnTo() : ?DateTimeImmutable
 	{
 		return $this->finishedOnTo;
 	}
 
-	public function setFinishedOnTo(\DateTime $finishedOnTo = NULL) : void
+	public function setFinishedOnTo(\DateTimeImmutable $finishedOnTo = NULL) : void
 	{
 		$this->finishedOnTo = $finishedOnTo;
 	}

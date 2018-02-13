@@ -31,4 +31,8 @@ class SoapFlattener extends ProcessorWithPaths
 		return $processed;
 	}
 
+	protected function convertValue($value, array $itemPath)
+	{
+		return $value;
+	}
 }

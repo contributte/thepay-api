@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Tp\DataApi;
 
-use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Tp\InvalidArgumentException;
 
 class ValueFormatter
@@ -102,11 +103,11 @@ class ValueFormatter
 	}
 
 	/**
-	 * @param DateTime|string|null $value
+	 * @param DateTimeInterface|string|null $value
 	 *
-	 * @return DateTime|null
+	 * @return DateTimeInterface|null
 	 */
-	public static function formatDateTime($value) : ?DateTime
+	public static function formatDateTime($value) : ?DateTimeInterface
 	{
 		if (is_null($value)) {
 			return NULL;
@@ -115,11 +116,11 @@ class ValueFormatter
 			if ($value === '0000-00-00 00:00:00') {
 				return NULL;
 			}
-			else if ($value instanceof DateTime) {
+			else if ($value instanceof DateTimeInterface) {
 				return $value;
 			}
 			else {
-				return new DateTime($value);
+				return new DateTimeImmutable($value);
 			}
 		}
 	}

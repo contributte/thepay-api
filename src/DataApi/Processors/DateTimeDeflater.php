@@ -3,29 +3,22 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
-use DateTime;
+use DateTimeInterface;
 
 class DateTimeDeflater extends ProcessorWithPaths
 {
-	protected function processItem($value, array $currentPath) : array
+	protected function convertValue($value, array $itemPath)
 	{
-		$isNull = is_null($value);
-		if ($isNull) {
-			$processed = NULL;
-		}
-		else {
-			$onPath = $this->onPath($currentPath);
-			if ($onPath) {
-				/** @var DateTime $value */
-				$processed = $value->format('c');
-			}
-			else {
-				$processed = parent::processItem(
-					$value, $currentPath
-				);
-			}
+		$onPath = $this->onPath($itemPath);
+
+		if (
+			!is_null($value)
+			&& $onPath
+			&& $value instanceof DateTimeInterface
+		) {
+			return $value->format(DateTimeInterface::ISO8601);
 		}
 
-		return $processed;
+		return $value;
 	}
 }

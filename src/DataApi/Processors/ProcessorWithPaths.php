@@ -43,5 +43,4 @@ abstract class ProcessorWithPaths extends Processor
 	{
 		return in_array($itemPath, $this->paths, TRUE);
 	}
-
 }

@@ -30,7 +30,7 @@ abstract class Processor
 			$itemPath = array_merge($currentPath, [$key]);
 			$processed[$key] = is_array($item)
 				? $this->processItem($item, $itemPath)
-				: $item;
+				: $this->convertValue($item, $itemPath);
 		}
 
 		return $processed;
@@ -68,9 +68,11 @@ abstract class Processor
 			// Numeric list keys are not appended to the path.
 			$processed[$key] = is_array($value)
 				? $this->processItem($value, $currentPath)
-				: $value;
+				: $this->convertValue($value, $currentPath);
 		}
 
 		return $processed;
 	}
+
+	abstract protected function convertValue($value, array $itemPath);
 }

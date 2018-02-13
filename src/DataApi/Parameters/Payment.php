@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Parameters;
 
-use DateTime;
+use DateTimeImmutable;
 use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
@@ -26,17 +26,17 @@ class Payment extends DataApiObject
 	public $state;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	public $createdOn;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	public $finishedOn;
 
 	/**
-	 * @var DateTime|null
+	 * @var DateTimeImmutable|null
 	 */
 	public $canceledOn;
 
@@ -193,32 +193,32 @@ class Payment extends DataApiObject
 		$this->state = $state;
 	}
 
-	public function getCreatedOn() : ?DateTime
+	public function getCreatedOn() : ?DateTimeImmutable
 	{
 		return $this->createdOn;
 	}
 
-	public function setCreatedOn(DateTime $createdOn = NULL) : void
+	public function setCreatedOn(DateTimeImmutable $createdOn = NULL) : void
 	{
 		$this->createdOn = $createdOn;
 	}
 
-	public function getFinishedOn() : ?DateTime
+	public function getFinishedOn() : ?DateTimeImmutable
 	{
 		return $this->finishedOn;
 	}
 
-	public function setFinishedOn(DateTime $finishedOn = NULL) : void
+	public function setFinishedOn(DateTimeImmutable $finishedOn = NULL) : void
 	{
 		$this->finishedOn = $finishedOn;
 	}
 
-	public function getCanceledOn() : ?DateTime
+	public function getCanceledOn() : ?DateTimeImmutable
 	{
 		return $this->canceledOn;
 	}
 
-	public function setCanceledOn(DateTime $canceledOn = NULL) : void
+	public function setCanceledOn(DateTimeImmutable $canceledOn = NULL) : void
 	{
 		$this->canceledOn = $canceledOn;
 	}

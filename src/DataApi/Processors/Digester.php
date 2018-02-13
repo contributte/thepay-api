@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
+use DateTimeInterface;
 use Tp\Utils;
 
 class Digester
@@ -42,6 +43,10 @@ class Digester
 			if ($value === '') {
 				// Empty values are not part of the digest. Not even its key.
 				continue;
+			}
+
+			if ($value instanceof DateTimeInterface) {
+				$value = $value->format(DateTimeInterface::ISO8601);
 			}
 
 			$stringParts[] = $key . '=' . $value;
