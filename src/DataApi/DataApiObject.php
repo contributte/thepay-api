@@ -155,6 +155,29 @@ abstract class DataApiObject implements ArrayAccess
 	public function offsetSet($offset, $value) : void
 	{
 		$setterName = 'set' . ucfirst($offset);
+
+		if ( !is_null($value) && is_string($value)) {
+			$reflectionMethod = new \ReflectionMethod($this, $setterName);
+			$parameterType = $reflectionMethod->getParameters()[0]->getType()->getName();
+
+			switch ($parameterType) {
+				case 'int':
+					$value = intval($value);
+
+					break;
+
+				case 'float':
+					$value = doubleval($value);
+
+					break;
+
+				case 'bool':
+					$value = $value === '1';
+
+					break;
+			}
+		}
+
 		$this->{$setterName}($value);
 	}
 

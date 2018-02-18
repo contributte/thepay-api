@@ -12,7 +12,7 @@ class Digester
 	{
 		$instance = new static;
 		// Start with an empty path [].
-		$processed = $instance->processHash($input, []);
+		$processed = $instance->processHash($input);
 
 		return $processed;
 	}
@@ -22,25 +22,26 @@ class Digester
 	 * consisting of &-concatenated “key=value” parts. Nested hashes are
 	 * digested without a password.
 	 *
-	 * @param array    $data
-	 * @param string[] $currentPath
+	 * @param array $data
 	 *
 	 * @return string
 	 */
-	protected function processHash(array $data, array $currentPath) : string
+	protected function processHash(array $data) : string
 	{
 		$processed = [];
 		foreach ($data as $key => $item) {
-			// Every level deeper appends the currenty key to the path.
-			$itemPath = array_merge($currentPath, [$key]);
+
 			$processed[$key] = is_array($item)
-				? $this->processItem($item, $itemPath)
-				: $item;
+				? $this->processItem($item)
+				: $this->convertValue($item);
 		}
 
 		$stringParts = [];
 		foreach ($processed as $key => $value) {
-			if ($value === '') {
+			if (
+				is_null($value)
+				|| $value === ''
+			) {
 				// Empty values are not part of the digest. Not even its key.
 				continue;
 			}
@@ -49,7 +50,7 @@ class Digester
 				$value = $value->format(DateTimeInterface::ISO8601);
 			}
 
-			$stringParts[] = $key . '=' . $value;
+			$stringParts[] = "{$key}={$value}";
 		}
 
 		$string = implode('&', $stringParts);
@@ -61,19 +62,18 @@ class Digester
 	 * Lists are |-concatenated digested values: Booleans converted to integers,
 	 * hashes digested, strings left as they are.
 	 *
-	 * @param array    $list
-	 * @param string[] $currentPath
+	 * @param array $list
 	 *
 	 * @return string
 	 */
-	protected function processList(array $list, array $currentPath) : string
+	protected function processList(array $list) : string
 	{
 		$processedArray = [];
 		foreach ($list as $key => $value) {
 			// Numeric list keys are not appended to the path.
 			$processedArray[$key] = is_array($value)
-				? $this->processItem($value, $currentPath)
-				: $value;
+				? $this->processItem($value)
+				: $this->convertValue($value);
 		}
 
 		$processedString = implode('|', $processedArray);
@@ -85,19 +85,31 @@ class Digester
 	 * Hashes, lists and booleans are treated specially. Other values are simply
 	 * converted to strings, strings are left untouched.
 	 *
-	 * @param mixed    $value
-	 * @param string[] $currentPath
+	 * @param mixed $value
 	 *
 	 * @return string
 	 */
-	protected function processItem($value, array $currentPath) : string
+	protected function processItem($value) : string
 	{
 		if (Utils::isList($value)) {
-			return $this->processList($value, $currentPath);
+			return $this->processList($value);
 		}
 		else {
-			return $this->processHash($value, $currentPath);
+			return $this->processHash($value);
 		}
 	}
 
+	protected function convertValue($value) : string
+	{
+		if (is_bool($value)) {
+			if ($value) {
+				return '1';
+			}
+			else {
+				return '0';
+			}
+		}
+
+		return strval($value);
+	}
 }

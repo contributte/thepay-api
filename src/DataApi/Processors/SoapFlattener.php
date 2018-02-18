@@ -12,7 +12,7 @@ class SoapFlattener extends ProcessorWithPaths
 		// is on the list of list paths, this one item is skipped and the list
 		// is processed directly.
 		$count = count($value);
-		if ($count == 1) {
+		if ($count === 1) {
 			list($key) = array_keys($value);
 			$itemPath = array_merge($currentPath, [$key]);
 			$onPath = $this->onPath($itemPath);
