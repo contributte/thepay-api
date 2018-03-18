@@ -18,7 +18,6 @@ abstract class DataApiObject implements ArrayAccess
 		foreach ($filtered as $key => $value) {
 			$this[$key] = $value;
 		}
-		unset($value);
 	}
 
 	public function toArray() : array
@@ -51,7 +50,6 @@ abstract class DataApiObject implements ArrayAccess
 		foreach ($sortedDataProperties as $property) {
 			$propertyNames[] = $property->getName();
 		}
-		unset($property);
 
 		return $propertyNames;
 	}
@@ -96,7 +94,6 @@ abstract class DataApiObject implements ArrayAccess
 				$inherited[] = $property;
 			}
 		}
-		unset($property, $propertyClass, $propertyClassName);
 
 		return array_merge($inherited, $own);
 	}
