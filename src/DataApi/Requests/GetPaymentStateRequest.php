@@ -10,7 +10,7 @@ class GetPaymentStateRequest extends Request
 	 */
 	protected $paymentId;
 
-	public function getPaymentId():?int
+	public function getPaymentId() : ?int
 	{
 		return $this->paymentId;
 	}
