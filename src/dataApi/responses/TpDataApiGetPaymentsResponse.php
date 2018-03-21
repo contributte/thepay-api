@@ -39,7 +39,6 @@ class TpDataApiGetPaymentsResponse extends TpDataApiResponse {
 		foreach($response['payments'] as $payment) {
 			$payments[] = new TpDataApiPayment($payment);
 		}
-		unset($payment);
 		$instance->setPayments($payments);
 
 		$pagination = new TpDataApiPaginationResponse($response['pagination']);

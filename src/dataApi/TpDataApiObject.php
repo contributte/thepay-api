@@ -13,7 +13,6 @@ abstract class TpDataApiObject implements ArrayAccess {
 		foreach($filtered as $key => $value) {
 			$this[$key] = $value;
 		}
-		unset($value);
 	}
 
 	/**
@@ -46,7 +45,6 @@ abstract class TpDataApiObject implements ArrayAccess {
 		foreach($sortedDataProperties as $property) {
 			$propertyNames[] = $property->getName();
 		}
-		unset($property);
 
 		return $propertyNames;
 	}
@@ -84,7 +82,6 @@ abstract class TpDataApiObject implements ArrayAccess {
 				$inherited[] = $property;
 			}
 		}
-		unset($property, $propertyClass, $propertyClassName);
 
 		$combined = array_merge($inherited, $own);
 		return $combined;
@@ -104,7 +101,6 @@ abstract class TpDataApiObject implements ArrayAccess {
 				foreach($value as $k => $v) {
 					$demodelized[$k] = static::demodelizeRecursive($v);
 				}
-				unset($k, $v);
 			} else {
 				$demodelized = $value;
 			}

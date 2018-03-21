@@ -14,12 +14,10 @@ class TpDataApiSoapFlattener extends TpDataApiProcessorWithPaths {
 		// If the hash contains only one item and its key appended to the path
 		// is on the list of list paths, this one item is skipped and the list
 		// is processed directly.
-		$count = count($value);
-		if($count == 1) {
+		if(count($value) == 1) {
 			list($key) = array_keys($value);
 			$itemPath = array_merge($currentPath, array($key));
-			$onPath = $this->onPath($itemPath);
-			if($onPath) {
+			if($this->onPath($itemPath)) {
 				list($item) = array_values($value);
 				$processed = $this->processItem($item, $currentPath);
 			} else {

@@ -14,7 +14,13 @@ class TpPaymentReturnHelper {
 	protected static function getSignature($data) {
 		return md5(http_build_query(array_filter($data)));
 	}
-	
+	/**
+	 * @param TpMerchantConfig $config
+	 * @param integer $paymentId
+	 * @param string $reason
+	 * @return TpPaymentReturnResponse
+	 * @throws TpException
+	 */
 	public static function returnPayment(TpMerchantConfig $config, $paymentId, $reason = null){
 		$client = new SoapClient($config->webServicesWsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 		$signature = static::getSignature(array(

@@ -7,10 +7,21 @@ class TpPermanentPayment {
 	 * @var TpMerchantConfig
 	 */
 	protected $config;
-
+	/**
+	 * @var string
+	 */
 	protected $merchantData;
+	/**
+	 * @var string
+	 */
 	protected $description;
+	/**
+	 * @var string
+	 */
 	protected $returnUrl;
+	/**
+	 * @var string
+	 */
 	protected $signature;
 
 	function __construct(TpMerchantConfig $config, $merchantData, $description, $returnUrl) {

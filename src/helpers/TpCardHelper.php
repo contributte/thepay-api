@@ -4,6 +4,7 @@ require_once implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'TpUtils.php'));
 // …everything else can be loaded using TpUtils::requirePaths.
 TpUtils::requirePaths(array(
 	array('TpCardPaymentResponse.php'),
+	array('TpCardInfoResponse.php'),
 	array('exceptions', 'TpException.php')
 ));
 
@@ -11,10 +12,17 @@ TpUtils::requirePaths(array(
  * @author Michal Kandr
  */
 class TpCardHelper {
-	protected static function getSignature($data) {
+
+	protected static function getSignature(array $data) {
 		return md5(http_build_query(array_filter($data)));
 	}
 
+	/**
+	 * @param TpMerchantConfig $config
+	 * @param string $merchantData
+	 * @return TpCardPaymentResponse
+	 * @throws TpException
+	 */
 	public static function depositPayment(TpMerchantConfig $config, $merchantData){
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(array(
@@ -35,6 +43,13 @@ class TpCardHelper {
 		return new TpCardPaymentResponse($result);
 	}
 
+	/**
+	 *
+	 * @param TpMerchantConfig $config
+	 * @param string $merchantData
+	 * @return TpCardPaymentResponse
+	 * @throws TpException
+	 */
 	public static function stornoPayment(TpMerchantConfig $config, $merchantData){
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(array(
@@ -55,6 +70,15 @@ class TpCardHelper {
 		return new TpCardPaymentResponse($result);
 	}
 
+	/**
+	 *
+	 * @param TpMerchantConfig $config
+	 * @param string $merchantData
+	 * @param string $newMerchantData
+	 * @param float $value
+	 * @return TpCardPaymentResponse
+	 * @throws TpException
+	 */
 	public static function createNewRecurrentPayment(TpMerchantConfig $config, $merchantData, $newMerchantData, $value){
 		$client = new SoapClient($config->webServicesWsdl);
 		$signature = static::getSignature(array(
@@ -80,4 +104,31 @@ class TpCardHelper {
 		return new TpCardPaymentResponse($result);
 	}
 
+	/**
+	 *
+	 * @param TpMerchantConfig $config
+	 * @param integer $paymentId
+	 * @return TpCardInfoResponse
+	 * @throws TpException
+	 */
+	public static function getCardInfo(TpMerchantConfig $config, $paymentId) {
+		$client = new SoapClient($config->webServicesWsdl);
+		$signature = static::getSignature(array(
+			'merchantId' => $config->merchantId,
+			'accountId' => $config->accountId,
+			'paymentId' => $paymentId,
+			'password' => $config->password,
+		));
+
+		$result = $client->getCardInfoRequest(array(
+			'merchantId' => $config->merchantId,
+			'accountId' => $config->accountId,
+			'paymentId' => $paymentId,
+			'signature' => $signature
+		));
+		if (!$result) {
+			throw new TpException();
+		}
+		return new TpCardInfoResponse($result);
+	}
 }

@@ -33,7 +33,6 @@ class TpDataApiGetPaymentMethodsResponse extends TpDataApiResponse {
 		foreach($response['methods'] as $method) {
 			$methods[] = new TpDataApiMerchantAccountMethod($method);
 		}
-		unset($method);
 		$instance->setMethods($methods);
 
 		return $instance;

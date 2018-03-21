@@ -13,12 +13,10 @@ class TpDataApiDateTimeInflater extends TpDataApiProcessorWithPaths {
 	 * @throws TpInvalidParameterException
 	 */
 	protected function processItem($value, array $currentPath) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			$processed = parent::processItem($value, $currentPath);
 		} else {
-			$onPath = $this->onPath($currentPath);
-			if($onPath) {
+			if($this->onPath($currentPath)) {
 				// Pozor, neprojde, pokud časové razítko obsahuje desetinnou část
 				// vteřin. Viz https://bugs.php.net/bug.php?id=51950.
 				$processed = DateTime::createFromFormat(DateTime::ISO8601, $value);

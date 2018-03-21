@@ -11,12 +11,10 @@ class TpDataApiDateTimeDeflater extends TpDataApiProcessorWithPaths {
 	 * @return mixed
 	 */
 	protected function processItem($value, array $currentPath) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			$processed = null;
 		} else {
-			$onPath = $this->onPath($currentPath);
-			if($onPath) {
+			if($this->onPath($currentPath)) {
 				/** @var DateTime $value */
 				$processed = $value->format('c');
 			} else {

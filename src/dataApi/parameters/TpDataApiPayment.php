@@ -9,127 +9,127 @@ class TpDataApiPayment extends TpDataApiObject {
 	/**
 	 * @var int|null
 	 */
-	public $id;
+	protected $id;
 
 	/**
 	 * @var int|null
 	 */
-	public $account;
+	protected $account;
 
 	/**
 	 * @var int|null
 	 */
-	public $state;
+	protected $state;
 
 	/**
 	 * @var DateTime|null
 	 */
-	public $createdOn;
+	protected $createdOn;
 
 	/**
 	 * @var DateTime|null
 	 */
-	public $finishedOn;
+	protected $finishedOn;
 
 	/**
 	 * @var DateTime|null
 	 */
-	public $canceledOn;
+	protected $canceledOn;
 
 	/**
 	 * @var int|null
 	 */
-	public $payOff;
+	protected $payOff;
 
 	/**
 	 * @var int|null
 	 */
-	public $payOffCancel;
+	protected $payOffCancel;
 
 	/**
 	 * @var float|null
 	 */
-	public $value;
+	protected $value;
 
 	/**
 	 * @var float|null
 	 */
-	public $receivedValue;
+	protected $receivedValue;
 
 	/**
 	 * @var int|null
 	 */
-	public $currency;
+	protected $currency;
 
 	/**
 	 * @var float|null
 	 */
-	public $fee;
+	protected $fee;
 
 	/**
 	 * @var string|null
 	 */
-	public $description;
+	protected $description;
 
 	/**
 	 * @var string|null
 	 */
-	public $merchantData;
+	protected $merchantData;
 
 	/**
 	 * @var int|null
 	 */
-	public $paymentMethod;
+	protected $paymentMethod;
 
 	/**
 	 * @var string|null
 	 */
-	public $specificSymbol;
+	protected $specificSymbol;
 
 	/**
 	 * @var string|null
 	 */
-	public $merchantSpecificSymbol;
+	protected $merchantSpecificSymbol;
 
 	/**
 	 * @var string|null
 	 */
-	public $accountNumber;
+	protected $accountNumber;
 
 	/**
 	 * @var string|null
 	 */
-	public $accountOwnerName;
+	protected $accountOwnerName;
 
 	/**
 	 * @var string|null
 	 */
-	public $returnUrl;
+	protected $returnUrl;
 
 	/**
 	 * @var int|null
 	 */
-	public $permanentPayment;
+	protected $permanentPayment;
 
 	/**
 	 * @var bool|null
 	 */
-	public $deposit;
+	protected $deposit;
 
 	/**
 	 * @var bool|null
 	 */
-	public $recurring;
+	protected $recurring;
 
 	/**
 	 * @var string|null
 	 */
-	public $ip;
+	protected $ip;
 
 	/**
 	 * @var string|null
 	 */
-	public $customerEmail;
+	protected $customerEmail;
 
 	/**
 	 * @var string|null

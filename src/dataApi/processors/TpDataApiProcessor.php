@@ -24,7 +24,6 @@ abstract class TpDataApiProcessor {
 			$itemPath = array_merge($currentPath, array($key));
 			$processed[$key] = $this->processItem($item, $itemPath);
 		}
-		unset($key, $item, $itemPath);
 		return $processed;
 	}
 
@@ -34,10 +33,8 @@ abstract class TpDataApiProcessor {
 	 * @return mixed
 	 */
 	protected function processItem($value, array $currentPath) {
-		$isArray = is_array($value);
-		if($isArray) {
-			$isList = TpUtils::isList($value);
-			if($isList) {
+		if(is_array($value)) {
+			if(TpUtils::isList($value)) {
 				$processed = $this->processList($value, $currentPath);
 			} else {
 				$processed = $this->processHash($value, $currentPath);
@@ -64,7 +61,6 @@ abstract class TpDataApiProcessor {
 			// Numeric list keys are not appended to the path.
 			$processed[$key] = $this->processItem($value, $currentPath);
 		}
-		unset($key, $value);
 		return $processed;
 	}
 

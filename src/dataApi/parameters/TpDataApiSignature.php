@@ -27,18 +27,15 @@ class TpDataApiSignature {
 	public static function compute(array $data, $password = null) {
 		unset($data['signature']);
 
-		$passwordIsNull = is_null($password);
-		if(!$passwordIsNull) {
+		if(!is_null($password)) {
 			$data['password'] = $password;
 		}
 
-		$dataPasswordKeyExists = array_key_exists('password', $data);
-		if(!$dataPasswordKeyExists) {
+		if(!array_key_exists('password', $data)) {
 			throw new TpMissingParameterException('password');
 		}
 
-		$dataPasswordIsNull = is_null($data['password']);
-		if($dataPasswordIsNull || $data['password'] === '') {
+		if(is_null($data['password']) || $data['password'] === '') {
 			throw new TpMissingParameterException('password');
 		}
 
@@ -59,8 +56,7 @@ class TpDataApiSignature {
 	 * @throws TpMissingParameterException
 	 */
 	public static function validate(array $data, $password, $signature = null) {
-		$signatureIsNull = is_null($signature);
-		if($signatureIsNull) {
+		if(is_null($signature)) {
 			$dataSignatureKeyExists = array_key_exists('signature', $data);
 			if(!$dataSignatureKeyExists || $dataSignatureKeyExists === '') {
 				throw new TpMissingParameterException('signature');

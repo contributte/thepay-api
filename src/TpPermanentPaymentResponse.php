@@ -8,9 +8,17 @@ TpUtils::requirePaths(array(
  * @author Michal Kandr
  */
 class TpPermanentPaymentResponse {
+	/**
+	 * @var boolean
+	 */
 	protected $status;
+	/**
+	 * @var string
+	 */
 	protected $errorDescription;
-	/** @var TpPermanentPaymentResponseMethod[] */
+	/**
+	 * @var TpPermanentPaymentResponseMethod[]
+	 */
 	protected $paymentMethods = array();
 
 	function __construct(stdClass $data) {
@@ -33,19 +41,26 @@ class TpPermanentPaymentResponse {
 					$value->vs
 				);
 			}
-			unset($value);
 		}
 	}
 
-
+	/**
+	 * @return boolean result of operation. True=OK, false = error
+	 */
 	public function getStatus() {
 		return $this->status;
 	}
 
+	/**
+	 * @return string description of error if $status=false
+	 */
 	public function getErrorDescription() {
 		return $this->errorDescription;
 	}
 
+	/**
+	 * @return TpPermanentPaymentResponseMethod[]
+	 */
 	public function getPaymentMethods() {
 		return $this->paymentMethods;
 	}

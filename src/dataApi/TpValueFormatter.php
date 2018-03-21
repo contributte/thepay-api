@@ -16,8 +16,7 @@ class TpValueFormatter {
 			return static::formatList(substr($type, 0, -2), $value);
 		}
 
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			$method = "format$type"; // Method names are case-insensitive.
@@ -29,8 +28,7 @@ class TpValueFormatter {
 				return $value;
 			}
 
-			$message = 'Unknown type ' . $type . '.';
-			throw new TpInvalidArgumentException($message);
+			throw new TpInvalidArgumentException('Unknown type ' . $type . '.');
 		}
 	}
 
@@ -39,8 +37,7 @@ class TpValueFormatter {
 	 * @return int
 	 */
 	public static function formatInt($value) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			return (int) $value;
@@ -52,8 +49,7 @@ class TpValueFormatter {
 	 * @return float
 	 */
 	public static function formatFloat($value) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			return (float) $value;
@@ -65,8 +61,7 @@ class TpValueFormatter {
 	 * @return bool
 	 */
 	public static function formatBool($value) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			return (bool) $value;
@@ -78,8 +73,7 @@ class TpValueFormatter {
 	 * @return string
 	 */
 	public static function formatString($value) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			return "$value";
@@ -91,8 +85,7 @@ class TpValueFormatter {
 	 * @return DateTime|null
 	 */
 	public static function formatDateTime($value) {
-		$isNull = is_null($value);
-		if($isNull) {
+		if(is_null($value)) {
 			return null;
 		} else {
 			if($value == "0000-00-00 00:00:00") {

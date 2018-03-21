@@ -17,7 +17,6 @@ class TpUtils {
 		foreach($presentKeys as $key) {
 			$filtered[$key] = $array[$key];
 		}
-		unset($key);
 
 		return $filtered;
 	}
@@ -69,7 +68,6 @@ class TpUtils {
 			$fullPathString = implode(DIRECTORY_SEPARATOR, $fullPathArray);
 			require_once $fullPathString;
 		}
-		unset($path, $fullPathArray, $fullPathString);
 	}
 
 }

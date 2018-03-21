@@ -24,7 +24,6 @@ class TpDataApiDigester extends TpDataApiProcessor {
 			}
 			$stringParts[] = $key . '=' . $value;
 		}
-		unset($key, $value);
 
 		$string = implode('&', $stringParts);
 		$digest = hash('sha256', $string);
@@ -56,8 +55,7 @@ class TpDataApiDigester extends TpDataApiProcessor {
 	 */
 	protected function processItem($value, array $currentPath) {
 		$processed = parent::processItem($value, $currentPath);
-		$isBool = is_bool($processed);
-		if($isBool) {
+		if(is_bool($processed)) {
 			// Hodnota pravda/nepravda se převede na číslo 0/1.
 			$processedInt = (int) $value;
 			$processedString = (string) $processedInt;
