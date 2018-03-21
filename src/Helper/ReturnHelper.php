@@ -29,6 +29,7 @@ class ReturnHelper
 				'password'   => $config->password,
 			]
 		);
+
 		$result = $client->returnPaymentRequest(
 			[
 				'merchantId' => $config->merchantId,
@@ -38,6 +39,7 @@ class ReturnHelper
 				'signature'  => $signature,
 			]
 		);
+
 		if ( !$result) {
 			throw new Exception;
 		}

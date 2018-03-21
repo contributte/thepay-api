@@ -21,7 +21,7 @@ class PaymentReturnResponse
 
 	function __construct(stdClass $data)
 	{
-		$this->status = $data->status;
+		$this->status = boolval($data->status);
 
 		if (property_exists($data, 'errorDescription')) {
 			$this->errorDescription = $data->errorDescription;

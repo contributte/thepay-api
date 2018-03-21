@@ -1,29 +1,36 @@
 <?php
 declare(strict_types=1);
 
-namespace Tp;
+namespace Tp\Card;
 
 use stdClass;
 
-class CardPaymentResponse
+class PaymentResponse
 {
+	/**
+	 * @var bool
+	 */
 	protected $status;
+	/**
+	 * @var string|null
+	 */
 	protected $errorDescription;
 
 	function __construct(stdClass $data)
 	{
-		$this->status = $data->status;
+		$this->status = boolval($data->status);
+
 		if (property_exists($data, 'errorDescription')) {
 			$this->errorDescription = $data->errorDescription;
 		}
 	}
 
-	public function getStatus()
+	public function getStatus() : bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription()
+	public function getErrorDescription() : ?string
 	{
 		return $this->errorDescription;
 	}

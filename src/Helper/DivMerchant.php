@@ -33,9 +33,6 @@ class DivMerchant extends Merchant
 	 */
 	protected $disablePopupCss = FALSE;
 
-	/**
-	 * @return string
-	 */
 	public function getSkin() : string
 	{
 		return $this->skin;
@@ -83,9 +80,6 @@ class DivMerchant extends Merchant
 		$this->disablePopupCss = FALSE;
 	}
 
-	/**
-	 * Return the HTML code for the div.
-	 */
 	function render() : string
 	{
 		$url = $this->payment->getMerchantConfig()->gateUrl;
@@ -97,27 +91,27 @@ class DivMerchant extends Merchant
 
 		$out = '';
 		if ( !$this->disableButtonCss) {
-			$skin = $this->skin === '' ? '' : "/$this->skin";
-			$href = "{$url}div/style$skin/div.css?v=" . time();
+			$skin = $this->skin === '' ? '' : "/{$this->skin}";
+			$href = "{$url}div/style{$skin}/div.css?v=" . time();
 			$href = Escaper::htmlEntityEncode($href);
-			$out .= "<link href=\"$href\" type=\"text/css\" rel=\"stylesheet\" />\n";
+			$out .= "<link href=\"{$href}\" type=\"text/css\" rel=\"stylesheet\" />\n";
 		}
 
 		$thepayGateUrl = $url . 'div/index.php?' . $this->buildQuery($queryArgs);
 		$thepayGateUrl = Escaper::jsonEncode($thepayGateUrl);
 		$disableThepayPopupCss = Escaper::jsonEncode($this->disablePopupCss);
 		$out .= "<script type=\"text/javascript\">";
-		$out .= "\tvar thepayGateUrl = $thepayGateUrl,\n";
-		$out .= "\t\tdisableThepayPopupCss = $disableThepayPopupCss;\n";
+		$out .= "\tvar thepayGateUrl = {$thepayGateUrl},\n";
+		$out .= "\t\tdisableThepayPopupCss = {$disableThepayPopupCss};\n";
 		$out .= "</script>\n";
 
 		$src = "{$url}div/js/jquery.js?v=" . time();
 		$src = Escaper::htmlEntityEncode($src);
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>\n";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>\n";
 
 		$src = "{$url}div/js/div.js?v=" . time();
 		$src = Escaper::htmlEntityEncode($src);
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>\n";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>\n";
 
 		$out .= "<div id=\"thepay-method-box\" style=\"border: 0;\"></div>\n";
 

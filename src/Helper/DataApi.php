@@ -24,14 +24,6 @@ use Tp\MerchantConfig;
 
 class DataApi
 {
-
-	/**
-	 * @param MerchantConfig $config
-	 * @param bool|null      $onlyActive
-	 *
-	 * @return GetPaymentMethodsResponse
-	 * @throws SoapException
-	 */
 	public static function getPaymentMethods(
 		MerchantConfig $config,
 		bool $onlyActive = NULL
@@ -47,13 +39,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param MerchantConfig $config
-	 * @param int            $paymentId
-	 *
-	 * @return GetPaymentResponse
-	 * @throws SoapException
-	 */
 	public static function getPayment(
 		MerchantConfig $config,
 		int $paymentId
@@ -69,13 +54,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param MerchantConfig $config
-	 * @param int            $paymentId
-	 *
-	 * @return GetPaymentInstructionsResponse
-	 * @throws SoapException
-	 */
 	public static function getPaymentInstructions(
 		MerchantConfig $config,
 		int $paymentId
@@ -91,13 +69,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param MerchantConfig $config
-	 * @param int            $paymentId
-	 *
-	 * @return GetPaymentStateResponse
-	 * @throws SoapException
-	 */
 	public static function getPaymentState(
 		MerchantConfig $config,
 		int $paymentId
@@ -113,15 +84,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param MerchantConfig          $config
-	 * @param GetPaymentsSearchParams $searchParams
-	 * @param PaginationRequest|null  $pagination
-	 * @param Ordering|null           $ordering
-	 *
-	 * @return GetPaymentsResponse
-	 * @throws SoapException
-	 */
 	public static function getPayments(
 		MerchantConfig $config,
 		GetPaymentsSearchParams $searchParams = NULL,
@@ -143,15 +105,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param MerchantConfig $config
-	 * @param mixed          $type
-	 * @param array          $paymentMethods
-	 *
-	 * @return SetPaymentMethodsResponse
-	 * @throws SoapException
-	 * @throws InvalidSignatureException
-	 */
 	public static function setPaymentMethods(
 		MerchantConfig $config,
 		$type,
@@ -171,15 +124,6 @@ class DataApi
 		return $response;
 	}
 
-	/**
-	 * @param string         $operation
-	 * @param MerchantConfig $config
-	 * @param Request        $request
-	 *
-	 * @return Response
-	 * @throws SoapException
-	 * @throws InvalidSignatureException
-	 */
 	protected static function call(
 		string $operation,
 		MerchantConfig $config,

@@ -5,7 +5,8 @@ namespace Tp\Helper;
 
 use SoapClient;
 use Tp\Exception;
-use Tp\CardPaymentResponse;
+use Tp\Card\InfoResponse;
+use Tp\Card\PaymentResponse;
 use Tp\MerchantConfig;
 
 /**
@@ -21,8 +22,10 @@ class Card
 	public static function depositPayment(
 		MerchantConfig $config,
 		$merchantData
-	) : CardPaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
+
 		$signature = static::getSignature(
 			[
 				'merchantId'   => $config->merchantId,
@@ -31,6 +34,7 @@ class Card
 				'password'     => $config->password,
 			]
 		);
+
 		$result = $client->cardDepositPaymentRequest(
 			[
 				'merchantId'   => $config->merchantId,
@@ -39,18 +43,21 @@ class Card
 				'signature'    => $signature,
 			]
 		);
-		if ( !$result) {
+
+		if (!$result) {
 			throw new Exception;
 		}
 
-		return new CardPaymentResponse($result);
+		return new PaymentResponse($result);
 	}
 
 	public static function stornoPayment(
 		MerchantConfig $config,
 		$merchantData
-	) : CardPaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
+
 		$signature = static::getSignature(
 			[
 				'merchantId'   => $config->merchantId,
@@ -59,6 +66,7 @@ class Card
 				'password'     => $config->password,
 			]
 		);
+
 		$result = $client->cardStornoPaymentRequest(
 			[
 				'merchantId'   => $config->merchantId,
@@ -67,11 +75,12 @@ class Card
 				'signature'    => $signature,
 			]
 		);
-		if ( !$result) {
+
+		if (!$result) {
 			throw new Exception;
 		}
 
-		return new CardPaymentResponse($result);
+		return new PaymentResponse($result);
 	}
 
 	public static function createNewRecurrentPayment(
@@ -79,8 +88,10 @@ class Card
 		$merchantData,
 		$newMerchantData,
 		$value
-	) : CardPaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
+
 		$signature = static::getSignature(
 			[
 				'merchantId'      => $config->merchantId,
@@ -102,11 +113,39 @@ class Card
 				'signature'       => $signature,
 			]
 		);
-		if ( !$result) {
+
+		if (!$result) {
 			throw new Exception;
 		}
 
-		return new CardPaymentResponse($result);
+		return new PaymentResponse($result);
 	}
 
+	public static function getCardInfo(
+		MerchantConfig $config,
+		int $paymentId
+	): InfoResponse
+	{
+		$client = new SoapClient($config->webServicesWsdl);
+
+		$signature = static::getSignature([
+			'merchantId' => $config->merchantId,
+			'accountId'  => $config->accountId,
+			'paymentId'  => $paymentId,
+			'password'   => $config->password,
+		]);
+
+		$result = $client->getCardInfoRequest([
+			'merchantId' => $config->merchantId,
+			'accountId'  => $config->accountId,
+			'paymentId'  => $paymentId,
+			'signature'  => $signature
+		]);
+
+		if (!$result) {
+			throw new Exception;
+		}
+
+		return new InfoResponse($result);
+	}
 }

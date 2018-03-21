@@ -179,24 +179,24 @@ class RadioMerchant
 		$queryArgs['signature'] = $this->createSignature($queryArgs);
 
 		$queryArgs = http_build_query($queryArgs);
-		$thepayGateUrl = "{$gateUrl}radiobuttons/index.php?$queryArgs";
+		$thepayGateUrl = "{$gateUrl}radiobuttons/index.php?{$queryArgs}";
 		$thepayGateUrl = Escaper::jsonEncode($thepayGateUrl);
 
 		$href = "{$gateUrl}radiobuttons/style/radiobuttons.css?v=" . time();
-		$out = "<link href=\"$href\" type=\"text/css\" rel=\"stylesheet\" />\n";
+		$out = "<link href=\"{$href}\" type=\"text/css\" rel=\"stylesheet\" />\n";
 		$out .= "<script type=\"text/javascript\">\n";
-		$out .= "\tvar thepayGateUrl = $thepayGateUrl;\n";
+		$out .= "\tvar thepayGateUrl = {$thepayGateUrl};\n";
 		if ($this->appendCode) {
 			$thepayAppendCode = Escaper::jsonEncode($this->appendCode);
-			$out .= "\tvar thepayAppendCode = $thepayAppendCode;\n";
+			$out .= "\tvar thepayAppendCode = {$thepayAppendCode};\n";
 		}
 		$out .= "</script>\n";
 
 		$src = "{$gateUrl}radiobuttons/js/jquery.js?v=" . time();
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>\n";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>\n";
 
 		$src = "{$gateUrl}radiobuttons/js/radiobuttons.js?v=" . time();
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>\n";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>\n";
 
 		$out .= "<div id=\"thepay-method-box\"></div>\n";
 
@@ -303,7 +303,7 @@ class RadioMerchant
 
 		$href = "{$this->config->gateUrl}radiobuttons/style/radiobuttons.css?v=" . time();
 		$href = Escaper::htmlEntityEncode($href);
-		$out = "<link href=\"$href\" type=\"text/css\" rel=\"stylesheet\" />\n";
+		$out = "<link href=\"{$href}\" type=\"text/css\" rel=\"stylesheet\" />\n";
 
 		$out .= "<script type=\"text/javascript\">\n";
 
@@ -312,20 +312,20 @@ class RadioMerchant
 		$queryArgs['signature'] = $payment->getSignature();
 		$thepayGateUrl = "{$this->config->gateUrl}?" . http_build_query($queryArgs);
 		$thepayGateUrl = Escaper::jsonEncode($thepayGateUrl);
-		$out .= "\tvar thepayGateUrl = $thepayGateUrl,\n";
+		$out .= "\tvar thepayGateUrl = {$thepayGateUrl},\n";
 
 		$thepayDisablePopupCss = Escaper::jsonEncode($this->disablePopupCss);
-		$out .= "\tthepayDisablePopupCss = $thepayDisablePopupCss;\n";
+		$out .= "\tthepayDisablePopupCss = {$thepayDisablePopupCss};\n";
 
 		$out .= "</script>\n";
 
 		$src = "{$this->config->gateUrl}radiobuttons/js/jquery.js?v=" . time();
 		$src = Escaper::htmlEntityEncode($src);
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>";
 
 		$src = "{$this->config->gateUrl}radiobuttons/js/radiobuttons.js?v=" . time();
 		$src = Escaper::htmlEntityEncode($src);
-		$out .= "<script type=\"text/javascript\" src=\"$src\" async=\"async\"></script>";
+		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>";
 
 		$out .= "<div id=\"thepay-method-result\"></div>";
 

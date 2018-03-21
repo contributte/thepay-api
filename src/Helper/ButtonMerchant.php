@@ -26,51 +26,42 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Sets the buttonStyle property.
 	 *
-	 * @param string $buttonStyle String specifying the button style. Can be empty
-	 *                            for default text button, or one of button styles specified in the
-	 *                            ThePay API documentation.
-	 * @param string $buttonText  Optional argument specifying the text that should
-	 *                            be displayed on the button.
+	 * @param string|null $buttonStyle String specifying the button style. Can be null
+	 *                                 for default text button, or one of button styles specified in the
+	 *                                 ThePay API documentation.
+	 * @param string      $buttonText  Optional argument specifying the text that should
+	 *                                 be displayed on the button.
 	 */
 	public function setButtonStyle(
-		string $buttonStyle,
+		?string $buttonStyle,
 		string $buttonText = NULL
 	) : void {
+		if (empty($buttonStyle)) {
+			$buttonStyle = NULL;
+		}
+
 		$this->buttonStyle = $buttonStyle;
+
 		if ( !is_null($buttonText)) {
 			$this->buttonText = $buttonText;
 		}
 	}
 
-	/**
-	 * Sets the buttonText property.
-	 */
 	public function setButtonText(string $buttonText) : void
 	{
 		$this->buttonText = $buttonText;
 	}
 
-	/**
-	 * Returns the buttonStyle property.
-	 */
-	public function getButtonStyle() : string
+	public function getButtonStyle() : ?string
 	{
 		return $this->buttonStyle;
 	}
 
-	/**
-	 * Returns the buttonText property.
-	 */
 	public function getButtonText() : string
 	{
 		return $this->buttonText;
 	}
 
-	/**
-	 * Button link target URL.
-	 *
-	 * @return string
-	 */
 	public function buildUrl() : string
 	{
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
@@ -88,20 +79,18 @@ class ButtonMerchant extends Merchant
 	public function render() : string
 	{
 		$targetUrl = Escaper::htmlEntityEncode(self::buildUrl());
-		switch ($this->buttonStyle) {
-			case "":
-				return "<a href=\"$targetUrl\">$this->buttonText</a>";
-				break;
-			default:
-				$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
-				$buttonStyle = rawurlencode($this->buttonStyle);
-				$src = Escaper::htmlEntityEncode(
-					$gateUrl . 'buttons/' . $buttonStyle . '.png'
-				);
-				$title = Escaper::htmlEntityEncode($this->buttonText);
 
-				return "<a href=\"" . $targetUrl . "\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
-				break;
+		if (is_null($this->buttonStyle)) {
+			return "<a href=\"{$targetUrl}\">{$this->buttonText}</a>";
+		}
+		else {
+			$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
+
+			$buttonStyle = rawurlencode($this->buttonStyle);
+			$src = Escaper::htmlEntityEncode($gateUrl . 'buttons/' . $buttonStyle . '.png');
+			$title = Escaper::htmlEntityEncode($this->buttonText);
+
+			return "<a href=\"{$targetUrl}\"><img src=\"{$src}\" alt=\"{$title}\" title=\"{$title}\" /></a>";
 		}
 	}
 }

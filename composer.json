@@ -27,7 +27,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"namespaces": "v3.4.x-dev"
+			"namespaces": "v3.5.x-dev"
 		}
 	}
 }

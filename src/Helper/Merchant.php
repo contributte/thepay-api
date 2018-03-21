@@ -51,12 +51,12 @@ abstract class Merchant
 		$out = array_merge(
 			$this->payment->getArgs(), // Arguments of the payment
 			$args, // Optional helper arguments
-			["signature" => $this->payment->getSignature()] // Signature
+			['signature' => $this->payment->getSignature()] // Signature
 		);
 
 		$str = [];
 		foreach ($out as $key => $val) {
-			$str[] = rawurlencode($key) . "=" . rawurlencode($val);
+			$str[] = rawurlencode($key) . '=' . rawurlencode($val);
 		}
 
 		return implode('&', $str);

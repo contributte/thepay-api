@@ -18,6 +18,7 @@ class PermanentPayment
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
+
 		$result = $client->createPermanentPaymentRequest(
 			[
 				'merchantId'   => $config->merchantId,
@@ -28,6 +29,7 @@ class PermanentPayment
 				'signature'    => $payment->getSignature(),
 			]
 		);
+
 		if ( !$result) {
 			throw new Tp\Exception;
 		}
@@ -43,6 +45,7 @@ class PermanentPayment
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
+
 		$result = $client->getPermanentPaymentRequest(
 			[
 				'merchantId'   => $config->merchantId,
@@ -51,6 +54,7 @@ class PermanentPayment
 				'signature'    => $payment->getSignatureLite(),
 			]
 		);
+
 		if ( !$result) {
 			throw new Tp\Exception;
 		}
