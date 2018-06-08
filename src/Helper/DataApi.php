@@ -10,33 +10,32 @@ use Tp\DataApi\Parameters\Ordering;
 use Tp\DataApi\Parameters\PaginationRequest;
 use Tp\DataApi\Requests\Request;
 use Tp\DataApi\Requests\RequestFactory;
-use Tp\DataApi\Responses\GetPaymentResponse;
 use Tp\DataApi\Responses\GetPaymentInstructionsResponse;
 use Tp\DataApi\Responses\GetPaymentMethodsResponse;
+use Tp\DataApi\Responses\GetPaymentResponse;
 use Tp\DataApi\Responses\GetPaymentsResponse;
 use Tp\DataApi\Responses\GetPaymentStateResponse;
 use Tp\DataApi\Responses\Response;
 use Tp\DataApi\Responses\ResponseFactory;
 use Tp\DataApi\Responses\SetPaymentMethodsResponse;
-use Tp\InvalidSignatureException;
-use Tp\SoapException;
 use Tp\MerchantConfig;
+use Tp\SoapException;
 
 class DataApi
 {
 	public static function getPaymentMethods(
 		MerchantConfig $config,
-		bool $onlyActive = NULL
+		?bool $onlyActive = null
 	) : GetPaymentMethodsResponse {
 		$data = ['onlyActive' => $onlyActive];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var GetPaymentMethodsResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	public static function getPayment(
@@ -45,13 +44,13 @@ class DataApi
 	) : GetPaymentResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var GetPaymentResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	public static function getPaymentInstructions(
@@ -60,13 +59,13 @@ class DataApi
 	) : GetPaymentInstructionsResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var GetPaymentInstructionsResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	public static function getPaymentState(
@@ -75,20 +74,20 @@ class DataApi
 	) : GetPaymentStateResponse {
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var GetPaymentStateResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	public static function getPayments(
 		MerchantConfig $config,
-		GetPaymentsSearchParams $searchParams = NULL,
-		PaginationRequest $pagination = NULL,
-		Ordering $ordering = NULL
+		?GetPaymentsSearchParams $searchParams = null,
+		?PaginationRequest $pagination = null,
+		?Ordering $ordering = null
 	) : GetPaymentsResponse {
 		$data = [
 			'searchParams' => $searchParams,
@@ -96,32 +95,32 @@ class DataApi
 			'ordering'     => $ordering,
 		];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var GetPaymentsResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	public static function setPaymentMethods(
 		MerchantConfig $config,
 		$type,
-		array $paymentMethods = NULL
+		?array $paymentMethods = null
 	) : SetPaymentMethodsResponse {
 		$data = [
 			'type'           => $type,
 			'paymentMethods' => $paymentMethods,
 		];
 		$request = RequestFactory::getRequest(
-			__FUNCTION__, $config, $data
+			__FUNCTION__,
+			$config,
+			$data
 		);
 
 		/** @var SetPaymentMethodsResponse $response */
-		$response = self::call(__FUNCTION__, $config, $request);
-
-		return $response;
+		return self::call(__FUNCTION__, $config, $request);
 	}
 
 	protected static function call(
@@ -135,16 +134,14 @@ class DataApi
 			$signed = $request->toSignedSoapRequestArray();
 
 			$rawResponse = $client->{$operation}($signed);
-		}
-		catch (SoapFault $e) {
+		} catch (SoapFault $e) {
 			throw new SoapException($e->getMessage());
 		}
 
-		$response = ResponseFactory::getResponse(
-			$operation, $config, $rawResponse
+		return ResponseFactory::getResponse(
+			$operation,
+			$config,
+			$rawResponse
 		);
-
-		return $response;
 	}
-
 }

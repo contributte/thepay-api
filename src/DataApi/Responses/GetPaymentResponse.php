@@ -7,7 +7,6 @@ use Tp\DataApi\Parameters\Payment;
 
 class GetPaymentResponse extends Response
 {
-
 	protected static $dateTimePaths = [
 		['payment', 'createdOn'],
 		['payment', 'finishedOn'],
@@ -36,9 +35,8 @@ class GetPaymentResponse extends Response
 		return $this->payment;
 	}
 
-	public function setPayment(Payment $payment = NULL)
+	public function setPayment(?Payment $payment = null) : void
 	{
 		$this->payment = $payment;
 	}
-
 }

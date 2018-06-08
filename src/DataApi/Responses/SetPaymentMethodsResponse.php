@@ -43,7 +43,7 @@ class SetPaymentMethodsResponse extends Response
 		return $this->status;
 	}
 
-	public function setStatus(string $status = NULL) : void
+	public function setStatus(?string $status = null) : void
 	{
 		$this->status = $status;
 	}

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Requests;
 
-use Tp\Utils;
 use Tp\MerchantConfig;
 
 class RequestFactory

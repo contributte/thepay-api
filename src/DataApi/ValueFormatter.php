@@ -11,7 +11,6 @@ class ValueFormatter
 {
 
 	/**
-	 * @param string $type
 	 * @param mixed  $value
 	 *
 	 * @return mixed
@@ -19,27 +18,25 @@ class ValueFormatter
 	 */
 	public static function format(string $type, $value)
 	{
-		if (substr($type, -2) == '[]') {
+		if (substr($type, -2) === '[]') {
 			return static::formatList(substr($type, 0, -2), $value);
 		}
 
 		$isNull = is_null($value);
 		if ($isNull) {
-			return NULL;
+			return null;
 		}
-		else {
-			$method = 'format' . ucfirst($type);
-			if (method_exists(__CLASS__, $method)) {
-				return static::$method($value);
-			}
-
-			if (class_exists($type) && $value instanceof $type) {
-				return $value;
-			}
-
-			$message = 'Unknown type ' . $type . '.';
-			throw new InvalidArgumentException($message);
+		$method = 'format' . ucfirst($type);
+		if (method_exists(__CLASS__, $method)) {
+			return static::$method($value);
 		}
+
+		if (class_exists($type) && $value instanceof $type) {
+			return $value;
+		}
+
+		$message = 'Unknown type ' . $type . '.';
+		throw new InvalidArgumentException($message);
 	}
 
 	/**
@@ -50,11 +47,9 @@ class ValueFormatter
 	public static function formatInt($value) : ?int
 	{
 		if (is_null($value)) {
-			return NULL;
+			return null;
 		}
-		else {
-			return intval($value);
-		}
+		return intval($value);
 	}
 
 	/**
@@ -65,11 +60,9 @@ class ValueFormatter
 	public static function formatFloat($value) : ?float
 	{
 		if (is_null($value)) {
-			return NULL;
+			return null;
 		}
-		else {
-			return floatval($value);
-		}
+		return floatval($value);
 	}
 
 	/**
@@ -80,11 +73,9 @@ class ValueFormatter
 	public static function formatBool($value) : ?bool
 	{
 		if (is_null($value)) {
-			return NULL;
+			return null;
 		}
-		else {
-			return boolval($value);
-		}
+		return boolval($value);
 	}
 
 	/**
@@ -95,50 +86,35 @@ class ValueFormatter
 	public static function formatString($value) : ?string
 	{
 		if (is_null($value)) {
-			return NULL;
+			return null;
 		}
-		else {
-			return strval($value);
-		}
+		return strval($value);
 	}
 
 	/**
 	 * @param DateTimeInterface|string|null $value
-	 *
-	 * @return DateTimeInterface|null
 	 */
 	public static function formatDateTime($value) : ?DateTimeInterface
 	{
 		if (is_null($value)) {
-			return NULL;
+			return null;
 		}
-		else {
-			if ($value === '0000-00-00 00:00:00') {
-				return NULL;
-			}
-			else if ($value instanceof DateTimeInterface) {
-				return $value;
-			}
-			else {
-				return new DateTimeImmutable($value);
-			}
+		if ($value === '0000-00-00 00:00:00') {
+			return null;
+		} elseif ($value instanceof DateTimeInterface) {
+			return $value;
+		} else {
+			return new DateTimeImmutable($value);
 		}
 	}
-
-	/**
-	 * @param string $type
-	 * @param array  $list
-	 *
-	 * @return array
-	 */
+	
 	public static function formatList(string $type, array $list) : array
 	{
 		$array = [];
 		foreach ($list as $item) {
-			$array[] = ValueFormatter::format($type, $item);
+			$array[] = self::format($type, $item);
 		}
 
 		return $array;
 	}
-
 }

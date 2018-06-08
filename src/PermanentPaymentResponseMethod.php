@@ -26,7 +26,7 @@ class PermanentPaymentResponseMethod
 	 */
 	protected $vs;
 
-	function __construct(
+	public function __construct(
 		int $methodId,
 		string $methodName,
 		string $url,

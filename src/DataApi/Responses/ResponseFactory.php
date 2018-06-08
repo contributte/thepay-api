@@ -4,22 +4,17 @@ declare(strict_types=1);
 namespace Tp\DataApi\Responses;
 
 use stdClass;
+use Tp\DataApi\Parameters\Signature;
+use Tp\DataApi\Processors\DateTimeInflater;
+use Tp\DataApi\Processors\SoapFlattener;
 use Tp\InvalidSignatureException;
+use Tp\MerchantConfig;
 use Tp\MissingParameterException;
 use Tp\Utils;
-use Tp\DataApi\Processors\DateTimeInflater;
-use Tp\DataApi\Parameters\Signature;
-use Tp\DataApi\Processors\SoapFlattener;
-use Tp\MerchantConfig;
 
 class ResponseFactory
 {
 	/**
-	 * @param string             $operation
-	 * @param \Tp\MerchantConfig $config
-	 * @param stdClass           $data
-	 *
-	 * @return Response
 	 * @throws MissingParameterException
 	 * @throws InvalidSignatureException
 	 */
@@ -39,14 +34,16 @@ class ResponseFactory
 
 		$listPaths = $className::listPaths();
 		$flattened = SoapFlattener::processWithPaths(
-			$array, $listPaths
+			$array,
+			$listPaths
 		);
 
 		Signature::validate($flattened, $config->dataApiPassword);
 
 		$dateTimePaths = $className::dateTimePaths();
 		$inflated = DateTimeInflater::processWithPaths(
-			$flattened, $dateTimePaths
+			$flattened,
+			$dateTimePaths
 		);
 
 		return $className::createFromResponse($inflated);

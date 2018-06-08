@@ -5,7 +5,7 @@ namespace Tp;
 
 class MissingParameterException extends InvalidParameterException
 {
-	function __construct(string $parameter)
+	public function __construct(string $parameter)
 	{
 		parent::__construct($parameter);
 

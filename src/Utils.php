@@ -10,10 +10,7 @@ class Utils
 	/**
 	 * Filters out all keys that are not in the $keys list.
 	 *
-	 * @param array    $array
 	 * @param string[] $keys
-	 *
-	 * @return array
 	 */
 	public static function filterKeys(array $array, array $keys) : array
 	{
@@ -28,12 +25,7 @@ class Utils
 
 		return $filtered;
 	}
-
-	/**
-	 * @param array $value
-	 *
-	 * @return array
-	 */
+	
 	public static function toArrayRecursive(array $value) : array
 	{
 		$array = [];
@@ -45,8 +37,7 @@ class Utils
 				|| $v instanceof stdClass
 			) {
 				$item = static::toArrayRecursive((array)$v);
-			}
-			else {
+			} else {
 				$item = $v;
 			}
 		}
@@ -57,18 +48,13 @@ class Utils
 	/**
 	 * Checks wherether given $array is a list – keys are only numeric,
 	 * sequential from zero without gaps. Returns true for empty arrays.
-	 *
-	 * @param array $array
-	 *
-	 * @return bool
 	 */
 	public static function isList(array $array) : bool
 	{
 		$count = count($array);
 		if ($count) {
 			$range = range(0, $count - 1);
-		}
-		else {
+		} else {
 			$range = [];
 		}
 		$keys = array_keys($array);
@@ -79,7 +65,7 @@ class Utils
 	/**
 	 * @param string[][] $paths
 	 */
-	public static function requirePaths(array $paths)
+	public static function requirePaths(array $paths) : void
 	{
 		$basePath = [__DIR__];
 		foreach ($paths as $path) {

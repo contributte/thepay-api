@@ -21,10 +21,7 @@ abstract class ProcessorWithPaths extends Processor
 	}
 
 	/**
-	 * @param array   $input
 	 * @param array[] $paths
-	 *
-	 * @return array
 	 */
 	public static function processWithPaths(array $input, array $paths) : array
 	{
@@ -36,11 +33,9 @@ abstract class ProcessorWithPaths extends Processor
 
 	/**
 	 * @param string[] $itemPath
-	 *
-	 * @return bool
 	 */
 	protected function onPath(array $itemPath) : bool
 	{
-		return in_array($itemPath, $this->paths, TRUE);
+		return in_array($itemPath, $this->paths, true);
 	}
 }

@@ -5,8 +5,8 @@ namespace Tp\DataApi\Requests;
 
 use Tp\BadMethodCallException;
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\Processors\DateTimeDeflater;
 use Tp\DataApi\Parameters\Signature;
+use Tp\DataApi\Processors\DateTimeDeflater;
 use Tp\MerchantConfig;
 
 abstract class Request extends DataApiObject
@@ -22,9 +22,6 @@ abstract class Request extends DataApiObject
 	 * Request must contain merchant config data alongside its own: merchant ID,
 	 * account ID, password. Thus, requests must be instantiating by this call
 	 * instead of their constructor.
-	 *
-	 * @param MerchantConfig $config
-	 * @param array          $data
 	 *
 	 * @return Request
 	 */
@@ -43,7 +40,6 @@ abstract class Request extends DataApiObject
 	 * SOAP request must not contain DateTime timestamps: They must be cast as
 	 * strings.
 	 *
-	 * @return array
 	 * @throws BadMethodCallException
 	 */
 	public function toSoapRequestArray() : array
@@ -53,14 +49,14 @@ abstract class Request extends DataApiObject
 		$withConfig = array_merge($configArray, $data);
 
 		$deflated = DateTimeDeflater::processWithPaths(
-			$withConfig, static::$dateTimePaths
+			$withConfig,
+			static::$dateTimePaths
 		);
 
 		return $deflated;
 	}
 
 	/**
-	 * @return array
 	 * @throws BadMethodCallException
 	 */
 	public function toSignedSoapRequestArray() : array
@@ -69,26 +65,22 @@ abstract class Request extends DataApiObject
 
 		$array = $this->toSoapRequestArray();
 		$signature = Signature::compute(
-			$array, $this->_config->dataApiPassword
+			$array,
+			$this->_config->dataApiPassword
 		);
 		$signatureArray = ['signature' => $signature];
 
-		$signed = array_merge($array, $signatureArray);
-
-		return $signed;
+		return array_merge($array, $signatureArray);
 	}
 
 	/**
-	 * @return array
 	 * @throws BadMethodCallException
 	 */
 	protected function configArray() : array
 	{
 		$this->assertConfig();
 
-		$configArray = ['merchantId' => $this->_config->merchantId];
-
-		return $configArray;
+		return ['merchantId' => $this->_config->merchantId];
 	}
 
 	/**
@@ -96,7 +88,7 @@ abstract class Request extends DataApiObject
 	 */
 	protected function assertConfig() : void
 	{
-		if ( !$this->_config) {
+		if (!$this->_config) {
 			$message = 'Tp\DataApi\Requests\Request instantiated without providing Tp\TpMerchantConfig. Use Tp\DataApi\Requests\Request::createWithConfig method instead of new Tp\DataApi\Requests\Request constructor.';
 			throw new BadMethodCallException($message);
 		}

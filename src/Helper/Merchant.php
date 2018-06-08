@@ -24,7 +24,7 @@ abstract class Merchant
 	 * @param Payment $payment Instace of the Tp\TpPayment method, that contains
 	 *                         inforamtion about the payment to be made.
 	 */
-	function __construct(Payment $payment)
+	public function __construct(Payment $payment)
 	{
 		$this->payment = $payment;
 	}
@@ -34,7 +34,7 @@ abstract class Merchant
 	 * is abstract function prototype, that should be implemented in
 	 * derived classes to provide custom HTML (or other) code.
 	 */
-	abstract function render() : string;
+	abstract public function render() : string;
 
 	/**
 	 * Build the query part of the URL from payment data and optional
@@ -44,9 +44,8 @@ abstract class Merchant
 	 *                    be appended to the URL.
 	 *
 	 * @return string Query part of the URL with all parameters correctly escaped
-	 *
 	 */
-	function buildQuery(array $args = []) : string
+	public function buildQuery(array $args = []) : string
 	{
 		$out = array_merge(
 			$this->payment->getArgs(), // Arguments of the payment

@@ -23,7 +23,7 @@ class PermanentPaymentResponse
 	 */
 	protected $paymentMethods = [];
 
-	function __construct(stdClass $data)
+	public function __construct(stdClass $data)
 	{
 		$this->status = boolval($data->status);
 

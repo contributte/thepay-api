@@ -35,7 +35,7 @@ class InfoResponse extends PaymentResponse
 	 */
 	protected $cardLevel;
 
-	function __construct(stdClass $data)
+	public function __construct(stdClass $data)
 	{
 		parent::__construct($data);
 
@@ -50,7 +50,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string Masked number of card. E.g. 123456******1234
 	 */
-	function getCardNumberMasked() : string
+	public function getCardNumberMasked() : string
 	{
 		return $this->cardNumberMasked;
 	}
@@ -58,7 +58,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string Brand of card, e.g. MC or VISA
 	 */
-	function getCardBrand() : string
+	public function getCardBrand() : string
 	{
 		return $this->cardBrand;
 	}
@@ -66,7 +66,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string country code in ISO 3166-1 alpha-2, e.g. CZ
 	 */
-	function getCountryCode() : string
+	public function getCountryCode() : string
 	{
 		return $this->countryCode;
 	}
@@ -74,7 +74,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string name of issuing bank, e.g. RAIFFEISENBANK A.S.
 	 */
-	function getBankName() : string
+	public function getBankName() : string
 	{
 		return $this->bankName;
 	}
@@ -82,16 +82,15 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string card type, e.g. DEBIT, CREDIT
 	 */
-	function getCardType() : string
+	public function getCardType() : string
 	{
 		return $this->cardType;
 	}
 
 	/**
-	 *
 	 * @return string card level, e.g. BUSINESS, CLASSIC, PREPAID
 	 */
-	function getCardLevel() : string
+	public function getCardLevel() : string
 	{
 		return $this->cardLevel;
 	}

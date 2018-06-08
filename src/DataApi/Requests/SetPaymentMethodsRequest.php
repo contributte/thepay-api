@@ -7,8 +7,8 @@ use Tp\DataApi\ValueFormatter;
 
 class SetPaymentMethodsRequest extends Request
 {
-	const TYPE_ALL       = 'all';
-	const TYPE_WHITELIST = 'whitelist';
+	public const TYPE_ALL       = 'all';
+	public const TYPE_WHITELIST = 'whitelist';
 
 	/**
 	 * @var string
@@ -19,7 +19,7 @@ class SetPaymentMethodsRequest extends Request
 	 */
 	protected $paymentMethods = [];
 
-	function getType() : string
+	public function getType() : string
 	{
 		return $this->type;
 	}
@@ -27,7 +27,7 @@ class SetPaymentMethodsRequest extends Request
 	/**
 	 * @param string $type one of TYPE_* constants
 	 */
-	function setType(string $type)
+	public function setType(string $type) : void
 	{
 		$this->type = $type;
 	}
@@ -35,7 +35,7 @@ class SetPaymentMethodsRequest extends Request
 	/**
 	 * @return int[]
 	 */
-	function getPaymentMethods() : array
+	public function getPaymentMethods() : array
 	{
 		return $this->paymentMethods;
 	}
@@ -45,10 +45,9 @@ class SetPaymentMethodsRequest extends Request
 	 *
 	 * @param int[] $paymentMethods id's of payment methods
 	 */
-	function setPaymentMethods(array $paymentMethods) : void
+	public function setPaymentMethods(array $paymentMethods) : void
 	{
 		$this->paymentMethods = ValueFormatter::formatList('int', $paymentMethods);
-
 	}
 
 	protected function configArray() : array

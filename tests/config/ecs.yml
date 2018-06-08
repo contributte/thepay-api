@@ -1,0 +1,46 @@
+services:
+    PhpCsFixer\Fixer\Strict\StrictComparisonFixer: ~
+    PhpCsFixer\Fixer\Strict\StrictParamFixer: ~
+
+    PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer:
+        space_before: one
+    PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer: ~
+    PhpCsFixer\Fixer\Alias\RandomApiMigrationFixer:
+        mt_rand: random_int
+        rand: random_int
+    Symplify\CodingStandard\Fixer\Strict\BlankLineAfterStrictTypesFixer: ~
+    PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer: ~
+
+    # All elements should have visibility
+    PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
+        elements: [const, property, method]
+
+    # Turn list() into []
+    PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer:
+        syntax: short
+
+    # Nullable Typehints
+    SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff: ~
+    PhpCsFixer\Fixer\Whitespace\CompactNullableTypehintFixer: ~
+
+    # Void Typehints
+    PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer: ~
+
+imports:
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/common/array.yml' }
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/common/control-structures.yml' }
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/common/docblock.yml' }
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/common/namespaces.yml' }
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/clean-code.yml' }
+    - { resource: '../../vendor/symplify/easy-coding-standard/config/psr2.yml' }
+
+parameters:
+    indentation: tab
+    exclude_checkers:
+        - PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer
+        - PhpCsFixer\Fixer\Operator\NewWithBracesFixer
+    skip:
+        PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\FunctionCallSignatureSniff.Indent: ~
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.UnusedMethod:
+            - 'src/DataApi/DataApiObject.php'
+        PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpacingSniff.SpacingAfterOpenBrace: ~

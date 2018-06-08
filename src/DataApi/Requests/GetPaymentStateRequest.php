@@ -15,7 +15,7 @@ class GetPaymentStateRequest extends Request
 		return $this->paymentId;
 	}
 
-	public function setPaymentId(int $paymentId = NULL) : void
+	public function setPaymentId(?int $paymentId = null) : void
 	{
 		$this->paymentId = $paymentId;
 	}

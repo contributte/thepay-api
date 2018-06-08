@@ -22,7 +22,7 @@ class Ordering extends DataApiObject
 		return $this->orderBy;
 	}
 
-	public function setOrderBy(string $orderBy = NULL) : void
+	public function setOrderBy(?string $orderBy = null) : void
 	{
 		$this->orderBy = $orderBy;
 	}
@@ -32,9 +32,8 @@ class Ordering extends DataApiObject
 		return $this->orderHow;
 	}
 
-	public function setOrderHow(string $orderHow = NULL) : void
+	public function setOrderHow(?string $orderHow = null) : void
 	{
 		$this->orderHow = $orderHow;
 	}
-
 }

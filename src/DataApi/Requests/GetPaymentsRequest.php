@@ -6,7 +6,6 @@ namespace Tp\DataApi\Requests;
 use Tp\DataApi\Parameters\GetPaymentsSearchParams;
 use Tp\DataApi\Parameters\Ordering;
 use Tp\DataApi\Parameters\PaginationRequest;
-use Tp\DataApi\ValueFormatter;
 
 class GetPaymentsRequest extends Request
 {
@@ -37,7 +36,7 @@ class GetPaymentsRequest extends Request
 		return $this->searchParams;
 	}
 
-	public function setSearchParams(GetPaymentsSearchParams $searchParams = NULL) : void
+	public function setSearchParams(?GetPaymentsSearchParams $searchParams = null) : void
 	{
 		$this->searchParams = $searchParams;
 	}
@@ -47,7 +46,7 @@ class GetPaymentsRequest extends Request
 		return $this->pagination;
 	}
 
-	public function setPagination(PaginationRequest $pagination = NULL) : void
+	public function setPagination(?PaginationRequest $pagination = null) : void
 	{
 		$this->pagination = $pagination;
 	}
@@ -57,7 +56,7 @@ class GetPaymentsRequest extends Request
 		return $this->ordering;
 	}
 
-	public function setOrdering(Ordering $ordering = NULL) : void
+	public function setOrdering(?Ordering $ordering = null) : void
 	{
 		$this->ordering = $ordering;
 	}

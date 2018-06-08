@@ -25,13 +25,13 @@ class DivMerchant extends Merchant
 	 * Disable default CSS styling for payment button.
 	 * User have to create his own style for button.
 	 */
-	protected $disableButtonCss = FALSE;
+	protected $disableButtonCss = false;
 
 	/**
 	 * Disable default CSS styling for popup div with payment instructions for offline methods.
 	 * User have to create his own style for popup.
 	 */
-	protected $disablePopupCss = FALSE;
+	protected $disablePopupCss = false;
 
 	public function getSkin() : string
 	{
@@ -40,8 +40,6 @@ class DivMerchant extends Merchant
 
 	/**
 	 * Set visual skin used for payment buttons.
-	 *
-	 * @param string $skin
 	 */
 	public function setSkin(string $skin) : void
 	{
@@ -53,7 +51,7 @@ class DivMerchant extends Merchant
 	 */
 	public function disableButtonCss() : void
 	{
-		$this->disableButtonCss = TRUE;
+		$this->disableButtonCss = true;
 	}
 
 	/**
@@ -61,7 +59,7 @@ class DivMerchant extends Merchant
 	 */
 	public function enableButtonCss() : void
 	{
-		$this->disableButtonCss = FALSE;
+		$this->disableButtonCss = false;
 	}
 
 	/**
@@ -69,7 +67,7 @@ class DivMerchant extends Merchant
 	 */
 	public function disablePopupCss() : void
 	{
-		$this->disablePopupCss = TRUE;
+		$this->disablePopupCss = true;
 	}
 
 	/**
@@ -77,10 +75,10 @@ class DivMerchant extends Merchant
 	 */
 	public function enablePopupCss() : void
 	{
-		$this->disablePopupCss = FALSE;
+		$this->disablePopupCss = false;
 	}
 
-	function render() : string
+	public function render() : string
 	{
 		$url = $this->payment->getMerchantConfig()->gateUrl;
 		$queryArgs = array_filter(
@@ -90,7 +88,7 @@ class DivMerchant extends Merchant
 		);
 
 		$out = '';
-		if ( !$this->disableButtonCss) {
+		if (!$this->disableButtonCss) {
 			$skin = $this->skin === '' ? '' : "/{$this->skin}";
 			$href = "{$url}div/style{$skin}/div.css?v=" . time();
 			$href = Escaper::htmlEntityEncode($href);
@@ -100,7 +98,7 @@ class DivMerchant extends Merchant
 		$thepayGateUrl = $url . 'div/index.php?' . $this->buildQuery($queryArgs);
 		$thepayGateUrl = Escaper::jsonEncode($thepayGateUrl);
 		$disableThepayPopupCss = Escaper::jsonEncode($this->disablePopupCss);
-		$out .= "<script type=\"text/javascript\">";
+		$out .= '<script type="text/javascript">';
 		$out .= "\tvar thepayGateUrl = {$thepayGateUrl},\n";
 		$out .= "\t\tdisableThepayPopupCss = {$disableThepayPopupCss};\n";
 		$out .= "</script>\n";

@@ -29,7 +29,7 @@ class GetPaymentInstructionsResponse extends Response
 		return $this->paymentInfo;
 	}
 
-	public function setPaymentInfo(PaymentInfo $paymentInfo = NULL) : void
+	public function setPaymentInfo(?PaymentInfo $paymentInfo = null) : void
 	{
 		$this->paymentInfo = $paymentInfo;
 	}

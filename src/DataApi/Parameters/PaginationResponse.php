@@ -16,7 +16,7 @@ class PaginationResponse extends Pagination
 		return $this->totalPages;
 	}
 
-	public function setTotalPages(int $totalPages = NULL) : void
+	public function setTotalPages(?int $totalPages = null) : void
 	{
 		$this->totalPages = $totalPages;
 	}

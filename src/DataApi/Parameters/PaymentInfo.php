@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tp\DataApi\Parameters;
 
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\ValueFormatter;
 
 class PaymentInfo extends DataApiObject
 {
@@ -99,7 +98,7 @@ class PaymentInfo extends DataApiObject
 		return $this->isOffline;
 	}
 
-	public function setIsOffline(bool $isOffline = NULL) : void
+	public function setIsOffline(?bool $isOffline = null) : void
 	{
 		$this->isOffline = $isOffline;
 	}
@@ -109,7 +108,7 @@ class PaymentInfo extends DataApiObject
 		return $this->paymentPageUrl;
 	}
 
-	public function setPaymentPageUrl(string $paymentPageUrl = NULL) : void
+	public function setPaymentPageUrl(?string $paymentPageUrl = null) : void
 	{
 		$this->paymentPageUrl = $paymentPageUrl;
 	}
@@ -119,7 +118,7 @@ class PaymentInfo extends DataApiObject
 		return $this->paymentInfoUrl;
 	}
 
-	public function setPaymentInfoUrl(string $paymentInfoUrl = NULL) : void
+	public function setPaymentInfoUrl(?string $paymentInfoUrl = null) : void
 	{
 		$this->paymentInfoUrl = $paymentInfoUrl;
 	}
@@ -129,7 +128,7 @@ class PaymentInfo extends DataApiObject
 		return $this->methodChangeUrl;
 	}
 
-	public function setMethodChangeUrl(string $methodChangeUrl = NULL) : void
+	public function setMethodChangeUrl(?string $methodChangeUrl = null) : void
 	{
 		$this->methodChangeUrl = $methodChangeUrl;
 	}
@@ -149,7 +148,7 @@ class PaymentInfo extends DataApiObject
 		return $this->accountNumberPrefix;
 	}
 
-	public function setAccountNumberPrefix(string $accountNumberPrefix = NULL) : void
+	public function setAccountNumberPrefix(?string $accountNumberPrefix = null) : void
 	{
 		$this->accountNumberPrefix = $accountNumberPrefix;
 	}
@@ -159,7 +158,7 @@ class PaymentInfo extends DataApiObject
 		return $this->accountNumber;
 	}
 
-	public function setAccountNumber(string $accountNumber = NULL) : void
+	public function setAccountNumber(?string $accountNumber = null) : void
 	{
 		$this->accountNumber = $accountNumber;
 	}
@@ -169,7 +168,7 @@ class PaymentInfo extends DataApiObject
 		return $this->bankCode;
 	}
 
-	public function setBankCode(string $bankCode = NULL) : void
+	public function setBankCode(?string $bankCode = null) : void
 	{
 		$this->bankCode = $bankCode;
 	}
@@ -179,7 +178,7 @@ class PaymentInfo extends DataApiObject
 		return $this->vs;
 	}
 
-	public function setVs(string $vs = NULL) : void
+	public function setVs(?string $vs = null) : void
 	{
 		$this->vs = $vs;
 	}
@@ -189,7 +188,7 @@ class PaymentInfo extends DataApiObject
 		return $this->ss;
 	}
 
-	public function setSs(string $ss = NULL) : void
+	public function setSs(?string $ss = null) : void
 	{
 		$this->ss = $ss;
 	}
@@ -199,7 +198,7 @@ class PaymentInfo extends DataApiObject
 		return $this->ebankingUrl;
 	}
 
-	public function setEbankingUrl(string $ebankingUrl = NULL) : void
+	public function setEbankingUrl(?string $ebankingUrl = null) : void
 	{
 		$this->ebankingUrl = $ebankingUrl;
 	}
@@ -209,7 +208,7 @@ class PaymentInfo extends DataApiObject
 		return $this->scCode;
 	}
 
-	public function setScCode(string $scCode = NULL) : void
+	public function setScCode(?string $scCode = null) : void
 	{
 		$this->scCode = $scCode;
 	}
@@ -219,7 +218,7 @@ class PaymentInfo extends DataApiObject
 		return $this->scBarcodeUrl;
 	}
 
-	public function setScBarcodeUrl(string $scBarcodeUrl = NULL) : void
+	public function setScBarcodeUrl(?string $scBarcodeUrl = null) : void
 	{
 		$this->scBarcodeUrl = $scBarcodeUrl;
 	}

@@ -5,7 +5,6 @@ namespace Tp\DataApi\Parameters;
 
 use DateTimeImmutable;
 use Tp\DataApi\DataApiObject;
-use Tp\DataApi\ValueFormatter;
 
 class Payment extends DataApiObject
 {
@@ -168,7 +167,7 @@ class Payment extends DataApiObject
 		return $this->id;
 	}
 
-	public function setId(int $id = NULL) : void
+	public function setId(?int $id = null) : void
 	{
 		$this->id = $id;
 	}
@@ -178,7 +177,7 @@ class Payment extends DataApiObject
 		return $this->account;
 	}
 
-	public function setAccount(int $account = NULL) : void
+	public function setAccount(?int $account = null) : void
 	{
 		$this->account = $account;
 	}
@@ -188,7 +187,7 @@ class Payment extends DataApiObject
 		return $this->state;
 	}
 
-	public function setState(int $state = NULL) : void
+	public function setState(?int $state = null) : void
 	{
 		$this->state = $state;
 	}
@@ -198,7 +197,7 @@ class Payment extends DataApiObject
 		return $this->createdOn;
 	}
 
-	public function setCreatedOn(DateTimeImmutable $createdOn = NULL) : void
+	public function setCreatedOn(?DateTimeImmutable $createdOn = null) : void
 	{
 		$this->createdOn = $createdOn;
 	}
@@ -208,7 +207,7 @@ class Payment extends DataApiObject
 		return $this->finishedOn;
 	}
 
-	public function setFinishedOn(DateTimeImmutable $finishedOn = NULL) : void
+	public function setFinishedOn(?DateTimeImmutable $finishedOn = null) : void
 	{
 		$this->finishedOn = $finishedOn;
 	}
@@ -218,7 +217,7 @@ class Payment extends DataApiObject
 		return $this->canceledOn;
 	}
 
-	public function setCanceledOn(DateTimeImmutable $canceledOn = NULL) : void
+	public function setCanceledOn(?DateTimeImmutable $canceledOn = null) : void
 	{
 		$this->canceledOn = $canceledOn;
 	}
@@ -228,7 +227,7 @@ class Payment extends DataApiObject
 		return $this->payOff;
 	}
 
-	public function setPayOff(int $payOff = NULL) : void
+	public function setPayOff(?int $payOff = null) : void
 	{
 		$this->payOff = $payOff;
 	}
@@ -238,7 +237,7 @@ class Payment extends DataApiObject
 		return $this->payOffCancel;
 	}
 
-	public function setPayOffCancel(int $payOffCancel = NULL) : void
+	public function setPayOffCancel(?int $payOffCancel = null) : void
 	{
 		$this->payOffCancel = $payOffCancel;
 	}
@@ -248,7 +247,7 @@ class Payment extends DataApiObject
 		return $this->value;
 	}
 
-	public function setValue(float $value = NULL) : void
+	public function setValue(?float $value = null) : void
 	{
 		$this->value = $value;
 	}
@@ -258,7 +257,7 @@ class Payment extends DataApiObject
 		return $this->receivedValue;
 	}
 
-	public function setReceivedValue(float $receivedValue = NULL) : void
+	public function setReceivedValue(?float $receivedValue = null) : void
 	{
 		$this->receivedValue = $receivedValue;
 	}
@@ -288,7 +287,7 @@ class Payment extends DataApiObject
 		return $this->description;
 	}
 
-	public function setDescription(string $description = NULL) : void
+	public function setDescription(?string $description = null) : void
 	{
 		$this->description = $description;
 	}
@@ -298,7 +297,7 @@ class Payment extends DataApiObject
 		return $this->merchantData;
 	}
 
-	public function setMerchantData(string $merchantData = NULL) : void
+	public function setMerchantData(?string $merchantData = null) : void
 	{
 		$this->merchantData = $merchantData;
 	}
@@ -318,7 +317,7 @@ class Payment extends DataApiObject
 		return $this->specificSymbol;
 	}
 
-	public function setSpecificSymbol(string $specificSymbol = NULL) : void
+	public function setSpecificSymbol(?string $specificSymbol = null) : void
 	{
 		$this->specificSymbol = $specificSymbol;
 	}
@@ -328,7 +327,7 @@ class Payment extends DataApiObject
 		return $this->merchantSpecificSymbol;
 	}
 
-	public function setMerchantSpecificSymbol(string $merchantSpecificSymbol = NULL) : void
+	public function setMerchantSpecificSymbol(?string $merchantSpecificSymbol = null) : void
 	{
 		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
@@ -338,7 +337,7 @@ class Payment extends DataApiObject
 		return $this->accountNumber;
 	}
 
-	public function setAccountNumber(string $accountNumber = NULL) : void
+	public function setAccountNumber(?string $accountNumber = null) : void
 	{
 		$this->accountNumber = $accountNumber;
 	}
@@ -348,7 +347,7 @@ class Payment extends DataApiObject
 		return $this->accountOwnerName;
 	}
 
-	public function setAccountOwnerName(string $accountOwnerName = NULL) : void
+	public function setAccountOwnerName(?string $accountOwnerName = null) : void
 	{
 		$this->accountOwnerName = $accountOwnerName;
 	}
@@ -358,7 +357,7 @@ class Payment extends DataApiObject
 		return $this->returnUrl;
 	}
 
-	public function setReturnUrl(string $returnUrl = NULL) : void
+	public function setReturnUrl(?string $returnUrl = null) : void
 	{
 		$this->returnUrl = $returnUrl;
 	}
@@ -368,7 +367,7 @@ class Payment extends DataApiObject
 		return $this->permanentPayment;
 	}
 
-	public function setPermanentPayment(int $permanentPayment = NULL) : void
+	public function setPermanentPayment(?int $permanentPayment = null) : void
 	{
 		$this->permanentPayment = $permanentPayment;
 	}
@@ -378,7 +377,7 @@ class Payment extends DataApiObject
 		return $this->deposit;
 	}
 
-	public function setDeposit(bool $deposit = NULL) : void
+	public function setDeposit(?bool $deposit = null) : void
 	{
 		$this->deposit = $deposit;
 	}
@@ -388,7 +387,7 @@ class Payment extends DataApiObject
 		return $this->recurring;
 	}
 
-	public function setRecurring(bool $recurring = NULL) : void
+	public function setRecurring(?bool $recurring = null) : void
 	{
 		$this->recurring = $recurring;
 	}
@@ -398,7 +397,7 @@ class Payment extends DataApiObject
 		return $this->ip;
 	}
 
-	public function setIp(string $ip = NULL) : void
+	public function setIp(?string $ip = null) : void
 	{
 		$this->ip = $ip;
 	}
@@ -408,7 +407,7 @@ class Payment extends DataApiObject
 		return $this->customerEmail;
 	}
 
-	public function setCustomerEmail(string $customerEmail = NULL) : void
+	public function setCustomerEmail(?string $customerEmail = null) : void
 	{
 		$this->customerEmail = $customerEmail;
 	}
@@ -418,7 +417,7 @@ class Payment extends DataApiObject
 		return $this->fik;
 	}
 
-	public function setFik(string $fik = NULL) : void
+	public function setFik(?string $fik = null) : void
 	{
 		$this->fik = $fik;
 	}
@@ -428,7 +427,7 @@ class Payment extends DataApiObject
 		return $this->bkp;
 	}
 
-	public function setBkp(string $bkp = NULL) : void
+	public function setBkp(?string $bkp = null) : void
 	{
 		$this->bkp = $bkp;
 	}
@@ -438,7 +437,7 @@ class Payment extends DataApiObject
 		return $this->pkp;
 	}
 
-	public function setPkp(string $pkp = NULL) : void
+	public function setPkp(?string $pkp = null) : void
 	{
 		$this->pkp = $pkp;
 	}
@@ -448,7 +447,7 @@ class Payment extends DataApiObject
 		return $this->receiptUrl;
 	}
 
-	public function setReceiptUrl(string $receiptUrl = NULL) : void
+	public function setReceiptUrl(?string $receiptUrl = null) : void
 	{
 		$this->receiptUrl = $receiptUrl;
 	}
@@ -458,7 +457,7 @@ class Payment extends DataApiObject
 		return $this->firstSuccess;
 	}
 
-	public function setFirstSuccess(bool $firstSuccess = NULL) : void
+	public function setFirstSuccess(?bool $firstSuccess = null) : void
 	{
 		$this->firstSuccess = $firstSuccess;
 	}

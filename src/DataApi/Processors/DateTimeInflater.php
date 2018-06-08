@@ -20,7 +20,7 @@ class DateTimeInflater extends ProcessorWithPaths
 			// Pozor, neprojde, pokud časové razítko obsahuje desetinnou část
 			// vteřin. Viz https://bugs.php.net/bug.php?id=51950.
 			$processed = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $value);
-			if ($processed === FALSE) {
+			if ($processed === false) {
 				$errorPathArray = $itemPath;
 				array_unshift($errorPathArray, '');
 				$errorPathString = implode('/', $errorPathArray);

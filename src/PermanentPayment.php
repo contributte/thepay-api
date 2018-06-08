@@ -23,7 +23,7 @@ class PermanentPayment
 	 */
 	protected $returnUrl;
 
-	function __construct(
+	public function __construct(
 		MerchantConfig $config,
 		?string $merchantData,
 		?string $description,
@@ -95,8 +95,6 @@ class PermanentPayment
 
 	/**
 	 * Version of the getSignature method. Used by getPermanentPayment call.
-	 *
-	 * @return string
 	 */
 	public function getSignatureLite() : string
 	{

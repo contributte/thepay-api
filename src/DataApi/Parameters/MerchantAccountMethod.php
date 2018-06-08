@@ -27,7 +27,7 @@ class MerchantAccountMethod extends DataApiObject
 		return $this->id;
 	}
 
-	public function setId(int $id = NULL) : void
+	public function setId(?int $id = null) : void
 	{
 		$this->id = $id;
 	}
@@ -37,7 +37,7 @@ class MerchantAccountMethod extends DataApiObject
 		return $this->name;
 	}
 
-	public function setName(string $name = NULL) : void
+	public function setName(?string $name = null) : void
 	{
 		$this->name = $name;
 	}
@@ -47,9 +47,8 @@ class MerchantAccountMethod extends DataApiObject
 		return $this->active;
 	}
 
-	public function setActive(bool $active = NULL) : void
+	public function setActive(?bool $active = null) : void
 	{
 		$this->active = $active;
 	}
-
 }

@@ -23,7 +23,7 @@ abstract class Pagination extends DataApiObject
 		return $this->page;
 	}
 
-	public function setPage(int $page = NULL) : void
+	public function setPage(?int $page = null) : void
 	{
 		$this->page = $page;
 	}
@@ -33,9 +33,8 @@ abstract class Pagination extends DataApiObject
 		return $this->itemsOnPage;
 	}
 
-	public function setItemsOnPage(int $itemsOnPage = NULL) : void
+	public function setItemsOnPage(?int $itemsOnPage = null) : void
 	{
 		$this->itemsOnPage = $itemsOnPage;
 	}
-
 }

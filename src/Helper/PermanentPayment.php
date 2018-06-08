@@ -30,7 +30,7 @@ class PermanentPayment
 			]
 		);
 
-		if ( !$result) {
+		if (!$result) {
 			throw new Tp\Exception;
 		}
 
@@ -55,7 +55,7 @@ class PermanentPayment
 			]
 		);
 
-		if ( !$result) {
+		if (!$result) {
 			throw new Tp\Exception;
 		}
 

@@ -19,7 +19,7 @@ class PaymentReturnResponse
 	 */
 	protected $errorDescription;
 
-	function __construct(stdClass $data)
+	public function __construct(stdClass $data)
 	{
 		$this->status = boolval($data->status);
 

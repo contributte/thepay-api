@@ -19,17 +19,17 @@ class Payment
 	/**
 	 * @var float|null value indicating the amount of money that should be paid.
 	 */
-	protected $value = NULL;
+	protected $value = null;
 
 	/**
 	 * @var string|null Currency identifier.
 	 */
-	protected $currency = NULL;
+	protected $currency = null;
 
 	/**
 	 * @var string|null Payment description that should be visible to the customer.
 	 */
-	protected $description = NULL;
+	protected $description = null;
 
 	/**
 	 * Any merchant-specific data, that will be returned to the site after
@@ -37,7 +37,7 @@ class Payment
 	 *
 	 * @var string|null
 	 */
-	protected $merchantData = NULL;
+	protected $merchantData = null;
 
 	/**
 	 * URL where to redirect the user after the payment has been completed.
@@ -46,7 +46,7 @@ class Payment
 	 *
 	 * @var string|null
 	 */
-	protected $returnUrl = NULL;
+	protected $returnUrl = null;
 
 	/**
 	 * Target of the “Back to e-shop” button on the offline payment info page.
@@ -55,7 +55,7 @@ class Payment
 	 *
 	 * @var string|null
 	 */
-	protected $backToEshopUrl = NULL;
+	protected $backToEshopUrl = null;
 
 	/**
 	 * ID of payment method to use for paying. Setting this argument should
@@ -63,40 +63,40 @@ class Payment
 	 *
 	 * @var int|null
 	 */
-	protected $methodId = NULL;
+	protected $methodId = null;
 
 	/**
 	 * @deprecated
 	 * @var string|null
 	 */
-	protected $customerData = NULL;
+	protected $customerData = null;
 
 	/**
 	 * @var string|null Customer’s e-mail address. Used to send payment info and payment link from the payment info
 	 *      page.
 	 */
-	protected $customerEmail = NULL;
+	protected $customerEmail = null;
 
 	/**
 	 * @var bool|null If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *      operation.
 	 */
-	protected $deposit = NULL;
+	protected $deposit = null;
 
 	/**
 	 * @var bool|null If card payment is recurring.
 	 */
-	protected $isRecurring = NULL;
+	protected $isRecurring = null;
 
 	/**
 	 * @var string|null numerical specific symbol (used only if payment method supports it).
 	 */
-	protected $merchantSpecificSymbol = NULL;
+	protected $merchantSpecificSymbol = null;
 
 	/**
 	 * @var EetDph|null VAT decomposition for EET
 	 */
-	protected $eetDph = NULL;
+	protected $eetDph = null;
 
 	/**
 	 * Constructor. Create the payment.
@@ -115,8 +115,6 @@ class Payment
 	/**
 	 * Sets the value property.
 	 *
-	 * @param float $value
-	 *
 	 * @throws InvalidParameterException
 	 */
 	public function setValue(float $value) : void
@@ -125,9 +123,7 @@ class Payment
 		if ($value < 0) {
 			throw new InvalidParameterException('value');
 		}
-		else {
-			$this->value = $value;
-		}
+		$this->value = $value;
 	}
 
 	public function setCurrency(string $currency) : void
@@ -137,8 +133,6 @@ class Payment
 
 	/**
 	 * Sets the description property.
-	 *
-	 * @param string $description
 	 */
 	public function setDescription(string $description) : void
 	{
@@ -147,8 +141,6 @@ class Payment
 
 	/**
 	 * Sets the merchantData property.
-	 *
-	 * @param string $data
 	 */
 	public function setMerchantData(string $data) : void
 	{
@@ -157,23 +149,19 @@ class Payment
 
 	/**
 	 * Sets the returnUrl property.
-	 *
-	 * @param string $returnUrl
 	 */
 	public function setReturnUrl(string $returnUrl) : void
 	{
 		$this->returnUrl = $returnUrl;
 	}
 
-	public function setBackToEshopUrl(string $backToEshopUrl = NULL) : void
+	public function setBackToEshopUrl(?string $backToEshopUrl = null) : void
 	{
 		$this->backToEshopUrl = $backToEshopUrl;
 	}
 
 	/**
 	 * Sets the methodId property.
-	 *
-	 * @param int $methodId
 	 */
 	public function setMethodId(int $methodId) : void
 	{
@@ -182,8 +170,6 @@ class Payment
 
 	/**
 	 * Return MerchantConfig associated with this payment.
-	 *
-	 * @return MerchantConfig
 	 */
 	public function getMerchantConfig() : MerchantConfig
 	{
@@ -244,10 +230,7 @@ class Payment
 	{
 		return $this->returnUrl;
 	}
-
-	/**
-	 * @return string|null
-	 */
+	
 	public function getBackToEshopUrl() : ?string
 	{
 		return $this->backToEshopUrl;
@@ -278,7 +261,7 @@ class Payment
 		return $this->customerData;
 	}
 
-	public function setCustomerEmail(?string $customerEmail)
+	public function setCustomerEmail(?string $customerEmail) : void
 	{
 		$this->customerEmail = $customerEmail;
 	}
@@ -299,8 +282,6 @@ class Payment
 
 	/**
 	 * Set if card payment will be charged immediately or only blocked and charged later by paymentDeposit operation.
-	 *
-	 * @param bool $deposit
 	 */
 	public function setDeposit(bool $deposit) : void
 	{
@@ -319,8 +300,6 @@ class Payment
 
 	/**
 	 * Set if card payment is recurring.
-	 *
-	 * @param bool $isRecurring
 	 */
 	public function setIsRecurring(bool $isRecurring) : void
 	{
@@ -332,17 +311,15 @@ class Payment
 	 *
 	 * @return string
 	 */
-	function getMerchantSpecificSymbol() : ?string
+	public function getMerchantSpecificSymbol() : ?string
 	{
 		return $this->merchantSpecificSymbol;
 	}
 
 	/**
 	 * Numerical specific symbol (used only if payment method supports it).
-	 *
-	 * @param string $merchantSpecificSymbol
 	 */
-	function setMerchantSpecificSymbol(string $merchantSpecificSymbol) : void
+	public function setMerchantSpecificSymbol(string $merchantSpecificSymbol) : void
 	{
 		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
@@ -351,7 +328,7 @@ class Payment
 	/**
 	 * @return EetDph VAT decomposition for EET
 	 */
-	function getEetDph() : ?EetDph
+	public function getEetDph() : ?EetDph
 	{
 		return $this->eetDph;
 	}
@@ -359,7 +336,7 @@ class Payment
 	/**
 	 * @param EetDph $eetDph VAT decomposition for EET
 	 */
-	function setEetDph(EetDph $eetDph = NULL) : void
+	public function setEetDph(?EetDph $eetDph = null) : void
 	{
 		$this->eetDph = $eetDph;
 	}
@@ -367,8 +344,6 @@ class Payment
 	/**
 	 * List arguments to put into the URL. Returns associative array of
 	 * arguments that should be contained in the ThePay gate call.
-	 *
-	 * @return array
 	 */
 	public function getArgs() : array
 	{
@@ -377,54 +352,54 @@ class Payment
 		$input['merchantId'] = $this->config->merchantId;
 		$input['accountId'] = $this->config->accountId;
 
-		if ( !is_null($this->value)) {
+		if (!is_null($this->value)) {
 			$input['value'] = number_format($this->getValue(), 2, '.', '');
 		}
 
-		if ( !is_null($this->currency)) {
+		if (!is_null($this->currency)) {
 			$input['currency'] = $this->currency;
 		}
 
-		if ( !is_null($this->description)) {
+		if (!is_null($this->description)) {
 			$input['description'] = $this->description;
 		}
 
-		if ( !is_null($this->merchantData)) {
+		if (!is_null($this->merchantData)) {
 			$input['merchantData'] = $this->merchantData;
 		}
 
-		if ( !is_null($this->customerData)) {
+		if (!is_null($this->customerData)) {
 			$input['customerData'] = $this->customerData;
 		}
 
-		if ( !is_null($this->customerEmail)) {
+		if (!is_null($this->customerEmail)) {
 			$input['customerEmail'] = $this->customerEmail;
 		}
 
-		if ( !is_null($this->returnUrl)) {
+		if (!is_null($this->returnUrl)) {
 			$input['returnUrl'] = $this->returnUrl;
 		}
 
-		if ( !is_null($this->backToEshopUrl)) {
+		if (!is_null($this->backToEshopUrl)) {
 			$input['backToEshopUrl'] = $this->backToEshopUrl;
 		}
 
-		if ( !is_null($this->methodId)) {
+		if (!is_null($this->methodId)) {
 			$input['methodId'] = $this->methodId;
 		}
 
-		if ( !is_null($this->deposit)) {
+		if (!is_null($this->deposit)) {
 			$input['deposit'] = $this->getDeposit() ? '1' : '0';
 		}
-		if ( !is_null($this->isRecurring)) {
+		if (!is_null($this->isRecurring)) {
 			$input['isRecurring'] = $this->getIsRecurring() ? '1' : '0';
 		}
 
-		if ( !is_null($this->merchantSpecificSymbol)) {
+		if (!is_null($this->merchantSpecificSymbol)) {
 			$input['merchantSpecificSymbol'] = $this->merchantSpecificSymbol;
 		}
 
-		if ( !is_null($this->eetDph) && !$this->eetDph->isEmpty()) {
+		if (!is_null($this->eetDph) && !$this->eetDph->isEmpty()) {
 			$input = array_merge($input, $this->eetDph->toArray());
 		}
 
@@ -436,8 +411,6 @@ class Payment
 	 * consists of hash of all specified parameters and the merchant
 	 * password specified in the configuration. So no one can alter the
 	 * payment, because the password is not known.
-	 *
-	 * @return string
 	 */
 	public function getSignature() : string
 	{
@@ -455,10 +428,6 @@ class Payment
 
 	/**
 	 * Function that calculates hash.
-	 *
-	 * @param string $str
-	 *
-	 * @return string
 	 */
 	public static function hashFunction(string $str) : string
 	{

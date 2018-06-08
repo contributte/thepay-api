@@ -42,7 +42,8 @@ abstract class DataApiObject implements ArrayAccess
 		// Filter out static properties and those beginning with an underscore.
 		$allProperties = $reflection->getProperties();
 		$dataProperties = array_filter(
-			$allProperties, ['self', 'filterDataProperties']
+			$allProperties,
+			['self', 'filterDataProperties']
 		);
 		$sortedDataProperties = static::sortDataProperties($dataProperties);
 
@@ -56,10 +57,6 @@ abstract class DataApiObject implements ArrayAccess
 
 	/**
 	 * Callback to be used by the array_filter function.
-	 *
-	 * @param ReflectionProperty $property
-	 *
-	 * @return bool
 	 */
 	private static function filterDataProperties(
 		ReflectionProperty $property
@@ -87,10 +84,9 @@ abstract class DataApiObject implements ArrayAccess
 			$propertyClass = $property->getDeclaringClass();
 			$propertyClassName = $propertyClass->getName();
 
-			if ($propertyClassName == $calledClassName) {
+			if ($propertyClassName === $calledClassName) {
 				$own[] = $property;
-			}
-			else {
+			} else {
 				$inherited[] = $property;
 			}
 		}
@@ -100,17 +96,15 @@ abstract class DataApiObject implements ArrayAccess
 
 	protected static function demodelizeRecursive($value)
 	{
-		if ($value instanceof DataApiObject) {
+		if ($value instanceof self) {
 			$demodelized = $value->toArray();
-		}
-		else {
+		} else {
 			if (is_array($value)) {
 				$demodelized = [];
 				foreach ($value as $k => $v) {
 					$demodelized[$k] = static::demodelizeRecursive($v);
 				}
-			}
-			else {
+			} else {
 				$demodelized = $value;
 			}
 		}
@@ -128,7 +122,7 @@ abstract class DataApiObject implements ArrayAccess
 	public function offsetExists($offset)
 	{
 		$keys = static::keys();
-		$offsetExists = in_array($offset, $keys, TRUE);
+		$offsetExists = in_array($offset, $keys, true);
 
 		return $offsetExists;
 	}
@@ -153,7 +147,7 @@ abstract class DataApiObject implements ArrayAccess
 	{
 		$setterName = 'set' . ucfirst($offset);
 
-		if ( !is_null($value) && is_string($value)) {
+		if (!is_null($value) && is_string($value)) {
 			$reflectionMethod = new \ReflectionMethod($this, $setterName);
 			$parameterType = $reflectionMethod->getParameters()[0]->getType()->getName();
 
@@ -183,7 +177,6 @@ abstract class DataApiObject implements ArrayAccess
 	 */
 	public function offsetUnset($offset) : void
 	{
-		$this->offsetSet($offset, NULL);
+		$this->offsetSet($offset, null);
 	}
-
 }

@@ -9,16 +9,13 @@ class GetPaymentMethodsRequest extends Request
 	 * @var bool|null
 	 */
 	protected $onlyActive;
-
-	/**
-	 * @return bool|null
-	 */
+	
 	public function getOnlyActive() : ?bool
 	{
 		return $this->onlyActive;
 	}
 
-	public function setOnlyActive(bool $onlyActive = NULL) : void
+	public function setOnlyActive(?bool $onlyActive = null) : void
 	{
 		$this->onlyActive = $onlyActive;
 	}

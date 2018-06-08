@@ -10,12 +10,11 @@ class Exception extends \Exception
 {
 	public $defaultMessage = 'Generic ThePay exception';
 
-	function __construct(string $message = NULL)
+	public function __construct(?string $message = null)
 	{
 		if (is_null($message)) {
 			parent::__construct($this->defaultMessage);
-		}
-		else {
+		} else {
 			parent::__construct($message);
 		}
 	}

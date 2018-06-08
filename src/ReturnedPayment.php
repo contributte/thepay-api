@@ -11,11 +11,11 @@ class ReturnedPayment extends Payment
 	/**
 	 * @var int|null merchantId from request
 	 */
-	protected $requestMerchantId = NULL;
+	protected $requestMerchantId = null;
 	/**
 	 * @var int|null accountId from request
 	 */
-	protected $requestAccountId = NULL;
+	protected $requestAccountId = null;
 
 	/**
 	 * @var int Payment status. One of enum values specified in the ThePay API documentation.
@@ -62,7 +62,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @var string|null specific symbol from bank transaction. Used only for permanent payments.
 	 */
-	protected $specificSymbol = NULL;
+	protected $specificSymbol = null;
 
 	/**
 	 * Number of customer's account in full format including bank code.
@@ -70,7 +70,7 @@ class ReturnedPayment extends Payment
 	 *
 	 * @var string|null
 	 */
-	protected $customerAccountNumber = NULL;
+	protected $customerAccountNumber = null;
 
 	/**
 	 * Name of customer's account. Usually name and surname of customer, but it could be arbitrary name
@@ -79,7 +79,7 @@ class ReturnedPayment extends Payment
 	 *
 	 * @var string|null
 	 */
-	protected $customerAccountName = NULL;
+	protected $customerAccountName = null;
 
 	/**
 	 * Correctly paid.
@@ -145,20 +145,18 @@ class ReturnedPayment extends Payment
 	 * @var array default values for optional args
 	 */
 	protected static $OPTIONAL_ARGS_DEFAULT = [
-		'isConfirm'             => NULL, 'variableSymbol' => NULL, 'specificSymbol' => NULL,
-		'deposit'               => NULL, 'isRecurring' => NULL,
-		'customerAccountNumber' => NULL, 'customerAccountName' => NULL,
+		'isConfirm'             => null, 'variableSymbol' => null, 'specificSymbol' => null,
+		'deposit'               => null, 'isRecurring' => null,
+		'customerAccountNumber' => null, 'customerAccountName' => null,
 	];
 
 	/**
-	 * @param MerchantConfig $config
 	 * @param array          $args array Optional arguments parameter, that can specify the
 	 *                             arguments of the returned payment. If not specified, it is taken
 	 *                             from the $_REQUEST superglobal array.
-	 *
 	 * @throws MissingParameterException
 	 */
-	function __construct(MerchantConfig $config, array $args = NULL)
+	public function __construct(MerchantConfig $config, ?array $args = null)
 	{
 		parent::__construct($config);
 
@@ -166,15 +164,15 @@ class ReturnedPayment extends Payment
 			$args = &$_REQUEST;
 		}
 
-		if ( !empty($args['merchantId'])) {
+		if (!empty($args['merchantId'])) {
 			$this->requestMerchantId = intval($args['merchantId']);
 		}
-		if ( !empty($args['accountId'])) {
+		if (!empty($args['accountId'])) {
 			$this->requestAccountId = intval($args['accountId']);
 		}
 
 		foreach (self::$REQUIRED_ARGS as $arg) {
-			if ( !isset($args[$arg])) {
+			if (!isset($args[$arg])) {
 				throw new MissingParameterException($arg);
 			}
 
@@ -182,28 +180,27 @@ class ReturnedPayment extends Payment
 		}
 
 		foreach (self::$OPTIONAL_ARGS_DEFAULT as $arg => $defaultValue) {
-			if ( !isset($args[$arg])) {
+			if (!isset($args[$arg])) {
 				$this->{$arg} = $defaultValue;
-			}
-			else {
+			} else {
 				$this->{$arg} = $args[$arg];
 			}
 		}
 
 		foreach (self::$BOOL_ARGS as $key) {
-			if ( !is_null($this->{$key})) {
+			if (!is_null($this->{$key})) {
 				$this->{$key} = $this->{$key} === '1';
 			}
 		}
 
 		foreach (self::$INT_ARGS as $key) {
-			if ( !is_null($this->{$key})) {
+			if (!is_null($this->{$key})) {
 				$this->{$key} = intval($this->{$key});
 			}
 		}
 
 		foreach (self::$FLOAT_ARGS as $key) {
-			if ( !is_null($this->{$key})) {
+			if (!is_null($this->{$key})) {
 				$this->{$key} = doubleval($this->{$key});
 			}
 		}
@@ -217,9 +214,9 @@ class ReturnedPayment extends Payment
 	 *
 	 * @return true if signature is valid, otherwise throws
 	 *   a Tp\TpInvalidSignatureException.
-	 * @throws InvalidSignatureException, when signature is invalid.
+	 * @throws InvalidSignatureException , when signature isinvalid.
 	 */
-	function verifySignature(string $signature = NULL) : bool
+	public function verifySignature(?string $signature = null) : bool
 	{
 		// check merchantId and accountId from request
 		if (
@@ -229,7 +226,7 @@ class ReturnedPayment extends Payment
 			throw new InvalidSignatureException;
 		}
 
-		if ($signature === NULL) {
+		if ($signature === null) {
 			$signature = $this->signature;
 		}
 		// Compute the signature for arguments specified, and compare
@@ -239,13 +236,12 @@ class ReturnedPayment extends Payment
 		$out[] = 'merchantId=' . $this->getRequestMerchantId();
 		$out[] = 'accountId=' . $this->getRequestAccountId();
 		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $property) {
-			if ( !is_null($this->{$property})) {
+			if (!is_null($this->{$property})) {
 				$value = $this->{$property};
 
-				if (in_array($property, self::$FLOAT_ARGS, TRUE)) {
+				if (in_array($property, self::$FLOAT_ARGS, true)) {
 					$value = number_format($value, 2, '.', '');
-				}
-				else if (in_array($property, self::$BOOL_ARGS, TRUE)) {
+				} elseif (in_array($property, self::$BOOL_ARGS, true)) {
 					$value = $value ? '1' : '0';
 				}
 
@@ -257,11 +253,9 @@ class ReturnedPayment extends Payment
 		$sig = $this->hashFunction(implode('&', $out));
 
 		if ($sig === $signature) {
-			return TRUE;
+			return true;
 		}
-		else {
-			throw new InvalidSignatureException;
-		}
+		throw new InvalidSignatureException;
 	}
 
 	public function getRequestMerchantId() : ?int
@@ -279,17 +273,13 @@ class ReturnedPayment extends Payment
 	 * the callback, so that merchant application can count with different
 	 * currencies right now, even when ThePay does not support multiple
 	 * currencies so far.
-	 *
-	 * @return string
 	 */
-	function getCurrency() : string
+	public function getCurrency() : string
 	{
 		if (is_null($this->currency)) {
 			return 'CZK';
 		}
-		else {
-			return $this->currency;
-		}
+		return $this->currency;
 	}
 
 	/**
@@ -298,10 +288,8 @@ class ReturnedPayment extends Payment
 	 * by the class for sending the payment (mainly because sent payment
 	 * does not contain all fields that are used to generate returned
 	 * payment signature).
-	 *
-	 * @return string
 	 */
-	function getSignature() : string
+	public function getSignature() : string
 	{
 		return $this->signature;
 	}
@@ -311,7 +299,7 @@ class ReturnedPayment extends Payment
 	 *
 	 * @return int one of STATUS_* constants.
 	 */
-	function getStatus() : int
+	public function getStatus() : int
 	{
 		return $this->status;
 	}
@@ -319,7 +307,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return int Gets unique ID of the payment in the ThePay system.
 	 */
-	function getPaymentId() : int
+	public function getPaymentId() : int
 	{
 		return $this->paymentId;
 	}
@@ -327,7 +315,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * Returns the IP rating of the IP that sent the payment.
 	 */
-	function getIpRating() : int
+	public function getIpRating() : int
 	{
 		return $this->ipRating;
 	}
@@ -335,7 +323,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Returns the variable symbol, if valid, for offline payment method.
 	 */
-	function getVariableSymbol() : ?string
+	public function getVariableSymbol() : ?string
 	{
 		return $this->variableSymbol;
 	}
@@ -343,7 +331,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return bool true if payment method is offline
 	 */
-	function isOffline() : bool
+	public function isOffline() : bool
 	{
 		return $this->getIsOffline();
 	}

@@ -5,7 +5,6 @@ namespace Tp\DataApi\Processors;
 
 class SoapFlattener extends ProcessorWithPaths
 {
-
 	protected function processHash(array $value, array $currentPath) : array
 	{
 		// If the hash contains only one item and its key appended to the path
@@ -13,18 +12,16 @@ class SoapFlattener extends ProcessorWithPaths
 		// is processed directly.
 		$count = count($value);
 		if ($count === 1) {
-			list($key) = array_keys($value);
+			[$key] = array_keys($value);
 			$itemPath = array_merge($currentPath, [$key]);
 			$onPath = $this->onPath($itemPath);
 			if ($onPath) {
-				list($item) = array_values($value);
+				[$item] = array_values($value);
 				$processed = $this->processItem($item, $currentPath);
-			}
-			else {
+			} else {
 				$processed = parent::processHash($value, $currentPath);
 			}
-		}
-		else {
+		} else {
 			$processed = parent::processHash($value, $currentPath);
 		}
 

@@ -9,7 +9,6 @@ use Tp\DataApi\ValueFormatter;
 
 class GetPaymentsResponse extends Response
 {
-
 	protected static $listPaths = [
 		['payments', 'payment'],
 	];
@@ -63,7 +62,8 @@ class GetPaymentsResponse extends Response
 	public function setPayments(array $payments = []) : void
 	{
 		$this->payments = ValueFormatter::formatList(
-			'Tp\DataApi\Parameters\Payment', $payments
+			'Tp\DataApi\Parameters\Payment',
+			$payments
 		);
 	}
 

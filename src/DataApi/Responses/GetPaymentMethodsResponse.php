@@ -8,7 +8,6 @@ use Tp\DataApi\ValueFormatter;
 
 class GetPaymentMethodsResponse extends Response
 {
-
 	protected static $listPaths = [
 		['methods', 'method'],
 	];
@@ -44,7 +43,7 @@ class GetPaymentMethodsResponse extends Response
 		return $this->accountId;
 	}
 
-	public function setAccountId(int $accountId = NULL)
+	public function setAccountId(?int $accountId = null) : void
 	{
 		$this->accountId = $accountId;
 	}
@@ -63,7 +62,8 @@ class GetPaymentMethodsResponse extends Response
 	public function setMethods(array $methods = []) : void
 	{
 		$this->methods = ValueFormatter::formatList(
-			'Tp\DataApi\Parameters\MerchantAccountMethod', $methods
+			'Tp\DataApi\Parameters\MerchantAccountMethod',
+			$methods
 		);
 	}
 }

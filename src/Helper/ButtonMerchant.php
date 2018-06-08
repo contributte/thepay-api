@@ -34,15 +34,15 @@ class ButtonMerchant extends Merchant
 	 */
 	public function setButtonStyle(
 		?string $buttonStyle,
-		string $buttonText = NULL
+		?string $buttonText = null
 	) : void {
 		if (empty($buttonStyle)) {
-			$buttonStyle = NULL;
+			$buttonStyle = null;
 		}
 
 		$this->buttonStyle = $buttonStyle;
 
-		if ( !is_null($buttonText)) {
+		if (!is_null($buttonText)) {
 			$this->buttonText = $buttonText;
 		}
 	}
@@ -83,14 +83,12 @@ class ButtonMerchant extends Merchant
 		if (is_null($this->buttonStyle)) {
 			return "<a href=\"{$targetUrl}\">{$this->buttonText}</a>";
 		}
-		else {
-			$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
+		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 
-			$buttonStyle = rawurlencode($this->buttonStyle);
-			$src = Escaper::htmlEntityEncode($gateUrl . 'buttons/' . $buttonStyle . '.png');
-			$title = Escaper::htmlEntityEncode($this->buttonText);
+		$buttonStyle = rawurlencode($this->buttonStyle);
+		$src = Escaper::htmlEntityEncode($gateUrl . 'buttons/' . $buttonStyle . '.png');
+		$title = Escaper::htmlEntityEncode($this->buttonText);
 
-			return "<a href=\"{$targetUrl}\"><img src=\"{$src}\" alt=\"{$title}\" title=\"{$title}\" /></a>";
-		}
+		return "<a href=\"{$targetUrl}\"><img src=\"{$src}\" alt=\"{$title}\" title=\"{$title}\" /></a>";
 	}
 }

@@ -17,10 +17,7 @@ abstract class Processor
 	}
 
 	/**
-	 * @param array    $value
 	 * @param string[] $currentPath
-	 *
-	 * @return array
 	 */
 	protected function processHash(array $value, array $currentPath) : array
 	{
@@ -37,29 +34,21 @@ abstract class Processor
 	}
 
 	/**
-	 * @param array    $value
 	 * @param string[] $currentPath
-	 *
-	 * @return array
 	 */
 	protected function processItem(array $value, array $currentPath) : array
 	{
 		if (Utils::isList($value)) {
 			return $this->processList($value, $currentPath);
 		}
-		else {
-			return $this->processHash($value, $currentPath);
-		}
+		return $this->processHash($value, $currentPath);
 	}
 
 	/**
 	 * Seznamy položek mohou obsahovat složené hodnoty určené ku zjednodušení,
 	 * avšak jejich číselné klíče se nevkládají jako součást cesty.
 	 *
-	 * @param array    $list
 	 * @param string[] $currentPath
-	 *
-	 * @return array
 	 */
 	protected function processList(array $list, array $currentPath) : array
 	{

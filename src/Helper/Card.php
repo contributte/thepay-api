@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Tp\Helper;
 
 use SoapClient;
-use Tp\Exception;
 use Tp\Card\InfoResponse;
 use Tp\Card\PaymentResponse;
+use Tp\Exception;
 use Tp\MerchantConfig;
 
 /**
@@ -22,8 +22,7 @@ class Card
 	public static function depositPayment(
 		MerchantConfig $config,
 		$merchantData
-	): PaymentResponse
-	{
+	) : PaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -54,8 +53,7 @@ class Card
 	public static function stornoPayment(
 		MerchantConfig $config,
 		$merchantData
-	): PaymentResponse
-	{
+	) : PaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -88,8 +86,7 @@ class Card
 		$merchantData,
 		$newMerchantData,
 		$value
-	): PaymentResponse
-	{
+	) : PaymentResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -124,8 +121,7 @@ class Card
 	public static function getCardInfo(
 		MerchantConfig $config,
 		int $paymentId
-	): InfoResponse
-	{
+	) : InfoResponse {
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature([
@@ -139,7 +135,7 @@ class Card
 			'merchantId' => $config->merchantId,
 			'accountId'  => $config->accountId,
 			'paymentId'  => $paymentId,
-			'signature'  => $signature
+			'signature'  => $signature,
 		]);
 
 		if (!$result) {

@@ -17,7 +17,7 @@ class ReturnHelper
 	public static function returnPayment(
 		MerchantConfig $config,
 		$paymentId,
-		$reason = NULL
+		$reason = null
 	) : PaymentReturnResponse {
 		$client = new \SoapClient($config->webServicesWsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 		$signature = static::getSignature(
@@ -40,11 +40,10 @@ class ReturnHelper
 			]
 		);
 
-		if ( !$result) {
+		if (!$result) {
 			throw new Exception;
 		}
 
 		return new PaymentReturnResponse($result);
 	}
-
 }

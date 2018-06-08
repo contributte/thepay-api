@@ -21,16 +21,11 @@ class Digester
 	 * Hashes are converted to a SHA256 digest of its string representation
 	 * consisting of &-concatenated “key=value” parts. Nested hashes are
 	 * digested without a password.
-	 *
-	 * @param array $data
-	 *
-	 * @return string
 	 */
 	protected function processHash(array $data) : string
 	{
 		$processed = [];
 		foreach ($data as $key => $item) {
-
 			$processed[$key] = is_array($item)
 				? $this->processItem($item)
 				: $this->convertValue($item);
@@ -61,10 +56,6 @@ class Digester
 	/**
 	 * Lists are |-concatenated digested values: Booleans converted to integers,
 	 * hashes digested, strings left as they are.
-	 *
-	 * @param array $list
-	 *
-	 * @return string
 	 */
 	protected function processList(array $list) : string
 	{
@@ -76,9 +67,7 @@ class Digester
 				: $this->convertValue($value);
 		}
 
-		$processedString = implode('|', $processedArray);
-
-		return $processedString;
+		return implode('|', $processedArray);
 	}
 
 	/**
@@ -86,17 +75,13 @@ class Digester
 	 * converted to strings, strings are left untouched.
 	 *
 	 * @param mixed $value
-	 *
-	 * @return string
 	 */
 	protected function processItem($value) : string
 	{
 		if (Utils::isList($value)) {
 			return $this->processList($value);
 		}
-		else {
-			return $this->processHash($value);
-		}
+		return $this->processHash($value);
 	}
 
 	protected function convertValue($value) : string
@@ -105,9 +90,7 @@ class Digester
 			if ($value) {
 				return '1';
 			}
-			else {
-				return '0';
-			}
+			return '0';
 		}
 
 		return strval($value);

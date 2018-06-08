@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tp\Helper;
 
-use Tp\Exception;
 use Tp\Escaper;
+use Tp\Exception;
 use Tp\MerchantConfig;
 use Tp\Payment;
 
@@ -29,7 +29,7 @@ class RadioMerchant
 	 * Disable default CSS styling for popup div with payment instructions for offline methods.
 	 * User have to create his own style for popup.
 	 */
-	protected $disablePopupCss = FALSE;
+	protected $disablePopupCss = false;
 
 	/**
 	 * @param MerchantConfig $config              merchant configuration
@@ -40,13 +40,13 @@ class RadioMerchant
 	 * @param bool           $disablePopupCss     disable default CSS styling for popup div with payment instructions
 	 * @param string         $currency            payment's currency. Null for default currency
 	 */
-	function __construct(
+	public function __construct(
 		MerchantConfig $config,
-		string $name = NULL,
-		$value = NULL,
-		bool $showIcon = TRUE,
-		bool $disablePopupCss = FALSE,
-		string $currency = NULL
+		?string $name = null,
+		$value = null,
+		bool $showIcon = true,
+		bool $disablePopupCss = false,
+		?string $currency = null
 	) {
 		$this->config = $config;
 		$this->name = $name;
@@ -231,21 +231,21 @@ class RadioMerchant
 	 */
 	public function redirectOnlinePayment(
 		Payment $payment,
-		callable $redirectFunc = NULL,
-		bool $dieAfterRedirect = FALSE,
-		int $forcedValue = NULL
+		?callable $redirectFunc = null,
+		bool $dieAfterRedirect = false,
+		?int $forcedValue = null
 	) : bool {
-		if (( !empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
+		if ((!empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
 			if (headers_sent()) {
 				throw new Exception('Redirect error - headers have been already sent');
 			}
 			$this->clearCookies();
 
 			// Output buffer must be empty for the redirect to be successful.
-			$obCleaned = FALSE;
+			$obCleaned = false;
 			while (ob_get_level()) {
 				ob_end_clean();
-				$obCleaned = TRUE;
+				$obCleaned = true;
 			}
 			if ($obCleaned) {
 				// If the output buffer was being used, start buffering again.
@@ -260,14 +260,12 @@ class RadioMerchant
 
 			if ($redirectFunc && is_callable($redirectFunc)) {
 				$returnedValue = call_user_func($redirectFunc, $url);
-			}
-			else {
+			} else {
 				header('Location:' . $url);
-				$returnedValue = TRUE;
+				$returnedValue = true;
 			}
-		}
-		else {
-			$returnedValue = FALSE;
+		} else {
+			$returnedValue = false;
 		}
 
 		if ($returnedValue && $dieAfterRedirect) {
@@ -280,7 +278,7 @@ class RadioMerchant
 	/**
 	 * @deprecated
 	 */
-	public function redirectOfflinePayment(Payment $payment, callable $redirecFunc = NULL) : void
+	public function redirectOfflinePayment(Payment $payment, ?callable $redirecFunc = null) : void
 	{
 		$this->redirectOnlinePayment($payment, $redirecFunc);
 	}
@@ -288,8 +286,6 @@ class RadioMerchant
 	/**
 	 * Show instruction for offline payment if ThePay payment method is selected and this method is offline.
 	 * Show output of this method somewhere on page with order confirmation.
-	 *
-	 * @param Payment $payment
 	 *
 	 * @return string HTML code with component
 	 */
@@ -327,7 +323,7 @@ class RadioMerchant
 		$src = Escaper::htmlEntityEncode($src);
 		$out .= "<script type=\"text/javascript\" src=\"{$src}\" async=\"async\"></script>";
 
-		$out .= "<div id=\"thepay-method-result\"></div>";
+		$out .= '<div id="thepay-method-result"></div>';
 
 		return $out;
 	}

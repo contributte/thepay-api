@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tp\DataApi\Parameters;
 
 use DateTimeImmutable;
-use DateTimeInterface;
 use Tp\DataApi\DataApiObject;
 use Tp\DataApi\ValueFormatter;
 
@@ -95,7 +94,8 @@ class GetPaymentsSearchParams extends DataApiObject
 	public function setAccountId(array $accountId = []) : void
 	{
 		$this->accountId = ValueFormatter::formatList(
-			'int', $accountId
+			'int',
+			$accountId
 		);
 	}
 
@@ -113,7 +113,8 @@ class GetPaymentsSearchParams extends DataApiObject
 	public function setState(array $state = []) : void
 	{
 		$this->state = ValueFormatter::formatList(
-			'int', $state
+			'int',
+			$state
 		);
 	}
 
@@ -131,7 +132,8 @@ class GetPaymentsSearchParams extends DataApiObject
 	public function setCurrency(array $currency = []) : void
 	{
 		$this->currency = ValueFormatter::formatList(
-			'int', $currency
+			'int',
+			$currency
 		);
 	}
 
@@ -140,7 +142,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->valueFrom;
 	}
 
-	public function setValueFrom(?float $valueFrom = NULL) : void
+	public function setValueFrom(?float $valueFrom = null) : void
 	{
 		$this->valueFrom = $valueFrom;
 	}
@@ -150,7 +152,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->valueTo;
 	}
 
-	public function setValueTo(?float $valueTo = NULL) : void
+	public function setValueTo(?float $valueTo = null) : void
 	{
 		$this->valueTo = $valueTo;
 	}
@@ -160,7 +162,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->createdOnFrom;
 	}
 
-	public function setCreatedOnFrom(DateTimeImmutable $createdOnFrom = NULL) : void
+	public function setCreatedOnFrom(?DateTimeImmutable $createdOnFrom = null) : void
 	{
 		$this->createdOnFrom = $createdOnFrom;
 	}
@@ -170,7 +172,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->createdOnTo;
 	}
 
-	public function setCreatedOnTo(DateTimeImmutable $createdOnTo = NULL) : void
+	public function setCreatedOnTo(?DateTimeImmutable $createdOnTo = null) : void
 	{
 		$this->createdOnTo = $createdOnTo;
 	}
@@ -180,7 +182,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->finishedOnFrom;
 	}
 
-	public function setFinishedOnFrom(DateTimeImmutable $finishedOnFrom = NULL) : void
+	public function setFinishedOnFrom(?DateTimeImmutable $finishedOnFrom = null) : void
 	{
 		$this->finishedOnFrom = $finishedOnFrom;
 	}
@@ -190,7 +192,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->finishedOnTo;
 	}
 
-	public function setFinishedOnTo(\DateTimeImmutable $finishedOnTo = NULL) : void
+	public function setFinishedOnTo(?\DateTimeImmutable $finishedOnTo = null) : void
 	{
 		$this->finishedOnTo = $finishedOnTo;
 	}
@@ -209,7 +211,8 @@ class GetPaymentsSearchParams extends DataApiObject
 	public function setAccounting(array $accounting = []) : void
 	{
 		$this->accounting = ValueFormatter::formatList(
-			'int', $accounting
+			'int',
+			$accounting
 		);
 	}
 
@@ -218,7 +221,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->description;
 	}
 
-	public function setDescription(string $description = NULL) : void
+	public function setDescription(?string $description = null) : void
 	{
 		$this->description = $description;
 	}
@@ -228,7 +231,7 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->merchantData;
 	}
 
-	public function setMerchantData(string $merchantData = NULL) : void
+	public function setMerchantData(?string $merchantData = null) : void
 	{
 		$this->merchantData = $merchantData;
 	}
@@ -244,10 +247,11 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $method
 	 */
-	public function setMethod(array $method = [])
+	public function setMethod(array $method = []) : void
 	{
 		$this->method = ValueFormatter::formatList(
-			'int', $method
+			'int',
+			$method
 		);
 	}
 
@@ -256,9 +260,8 @@ class GetPaymentsSearchParams extends DataApiObject
 		return $this->specificSymbol;
 	}
 
-	public function setSpecificSymbol(string $specificSymbol = NULL) : void
+	public function setSpecificSymbol(?string $specificSymbol = null) : void
 	{
 		$this->specificSymbol = $specificSymbol;
 	}
-
 }

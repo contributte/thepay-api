@@ -19,21 +19,17 @@ class Signature
 	 * already present, it is removed. Password can be provided either as a hash
 	 * key 'password', or as a method argument $password.
 	 *
-	 * @param array  $data
-	 * @param string $password
-	 *
-	 * @return string
 	 * @throws MissingParameterException
 	 */
-	public static function compute(array $data, string $password = NULL) : string
+	public static function compute(array $data, ?string $password = null) : string
 	{
 		unset($data['signature']);
 
-		if ( !is_null($password)) {
+		if (!is_null($password)) {
 			$data['password'] = $password;
 		}
 
-		if ( !array_key_exists('password', $data)) {
+		if (!array_key_exists('password', $data)) {
 			throw new MissingParameterException('password');
 		}
 
@@ -53,14 +49,11 @@ class Signature
 	 * signature differs from the provided one, Tp\TpInvalidSignatureException is
 	 * thrown.
 	 *
-	 * @param array       $data
-	 * @param string      $password
 	 * @param string|null $signature
-	 *
 	 * @throws InvalidSignatureException
 	 * @throws MissingParameterException
 	 */
-	public static function validate(array $data, string $password, string $signature = NULL) : void
+	public static function validate(array $data, string $password, ?string $signature = null) : void
 	{
 		if (is_null($signature)) {
 			if (
