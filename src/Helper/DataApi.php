@@ -34,7 +34,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentMethodsResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
@@ -49,7 +48,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
@@ -79,7 +77,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentStateResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
@@ -100,7 +97,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentsResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
@@ -119,7 +115,6 @@ class DataApi
 			$data
 		);
 
-		/** @var SetPaymentMethodsResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
