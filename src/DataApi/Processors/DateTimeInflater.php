@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tp\DataApi\Processors;
 
 use DateTimeImmutable;
-use DateTimeInterface;
 use Tp\InvalidParameterException;
 
 class DateTimeInflater extends ProcessorWithPaths
@@ -19,7 +18,7 @@ class DateTimeInflater extends ProcessorWithPaths
 		) {
 			// Pozor, neprojde, pokud časové razítko obsahuje desetinnou část
 			// vteřin. Viz https://bugs.php.net/bug.php?id=51950.
-			$processed = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $value);
+			$processed = DateTimeImmutable::createFromFormat(DateTimeImmutable::ISO8601, $value);
 			if ($processed === false) {
 				$errorPathArray = $itemPath;
 				array_unshift($errorPathArray, '');
