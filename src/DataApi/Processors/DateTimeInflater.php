@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
-use DateTimeImmutable;
 use DateTime;
+use DateTimeImmutable;
 use Tp\InvalidParameterException;
 
 class DateTimeInflater extends ProcessorWithPaths
