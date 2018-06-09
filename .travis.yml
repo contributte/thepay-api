@@ -14,7 +14,7 @@ install:
     - travis_retry composer install --no-progress --prefer-dist
 
 script:
-    - bin/run-tests.sh
+    - vendor/bin/tester -p php tests/cases
 
 jobs:
     include:
