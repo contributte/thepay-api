@@ -28,7 +28,7 @@ jobs:
         -   stage: Code Coverage
             php: 7.1
             script:
-                - vendor/bin/tester -p phpdbg tests/cases -s --coverage tests/coverage.xml --coverage-src ./src
+                - vendor/bin/tester -p phpdbg tests/cases -s --coverage ./coverage.xml --coverage-src ./src
             after_script:
                 - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
                 - php coveralls.phar --verbose --config tests/.coveralls.yml
