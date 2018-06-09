@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
-use DateTimeImmutable;
+use DateTime;
 use DateTimeInterface;
 use Tp\Utils;
 
@@ -43,7 +43,7 @@ class Digester
 			}
 
 			if ($value instanceof DateTimeInterface) {
-				$value = $value->format(DateTimeImmutable::ISO8601);
+				$value = $value->format(DateTime::ISO8601);
 			}
 
 			$stringParts[] = "{$key}={$value}";
