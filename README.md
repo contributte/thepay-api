@@ -1,6 +1,8 @@
 The Pay library
 ===============
 
+[![Build Status](https://travis-ci.org/Trejjam/ThePay-lib.svg?branch=namespaces)](https://travis-ci.org/Trejjam/ThePay-lib)
+
 ***This is not official library!*** 
 
 Installation

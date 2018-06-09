@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tp\DataApi\Processors;
 
+use DateTime;
 use DateTimeInterface;
 
 class DateTimeDeflater extends ProcessorWithPaths
@@ -16,7 +17,7 @@ class DateTimeDeflater extends ProcessorWithPaths
 			&& $onPath
 			&& $value instanceof DateTimeInterface
 		) {
-			return $value->format(DateTimeInterface::ISO8601);
+			return $value->format(DateTime::ISO8601);
 		}
 
 		return $value;

@@ -103,11 +103,10 @@ class ValueFormatter
 			return null;
 		} elseif ($value instanceof DateTimeInterface) {
 			return $value;
-		} else {
-			return new DateTimeImmutable($value);
 		}
+		return new DateTimeImmutable($value);
 	}
-	
+
 	public static function formatList(string $type, array $list) : array
 	{
 		$array = [];
