@@ -8,7 +8,8 @@ test: phpstan ecs
 
 phpstan:
 	vendor/bin/phpstan analyse -l 7 -c tests/config/phpstan.neon \
-	src
+	src \
+	tests/cases
 
 ecs:
 	XDEBUG_CONFIG="remote_enable=0" vendor/bin/ecs --config=tests/config/ecs.yml check src tests/cases ${ECS_PARAM}
