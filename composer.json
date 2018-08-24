@@ -7,20 +7,32 @@
 	"license": [
 		"MIT"
 	],
+	"require": {
+		"php": ">=7.1",
+
+		"ext-json": "*",
+		"ext-soap": "*",
+		"ext-hash": "*"
+	},
 	"require-dev": {
-		"nette/tester": "@dev"
+		"nette/tester": "@dev",
+		"phpstan/phpstan": "^0.9.2",
+		"symplify/easy-coding-standard": "^4.2"
 	},
 	"suggest": {
 		"trejjam/thepay": "to use as nette extension"
 	},
 	"autoload": {
+		"psr-4": {
+			"Tp\\": "src/"
+		},
 		"classmap": [
-			"src"
+			"src/exceptions/"
 		]
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "v3.4.x-dev"
+			"master": "v4.0.x-dev"
 		}
 	}
 }

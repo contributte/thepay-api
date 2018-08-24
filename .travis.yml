@@ -1,0 +1,46 @@
+language: php
+php:
+    - 7.1
+    - 7.2
+
+env:
+    - PHP_BIN=php
+
+before_install:
+    # turn off XDebug
+    - phpenv config-rm xdebug.ini || return 0
+
+install:
+    - travis_retry composer install --no-progress --prefer-dist
+
+script:
+    - vendor/bin/tester -p php tests/cases
+
+jobs:
+    include:
+        -   stage: Code Standard Checker
+            php: 7.1
+            script:
+                - make phpstan
+                - make ecs
+
+
+        -   stage: Code Coverage
+            php: 7.1
+            script:
+                - vendor/bin/tester -p phpdbg tests/cases -s --coverage ./coverage.xml --coverage-src ./src
+            after_script:
+                - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
+                - php coveralls.phar --verbose --config tests/config/.coveralls.yml
+
+    allow_failures:
+        -   stage: Code Coverage
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+notifications:
+    email: false
