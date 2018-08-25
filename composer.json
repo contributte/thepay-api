@@ -1,5 +1,5 @@
 {
-	"name": "trejjam/thepay-lib",
+	"name": "contributte/thepay-lib",
 	"description": "The pay library",
 	"keywords": [
 		"the pay"
@@ -21,7 +21,7 @@
 		"symplify/easy-coding-standard": "~4.6.0"
 	},
 	"suggest": {
-		"trejjam/thepay": "to use as nette extension"
+		"contributte/thepay": "to use as nette extension"
 	},
 	"autoload": {
 		"psr-4": {
