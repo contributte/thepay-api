@@ -2,22 +2,22 @@
 
 -----
 
-[![Build Status](https://img.shields.io/travis/contributte/thepay-lib.svg?style=flat-square)](https://travis-ci.org/contributte/thepay-lib)
-[![Code coverage](https://img.shields.io/coveralls/contributte/thepay-lib.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay-lib)
-[![Licence](https://img.shields.io/packagist/l/contributte/thepay-lib.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-lib)
+[![Build Status](https://img.shields.io/travis/contributte/thepay-api.svg?style=flat-square)](https://travis-ci.org/contributte/thepay-api)
+[![Code coverage](https://img.shields.io/coveralls/contributte/thepay-api.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay-api)
+[![Licence](https://img.shields.io/packagist/l/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
 
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay-lib.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-lib)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay-lib.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-lib)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/thepay-lib.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-lib)
+[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
+[![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
+[![Latest stable](https://img.shields.io/packagist/v/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
 
 ## Discussion / Help
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/thepay-lib.svg?style=flat-square)](http://bit.ly/ctteg)
+[![Join the chat](https://img.shields.io/gitter/room/contributte/thepay-api.svg?style=flat-square)](http://bit.ly/ctteg)
 
 ## Install
 
 ```
-composer require contributte/thepay-lib
+composer require contributte/thepay-api
 ```
 
 ## Versions
