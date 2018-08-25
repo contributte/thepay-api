@@ -26,7 +26,7 @@ composer require contributte/thepay-lib
 |-------------|---------|----------|----------|
 | dev         | `^4.0`  | `master` | `>= 7.1` |
 | stable      | `^4.0`  | `master` | `>= 7.1` |
-| stable      | `^3.0`  | `master` | `>= 5.7` |
+| stable      | `^3.0`  | `master` | `>= 5.6` |
 | stable      | `^2.3`  | `master` | `>= 5.6` |
 
 ## Links
