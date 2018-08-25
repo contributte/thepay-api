@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
@@ -8,23 +7,21 @@ use Tp\DataApi\ValueFormatter;
 
 class GetPaymentMethodsResponse extends Response
 {
+
 	protected static $listPaths = [
 		['methods', 'method'],
 	];
 
-	/**
-	 * @var int|null
-	 */
+	/** @var int|null */
 	protected $accountId;
 
-	/**
-	 * @var MerchantAccountMethod[]
-	 */
+	/** @var MerchantAccountMethod[] */
 	protected $methods = [];
 
 	public static function createFromResponse(
 		array $response
-	) : self {
+	): self
+	{
 		/** @var GetPaymentMethodsResponse $instance */
 		$instance = parent::createFromResponse($response);
 		$instance->setAccountId($response['accountId']);
@@ -38,12 +35,12 @@ class GetPaymentMethodsResponse extends Response
 		return $instance;
 	}
 
-	public function getAccountId() : ?int
+	public function getAccountId(): ?int
 	{
 		return $this->accountId;
 	}
 
-	public function setAccountId(?int $accountId = null) : void
+	public function setAccountId(?int $accountId = null): void
 	{
 		$this->accountId = $accountId;
 	}
@@ -51,19 +48,20 @@ class GetPaymentMethodsResponse extends Response
 	/**
 	 * @return MerchantAccountMethod[]
 	 */
-	public function getMethods() : array
+	public function getMethods(): array
 	{
 		return $this->methods;
 	}
 
 	/**
-	 * @param \Tp\DataApi\Parameters\MerchantAccountMethod[] $methods
+	 * @param MerchantAccountMethod[] $methods
 	 */
-	public function setMethods(array $methods = []) : void
+	public function setMethods(array $methods = []): void
 	{
 		$this->methods = ValueFormatter::formatList(
 			'Tp\DataApi\Parameters\MerchantAccountMethod',
 			$methods
 		);
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -10,19 +9,21 @@ use Tp\Payment;
 
 /**
  * Helper for payment component with radio buttons method selection.
- *
- * @author Michal Kandr
  */
 class RadioMerchant
 {
-	/**
-	 * @var MerchantConfig merchant configuration
-	 */
+
+	/** @var MerchantConfig merchant configuration */
 	protected $config;
+
 	protected $name;
+
 	protected $value;
+
 	protected $showIcon;
+
 	protected $appendCode;
+
 	protected $currency; // Optional, defaults to CZK.
 
 	/**
@@ -43,11 +44,12 @@ class RadioMerchant
 	public function __construct(
 		MerchantConfig $config,
 		?string $name = null,
-		$value = null,
+		?string $value = null,
 		bool $showIcon = true,
 		bool $disablePopupCss = false,
 		?string $currency = null
-	) {
+	)
+	{
 		$this->config = $config;
 		$this->name = $name;
 		$this->value = $value;
@@ -59,7 +61,7 @@ class RadioMerchant
 	/**
 	 * @return MerchantConfig merchant configuration
 	 */
-	public function getConfig() : MerchantConfig
+	public function getConfig(): MerchantConfig
 	{
 		return $this->config;
 	}
@@ -67,7 +69,7 @@ class RadioMerchant
 	/**
 	 * @param MerchantConfig $config merchant configuration
 	 */
-	public function setConfig(MerchantConfig $config) : void
+	public function setConfig(MerchantConfig $config): void
 	{
 		$this->config = $config;
 	}
@@ -75,7 +77,7 @@ class RadioMerchant
 	/**
 	 * @return string name of original radio buttons with payment methods;
 	 */
-	public function getName() : string
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -83,7 +85,7 @@ class RadioMerchant
 	/**
 	 * @param string $name name of original radio buttons with payment methods
 	 */
-	public function setName(string $name) : void
+	public function setName(string $name): void
 	{
 		$this->name = $name;
 	}
@@ -99,7 +101,7 @@ class RadioMerchant
 	/**
 	 * @param string|int $value value of radio button that originally represents ThePay payment method
 	 */
-	public function setValue($value) : void
+	public function setValue($value): void
 	{
 		$this->value = $value;
 	}
@@ -107,7 +109,7 @@ class RadioMerchant
 	/**
 	 * @param bool $showIcon if payment method graphical icon should be rendered in radiobutton's label
 	 */
-	public function setShowIcon(bool $showIcon) : void
+	public function setShowIcon(bool $showIcon): void
 	{
 		$this->showIcon = $showIcon;
 	}
@@ -115,7 +117,7 @@ class RadioMerchant
 	/**
 	 * @return bool if payment method graphical icon should be rendered in radiobutton's label
 	 */
-	public function getShowIcon() : bool
+	public function getShowIcon(): bool
 	{
 		return $this->showIcon;
 	}
@@ -125,7 +127,7 @@ class RadioMerchant
 		return $this->appendCode;
 	}
 
-	public function setAppendCode($appendCode) : void
+	public function setAppendCode($appendCode): void
 	{
 		$this->appendCode = $appendCode;
 	}
@@ -138,7 +140,7 @@ class RadioMerchant
 	/**
 	 * Disable/enable thepay css for offline payment popup box
 	 */
-	public function setDisablePopupCss(bool $disablePopupCss) : void
+	public function setDisablePopupCss(bool $disablePopupCss): void
 	{
 		$this->disablePopupCss = $disablePopupCss;
 	}
@@ -148,7 +150,7 @@ class RadioMerchant
 		return $this->currency;
 	}
 
-	private function createSignature(array $params) : string
+	private function createSignature(array $params): string
 	{
 		$str = http_build_query(array_filter(array_merge($params, ['password' => $this->config->password])));
 
@@ -160,7 +162,7 @@ class RadioMerchant
 	 *
 	 * @return string HTML code
 	 */
-	public function renderRadio() : string
+	public function renderRadio(): string
 	{
 		$gateUrl = $this->config->gateUrl;
 		$queryArgs = [
@@ -169,7 +171,7 @@ class RadioMerchant
 			'name'       => $this->name,
 			'value'      => $this->value,
 			'showIcon'   => $this->showIcon,
-			'selected'   => !empty($_REQUEST['tp_radio_value']) ? (int)$_REQUEST['tp_radio_value'] : '',
+			'selected'   => !empty($_REQUEST['tp_radio_value']) ? (int) $_REQUEST['tp_radio_value'] : '',
 		];
 		// Currency is an optional argument. For compatibility reasons, it is
 		// not present in the query at all if its value is empty.
@@ -206,12 +208,12 @@ class RadioMerchant
 	/**
 	 * @return bool true if some of ThePay payment methods was selected
 	 */
-	public function isTpMethodChosen() : bool
+	public function isTpMethodChosen(): bool
 	{
 		return !empty($_REQUEST['tp_radio_value']);
 	}
 
-	protected function clearCookies() : void
+	protected function clearCookies(): void
 	{
 		setcookie('tp_selected_val', '', 1);
 	}
@@ -226,7 +228,6 @@ class RadioMerchant
 	 * @param bool     $dieAfterRedirect  In case of successful redirect, exit (die) instead of just returning true.
 	 * @param int      $forcedValue       allowes you to explicitly set selected payment method id (when you need it to
 	 *                                    by set differently then from request variable)
-	 *
 	 * @throws Exception if headers was already sent
 	 */
 	public function redirectOnlinePayment(
@@ -234,7 +235,8 @@ class RadioMerchant
 		?callable $redirectFunc = null,
 		bool $dieAfterRedirect = false,
 		?int $forcedValue = null
-	) : bool {
+	): bool
+	{
 		if ((!empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
 			if (headers_sent()) {
 				throw new Exception('Redirect error - headers have been already sent');
@@ -280,7 +282,7 @@ class RadioMerchant
 	/**
 	 * @deprecated
 	 */
-	public function redirectOfflinePayment(Payment $payment, ?callable $redirecFunc = null) : void
+	public function redirectOfflinePayment(Payment $payment, ?callable $redirecFunc = null): void
 	{
 		$this->redirectOnlinePayment($payment, $redirecFunc);
 	}
@@ -291,7 +293,7 @@ class RadioMerchant
 	 *
 	 * @return string HTML code with component
 	 */
-	public function showPaymentInstructions(Payment $payment) : string
+	public function showPaymentInstructions(Payment $payment): string
 	{
 		if (empty($_REQUEST['tp_radio_value']) || empty($_REQUEST['tp_radio_is_offline'])) {
 			return '';
@@ -329,4 +331,5 @@ class RadioMerchant
 
 		return $out;
 	}
+
 }

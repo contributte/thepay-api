@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
@@ -8,24 +7,20 @@ use Tp\Utils;
 
 class Response extends DataApiObject
 {
-	/**
-	 * @var array[]
-	 */
+
+	/** @var array[] */
 	protected static $listPaths = [];
 
-	/**
-	 * @var array[]
-	 */
+	/** @var array[] */
 	protected static $dateTimePaths = [];
 
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	protected $merchantId;
 
 	public static function createFromResponse(
 		array $response
-	) {
+	)
+	{
 		$keys = ['merchantId'];
 		$data = Utils::filterKeys($response, $keys);
 
@@ -35,7 +30,7 @@ class Response extends DataApiObject
 	/**
 	 * @return array[]
 	 */
-	public static function listPaths() : array
+	public static function listPaths(): array
 	{
 		return static::$listPaths;
 	}
@@ -43,18 +38,19 @@ class Response extends DataApiObject
 	/**
 	 * @return array[]
 	 */
-	public static function dateTimePaths() : array
+	public static function dateTimePaths(): array
 	{
 		return static::$dateTimePaths;
 	}
 
-	public function getMerchantId() : int
+	public function getMerchantId(): int
 	{
 		return $this->merchantId;
 	}
 
-	public function setMerchantId(int $merchantId) : void
+	public function setMerchantId(int $merchantId): void
 	{
 		$this->merchantId = $merchantId;
 	}
+
 }

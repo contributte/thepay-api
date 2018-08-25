@@ -1,39 +1,64 @@
 {
-	"name": "contributte/thepay-lib",
-	"description": "The pay library",
-	"keywords": [
-		"the pay"
-	],
-	"license": [
-		"MIT"
-	],
-	"require": {
-		"php": ">=7.1",
+  "name": "contributte/thepay-lib",
+  "description": "The pay library",
+  "keywords": [
+    "the pay"
+  ],
+  "license": [
+    "MIT"
+  ],
+  "require": {
+    "php": ">=7.1",
 
-		"ext-json": "*",
-		"ext-soap": "*",
-		"ext-hash": "*"
-	},
-	"require-dev": {
-		"nette/tester": "@dev",
+    "ext-json": "*",
+    "ext-soap": "*",
+    "ext-hash": "*"
+  },
+  "require-dev": {
+    "nette/tester": "@dev",
 
-		"phpstan/phpstan": "~0.10.2",
-		"symplify/easy-coding-standard": "~4.6.0"
-	},
-	"suggest": {
-		"contributte/thepay": "to use as nette extension"
-	},
-	"autoload": {
-		"psr-4": {
-			"Tp\\": "src/"
-		},
-		"classmap": [
-			"src/exceptions/"
-		]
-	},
-	"extra": {
-		"branch-alias": {
-			"master": "v4.0.x-dev"
-		}
-	}
+    "phpstan/phpstan": "~0.10.2",
+    "phpstan/phpstan-strict-rules": "~0.10.1",
+    "ninjify/qa": "^0.8.0@dev",
+    "ninjify/coding-standard": "^0.7.0@dev",
+    "ninjify/nunjuck": "^0.2.0"
+  },
+  "suggest": {
+    "contributte/thepay": "to use as nette extension"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tp\\": "src/"
+    },
+    "classmap": [
+      "src/exceptions/"
+    ]
+  },
+  "prefer-stable": true,
+  "scripts": {
+    "qa": [
+      "linter src tests/cases",
+      "codesniffer src tests/cases"
+    ],
+    "tester": [
+      "tester -s -p php --colors 1 -C -d soap.so tests/cases"
+    ],
+    "coverage": [
+      "tester -s -p php --colors 1 -C -d soap.so -d extension=xdebug.so --coverage coverage.xml --coverage-src src tests/cases"
+    ],
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:0.10.1",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:0.10"
+    ],
+    "phpstan": [
+      "phpstan analyse -l max -c tests/config/phpstan.neon src tests/cases"
+    ]
+  },
+  "extra": {
+    "branch-alias": {
+      "master": "v4.0.x-dev"
+    }
+  }
 }

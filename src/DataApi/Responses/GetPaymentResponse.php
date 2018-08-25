@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
@@ -7,20 +6,20 @@ use Tp\DataApi\Parameters\Payment;
 
 class GetPaymentResponse extends Response
 {
+
 	protected static $dateTimePaths = [
 		['payment', 'createdOn'],
 		['payment', 'finishedOn'],
 		['payment', 'canceledOn'],
 	];
 
-	/**
-	 * @var Payment|null
-	 */
+	/** @var Payment|null */
 	protected $payment;
 
 	public static function createFromResponse(
 		array $response
-	) : self {
+	): self
+	{
 		/** @var GetPaymentResponse $instance */
 		$instance = parent::createFromResponse($response);
 
@@ -30,13 +29,14 @@ class GetPaymentResponse extends Response
 		return $instance;
 	}
 
-	public function getPayment() : ?Payment
+	public function getPayment(): ?Payment
 	{
 		return $this->payment;
 	}
 
-	public function setPayment(?Payment $payment = null) : void
+	public function setPayment(?Payment $payment = null): void
 	{
 		$this->payment = $payment;
 	}
+
 }

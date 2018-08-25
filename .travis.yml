@@ -14,15 +14,15 @@ install:
     - travis_retry composer install --no-progress --prefer-dist
 
 script:
-    - vendor/bin/tester -p php tests/cases
+    - composer run-script tester
 
 jobs:
     include:
         -   stage: Code Standard Checker
             php: 7.1
             script:
-                - make phpstan
-                - make ecs
+                - composer run-script phpstan
+                - composer run-script qa
 
 
         -   stage: Code Coverage

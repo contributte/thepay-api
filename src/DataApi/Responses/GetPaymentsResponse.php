@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
@@ -9,6 +8,7 @@ use Tp\DataApi\ValueFormatter;
 
 class GetPaymentsResponse extends Response
 {
+
 	protected static $listPaths = [
 		['payments', 'payment'],
 	];
@@ -19,19 +19,16 @@ class GetPaymentsResponse extends Response
 		['payments', 'canceledOn'],
 	];
 
-	/**
-	 * @var Payment[]
-	 */
+	/** @var Payment[] */
 	protected $payments = [];
 
-	/**
-	 * @var PaginationResponse|null
-	 */
+	/** @var PaginationResponse|null */
 	protected $pagination;
 
 	public static function createFromResponse(
 		array $response
-	) : self {
+	): self
+	{
 		/** @var GetPaymentsResponse $instance */
 		$instance = parent::createFromResponse($response);
 
@@ -51,7 +48,7 @@ class GetPaymentsResponse extends Response
 	/**
 	 * @return Payment[]
 	 */
-	public function getPayments() : array
+	public function getPayments(): array
 	{
 		return $this->payments;
 	}
@@ -59,7 +56,7 @@ class GetPaymentsResponse extends Response
 	/**
 	 * @param Payment[] $payments
 	 */
-	public function setPayments(array $payments = []) : void
+	public function setPayments(array $payments = []): void
 	{
 		$this->payments = ValueFormatter::formatList(
 			'Tp\DataApi\Parameters\Payment',
@@ -67,13 +64,14 @@ class GetPaymentsResponse extends Response
 		);
 	}
 
-	public function getPagination() : ?PaginationResponse
+	public function getPagination(): ?PaginationResponse
 	{
 		return $this->pagination;
 	}
 
-	public function setPagination(?PaginationResponse $pagination) : void
+	public function setPagination(?PaginationResponse $pagination): void
 	{
 		$this->pagination = $pagination;
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -10,80 +9,52 @@ use Tp\DataApi\ValueFormatter;
 class GetPaymentsSearchParams extends DataApiObject
 {
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	protected $accountId = [];
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	protected $state = [];
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	protected $currency = [];
 
-	/**
-	 * @var float|null
-	 */
+	/** @var float|null */
 	protected $valueFrom;
 
-	/**
-	 * @var float|null
-	 */
+	/** @var float|null */
 	protected $valueTo;
 
-	/**
-	 * @var DateTimeImmutable|null
-	 */
+	/** @var DateTimeImmutable|null */
 	protected $createdOnFrom;
 
-	/**
-	 * @var DateTimeImmutable|null
-	 */
+	/** @var DateTimeImmutable|null */
 	protected $createdOnTo;
 
-	/**
-	 * @var DateTimeImmutable|null
-	 */
+	/** @var DateTimeImmutable|null */
 	protected $finishedOnFrom;
 
-	/**
-	 * @var DateTimeImmutable|null
-	 */
+	/** @var DateTimeImmutable|null */
 	protected $finishedOnTo;
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	protected $accounting = [];
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	protected $description;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	protected $merchantData;
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	protected $method = [];
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	protected $specificSymbol;
 
 	/**
 	 * @return int[]
 	 */
-	public function getAccountId() : array
+	public function getAccountId(): array
 	{
 		return $this->accountId;
 	}
@@ -91,7 +62,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $accountId
 	 */
-	public function setAccountId(array $accountId = []) : void
+	public function setAccountId(array $accountId = []): void
 	{
 		$this->accountId = ValueFormatter::formatList(
 			'int',
@@ -102,7 +73,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @return int[]
 	 */
-	public function getState() : array
+	public function getState(): array
 	{
 		return $this->state;
 	}
@@ -110,7 +81,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $state
 	 */
-	public function setState(array $state = []) : void
+	public function setState(array $state = []): void
 	{
 		$this->state = ValueFormatter::formatList(
 			'int',
@@ -121,7 +92,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @return int[]
 	 */
-	public function getCurrency() : array
+	public function getCurrency(): array
 	{
 		return $this->currency;
 	}
@@ -129,7 +100,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $currency
 	 */
-	public function setCurrency(array $currency = []) : void
+	public function setCurrency(array $currency = []): void
 	{
 		$this->currency = ValueFormatter::formatList(
 			'int',
@@ -137,62 +108,62 @@ class GetPaymentsSearchParams extends DataApiObject
 		);
 	}
 
-	public function getValueFrom() : ?float
+	public function getValueFrom(): ?float
 	{
 		return $this->valueFrom;
 	}
 
-	public function setValueFrom(?float $valueFrom = null) : void
+	public function setValueFrom(?float $valueFrom = null): void
 	{
 		$this->valueFrom = $valueFrom;
 	}
 
-	public function getValueTo() : ?float
+	public function getValueTo(): ?float
 	{
 		return $this->valueTo;
 	}
 
-	public function setValueTo(?float $valueTo = null) : void
+	public function setValueTo(?float $valueTo = null): void
 	{
 		$this->valueTo = $valueTo;
 	}
 
-	public function getCreatedOnFrom() : ?DateTimeImmutable
+	public function getCreatedOnFrom(): ?DateTimeImmutable
 	{
 		return $this->createdOnFrom;
 	}
 
-	public function setCreatedOnFrom(?DateTimeImmutable $createdOnFrom = null) : void
+	public function setCreatedOnFrom(?DateTimeImmutable $createdOnFrom = null): void
 	{
 		$this->createdOnFrom = $createdOnFrom;
 	}
 
-	public function getCreatedOnTo() : ?DateTimeImmutable
+	public function getCreatedOnTo(): ?DateTimeImmutable
 	{
 		return $this->createdOnTo;
 	}
 
-	public function setCreatedOnTo(?DateTimeImmutable $createdOnTo = null) : void
+	public function setCreatedOnTo(?DateTimeImmutable $createdOnTo = null): void
 	{
 		$this->createdOnTo = $createdOnTo;
 	}
 
-	public function getFinishedOnFrom() : ?DateTimeImmutable
+	public function getFinishedOnFrom(): ?DateTimeImmutable
 	{
 		return $this->finishedOnFrom;
 	}
 
-	public function setFinishedOnFrom(?DateTimeImmutable $finishedOnFrom = null) : void
+	public function setFinishedOnFrom(?DateTimeImmutable $finishedOnFrom = null): void
 	{
 		$this->finishedOnFrom = $finishedOnFrom;
 	}
 
-	public function getFinishedOnTo() : ?DateTimeImmutable
+	public function getFinishedOnTo(): ?DateTimeImmutable
 	{
 		return $this->finishedOnTo;
 	}
 
-	public function setFinishedOnTo(?\DateTimeImmutable $finishedOnTo = null) : void
+	public function setFinishedOnTo(?DateTimeImmutable $finishedOnTo = null): void
 	{
 		$this->finishedOnTo = $finishedOnTo;
 	}
@@ -200,7 +171,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @return int[]
 	 */
-	public function getAccounting() : array
+	public function getAccounting(): array
 	{
 		return $this->accounting;
 	}
@@ -208,7 +179,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $accounting
 	 */
-	public function setAccounting(array $accounting = []) : void
+	public function setAccounting(array $accounting = []): void
 	{
 		$this->accounting = ValueFormatter::formatList(
 			'int',
@@ -216,22 +187,22 @@ class GetPaymentsSearchParams extends DataApiObject
 		);
 	}
 
-	public function getDescription() : ?string
+	public function getDescription(): ?string
 	{
 		return $this->description;
 	}
 
-	public function setDescription(?string $description = null) : void
+	public function setDescription(?string $description = null): void
 	{
 		$this->description = $description;
 	}
 
-	public function getMerchantData() : ?string
+	public function getMerchantData(): ?string
 	{
 		return $this->merchantData;
 	}
 
-	public function setMerchantData(?string $merchantData = null) : void
+	public function setMerchantData(?string $merchantData = null): void
 	{
 		$this->merchantData = $merchantData;
 	}
@@ -239,7 +210,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @return int[]
 	 */
-	public function getMethod() : array
+	public function getMethod(): array
 	{
 		return $this->method;
 	}
@@ -247,7 +218,7 @@ class GetPaymentsSearchParams extends DataApiObject
 	/**
 	 * @param int[] $method
 	 */
-	public function setMethod(array $method = []) : void
+	public function setMethod(array $method = []): void
 	{
 		$this->method = ValueFormatter::formatList(
 			'int',
@@ -255,13 +226,14 @@ class GetPaymentsSearchParams extends DataApiObject
 		);
 	}
 
-	public function getSpecificSymbol() : ?string
+	public function getSpecificSymbol(): ?string
 	{
 		return $this->specificSymbol;
 	}
 
-	public function setSpecificSymbol(?string $specificSymbol = null) : void
+	public function setSpecificSymbol(?string $specificSymbol = null): void
 	{
 		$this->specificSymbol = $specificSymbol;
 	}
+
 }

@@ -1,22 +1,16 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
 use stdClass;
 
-/**
- * @author Michal Kandr
- */
 class PaymentReturnResponse
 {
-	/**
-	 * @var bool
-	 */
+
+	/** @var bool */
 	protected $status;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $errorDescription;
 
 	public function __construct(stdClass $data)
@@ -28,13 +22,14 @@ class PaymentReturnResponse
 		}
 	}
 
-	public function getStatus() : bool
+	public function getStatus(): bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription() : ?string
+	public function getErrorDescription(): ?string
 	{
 		return $this->errorDescription;
 	}
+
 }

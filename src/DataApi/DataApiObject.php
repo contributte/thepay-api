@@ -1,15 +1,16 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi;
 
 use ArrayAccess;
 use ReflectionClass;
+use ReflectionMethod;
 use ReflectionProperty;
 use Tp\Utils;
 
 abstract class DataApiObject implements ArrayAccess
 {
+
 	public function __construct(array $data = [])
 	{
 		$keys = static::keys();
@@ -20,7 +21,7 @@ abstract class DataApiObject implements ArrayAccess
 		}
 	}
 
-	public function toArray() : array
+	public function toArray(): array
 	{
 		$data = [];
 		$keys = self::keys();
@@ -34,16 +35,16 @@ abstract class DataApiObject implements ArrayAccess
 	/**
 	 * @return string[]
 	 */
-	public static function keys() : array
+	public static function keys(): array
 	{
-		$calledClass = get_called_class();
+		$calledClass = static::class;
 		$reflection = new ReflectionClass($calledClass);
 
 		// Filter out static properties and those beginning with an underscore.
 		$allProperties = $reflection->getProperties();
 		$dataProperties = array_filter(
 			$allProperties,
-			function (ReflectionProperty $property) {
+			static function (ReflectionProperty $property) {
 				return self::filterDataProperties($property);
 			}
 		);
@@ -59,7 +60,8 @@ abstract class DataApiObject implements ArrayAccess
 
 	private static function filterDataProperties(
 		ReflectionProperty $property
-	) : bool {
+	): bool
+	{
 		$underscored = strpos($property->getName(), '_') === 0;
 
 		return !$underscored && !$property->isStatic();
@@ -69,15 +71,14 @@ abstract class DataApiObject implements ArrayAccess
 	 * Prepend inherited properties.
 	 *
 	 * @param ReflectionProperty[] $dataProperties
-	 *
 	 * @return ReflectionProperty[]
 	 */
-	private static function sortDataProperties(array $dataProperties) : array
+	private static function sortDataProperties(array $dataProperties): array
 	{
 		$inherited = [];
 		$own = [];
 
-		$calledClassName = get_called_class();
+		$calledClassName = static::class;
 
 		foreach ($dataProperties as $property) {
 			$propertyClass = $property->getDeclaringClass();
@@ -115,20 +116,16 @@ abstract class DataApiObject implements ArrayAccess
 
 	/**
 	 * @param string $offset
-	 *
 	 * @return bool
 	 */
 	public function offsetExists($offset)
 	{
 		$keys = static::keys();
-		$offsetExists = in_array($offset, $keys, true);
-
-		return $offsetExists;
+		return in_array($offset, $keys, true);
 	}
 
 	/**
 	 * @param string $offset
-	 *
 	 * @return mixed
 	 */
 	public function offsetGet($offset)
@@ -142,12 +139,12 @@ abstract class DataApiObject implements ArrayAccess
 	 * @param string $offset
 	 * @param mixed  $value
 	 */
-	public function offsetSet($offset, $value) : void
+	public function offsetSet($offset, $value): void
 	{
 		$setterName = 'set' . ucfirst($offset);
 
-		if (!is_null($value) && is_string($value)) {
-			$reflectionMethod = new \ReflectionMethod($this, $setterName);
+		if ($value !== null && is_string($value)) {
+			$reflectionMethod = new ReflectionMethod($this, $setterName);
 			$parameterType = $reflectionMethod->getParameters()[0]->getType()->getName();
 
 			switch ($parameterType) {
@@ -157,7 +154,7 @@ abstract class DataApiObject implements ArrayAccess
 					break;
 
 				case 'float':
-					$value = doubleval($value);
+					$value = floatval($value);
 
 					break;
 
@@ -174,8 +171,9 @@ abstract class DataApiObject implements ArrayAccess
 	/**
 	 * @param string $offset
 	 */
-	public function offsetUnset($offset) : void
+	public function offsetUnset($offset): void
 	{
 		$this->offsetSet($offset, null);
 	}
+
 }

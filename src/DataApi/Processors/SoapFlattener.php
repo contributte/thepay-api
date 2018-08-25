@@ -1,11 +1,11 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Processors;
 
 class SoapFlattener extends ProcessorWithPaths
 {
-	protected function processHash(array $value, array $currentPath) : array
+
+	protected function processHash(array $value, array $currentPath): array
 	{
 		// If the hash contains only one item and its key appended to the path
 		// is on the list of list paths, this one item is skipped and the list
@@ -32,4 +32,5 @@ class SoapFlattener extends ProcessorWithPaths
 	{
 		return $value;
 	}
+
 }

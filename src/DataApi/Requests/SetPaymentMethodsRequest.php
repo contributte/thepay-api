@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Requests;
 
@@ -7,19 +6,17 @@ use Tp\DataApi\ValueFormatter;
 
 class SetPaymentMethodsRequest extends Request
 {
+
 	public const TYPE_ALL       = 'all';
 	public const TYPE_WHITELIST = 'whitelist';
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	protected $type = self::TYPE_WHITELIST;
-	/**
-	 * @var int[]
-	 */
+
+	/** @var int[] */
 	protected $paymentMethods = [];
 
-	public function getType() : string
+	public function getType(): string
 	{
 		return $this->type;
 	}
@@ -27,7 +24,7 @@ class SetPaymentMethodsRequest extends Request
 	/**
 	 * @param string $type one of TYPE_* constants
 	 */
-	public function setType(string $type) : void
+	public function setType(string $type): void
 	{
 		$this->type = $type;
 	}
@@ -35,7 +32,7 @@ class SetPaymentMethodsRequest extends Request
 	/**
 	 * @return int[]
 	 */
-	public function getPaymentMethods() : array
+	public function getPaymentMethods(): array
 	{
 		return $this->paymentMethods;
 	}
@@ -45,16 +42,17 @@ class SetPaymentMethodsRequest extends Request
 	 *
 	 * @param int[] $paymentMethods id's of payment methods
 	 */
-	public function setPaymentMethods(array $paymentMethods) : void
+	public function setPaymentMethods(array $paymentMethods): void
 	{
 		$this->paymentMethods = ValueFormatter::formatList('int', $paymentMethods);
 	}
 
-	protected function configArray() : array
+	protected function configArray(): array
 	{
 		$configArray = parent::configArray();
 		$configArray['accountId'] = $this->_config->accountId;
 
 		return $configArray;
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -8,14 +7,10 @@ use Tp\DataApi\DataApiObject;
 class PaymentInfo extends DataApiObject
 {
 
-	/**
-	 * @var bool|null
-	 */
+	/** @var bool|null */
 	protected $isOffline;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	protected $paymentPageUrl;
 
 	/**
@@ -32,9 +27,7 @@ class PaymentInfo extends DataApiObject
 	 */
 	protected $methodChangeUrl;
 
-	/**
-	 * @var float|null
-	 */
+	/** @var float|null */
 	protected $value;
 
 	/**
@@ -93,133 +86,134 @@ class PaymentInfo extends DataApiObject
 	 */
 	protected $scBarcodeUrl;
 
-	public function getIsOffline() : ?bool
+	public function getIsOffline(): ?bool
 	{
 		return $this->isOffline;
 	}
 
-	public function setIsOffline(?bool $isOffline = null) : void
+	public function setIsOffline(?bool $isOffline = null): void
 	{
 		$this->isOffline = $isOffline;
 	}
 
-	public function getPaymentPageUrl() : ?string
+	public function getPaymentPageUrl(): ?string
 	{
 		return $this->paymentPageUrl;
 	}
 
-	public function setPaymentPageUrl(?string $paymentPageUrl = null) : void
+	public function setPaymentPageUrl(?string $paymentPageUrl = null): void
 	{
 		$this->paymentPageUrl = $paymentPageUrl;
 	}
 
-	public function getPaymentInfoUrl() : ?string
+	public function getPaymentInfoUrl(): ?string
 	{
 		return $this->paymentInfoUrl;
 	}
 
-	public function setPaymentInfoUrl(?string $paymentInfoUrl = null) : void
+	public function setPaymentInfoUrl(?string $paymentInfoUrl = null): void
 	{
 		$this->paymentInfoUrl = $paymentInfoUrl;
 	}
 
-	public function getMethodChangeUrl() : ?string
+	public function getMethodChangeUrl(): ?string
 	{
 		return $this->methodChangeUrl;
 	}
 
-	public function setMethodChangeUrl(?string $methodChangeUrl = null) : void
+	public function setMethodChangeUrl(?string $methodChangeUrl = null): void
 	{
 		$this->methodChangeUrl = $methodChangeUrl;
 	}
 
-	public function getValue() : ?float
+	public function getValue(): ?float
 	{
 		return $this->value;
 	}
 
-	public function setValue(?float $value) : void
+	public function setValue(?float $value): void
 	{
 		$this->value = $value;
 	}
 
-	public function getAccountNumberPrefix() : ?string
+	public function getAccountNumberPrefix(): ?string
 	{
 		return $this->accountNumberPrefix;
 	}
 
-	public function setAccountNumberPrefix(?string $accountNumberPrefix = null) : void
+	public function setAccountNumberPrefix(?string $accountNumberPrefix = null): void
 	{
 		$this->accountNumberPrefix = $accountNumberPrefix;
 	}
 
-	public function getAccountNumber() : ?string
+	public function getAccountNumber(): ?string
 	{
 		return $this->accountNumber;
 	}
 
-	public function setAccountNumber(?string $accountNumber = null) : void
+	public function setAccountNumber(?string $accountNumber = null): void
 	{
 		$this->accountNumber = $accountNumber;
 	}
 
-	public function getBankCode() : ?string
+	public function getBankCode(): ?string
 	{
 		return $this->bankCode;
 	}
 
-	public function setBankCode(?string $bankCode = null) : void
+	public function setBankCode(?string $bankCode = null): void
 	{
 		$this->bankCode = $bankCode;
 	}
 
-	public function getVs() : ?string
+	public function getVs(): ?string
 	{
 		return $this->vs;
 	}
 
-	public function setVs(?string $vs = null) : void
+	public function setVs(?string $vs = null): void
 	{
 		$this->vs = $vs;
 	}
 
-	public function getSs() : ?string
+	public function getSs(): ?string
 	{
 		return $this->ss;
 	}
 
-	public function setSs(?string $ss = null) : void
+	public function setSs(?string $ss = null): void
 	{
 		$this->ss = $ss;
 	}
 
-	public function getEbankingUrl() : ?string
+	public function getEbankingUrl(): ?string
 	{
 		return $this->ebankingUrl;
 	}
 
-	public function setEbankingUrl(?string $ebankingUrl = null) : void
+	public function setEbankingUrl(?string $ebankingUrl = null): void
 	{
 		$this->ebankingUrl = $ebankingUrl;
 	}
 
-	public function getScCode() : ?string
+	public function getScCode(): ?string
 	{
 		return $this->scCode;
 	}
 
-	public function setScCode(?string $scCode = null) : void
+	public function setScCode(?string $scCode = null): void
 	{
 		$this->scCode = $scCode;
 	}
 
-	public function getScBarcodeUrl() : ?string
+	public function getScBarcodeUrl(): ?string
 	{
 		return $this->scBarcodeUrl;
 	}
 
-	public function setScBarcodeUrl(?string $scBarcodeUrl = null) : void
+	public function setScBarcodeUrl(?string $scBarcodeUrl = null): void
 	{
 		$this->scBarcodeUrl = $scBarcodeUrl;
 	}
+
 }

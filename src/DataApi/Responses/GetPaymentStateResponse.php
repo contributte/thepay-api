@@ -1,19 +1,17 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
 class GetPaymentStateResponse extends Response
 {
 
-	/**
-	 * @var int|null
-	 */
+	/** @var int|null */
 	protected $state;
 
 	public static function createFromResponse(
 		array $response
-	) : self {
+	): self
+	{
 		/** @var GetPaymentStateResponse $instance */
 		$instance = parent::createFromResponse($response);
 		$instance->setState($response['state']);
@@ -21,13 +19,14 @@ class GetPaymentStateResponse extends Response
 		return $instance;
 	}
 
-	public function getState() : ?int
+	public function getState(): ?int
 	{
 		return $this->state;
 	}
 
-	public function setState(?int $state = null) : void
+	public function setState(?int $state = null): void
 	{
 		$this->state = $state;
 	}
+
 }

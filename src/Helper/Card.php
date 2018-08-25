@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -9,11 +8,9 @@ use Tp\Card\PaymentResponse;
 use Tp\Exception;
 use Tp\MerchantConfig;
 
-/**
- * @author Michal Kandr
- */
 class Card
 {
+
 	protected static function getSignature(array $data)
 	{
 		return md5(http_build_query(array_filter($data)));
@@ -22,7 +19,8 @@ class Card
 	public static function depositPayment(
 		MerchantConfig $config,
 		$merchantData
-	) : PaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -53,7 +51,8 @@ class Card
 	public static function stornoPayment(
 		MerchantConfig $config,
 		$merchantData
-	) : PaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -86,7 +85,8 @@ class Card
 		$merchantData,
 		$newMerchantData,
 		$value
-	) : PaymentResponse {
+	): PaymentResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature(
@@ -121,7 +121,8 @@ class Card
 	public static function getCardInfo(
 		MerchantConfig $config,
 		int $paymentId
-	) : InfoResponse {
+	): InfoResponse
+	{
 		$client = new SoapClient($config->webServicesWsdl);
 
 		$signature = static::getSignature([
@@ -144,4 +145,5 @@ class Card
 
 		return new InfoResponse($result);
 	}
+
 }

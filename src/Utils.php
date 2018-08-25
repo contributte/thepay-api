@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
@@ -7,12 +6,14 @@ use stdClass;
 
 class Utils
 {
+
 	/**
 	 * Filters out all keys that are not in the $keys list.
 	 *
 	 * @param string[] $keys
+	 * @return string[]
 	 */
-	public static function filterKeys(array $array, array $keys) : array
+	public static function filterKeys(array $array, array $keys): array
 	{
 		$keysKeys = array_flip($keys);
 		$presentKeysKeys = array_intersect_key($keysKeys, $array);
@@ -25,20 +26,21 @@ class Utils
 
 		return $filtered;
 	}
-	
-	public static function toArrayRecursive(array $value) : array
+
+	/**
+	 * @return string[]
+	 */
+	public static function toArrayRecursive(array $value): array
 	{
 		$array = [];
 		foreach ($value as $k => $v) {
-			$item =& $array[$k];
-
 			if (
 				is_array($v)
 				|| $v instanceof stdClass
 			) {
-				$item = static::toArrayRecursive((array)$v);
+				$array[$k] = static::toArrayRecursive((array) $v);
 			} else {
-				$item = $v;
+				$array[$k] = $v;
 			}
 		}
 
@@ -49,7 +51,7 @@ class Utils
 	 * Checks wherether given $array is a list – keys are only numeric,
 	 * sequential from zero without gaps. Returns true for empty arrays.
 	 */
-	public static function isList(array $array) : bool
+	public static function isList(array $array): bool
 	{
 		$count = count($array);
 		if ($count) {
@@ -65,7 +67,7 @@ class Utils
 	/**
 	 * @param string[][] $paths
 	 */
-	public static function requirePaths(array $paths) : void
+	public static function requirePaths(array $paths): void
 	{
 		$basePath = [__DIR__];
 		foreach ($paths as $path) {
@@ -74,4 +76,5 @@ class Utils
 			require_once $fullPathString;
 		}
 	}
+
 }

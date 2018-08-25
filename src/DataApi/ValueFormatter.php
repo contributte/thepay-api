@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi;
 
@@ -12,7 +11,6 @@ class ValueFormatter
 
 	/**
 	 * @param mixed  $value
-	 *
 	 * @return mixed
 	 * @throws InvalidArgumentException
 	 */
@@ -22,12 +20,12 @@ class ValueFormatter
 			return static::formatList(substr($type, 0, -2), $value);
 		}
 
-		$isNull = is_null($value);
+		$isNull = $value === null;
 		if ($isNull) {
 			return null;
 		}
 		$method = 'format' . ucfirst($type);
-		if (method_exists(__CLASS__, $method)) {
+		if (method_exists(self::class, $method)) {
 			return static::$method($value);
 		}
 
@@ -39,40 +37,25 @@ class ValueFormatter
 		throw new InvalidArgumentException($message);
 	}
 
-	/**
-	 * @param int|null $value
-	 *
-	 * @return int
-	 */
-	public static function formatInt($value) : ?int
+	public static function formatInt(?int $value): ?int
 	{
-		if (is_null($value)) {
+		if ($value === null) {
 			return null;
 		}
 		return intval($value);
 	}
 
-	/**
-	 * @param float|null $value
-	 *
-	 * @return float
-	 */
-	public static function formatFloat($value) : ?float
+	public static function formatFloat(?float $value): ?float
 	{
-		if (is_null($value)) {
+		if ($value === null) {
 			return null;
 		}
 		return floatval($value);
 	}
 
-	/**
-	 * @param bool|null $value
-	 *
-	 * @return bool
-	 */
-	public static function formatBool($value) : ?bool
+	public static function formatBool(?bool $value): ?bool
 	{
-		if (is_null($value)) {
+		if ($value === null) {
 			return null;
 		}
 		return boolval($value);
@@ -80,12 +63,10 @@ class ValueFormatter
 
 	/**
 	 * @param mixed $value
-	 *
-	 * @return string
 	 */
-	public static function formatString($value) : ?string
+	public static function formatString($value): ?string
 	{
-		if (is_null($value)) {
+		if ($value === null) {
 			return null;
 		}
 		return strval($value);
@@ -94,9 +75,9 @@ class ValueFormatter
 	/**
 	 * @param DateTimeInterface|string|null $value
 	 */
-	public static function formatDateTime($value) : ?DateTimeInterface
+	public static function formatDateTime($value): ?DateTimeInterface
 	{
-		if (is_null($value)) {
+		if ($value === null) {
 			return null;
 		}
 		if ($value === '0000-00-00 00:00:00') {
@@ -107,7 +88,7 @@ class ValueFormatter
 		return new DateTimeImmutable($value);
 	}
 
-	public static function formatList(string $type, array $list) : array
+	public static function formatList(string $type, array $list): array
 	{
 		$array = [];
 		foreach ($list as $item) {
@@ -116,4 +97,5 @@ class ValueFormatter
 
 		return $array;
 	}
+
 }

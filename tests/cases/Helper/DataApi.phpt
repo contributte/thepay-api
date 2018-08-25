@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests\Tp\Helper;
 
@@ -14,17 +13,16 @@ require __DIR__ . '/../../bootstrap.php';
 
 final class DataApiTest extends TestCase
 {
-	/**
-	 * @var MerchantConfig
-	 */
+
+	/** @var MerchantConfig */
 	private $merchantConfig;
 
-	protected function setUp() : void
+	protected function setUp(): void
 	{
 		$this->merchantConfig = new MerchantConfig;
 	}
 
-	public function testGetPaymentMethods() : void
+	public function testGetPaymentMethods(): void
 	{
 		$paymentMethodsResponse = DataApi::getPaymentMethods($this->merchantConfig);
 
@@ -47,6 +45,7 @@ final class DataApiTest extends TestCase
 			);
 		}
 	}
+
 }
 
 $test = new DataApiTest;

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Requests;
 
@@ -7,11 +6,13 @@ use Tp\MerchantConfig;
 
 class RequestFactory
 {
+
 	public static function getRequest(
 		string $operation,
 		MerchantConfig $config,
 		array $data
-	) : Request {
+	): Request
+	{
 		/** @var Request $className Only class name. */
 		$className = preg_replace(
 			['/^get(.+)$/', '/^set(.+)$/'],
@@ -21,4 +22,5 @@ class RequestFactory
 
 		return new $className($config, $data);
 	}
+
 }

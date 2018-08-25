@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -23,10 +22,12 @@ use Tp\SoapException;
 
 class DataApi
 {
+
 	public static function getPaymentMethods(
 		MerchantConfig $config,
 		?bool $onlyActive = null
-	) : GetPaymentMethodsResponse {
+	): GetPaymentMethodsResponse
+	{
 		$data = ['onlyActive' => $onlyActive];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__,
@@ -40,7 +41,8 @@ class DataApi
 	public static function getPayment(
 		MerchantConfig $config,
 		int $paymentId
-	) : GetPaymentResponse {
+	): GetPaymentResponse
+	{
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__,
@@ -54,7 +56,8 @@ class DataApi
 	public static function getPaymentInstructions(
 		MerchantConfig $config,
 		int $paymentId
-	) : GetPaymentInstructionsResponse {
+	): GetPaymentInstructionsResponse
+	{
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__,
@@ -69,7 +72,8 @@ class DataApi
 	public static function getPaymentState(
 		MerchantConfig $config,
 		int $paymentId
-	) : GetPaymentStateResponse {
+	): GetPaymentStateResponse
+	{
 		$data = ['paymentId' => $paymentId];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__,
@@ -85,7 +89,8 @@ class DataApi
 		?GetPaymentsSearchParams $searchParams = null,
 		?PaginationRequest $pagination = null,
 		?Ordering $ordering = null
-	) : GetPaymentsResponse {
+	): GetPaymentsResponse
+	{
 		$data = [
 			'searchParams' => $searchParams,
 			'pagination'   => $pagination,
@@ -104,7 +109,8 @@ class DataApi
 		MerchantConfig $config,
 		$type,
 		?array $paymentMethods = null
-	) : SetPaymentMethodsResponse {
+	): SetPaymentMethodsResponse
+	{
 		$data = [
 			'type'           => $type,
 			'paymentMethods' => $paymentMethods,
@@ -122,7 +128,8 @@ class DataApi
 		string $operation,
 		MerchantConfig $config,
 		Request $request
-	) : Response {
+	): Response
+	{
 		try {
 			$options = ['features' => SOAP_SINGLE_ELEMENT_ARRAYS];
 			$client = new SoapClient($config->dataWebServicesWsdl, $options);
@@ -139,4 +146,5 @@ class DataApi
 			$rawResponse
 		);
 	}
+
 }

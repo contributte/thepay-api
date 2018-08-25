@@ -1,18 +1,14 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Processors;
 
 abstract class ProcessorWithPaths extends Processor
 {
-	/**
-	 * @var array[]
-	 */
+
+	/** @var array[] */
 	protected $paths = [];
 
 	/**
-	 * Tp\DataApi\Processors\ProcessorWithPaths constructor.
-	 *
 	 * @param array[] $paths
 	 */
 	protected function __construct(array $paths)
@@ -23,7 +19,7 @@ abstract class ProcessorWithPaths extends Processor
 	/**
 	 * @param array[] $paths
 	 */
-	public static function processWithPaths(array $input, array $paths) : array
+	public static function processWithPaths(array $input, array $paths): array
 	{
 		$instance = new static($paths);
 
@@ -34,8 +30,9 @@ abstract class ProcessorWithPaths extends Processor
 	/**
 	 * @param string[]|int[] $itemPath
 	 */
-	protected function onPath(array $itemPath) : bool
+	protected function onPath(array $itemPath): bool
 	{
 		return in_array($itemPath, $this->paths, true);
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -11,12 +10,14 @@ use Tp\Escaper;
  */
 class ButtonMerchant extends Merchant
 {
+
 	/**
 	 * Button visual style. If left blank, only simple text link will be
 	 * created. Otherwise, one of button styles specified in ThePay API
 	 * documentation can be used.
 	 */
 	protected $buttonStyle = 'fullsize';
+
 	/**
 	 * Button text. This text is displayed if button image cannot be loaded
 	 * or when simple text style (empty buttonStyle property) is used.
@@ -35,38 +36,39 @@ class ButtonMerchant extends Merchant
 	public function setButtonStyle(
 		?string $buttonStyle,
 		?string $buttonText = null
-	) : void {
+	): void
+	{
 		if (empty($buttonStyle)) {
 			$buttonStyle = null;
 		}
 
 		$this->buttonStyle = $buttonStyle;
 
-		if (!is_null($buttonText)) {
+		if ($buttonText !== null) {
 			$this->buttonText = $buttonText;
 		}
 	}
 
-	public function setButtonText(string $buttonText) : void
+	public function setButtonText(string $buttonText): void
 	{
 		$this->buttonText = $buttonText;
 	}
 
-	public function getButtonStyle() : ?string
+	public function getButtonStyle(): ?string
 	{
 		return $this->buttonStyle;
 	}
 
-	public function getButtonText() : string
+	public function getButtonText(): string
 	{
 		return $this->buttonText;
 	}
 
-	public function buildUrl() : string
+	public function buildUrl(): string
 	{
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 		$query = $this->buildQuery();
-		if (is_null($this->payment->getMethodId())) {
+		if ($this->payment->getMethodId() === null) {
 			$query .= '&methodSelectionAllowed';
 		}
 
@@ -76,11 +78,11 @@ class ButtonMerchant extends Merchant
 	/**
 	 * Return the HTML code for the button.
 	 */
-	public function render() : string
+	public function render(): string
 	{
 		$targetUrl = Escaper::htmlEntityEncode(self::buildUrl());
 
-		if (is_null($this->buttonStyle)) {
+		if ($this->buttonStyle === null) {
 			return "<a href=\"{$targetUrl}\">{$this->buttonText}</a>";
 		}
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
@@ -91,4 +93,5 @@ class ButtonMerchant extends Merchant
 
 		return "<a href=\"{$targetUrl}\"><img src=\"{$src}\" alt=\"{$title}\" title=\"{$title}\" /></a>";
 	}
+
 }

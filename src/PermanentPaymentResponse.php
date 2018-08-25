@@ -1,26 +1,19 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
 use stdClass;
 
-/**
- * @author Michal Kandr
- */
 class PermanentPaymentResponse
 {
-	/**
-	 * @var bool
-	 */
+
+	/** @var bool */
 	protected $status;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $errorDescription;
-	/**
-	 * @var PermanentPaymentResponseMethod[]
-	 */
+
+	/** @var PermanentPaymentResponseMethod[] */
 	protected $paymentMethods = [];
 
 	public function __construct(stdClass $data)
@@ -50,18 +43,22 @@ class PermanentPaymentResponse
 	}
 
 
-	public function getStatus() : bool
+	public function getStatus(): bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription() : ?string
+	public function getErrorDescription(): ?string
 	{
 		return $this->errorDescription;
 	}
 
-	public function getPaymentMethods() : array
+	/**
+	 * @return PermanentPaymentResponseMethod[]
+	 */
+	public function getPaymentMethods(): array
 	{
 		return $this->paymentMethods;
 	}
+
 }

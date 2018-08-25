@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Card;
 
@@ -7,13 +6,11 @@ use stdClass;
 
 class PaymentResponse
 {
-	/**
-	 * @var bool
-	 */
+
+	/** @var bool */
 	protected $status;
-	/**
-	 * @var string|null
-	 */
+
+	/** @var string|null */
 	protected $errorDescription;
 
 	public function __construct(stdClass $data)
@@ -25,13 +22,14 @@ class PaymentResponse
 		}
 	}
 
-	public function getStatus() : bool
+	public function getStatus(): bool
 	{
 		return $this->status;
 	}
 
-	public function getErrorDescription() : ?string
+	public function getErrorDescription(): ?string
 	{
 		return $this->errorDescription;
 	}
+
 }

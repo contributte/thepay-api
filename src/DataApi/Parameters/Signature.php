@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Parameters;
 
@@ -9,6 +8,7 @@ use Tp\MissingParameterException;
 
 class Signature
 {
+
 	protected function __construct()
 	{
 		// Hidden.
@@ -21,11 +21,11 @@ class Signature
 	 *
 	 * @throws MissingParameterException
 	 */
-	public static function compute(array $data, ?string $password = null) : string
+	public static function compute(array $data, ?string $password = null): string
 	{
 		unset($data['signature']);
 
-		if (!is_null($password)) {
+		if ($password !== null) {
 			$data['password'] = $password;
 		}
 
@@ -34,7 +34,7 @@ class Signature
 		}
 
 		if (
-			is_null($data['password'])
+			$data['password'] === null
 			|| $data['password'] === ''
 		) {
 			throw new MissingParameterException('password');
@@ -49,13 +49,12 @@ class Signature
 	 * signature differs from the provided one, Tp\TpInvalidSignatureException is
 	 * thrown.
 	 *
-	 * @param string|null $signature
 	 * @throws InvalidSignatureException
 	 * @throws MissingParameterException
 	 */
-	public static function validate(array $data, string $password, ?string $signature = null) : void
+	public static function validate(array $data, string $password, ?string $signature = null): void
 	{
-		if (is_null($signature)) {
+		if ($signature === null) {
 			if (
 				!array_key_exists('signature', $data)
 				|| $data['signature'] === ''
@@ -72,4 +71,5 @@ class Signature
 			throw new InvalidSignatureException;
 		}
 	}
+
 }

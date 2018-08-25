@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
@@ -7,6 +6,7 @@ use Nette;
 
 class Escaper
 {
+
 	/**
 	 * JSON-encode with all hex options enabled. Results in values insertable
 	 * into inline <scripts>. Note that if used in a HTML attribute (e. g.
@@ -14,7 +14,7 @@ class Escaper
 	 *
 	 * @param mixed $value
 	 */
-	public static function jsonEncode($value) : string
+	public static function jsonEncode($value): string
 	{
 		return Nette\Utils\Json::encode($value, self::jsonEncodeOptions());
 	}
@@ -23,11 +23,12 @@ class Escaper
 	 * Every HTML special characters converted to \u entities. Thus safe to use
 	 * in inline <scripts>.
 	 */
-	public static function jsonEncodeOptions() : int
+	public static function jsonEncodeOptions(): int
 	{
 		return JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
 	}
 
+	/** @return mixed */
 	public static function jsonDecode(string $json)
 	{
 		return Nette\Utils\Json::decode($json);
@@ -38,7 +39,7 @@ class Escaper
 	 * Resulting string is safe to use inline in a HTML document as well as a
 	 * part of a HTML tag attribute. Single- or double-quoted, both are OK.
 	 */
-	public static function htmlEntityEncode(string $value) : string
+	public static function htmlEntityEncode(string $value): string
 	{
 		return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', true);
 	}
@@ -46,8 +47,9 @@ class Escaper
 	/**
 	 * Translates all HTML &…; entities to plain-text, including &#039 (').
 	 */
-	public static function htmlEntityDecode(string $value) : string
+	public static function htmlEntityDecode(string $value): string
 	{
 		return html_entity_decode($value, ENT_QUOTES, 'UTF-8');
 	}
+
 }

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Requests;
 
@@ -11,9 +10,8 @@ use Tp\MerchantConfig;
 
 abstract class Request extends DataApiObject
 {
-	/**
-	 * @var MerchantConfig
-	 */
+
+	/** @var MerchantConfig */
 	protected $_config;
 
 	protected static $dateTimePaths = [];
@@ -21,7 +19,8 @@ abstract class Request extends DataApiObject
 	public function __construct(
 		MerchantConfig $config,
 		array $data = []
-	) {
+	)
+	{
 		parent::__construct($data);
 
 		$this->_config = $config;
@@ -33,7 +32,8 @@ abstract class Request extends DataApiObject
 	public static function createWithConfig(
 		MerchantConfig $config,
 		array $data = []
-	) : self {
+	): self
+	{
 		return new static($config, $data);
 	}
 
@@ -44,24 +44,22 @@ abstract class Request extends DataApiObject
 	 *
 	 * @throws BadMethodCallException
 	 */
-	public function toSoapRequestArray() : array
+	public function toSoapRequestArray(): array
 	{
 		$configArray = $this->configArray();
 		$data = parent::toArray();
 		$withConfig = array_merge($configArray, $data);
 
-		$deflated = DateTimeDeflater::processWithPaths(
+		return DateTimeDeflater::processWithPaths(
 			$withConfig,
 			static::$dateTimePaths
 		);
-
-		return $deflated;
 	}
 
 	/**
 	 * @throws BadMethodCallException
 	 */
-	public function toSignedSoapRequestArray() : array
+	public function toSignedSoapRequestArray(): array
 	{
 		$array = $this->toSoapRequestArray();
 		$signature = Signature::compute(
@@ -76,8 +74,9 @@ abstract class Request extends DataApiObject
 	/**
 	 * @throws BadMethodCallException
 	 */
-	protected function configArray() : array
+	protected function configArray(): array
 	{
 		return ['merchantId' => $this->_config->merchantId];
 	}
+
 }

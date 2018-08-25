@@ -1,20 +1,21 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
-use Tp;
+use SoapClient;
+use Tp\Exception as TpException;
+use Tp\PermanentPayment as TpPermanentPayment;
+use Tp\PermanentPaymentResponse;
 
-/**
- * @author Michal Kandr
- */
 class PermanentPayment
 {
+
 	public static function createPermanentPayment(
-		Tp\PermanentPayment $payment
-	) : Tp\PermanentPaymentResponse {
+		TpPermanentPayment $payment
+	): PermanentPaymentResponse
+	{
 		$config = $payment->getMerchantConfig();
-		$client = new \SoapClient(
+		$client = new SoapClient(
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
@@ -31,17 +32,18 @@ class PermanentPayment
 		);
 
 		if (!$result) {
-			throw new Tp\Exception;
+			throw new TpException;
 		}
 
-		return new Tp\PermanentPaymentResponse($result);
+		return new PermanentPaymentResponse($result);
 	}
 
 	public static function getPermanentPayment(
-		Tp\PermanentPayment $payment
-	) : Tp\PermanentPaymentResponse {
+		TpPermanentPayment $payment
+	): PermanentPaymentResponse
+	{
 		$config = $payment->getMerchantConfig();
-		$client = new \SoapClient(
+		$client = new SoapClient(
 			$config->webServicesWsdl,
 			['features' => SOAP_SINGLE_ELEMENT_ARRAYS]
 		);
@@ -56,9 +58,10 @@ class PermanentPayment
 		);
 
 		if (!$result) {
-			throw new Tp\Exception;
+			throw new TpException;
 		}
 
-		return new Tp\PermanentPaymentResponse($result);
+		return new PermanentPaymentResponse($result);
 	}
+
 }

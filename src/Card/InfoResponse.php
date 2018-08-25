@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Card;
 
@@ -10,29 +9,23 @@ use stdClass;
  */
 class InfoResponse extends PaymentResponse
 {
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $cardNumberMasked;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $cardBrand;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $countryCode;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $bankName;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $cardType;
-	/**
-	 * @var string
-	 */
+
+	/** @var string */
 	protected $cardLevel;
 
 	public function __construct(stdClass $data)
@@ -50,7 +43,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string Masked number of card. E.g. 123456******1234
 	 */
-	public function getCardNumberMasked() : string
+	public function getCardNumberMasked(): string
 	{
 		return $this->cardNumberMasked;
 	}
@@ -58,7 +51,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string Brand of card, e.g. MC or VISA
 	 */
-	public function getCardBrand() : string
+	public function getCardBrand(): string
 	{
 		return $this->cardBrand;
 	}
@@ -66,7 +59,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string country code in ISO 3166-1 alpha-2, e.g. CZ
 	 */
-	public function getCountryCode() : string
+	public function getCountryCode(): string
 	{
 		return $this->countryCode;
 	}
@@ -74,7 +67,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string name of issuing bank, e.g. RAIFFEISENBANK A.S.
 	 */
-	public function getBankName() : string
+	public function getBankName(): string
 	{
 		return $this->bankName;
 	}
@@ -82,7 +75,7 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string card type, e.g. DEBIT, CREDIT
 	 */
-	public function getCardType() : string
+	public function getCardType(): string
 	{
 		return $this->cardType;
 	}
@@ -90,8 +83,9 @@ class InfoResponse extends PaymentResponse
 	/**
 	 * @return string card level, e.g. BUSINESS, CLASSIC, PREPAID
 	 */
-	public function getCardLevel() : string
+	public function getCardLevel(): string
 	{
 		return $this->cardLevel;
 	}
+
 }

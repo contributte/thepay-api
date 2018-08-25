@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -16,9 +16,7 @@ class DivMerchant extends Merchant
 	 */
 	protected $cssUrl;
 
-	/**
-	 * @var string payment button skin
-	 */
+	/** @var string payment button skin */
 	protected $skin;
 
 	/**
@@ -33,7 +31,7 @@ class DivMerchant extends Merchant
 	 */
 	protected $disablePopupCss = false;
 
-	public function getSkin() : string
+	public function getSkin(): string
 	{
 		return $this->skin;
 	}
@@ -41,7 +39,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Set visual skin used for payment buttons.
 	 */
-	public function setSkin(string $skin) : void
+	public function setSkin(string $skin): void
 	{
 		$this->skin = $skin;
 	}
@@ -49,7 +47,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Disable thepay css for button
 	 */
-	public function disableButtonCss() : void
+	public function disableButtonCss(): void
 	{
 		$this->disableButtonCss = true;
 	}
@@ -57,7 +55,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Enable thepay css for button
 	 */
-	public function enableButtonCss() : void
+	public function enableButtonCss(): void
 	{
 		$this->disableButtonCss = false;
 	}
@@ -65,7 +63,7 @@ class DivMerchant extends Merchant
 	/**
 	 * Disable thepay css for offline payment popup box
 	 */
-	public function disablePopupCss() : void
+	public function disablePopupCss(): void
 	{
 		$this->disablePopupCss = true;
 	}
@@ -73,12 +71,12 @@ class DivMerchant extends Merchant
 	/**
 	 * Enable thepay css for offline payment popup box
 	 */
-	public function enablePopupCss() : void
+	public function enablePopupCss(): void
 	{
 		$this->disablePopupCss = false;
 	}
 
-	public function render() : string
+	public function render(): string
 	{
 		$url = $this->payment->getMerchantConfig()->gateUrl;
 		$queryArgs = array_filter(
@@ -115,4 +113,5 @@ class DivMerchant extends Merchant
 
 		return $out;
 	}
+
 }

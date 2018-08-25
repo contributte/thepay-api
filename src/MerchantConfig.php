@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
@@ -10,13 +9,13 @@ namespace Tp;
  */
 class MerchantConfig
 {
+
 	/**
 	 * URL where the ThePay gate is located.
 	 * Use for switch between development and production environment.
 	 *
 	 * @var string
 	 */
-//	public $gateUrl = 'https://www.thepay.cz/gate/';
 	public $gateUrl = 'https://www.thepay.cz/demo-gate/';
 
 	/**
@@ -43,6 +42,8 @@ class MerchantConfig
 	 * @var string
 	 */
 	public $password        = 'my$up3rsecr3tp4$$word';
+
+	/** @var string */
 	public $dataApiPassword = 'my$up3rsecr3tp4$$word';
 
 	/**
@@ -52,9 +53,9 @@ class MerchantConfig
 	 *
 	 * @var string
 	 */
-//	public $webServicesWsdl = 'https://www.thepay.cz/gate/api/gate-api.wsdl';
 	public $webServicesWsdl = 'https://www.thepay.cz/demo-gate/api/gate-api-demo.wsdl';
 
-//	public $dataWebServicesWsdl = 'https://www.thepay.cz/gate/api/data.wsdl';
+	/** @var string */
 	public $dataWebServicesWsdl = 'https://www.thepay.cz/demo-gate/api/data-demo.wsdl';
+
 }

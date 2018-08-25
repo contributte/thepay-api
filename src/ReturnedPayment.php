@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
@@ -8,43 +7,29 @@ namespace Tp;
  */
 class ReturnedPayment extends Payment
 {
-	/**
-	 * @var int|null merchantId from request
-	 */
+
+	/** @var int|null merchantId from request */
 	protected $requestMerchantId = null;
-	/**
-	 * @var int|null accountId from request
-	 */
+
+	/** @var int|null accountId from request */
 	protected $requestAccountId = null;
 
-	/**
-	 * @var int Payment status. One of enum values specified in the ThePay API documentation.
-	 */
+	/** @var int Payment status. One of enum values specified in the ThePay API documentation. */
 	protected $status;
 
-	/**
-	 * @var int Unique payment ID in the ThePay system.
-	 */
+	/** @var int Unique payment ID in the ThePay system. */
 	protected $paymentId;
 
-	/**
-	 * Threat rating of the IP address that sent the payment.
-	 */
+	/** @var mixed Threat rating of the IP address that sent the payment. */
 	protected $ipRating;
 
-	/**
-	 * @var string For offline payments, variable symbol (or equivalent) that identifies the payment.
-	 */
+	/** @var string For offline payments, variable symbol (or equivalent) that identifies the payment. */
 	protected $variableSymbol;
 
-	/**
-	 * @var string Signature specified in arguments by ThePay gate.
-	 */
+	/** @var string Signature specified in arguments by ThePay gate. */
 	protected $signature;
 
-	/**
-	 * @var bool if payment method is offline or online
-	 */
+	/** @var bool if payment method is offline or online */
 	protected $isOffline;
 
 	/**
@@ -59,9 +44,7 @@ class ReturnedPayment extends Payment
 	 */
 	protected $isConfirm;
 
-	/**
-	 * @var string|null specific symbol from bank transaction. Used only for permanent payments.
-	 */
+	/** @var string|null specific symbol from bank transaction. Used only for permanent payments. */
 	protected $specificSymbol = null;
 
 	/**
@@ -111,47 +94,67 @@ class ReturnedPayment extends Payment
 	 */
 	public const STATUS_CARD_DEPOSIT = 9;
 
+	/** @var string[] */
 	protected static $BOOL_ARGS = [
-		'isOffline', 'needConfirm', 'isConfirm',
-		'deposit', 'isRecurring',
+		'isOffline',
+		'needConfirm',
+		'isConfirm',
+		'deposit',
+		'isRecurring',
 	];
 
+	/** @var string[] */
 	protected static $INT_ARGS = [
-		'requestMerchantId', 'requestAccountId', 'status',
-		'paymentId', 'methodId',
+		'requestMerchantId',
+		'requestAccountId',
+		'status',
+		'paymentId',
+		'methodId',
 	];
 
+	/** @var string[] */
 	protected static $FLOAT_ARGS = [
 		'value',
 	];
 
-	/**
-	 * @var array required arguments of incoming request.
-	 */
+	/** @var string[] required arguments of incoming request. */
 	protected static $REQUIRED_ARGS = [
-		'value', 'currency', 'methodId', 'description', 'merchantData',
-		'status', 'paymentId', 'ipRating', 'isOffline', 'needConfirm',
+		'value',
+		'currency',
+		'methodId',
+		'description',
+		'merchantData',
+		'status',
+		'paymentId',
+		'ipRating',
+		'isOffline',
+		'needConfirm',
 	];
 
-	/**
-	 * @var array optional arguments of incoming request.
-	 */
+	/** @var string[] optional arguments of incoming request. */
 	protected static $OPTIONAL_ARGS = [
-		'isConfirm', 'variableSymbol', 'specificSymbol',
-		'deposit', 'isRecurring', 'customerAccountNumber',
+		'isConfirm',
+		'variableSymbol',
+		'specificSymbol',
+		'deposit',
+		'isRecurring',
+		'customerAccountNumber',
 		'customerAccountName',
 	];
-	/**
-	 * @var array default values for optional args
-	 */
+
+	/** @var null[] default values for optional args */
 	protected static $OPTIONAL_ARGS_DEFAULT = [
-		'isConfirm'             => null, 'variableSymbol' => null, 'specificSymbol' => null,
-		'deposit'               => null, 'isRecurring' => null,
-		'customerAccountNumber' => null, 'customerAccountName' => null,
+		'isConfirm'             => null,
+		'variableSymbol'        => null,
+		'specificSymbol'        => null,
+		'deposit'               => null,
+		'isRecurring'           => null,
+		'customerAccountNumber' => null,
+		'customerAccountName'   => null,
 	];
 
 	/**
-	 * @param array          $args array Optional arguments parameter, that can specify the
+	 * @param array $args array Optional arguments parameter, that can specify the
 	 *                             arguments of the returned payment. If not specified, it is taken
 	 *                             from the $_REQUEST superglobal array.
 	 * @throws MissingParameterException
@@ -160,7 +163,7 @@ class ReturnedPayment extends Payment
 	{
 		parent::__construct($config);
 
-		if (is_null($args)) {
+		if ($args === null) {
 			$args = &$_REQUEST;
 		}
 
@@ -188,20 +191,20 @@ class ReturnedPayment extends Payment
 		}
 
 		foreach (self::$BOOL_ARGS as $key) {
-			if (!is_null($this->{$key})) {
+			if ($this->{$key} !== null) {
 				$this->{$key} = $this->{$key} === '1';
 			}
 		}
 
 		foreach (self::$INT_ARGS as $key) {
-			if (!is_null($this->{$key})) {
+			if ($this->{$key} !== null) {
 				$this->{$key} = intval($this->{$key});
 			}
 		}
 
 		foreach (self::$FLOAT_ARGS as $key) {
-			if (!is_null($this->{$key})) {
-				$this->{$key} = doubleval($this->{$key});
+			if ($this->{$key} !== null) {
+				$this->{$key} = floatval($this->{$key});
 			}
 		}
 
@@ -216,7 +219,7 @@ class ReturnedPayment extends Payment
 	 *   a Tp\TpInvalidSignatureException.
 	 * @throws InvalidSignatureException , when signature isinvalid.
 	 */
-	public function verifySignature(?string $signature = null) : bool
+	public function verifySignature(?string $signature = null): bool
 	{
 		// check merchantId and accountId from request
 		if (
@@ -236,7 +239,7 @@ class ReturnedPayment extends Payment
 		$out[] = 'merchantId=' . $this->getRequestMerchantId();
 		$out[] = 'accountId=' . $this->getRequestAccountId();
 		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $property) {
-			if (!is_null($this->{$property})) {
+			if ($this->{$property} !== null) {
 				$value = $this->{$property};
 
 				if (in_array($property, self::$FLOAT_ARGS, true)) {
@@ -245,7 +248,7 @@ class ReturnedPayment extends Payment
 					$value = $value ? '1' : '0';
 				}
 
-				$out[] = "{$property}={$value}";
+				$out[] = sprintf('%s=%s', $property, $value);
 			}
 		}
 		$out[] = 'password=' . $this->getMerchantConfig()->password;
@@ -258,12 +261,12 @@ class ReturnedPayment extends Payment
 		throw new InvalidSignatureException;
 	}
 
-	public function getRequestMerchantId() : ?int
+	public function getRequestMerchantId(): ?int
 	{
 		return $this->requestMerchantId;
 	}
 
-	public function getRequestAccountId() : ?int
+	public function getRequestAccountId(): ?int
 	{
 		return $this->requestAccountId;
 	}
@@ -274,9 +277,9 @@ class ReturnedPayment extends Payment
 	 * currencies right now, even when ThePay does not support multiple
 	 * currencies so far.
 	 */
-	public function getCurrency() : string
+	public function getCurrency(): string
 	{
-		if (is_null($this->currency)) {
+		if ($this->currency === null) {
 			return 'CZK';
 		}
 		return $this->currency;
@@ -289,7 +292,7 @@ class ReturnedPayment extends Payment
 	 * does not contain all fields that are used to generate returned
 	 * payment signature).
 	 */
-	public function getSignature() : string
+	public function getSignature(): string
 	{
 		return $this->signature;
 	}
@@ -299,7 +302,7 @@ class ReturnedPayment extends Payment
 	 *
 	 * @return int one of STATUS_* constants.
 	 */
-	public function getStatus() : int
+	public function getStatus(): int
 	{
 		return $this->status;
 	}
@@ -307,7 +310,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return int Gets unique ID of the payment in the ThePay system.
 	 */
-	public function getPaymentId() : int
+	public function getPaymentId(): int
 	{
 		return $this->paymentId;
 	}
@@ -315,7 +318,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * Returns the IP rating of the IP that sent the payment.
 	 */
-	public function getIpRating() : int
+	public function getIpRating(): int
 	{
 		return $this->ipRating;
 	}
@@ -323,7 +326,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Returns the variable symbol, if valid, for offline payment method.
 	 */
-	public function getVariableSymbol() : ?string
+	public function getVariableSymbol(): ?string
 	{
 		return $this->variableSymbol;
 	}
@@ -331,7 +334,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return bool true if payment method is offline
 	 */
-	public function isOffline() : bool
+	public function isOffline(): bool
 	{
 		return $this->getIsOffline();
 	}
@@ -340,7 +343,7 @@ class ReturnedPayment extends Payment
 	 * @return bool if payment needs additional confirmation about it's state - for online methods with additional
 	 *                 confirmation
 	 */
-	public function getNeedConfirm() : bool
+	public function getNeedConfirm(): bool
 	{
 		return $this->needConfirm;
 	}
@@ -349,7 +352,7 @@ class ReturnedPayment extends Payment
 	 * @return bool if actual action is confirmation about payment state - for online methods with additional
 	 *                 confirmation
 	 */
-	public function getIsConfirm() : ?bool
+	public function getIsConfirm(): ?bool
 	{
 		return $this->isConfirm;
 	}
@@ -357,7 +360,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string specific symbol from bank transaction. Used only for permanent payments.
 	 */
-	public function getSpecificSymbol() : ?string
+	public function getSpecificSymbol(): ?string
 	{
 		return $this->specificSymbol;
 	}
@@ -365,7 +368,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return bool if payment method is offline or online
 	 */
-	public function getIsOffline() : bool
+	public function getIsOffline(): bool
 	{
 		return $this->isOffline;
 	}
@@ -373,7 +376,7 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Number of customer's account in full format including bank code.
 	 */
-	public function getCustomerAccountNumber() : ?string
+	public function getCustomerAccountNumber(): ?string
 	{
 		return $this->customerAccountNumber;
 	}
@@ -381,8 +384,9 @@ class ReturnedPayment extends Payment
 	/**
 	 * @return string Name of customer's account.
 	 */
-	public function getCustomerAccountName() : ?string
+	public function getCustomerAccountName(): ?string
 	{
 		return $this->customerAccountName;
 	}
+
 }

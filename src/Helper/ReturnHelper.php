@@ -1,14 +1,15 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
+use SoapClient;
 use Tp\Exception;
 use Tp\MerchantConfig;
 use Tp\PaymentReturnResponse;
 
 class ReturnHelper
 {
+
 	protected static function getSignature(array $data)
 	{
 		return md5(http_build_query(array_filter($data)));
@@ -18,8 +19,9 @@ class ReturnHelper
 		MerchantConfig $config,
 		$paymentId,
 		$reason = null
-	) : PaymentReturnResponse {
-		$client = new \SoapClient($config->webServicesWsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
+	): PaymentReturnResponse
+	{
+		$client = new SoapClient($config->webServicesWsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 		$signature = static::getSignature(
 			[
 				'merchantId' => $config->merchantId,
@@ -46,4 +48,5 @@ class ReturnHelper
 
 		return new PaymentReturnResponse($result);
 	}
+
 }

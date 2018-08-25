@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Processors;
 
@@ -7,19 +6,18 @@ use Tp\Utils;
 
 abstract class Processor
 {
-	public static function process(array $input) : array
+
+	public static function process(array $input): array
 	{
 		$instance = new static;
 		// Start with an empty path [].
-		$processed = $instance->processHash($input, []);
-
-		return $processed;
+		return $instance->processHash($input, []);
 	}
 
 	/**
 	 * @param string[]|int[] $currentPath
 	 */
-	protected function processHash(array $value, array $currentPath) : array
+	protected function processHash(array $value, array $currentPath): array
 	{
 		$processed = [];
 		foreach ($value as $key => $item) {
@@ -36,7 +34,7 @@ abstract class Processor
 	/**
 	 * @param string[]|int[] $currentPath
 	 */
-	protected function processItem(array $value, array $currentPath) : array
+	protected function processItem(array $value, array $currentPath): array
 	{
 		if (Utils::isList($value)) {
 			return $this->processList($value, $currentPath);
@@ -50,7 +48,7 @@ abstract class Processor
 	 *
 	 * @param string[]|int[] $currentPath
 	 */
-	protected function processList(array $list, array $currentPath) : array
+	protected function processList(array $list, array $currentPath): array
 	{
 		$processed = [];
 		foreach ($list as $key => $value) {
@@ -64,4 +62,5 @@ abstract class Processor
 	}
 
 	abstract protected function convertValue($value, array $itemPath);
+
 }

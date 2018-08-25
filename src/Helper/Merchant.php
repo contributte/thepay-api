@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\Helper;
 
@@ -10,6 +9,7 @@ use Tp\Payment;
  */
 abstract class Merchant
 {
+
 	/**
 	 * Payment that should be rendered using the helper. Specify the
 	 * payment as parameter to the helper constructor.
@@ -34,7 +34,7 @@ abstract class Merchant
 	 * is abstract function prototype, that should be implemented in
 	 * derived classes to provide custom HTML (or other) code.
 	 */
-	abstract public function render() : string;
+	abstract public function render(): string;
 
 	/**
 	 * Build the query part of the URL from payment data and optional
@@ -42,10 +42,9 @@ abstract class Merchant
 	 *
 	 * @param array $args Associative array of optional arguments that should
 	 *                    be appended to the URL.
-	 *
 	 * @return string Query part of the URL with all parameters correctly escaped
 	 */
-	public function buildQuery(array $args = []) : string
+	public function buildQuery(array $args = []): string
 	{
 		$out = array_merge(
 			$this->payment->getArgs(), // Arguments of the payment
@@ -60,4 +59,5 @@ abstract class Merchant
 
 		return implode('&', $str);
 	}
+
 }

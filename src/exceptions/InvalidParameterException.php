@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp;
 
@@ -8,6 +7,7 @@ namespace Tp;
  */
 class InvalidParameterException extends Exception
 {
+
 	protected $parameter;
 
 	public function __construct(string $parameter)
@@ -16,8 +16,9 @@ class InvalidParameterException extends Exception
 		parent::__construct('Invalid parameter value.');
 	}
 
-	public function getParameter() : string
+	public function getParameter(): string
 	{
 		return $this->parameter;
 	}
+
 }

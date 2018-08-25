@@ -1,4 +1,6 @@
 parameters:
+	includes:
+		- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
 	ignoreErrors:
 		- '#Call to an undefined method SoapClient::#'
 		- '#Method Tp\\Helper\\DataApi::[a-zA-Z]+\(\) should return Tp\\DataApi\\Responses\\[a-zA-Z]+ but returns Tp\\DataApi\\Responses\\Response\.#'

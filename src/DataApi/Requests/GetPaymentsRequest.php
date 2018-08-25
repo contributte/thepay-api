@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Requests;
 
@@ -9,6 +8,7 @@ use Tp\DataApi\Parameters\PaginationRequest;
 
 class GetPaymentsRequest extends Request
 {
+
 	protected static $dateTimePaths = [
 		['searchParams', 'createdOnFrom'],
 		['searchParams', 'createdOnTo'],
@@ -16,48 +16,43 @@ class GetPaymentsRequest extends Request
 		['searchParams', 'finishedOnTo'],
 	];
 
-	/**
-	 * @var GetPaymentsSearchParams|null
-	 */
+	/** @var GetPaymentsSearchParams|null */
 	protected $searchParams;
 
-	/**
-	 * @var PaginationRequest|null
-	 */
+	/** @var PaginationRequest|null */
 	protected $pagination;
 
-	/**
-	 * @var Ordering|null
-	 */
+	/** @var Ordering|null */
 	protected $ordering;
 
-	public function getSearchParams() : ?GetPaymentsSearchParams
+	public function getSearchParams(): ?GetPaymentsSearchParams
 	{
 		return $this->searchParams;
 	}
 
-	public function setSearchParams(?GetPaymentsSearchParams $searchParams = null) : void
+	public function setSearchParams(?GetPaymentsSearchParams $searchParams = null): void
 	{
 		$this->searchParams = $searchParams;
 	}
 
-	public function getPagination() : ?PaginationRequest
+	public function getPagination(): ?PaginationRequest
 	{
 		return $this->pagination;
 	}
 
-	public function setPagination(?PaginationRequest $pagination = null) : void
+	public function setPagination(?PaginationRequest $pagination = null): void
 	{
 		$this->pagination = $pagination;
 	}
 
-	public function getOrdering() : ?Ordering
+	public function getOrdering(): ?Ordering
 	{
 		return $this->ordering;
 	}
 
-	public function setOrdering(?Ordering $ordering = null) : void
+	public function setOrdering(?Ordering $ordering = null): void
 	{
 		$this->ordering = $ordering;
 	}
+
 }

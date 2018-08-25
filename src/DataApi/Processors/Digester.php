@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Processors;
 
@@ -7,13 +6,12 @@ use Tp\Utils;
 
 class Digester
 {
-	public static function process(array $input) : string
+
+	public static function process(array $input): string
 	{
 		$instance = new static;
 		// Start with an empty path [].
-		$processed = $instance->processHash($input);
-
-		return $processed;
+		return $instance->processHash($input);
 	}
 
 	/**
@@ -21,7 +19,7 @@ class Digester
 	 * consisting of &-concatenated “key=value” parts. Nested hashes are
 	 * digested without a password.
 	 */
-	protected function processHash(array $data) : string
+	protected function processHash(array $data): string
 	{
 		$processed = [];
 		foreach ($data as $key => $item) {
@@ -37,7 +35,7 @@ class Digester
 				continue;
 			}
 
-			$stringParts[] = "{$key}={$value}";
+			$stringParts[] = sprintf('%s=%s', $key, $value);
 		}
 
 		$string = implode('&', $stringParts);
@@ -49,7 +47,7 @@ class Digester
 	 * Lists are |-concatenated digested values: Booleans converted to integers,
 	 * hashes digested, strings left as they are.
 	 */
-	protected function processList(array $list) : string
+	protected function processList(array $list): string
 	{
 		$processedArray = [];
 		foreach ($list as $key => $value) {
@@ -68,7 +66,7 @@ class Digester
 	 *
 	 * @param mixed $value
 	 */
-	protected function processItem($value) : string
+	protected function processItem($value): string
 	{
 		if (Utils::isList($value)) {
 			return $this->processList($value);
@@ -76,7 +74,7 @@ class Digester
 		return $this->processHash($value);
 	}
 
-	protected function convertValue($value) : string
+	protected function convertValue($value): string
 	{
 		if (is_bool($value)) {
 			if ($value) {
@@ -87,4 +85,5 @@ class Digester
 
 		return strval($value);
 	}
+
 }

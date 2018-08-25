@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tp\DataApi\Responses;
 
@@ -14,6 +13,7 @@ use Tp\Utils;
 
 class ResponseFactory
 {
+
 	/**
 	 * @throws MissingParameterException
 	 * @throws InvalidSignatureException
@@ -22,7 +22,8 @@ class ResponseFactory
 		string $operation,
 		MerchantConfig $config,
 		stdClass $data
-	) : Response {
+	): Response
+	{
 		/** @var Response $className Only class name. */
 		$className = preg_replace(
 			['/^get(.+)$/', '/^set(.+)$/'],
@@ -30,7 +31,7 @@ class ResponseFactory
 			$operation
 		);
 
-		$array = Utils::toArrayRecursive((array)$data);
+		$array = Utils::toArrayRecursive((array) $data);
 
 		$listPaths = $className::listPaths();
 		$flattened = SoapFlattener::processWithPaths(
@@ -48,4 +49,5 @@ class ResponseFactory
 
 		return $className::createFromResponse($inflated);
 	}
+
 }
