@@ -9,18 +9,15 @@
   ],
   "require": {
     "php": ">=7.1",
-
     "ext-json": "*",
     "ext-soap": "*",
     "ext-hash": "*"
   },
   "require-dev": {
-    "nette/tester": "@dev",
-
-    "phpstan/phpstan": "~0.10.2",
-    "phpstan/phpstan-strict-rules": "~0.10.1",
+    "nette/tester": "^2.0.2",
+    "phpstan/phpstan": "^0.10.2",
+    "phpstan/phpstan-strict-rules": "^0.10.1",
     "ninjify/qa": "^0.8.0@dev",
-    "ninjify/coding-standard": "^0.7.0@dev",
     "ninjify/nunjuck": "^0.2.0"
   },
   "suggest": {
@@ -34,6 +31,7 @@
       "src/exceptions/"
     ]
   },
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
     "qa": [
