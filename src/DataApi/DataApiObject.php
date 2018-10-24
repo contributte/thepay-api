@@ -145,9 +145,11 @@ abstract class DataApiObject implements ArrayAccess
 
 		if ($value !== null && is_string($value)) {
 			$reflectionMethod = new ReflectionMethod($this, $setterName);
-			$parameterType = $reflectionMethod->getParameters()[0]->getType()->getName();
+			$parameterType = $reflectionMethod->getParameters()[0]->getType();
 
-			switch ($parameterType) {
+			assert($parameterType !== null);
+
+			switch ($parameterType->getName()) {
 				case 'int':
 					$value = intval($value);
 
