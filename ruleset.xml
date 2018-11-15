@@ -38,14 +38,6 @@
         <exclude-pattern>*</exclude-pattern>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses.MissingParentheses">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
     <rule ref="Squiz.Commenting.VariableComment.MissingVar">
         <exclude-pattern>*</exclude-pattern>
     </rule>

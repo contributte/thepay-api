@@ -68,7 +68,7 @@ class Signature
 		$computed = static::compute($data, $password);
 
 		if ($computed !== $signature) {
-			throw new InvalidSignatureException;
+			throw new InvalidSignatureException();
 		}
 	}
 

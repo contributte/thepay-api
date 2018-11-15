@@ -5,10 +5,10 @@
 [![Build Status](https://img.shields.io/travis/contributte/thepay-api.svg?style=flat-square)](https://travis-ci.org/contributte/thepay-api)
 [![Code coverage](https://img.shields.io/coveralls/contributte/thepay-api.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay-api)
 [![Licence](https://img.shields.io/packagist/l/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
-
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
@@ -40,7 +40,7 @@ composer require contributte/thepay-api
     <tr>
       <td align="center">
         <a href="https://github.com/trejjam">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/3594540?s=460&v=4">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/3594540?s=150&v=4">
         </a>
         </br>
         <a href="https://github.com/trejjam">Jan Trejbal</a>
@@ -53,7 +53,7 @@ composer require contributte/thepay-api
         <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
       </td>
     </tr>
-  <tbody>
+  </tbody>
 </table>
 
 -----

@@ -1,7 +1,10 @@
-.idea
-composer.lock
-vendor
+# IDE
+/.idea
 
-tests/php-unix.generated.ini
-tests/cases/output
-tests/cases/**/output
+# Composer
+/vendor
+/composer.lock
+
+# Tests
+/temp
+/coverage.xml

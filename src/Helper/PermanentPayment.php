@@ -32,7 +32,7 @@ class PermanentPayment
 		);
 
 		if (!$result) {
-			throw new TpException;
+			throw new TpException();
 		}
 
 		return new PermanentPaymentResponse($result);
@@ -58,7 +58,7 @@ class PermanentPayment
 		);
 
 		if (!$result) {
-			throw new TpException;
+			throw new TpException();
 		}
 
 		return new PermanentPaymentResponse($result);

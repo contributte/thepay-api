@@ -9,7 +9,7 @@ class Digester
 
 	public static function process(array $input): string
 	{
-		$instance = new static;
+		$instance = new static();
 		// Start with an empty path [].
 		return $instance->processHash($input);
 	}

@@ -4,9 +4,7 @@
   "keywords": [
     "the pay"
   ],
-  "license": [
-    "MIT"
-  ],
+  "license": "MIT",
   "require": {
     "php": ">=7.1",
     "ext-json": "*",
@@ -14,11 +12,8 @@
     "ext-hash": "*"
   },
   "require-dev": {
-    "nette/tester": "^2.0.2",
-    "phpstan/phpstan": "^0.10.2",
-    "phpstan/phpstan-strict-rules": "^0.10.1",
-    "ninjify/qa": "^0.8.0@dev",
-    "ninjify/nunjuck": "^0.2.0"
+    "ninjify/qa": "^0.8.0",
+    "ninjify/nunjuck": "^0.2.1"
   },
   "suggest": {
     "contributte/thepay": "to use as nette extension"
@@ -38,14 +33,20 @@
       "linter src tests/cases",
       "codesniffer src tests/cases"
     ],
-    "tester": [
+    "tests": [
       "tester -s -p php --colors 1 -C -d soap.so tests/cases"
     ],
     "coverage": [
-      "tester -s -p php --colors 1 -C -d soap.so -d extension=xdebug.so --coverage coverage.xml --coverage-src src tests/cases"
+      "tester -s -p phpdbg --colors 1 -C -d soap.so --coverage coverage.xml --coverage-src src tests/cases"
+    ],
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-deprecation-rules:^0.10",
+      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:^0.10"
     ],
     "phpstan": [
-      "phpstan analyse -l max -c tests/config/phpstan.neon src tests/cases"
+      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src tests/cases"
     ]
   },
   "extra": {
