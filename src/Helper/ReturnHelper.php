@@ -43,7 +43,7 @@ class ReturnHelper
 		);
 
 		if (!$result) {
-			throw new Exception;
+			throw new Exception();
 		}
 
 		return new PaymentReturnResponse($result);

@@ -19,7 +19,7 @@ final class DataApiTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->merchantConfig = new MerchantConfig;
+		$this->merchantConfig = new MerchantConfig();
 	}
 
 	public function testGetPaymentMethods(): void
@@ -48,5 +48,5 @@ final class DataApiTest extends TestCase
 
 }
 
-$test = new DataApiTest;
+$test = new DataApiTest();
 $test->run();

@@ -226,7 +226,7 @@ class ReturnedPayment extends Payment
 			$this->getRequestMerchantId() !== $this->getMerchantConfig()->merchantId
 			|| $this->getRequestAccountId() !== $this->getMerchantConfig()->accountId
 		) {
-			throw new InvalidSignatureException;
+			throw new InvalidSignatureException();
 		}
 
 		if ($signature === null) {
@@ -258,7 +258,7 @@ class ReturnedPayment extends Payment
 		if ($sig === $signature) {
 			return true;
 		}
-		throw new InvalidSignatureException;
+		throw new InvalidSignatureException();
 	}
 
 	public function getRequestMerchantId(): ?int

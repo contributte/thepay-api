@@ -42,7 +42,7 @@ class Card
 		);
 
 		if (!$result) {
-			throw new Exception;
+			throw new Exception();
 		}
 
 		return new PaymentResponse($result);
@@ -74,7 +74,7 @@ class Card
 		);
 
 		if (!$result) {
-			throw new Exception;
+			throw new Exception();
 		}
 
 		return new PaymentResponse($result);
@@ -112,7 +112,7 @@ class Card
 		);
 
 		if (!$result) {
-			throw new Exception;
+			throw new Exception();
 		}
 
 		return new PaymentResponse($result);
@@ -140,7 +140,7 @@ class Card
 		]);
 
 		if (!$result) {
-			throw new Exception;
+			throw new Exception();
 		}
 
 		return new InfoResponse($result);
