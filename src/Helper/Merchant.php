@@ -53,8 +53,9 @@ abstract class Merchant
 		);
 
 		$str = [];
+		/** @var string|int $val */
 		foreach ($out as $key => $val) {
-			$str[] = rawurlencode($key) . '=' . rawurlencode($val);
+			$str[] = rawurlencode($key) . '=' . rawurlencode((string) $val);
 		}
 
 		return implode('&', $str);
