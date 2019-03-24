@@ -39,6 +39,7 @@ abstract class Processor
 		if (Utils::isList($value)) {
 			return $this->processList($value, $currentPath);
 		}
+
 		return $this->processHash($value, $currentPath);
 	}
 

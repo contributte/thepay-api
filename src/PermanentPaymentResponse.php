@@ -23,6 +23,7 @@ class PermanentPaymentResponse
 		if (property_exists($data, 'errorDescription')) {
 			$this->errorDescription = $data->errorDescription;
 		}
+
 		if (
 			property_exists($data, 'paymentMethods') &&
 			$data->paymentMethods instanceof stdClass &&
@@ -38,7 +39,6 @@ class PermanentPaymentResponse
 					$value->vs
 				);
 			}
-			unset($value);
 		}
 	}
 

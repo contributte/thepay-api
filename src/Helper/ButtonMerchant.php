@@ -85,6 +85,7 @@ class ButtonMerchant extends Merchant
 		if ($this->buttonStyle === null) {
 			return "<a href=\"{$targetUrl}\">{$this->buttonText}</a>";
 		}
+
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
 
 		$buttonStyle = rawurlencode($this->buttonStyle);

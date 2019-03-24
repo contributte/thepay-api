@@ -22,7 +22,6 @@ class GetPaymentMethodsResponse extends Response
 		array $response
 	): self
 	{
-		/** @var GetPaymentMethodsResponse $instance */
 		$instance = parent::createFromResponse($response);
 		$instance->setAccountId($response['accountId']);
 
@@ -30,6 +29,7 @@ class GetPaymentMethodsResponse extends Response
 		foreach ($response['methods'] as $method) {
 			$methods[] = new MerchantAccountMethod($method);
 		}
+
 		$instance->setMethods($methods);
 
 		return $instance;

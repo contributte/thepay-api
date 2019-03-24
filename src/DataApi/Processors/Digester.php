@@ -71,16 +71,14 @@ class Digester
 		if (Utils::isList($value)) {
 			return $this->processList($value);
 		}
+
 		return $this->processHash($value);
 	}
 
 	protected function convertValue($value): string
 	{
 		if (is_bool($value)) {
-			if ($value) {
-				return '1';
-			}
-			return '0';
+			return $value ? '1' : '0';
 		}
 
 		return strval($value);

@@ -36,7 +36,7 @@ class GetPaymentsResponse extends Response
 		foreach ($response['payments'] as $payment) {
 			$payments[] = new Payment($payment);
 		}
-		unset($payment);
+
 		$instance->setPayments($payments);
 
 		$pagination = new PaginationResponse($response['pagination']);
@@ -59,7 +59,7 @@ class GetPaymentsResponse extends Response
 	public function setPayments(array $payments = []): void
 	{
 		$this->payments = ValueFormatter::formatList(
-			'Tp\DataApi\Parameters\Payment',
+			Payment::class,
 			$payments
 		);
 	}

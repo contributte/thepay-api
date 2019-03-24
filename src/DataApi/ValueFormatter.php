@@ -24,6 +24,7 @@ class ValueFormatter
 		if ($isNull) {
 			return null;
 		}
+
 		$method = 'format' . ucfirst($type);
 		if (method_exists(self::class, $method)) {
 			return static::$method($value);
@@ -42,6 +43,7 @@ class ValueFormatter
 		if ($value === null) {
 			return null;
 		}
+
 		return intval($value);
 	}
 
@@ -50,6 +52,7 @@ class ValueFormatter
 		if ($value === null) {
 			return null;
 		}
+
 		return floatval($value);
 	}
 
@@ -58,6 +61,7 @@ class ValueFormatter
 		if ($value === null) {
 			return null;
 		}
+
 		return boolval($value);
 	}
 
@@ -69,6 +73,7 @@ class ValueFormatter
 		if ($value === null) {
 			return null;
 		}
+
 		return strval($value);
 	}
 
@@ -80,11 +85,13 @@ class ValueFormatter
 		if ($value === null) {
 			return null;
 		}
+
 		if ($value === '0000-00-00 00:00:00') {
 			return null;
 		} elseif ($value instanceof DateTimeInterface) {
 			return $value;
 		}
+
 		return new DateTimeImmutable($value);
 	}
 

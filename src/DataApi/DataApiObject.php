@@ -154,12 +154,10 @@ abstract class DataApiObject implements ArrayAccess
 					$value = intval($value);
 
 					break;
-
 				case 'float':
 					$value = floatval($value);
 
 					break;
-
 				case 'bool':
 					$value = $value === '1';
 

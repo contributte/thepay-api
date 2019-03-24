@@ -170,6 +170,7 @@ class ReturnedPayment extends Payment
 		if (!empty($args['merchantId'])) {
 			$this->requestMerchantId = intval($args['merchantId']);
 		}
+
 		if (!empty($args['accountId'])) {
 			$this->requestAccountId = intval($args['accountId']);
 		}
@@ -183,11 +184,7 @@ class ReturnedPayment extends Payment
 		}
 
 		foreach (self::$OPTIONAL_ARGS_DEFAULT as $arg => $defaultValue) {
-			if (!isset($args[$arg])) {
-				$this->{$arg} = $defaultValue;
-			} else {
-				$this->{$arg} = $args[$arg];
-			}
+			$this->{$arg} = $args[$arg] ?? $defaultValue;
 		}
 
 		foreach (self::$BOOL_ARGS as $key) {
@@ -232,8 +229,8 @@ class ReturnedPayment extends Payment
 		if ($signature === null) {
 			$signature = $this->signature;
 		}
-		// Compute the signature for arguments specified, and compare
-		// it to the specified signature.
+
+		// Compute the signature for specified arguments, and compare it to the specified signature.
 
 		$out = [];
 		$out[] = 'merchantId=' . $this->getRequestMerchantId();
@@ -251,6 +248,7 @@ class ReturnedPayment extends Payment
 				$out[] = sprintf('%s=%s', $property, $value);
 			}
 		}
+
 		$out[] = 'password=' . $this->getMerchantConfig()->password;
 
 		$sig = $this->hashFunction(implode('&', $out));
@@ -258,6 +256,7 @@ class ReturnedPayment extends Payment
 		if ($sig === $signature) {
 			return true;
 		}
+
 		throw new InvalidSignatureException();
 	}
 
@@ -279,10 +278,7 @@ class ReturnedPayment extends Payment
 	 */
 	public function getCurrency(): string
 	{
-		if ($this->currency === null) {
-			return 'CZK';
-		}
-		return $this->currency;
+		return parent::getCurrency() ?? 'CZK';
 	}
 
 	/**

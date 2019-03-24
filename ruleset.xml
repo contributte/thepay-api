@@ -60,6 +60,14 @@
         <exclude-pattern>src/DataApi/Responses/Response.php</exclude-pattern>
     </rule>
 
+    <rule ref="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing.IncorrectLinesCountBeforeControlStructure">
+        <exclude-pattern>*</exclude-pattern>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator.MultiLineTernaryOperatorNotUsed">
+        <exclude-pattern>*</exclude-pattern>
+    </rule>
+
     <!--Exclude folders -->
     <exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>

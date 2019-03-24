@@ -34,14 +34,9 @@ class Utils
 	{
 		$array = [];
 		foreach ($value as $k => $v) {
-			if (
-				is_array($v)
-				|| $v instanceof stdClass
-			) {
-				$array[$k] = static::toArrayRecursive((array) $v);
-			} else {
-				$array[$k] = $v;
-			}
+			$array[$k] = is_array($v) || $v instanceof stdClass
+				? static::toArrayRecursive((array) $v)
+				: $v;
 		}
 
 		return $array;
@@ -54,11 +49,11 @@ class Utils
 	public static function isList(array $array): bool
 	{
 		$count = count($array);
-		if ($count) {
-			$range = range(0, $count - 1);
-		} else {
-			$range = [];
-		}
+
+		$range = $count
+			? range(0, $count - 1)
+			: [];
+
 		$keys = array_keys($array);
 
 		return $keys === $range;

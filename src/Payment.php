@@ -111,6 +111,7 @@ class Payment
 		if ($value < 0) {
 			throw new InvalidParameterException('value');
 		}
+
 		$this->value = $value;
 	}
 
@@ -366,6 +367,7 @@ class Payment
 		if ($this->deposit !== null) {
 			$input['deposit'] = $this->getDeposit() ? '1' : '0';
 		}
+
 		if ($this->isRecurring !== null) {
 			$input['isRecurring'] = $this->getIsRecurring() ? '1' : '0';
 		}

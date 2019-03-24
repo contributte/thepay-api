@@ -178,6 +178,7 @@ class RadioMerchant
 		if ($this->currency) {
 			$queryArgs['currency'] = $this->currency;
 		}
+
 		$queryArgs['signature'] = $this->createSignature($queryArgs);
 
 		$queryArgs = http_build_query($queryArgs);
@@ -188,10 +189,12 @@ class RadioMerchant
 		$out = "<link href=\"{$href}\" type=\"text/css\" rel=\"stylesheet\" />\n";
 		$out .= "<script type=\"text/javascript\">\n";
 		$out .= "\tvar thepayGateUrl = {$thepayGateUrl};\n";
+
 		if ($this->appendCode) {
 			$thepayAppendCode = Escaper::jsonEncode($this->appendCode);
 			$out .= "\tvar thepayAppendCode = {$thepayAppendCode};\n";
 		}
+
 		$out .= "</script>\n";
 
 		$src = "{$gateUrl}radiobuttons/js/jquery.js?v=" . time();
@@ -241,6 +244,7 @@ class RadioMerchant
 			if (headers_sent()) {
 				throw new Exception('Redirect error - headers have been already sent');
 			}
+
 			$this->clearCookies();
 
 			// Output buffer must be empty for the redirect to be successful.
@@ -249,6 +253,7 @@ class RadioMerchant
 				ob_end_clean();
 				$obCleaned = true;
 			}
+
 			if ($obCleaned) {
 				// If the output buffer was being used, start buffering again.
 				// Makes function’s behavior more consistent and predictable.
