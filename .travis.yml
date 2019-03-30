@@ -29,6 +29,15 @@ jobs:
       script:
         - composer run-script tests
 
+    - env: title="Bleading edge dependencies 7.3"
+      allow_failures: true
+      php: 7.3
+      install:
+        - composer config minimum-stability RC
+        - travis_retry composer update --no-progress --prefer-dist
+      script:
+        - composer run-script tests
+
     - stage: Quality Assurance
       php: 7.1
       script:

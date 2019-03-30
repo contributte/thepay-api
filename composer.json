@@ -12,11 +12,12 @@
     "ext-hash": "*"
   },
   "require-dev": {
+    "nette/utils": "^2.4 || ^3.0",
     "ninjify/qa": "^0.9.0",
     "ninjify/nunjuck": "^0.2.1"
   },
   "suggest": {
-    "contributte/thepay": "to use as nette extension"
+    "contributte/thepay": "to use as a Nette extension"
   },
   "autoload": {
     "psr-4": {
@@ -26,7 +27,7 @@
       "src/exceptions/"
     ]
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "RC",
   "prefer-stable": true,
   "scripts": {
     "qa": [
