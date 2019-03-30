@@ -1,11 +1,9 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests\Tp\Helper;
 
 use Tester\Assert;
 use Tester\TestCase;
-use Tp\DataApi\Parameters\MerchantAccountMethod;
-use Tp\DataApi\Responses\GetPaymentMethodsResponse;
 use Tp\Helper\DivMerchant;
 use Tp\MerchantConfig;
 use Tp\Payment;
@@ -17,25 +15,26 @@ require TESTS_ROOT . '/bootstrap.php';
 final class DivMerchantTest extends TestCase
 {
 
-    /** @var MerchantConfig */
-    private $merchantConfig;
+	/** @var MerchantConfig */
+	private $merchantConfig;
 
-    protected function setUp() : void
-    {
-        $this->merchantConfig = new MerchantConfig;
-    }
+	protected function setUp(): void
+	{
+		$this->merchantConfig = new MerchantConfig();
+	}
 
-    public function testRenderDivMerchant() : void
-    {
-        $payment = new Payment($this->merchantConfig);
-        $divMerchant = new DivMerchant($payment);
+	public function testMerchantBuildQuery(): void
+	{
+		$payment = new Payment($this->merchantConfig);
+		$divMerchant = new DivMerchant($payment);
 
-        Assert::same(
-            'merchantId=1&accountId=1&signature=ab12b518198f1ee13efcdda9721ae678',
-            $divMerchant->buildQuery([])
-        );
-    }
+		Assert::same(
+			'merchantId=1&accountId=1&signature=ab12b518198f1ee13efcdda9721ae678',
+			$divMerchant->buildQuery([])
+		);
+	}
+
 }
 
-$test = new DivMerchantTest;
+$test = new DivMerchantTest();
 $test->run();
