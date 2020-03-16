@@ -13,8 +13,8 @@
     "nette/utils": "^2.4 || ^3.0"
   },
   "require-dev": {
-    "ninjify/qa": "^0.9.0",
-    "ninjify/nunjuck": "^0.2.1"
+    "ninjify/qa": "^0.10.0",
+    "ninjify/nunjuck": "^0.3.0"
   },
   "suggest": {
     "contributte/thepay": "to use as a Nette extension"
