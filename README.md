@@ -14,11 +14,10 @@
 
 [![Join the chat](https://img.shields.io/gitter/room/contributte/thepay-api.svg?style=flat-square)](http://bit.ly/ctteg)
 
-## Install
+## Documentation
 
-```
-composer require contributte/thepay-api
-```
+- [Install](.docs/README.md#install)
+- [Official documentation](.docs/README.md#official-documentation)
 
 ## Versions
 
@@ -28,10 +27,6 @@ composer require contributte/thepay-api
 | stable      | `^4.0`  | `master` | `>= 7.1` |
 | stable      | `^3.0`  | `master` | `>= 5.6` |
 | stable      | `^2.3`  | `master` | `>= 5.6` |
-
-## Links
-
-- [Official library & documentations](https://www.thepay.cz/ke-stazeni/)
 
 ## Maintainers
 
