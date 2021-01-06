@@ -60,8 +60,9 @@ class Payment
 	protected $methodId = null;
 
 	/**
-	 * @var string|null
-	 * @deprecated
+	 * Customer's billing information.
+	 * Used for 3D secure 2.0 customer authentication of card payments.
+	 * @var CustomerBillingData|null
 	 */
 	protected $customerData = null;
 
@@ -224,16 +225,15 @@ class Payment
 		return $this->methodId;
 	}
 
-	public function setCustomerData(string $data): void
+	/**
+	 * Set customer's billing information.
+	 */
+	public function setCustomerData(?CustomerBillingData $data): void
 	{
 		$this->customerData = $data;
 	}
 
-	/**
-	 * @deprecated
-	 * @return string previously set customer data
-	 */
-	public function getCustomerData(): ?string
+	public function getCustomerData(): ?CustomerBillingData
 	{
 		return $this->customerData;
 	}
@@ -344,8 +344,20 @@ class Payment
 			$input['merchantData'] = $this->merchantData;
 		}
 
-		if ($this->customerData !== null) {
-			$input['customerData'] = $this->customerData;
+		$customerData = $this->customerData;
+		if ($customerData !== null) {
+			$customerDataArr = array_filter([
+				'full_name' => $customerData->getFullName(),
+				'country'   => $customerData->getCountry(),
+				'city'      => $customerData->getCity(),
+				'postcode'  => $customerData->getPostcode(),
+				'street'    => $customerData->getStreet(),
+				'email'     => $customerData->getEmail(),
+			]);
+
+			if ($customerDataArr) {
+				$input["customerData"] = Escaper::jsonEncode($customerDataArr);
+			}
 		}
 
 		if ($this->customerEmail !== null) {

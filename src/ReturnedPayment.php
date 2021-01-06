@@ -65,6 +65,10 @@ class ReturnedPayment extends Payment
 	protected $customerAccountName = null;
 
 	/**
+	 * Waiting for payment. Initial state.
+	 */
+	public const STATUS_NOT_PAID = 1;
+	/**
 	 * Correctly paid.
 	 */
 	public const STATUS_OK = 2;
@@ -73,8 +77,7 @@ class ReturnedPayment extends Payment
 	 */
 	public const STATUS_CANCELED = 3;
 	/**
-	 * Some error occurred during payment process.
-	 * Probably not payed.
+	 * Some error occurred during payment process. Payment is not payed.
 	 */
 	public const STATUS_ERROR = 4;
 
@@ -87,6 +90,11 @@ class ReturnedPayment extends Payment
 	 * Payment was paid, but waiting for confirmation from payment system.
 	 */
 	public const STATUS_WAITING = 7;
+
+	/**
+	 * Payment was returned back to customer. Usually not used in notifications.
+	 */
+	public const STATUS_REVERTED = 8;
 
 	/**
 	 * Payment amount is blocked on customer's account. Money is charged after sending paymentDeposit request through
