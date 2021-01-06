@@ -92,6 +92,10 @@ class TpReturnedPayment extends TpPayment {
 	protected $customerAccountName = NULL;
 
 	/**
+	 * Waiting for payment. Initial state.
+	 */
+	const STATUS_NOT_PAID = 1;
+	/**
 	 * Correctly paid.
 	 */
 	const STATUS_OK = 2;
@@ -100,8 +104,7 @@ class TpReturnedPayment extends TpPayment {
 	 */
 	const STATUS_CANCELED = 3;
 	/**
-	 * Some error occurred during payment process.
-	 * Probably not payed.
+	 * Some error occurred during payment process. Payment is not paied.
 	 */
 	const STATUS_ERROR = 4;
 
@@ -114,6 +117,11 @@ class TpReturnedPayment extends TpPayment {
 	 * Payment was paid, but waiting for confirmation from payment system.
 	 */
 	const STATUS_WAITING = 7;
+
+	/**
+	 * Payment was returned back to customer. Usually not used in notifications.
+	 */
+	const STATUS_REVERTED = 8;
 
 	/**
 	 * Payment amount is blocked on customer's account. Money is charged after sending paymentDeposit request through API.

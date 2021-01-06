@@ -64,8 +64,9 @@ class TpPayment {
 	protected $methodId = NULL;
 
 	/**
-	 * @deprecated
-	 * @var string
+	 * Customer's billing information.
+	 * Used for 3D secure 2.0 customer authentication of card payments.
+	 * @var TpCustomerBillingData|null
 	 */
 	protected $customerData = NULL;
 
@@ -239,17 +240,15 @@ class TpPayment {
 	}
 
 	/**
-	 * @deprecated
-	 * Set customer data.
-	 * @param string $data
+	 * Set customer's billing information.
+	 * @param TpCustomerBillingData|null $data
 	 */
-	public function setCustomerData($data = null) {
+	public function setCustomerData(TpCustomerBillingData $data = null) {
 		$this->customerData = $data;
 	}
 
 	/**
-	 * @deprecated
-	 * @return string previously set customer data
+	 * @return TpCustomerBillingData|null customer's billing information
 	 */
 	public function getCustomerData() {
 		return $this->customerData;
@@ -358,7 +357,17 @@ class TpPayment {
 		}
 
 		if (!is_null($this->customerData)){
-			$input["customerData"] = $this->customerData;
+			$customerDataArr = array_filter([
+				'full_name' => $this->customerData->getFullName(),
+				'country' => $this->customerData->getCountry(),
+				'city' => $this->customerData->getCity(),
+				'postcode' => $this->customerData->getPostcode(),
+				'street' => $this->customerData->getStreet(),
+				'email' => $this->customerData->getEmail(),
+			]);
+			if($customerDataArr){
+				$input["customerData"] =  TpEscaper::jsonEncode($customerDataArr);
+			}
 		}
 
 		if (!is_null($this->customerEmail)) {

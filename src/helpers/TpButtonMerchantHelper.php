@@ -81,11 +81,11 @@ class TpButtonMerchantHelper extends TpMerchantHelper {
 	public function render() {
 		$targetUrl = TpEscaper::htmlEntityEncode(self::buildUrl());
 		if($this->buttonStyle){
-				$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
-				$buttonStyle = rawurlencode($this->buttonStyle);
+			$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
+			$buttonStyle = rawurlencode($this->buttonStyle);
 			$src = TpEscaper::htmlEntityEncode($gateUrl . 'buttons/' . $buttonStyle . '.png');
-				$title = TpEscaper::htmlEntityEncode($this->buttonText);
-				return "<a href=\"".$targetUrl."\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
+			$title = TpEscaper::htmlEntityEncode($this->buttonText);
+			return "<a href=\"".$targetUrl."\"><img src=\"$src\" alt=\"$title\" title=\"$title\" /></a>";
 		} else {
 			return "<a href=\"$targetUrl\">$this->buttonText</a>";
 		}
