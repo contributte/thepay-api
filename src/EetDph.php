@@ -223,7 +223,7 @@ class EetDph
 	{
 		$resultArr = [];
 		foreach (get_object_vars($this) as $name => $value) {
-			if (!empty($value)) {
+			if ($value !== null && $value !== '' && $value !== 0) {
 				$resultArr[$name] = number_format($value, 2, '.', '');
 			}
 		}
@@ -237,7 +237,7 @@ class EetDph
 	public function isEmpty(): bool
 	{
 		foreach (get_object_vars($this) as $value) {
-			if (!empty($value)) {
+			if ($value !== null && $value !== '' && $value !== 0) {
 				return false;
 			}
 		}

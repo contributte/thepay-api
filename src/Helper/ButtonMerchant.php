@@ -38,7 +38,7 @@ class ButtonMerchant extends Merchant
 		?string $buttonText = null
 	): void
 	{
-		if (empty($buttonStyle)) {
+		if ($buttonStyle === '') {
 			$buttonStyle = null;
 		}
 

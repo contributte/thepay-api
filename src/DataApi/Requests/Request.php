@@ -16,7 +16,7 @@ abstract class Request extends DataApiObject
 
 	protected static $dateTimePaths = [];
 
-	public function __construct(
+	final public function __construct(
 		MerchantConfig $merchantConfig,
 		array $data = []
 	)

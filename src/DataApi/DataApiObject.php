@@ -26,7 +26,7 @@ abstract class DataApiObject implements ArrayAccess
 		$data = [];
 		$keys = self::keys();
 		foreach ($keys as $name) {
-			$data[$name] = static::demodelizeRecursive($this->{$name});
+			$data[$name] = static::demodelizeRecursive($this->{$name}); /* @phpstan-ignore-line */
 		}
 
 		return $data;
@@ -132,7 +132,7 @@ abstract class DataApiObject implements ArrayAccess
 	{
 		$getterName = 'get' . ucfirst($offset);
 
-		return $this->{$getterName}();
+		return $this->{$getterName}(); /* @phpstan-ignore-line */
 	}
 
 	/**
@@ -165,7 +165,7 @@ abstract class DataApiObject implements ArrayAccess
 			}
 		}
 
-		$this->{$setterName}($value);
+		$this->{$setterName}($value); /* @phpstan-ignore-line */
 	}
 
 	/**

@@ -6,6 +6,9 @@ use Tp\Utils;
 
 class Digester
 {
+	final protected function __construct()
+	{
+	}
 
 	public static function process(array $input): string
 	{

@@ -171,7 +171,7 @@ class RadioMerchant
 			'name'       => $this->name,
 			'value'      => $this->value,
 			'showIcon'   => $this->showIcon,
-			'selected'   => !empty($_REQUEST['tp_radio_value']) ? (int) $_REQUEST['tp_radio_value'] : '',
+			'selected'   => $this->isTpMethodChosen() ? (int) $_REQUEST['tp_radio_value'] : '',
 		];
 		// Currency is an optional argument. For compatibility reasons, it is
 		// not present in the query at all if its value is empty.
@@ -213,7 +213,15 @@ class RadioMerchant
 	 */
 	public function isTpMethodChosen(): bool
 	{
-		return !empty($_REQUEST['tp_radio_value']);
+		return is_int($_REQUEST['tp_radio_value']);
+	}
+
+	/**
+	 * @return bool true if ThePay offline methods was selected
+	 */
+	public function isTpOffline(): bool
+	{
+		return ($_REQUEST['tp_radio_is_offline'] ?? '') !== '';
 	}
 
 	protected function clearCookies(): void
@@ -240,7 +248,7 @@ class RadioMerchant
 		?int $forcedValue = null
 	): bool
 	{
-		if ((!empty($_REQUEST['tp_radio_value']) || $forcedValue > 0) && empty($_REQUEST['tp_radio_is_offline'])) {
+		if (($this->isTpMethodChosen() || $forcedValue > 0) && !$this->isTpOffline()) {
 			if (headers_sent()) {
 				throw new Exception('Redirect error - headers have been already sent');
 			}
@@ -267,8 +275,8 @@ class RadioMerchant
 			$queryArgs['signature'] = $payment->getSignature();
 			$url = $this->config->gateUrl . '?' . http_build_query($queryArgs);
 
-			if ($redirectFunc && is_callable($redirectFunc)) {
-				$returnedValue = call_user_func($redirectFunc, $url);
+			if ($redirectFunc !== null && is_callable($redirectFunc)) {
+				$returnedValue = (bool) call_user_func($redirectFunc, $url);
 			} else {
 				header('Location:' . $url);
 				$returnedValue = true;
@@ -300,7 +308,7 @@ class RadioMerchant
 	 */
 	public function showPaymentInstructions(Payment $payment): string
 	{
-		if (empty($_REQUEST['tp_radio_value']) || empty($_REQUEST['tp_radio_is_offline'])) {
+		if (!$this->isTpMethodChosen() || !$this->isTpOffline())  {
 			return '';
 		}
 

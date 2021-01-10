@@ -9,7 +9,7 @@ abstract class Processor
 
 	public static function process(array $input): array
 	{
-		$instance = new static();
+		$instance = new static(); /* @phpstan-ignore-line */
 		// Start with an empty path [].
 		return $instance->processHash($input, []);
 	}
