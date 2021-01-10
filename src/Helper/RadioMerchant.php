@@ -308,7 +308,7 @@ class RadioMerchant
 	 */
 	public function showPaymentInstructions(Payment $payment): string
 	{
-		if (!$this->isTpMethodChosen() || !$this->isTpOffline())  {
+		if (!$this->isTpMethodChosen() || !$this->isTpOffline()) {
 			return '';
 		}
 

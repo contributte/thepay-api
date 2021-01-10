@@ -415,13 +415,13 @@ class Payment
 
 		$items[] = 'password=' . $this->getMerchantConfig()->password;
 
-		return self::hashFunction(implode('&', $items));
+		return $this->hashFunction(implode('&', $items));
 	}
 
 	/**
 	 * Function that calculates hash.
 	 */
-	public static function hashFunction(string $str): string
+	public function hashFunction(string $str): string
 	{
 		return md5($str);
 	}

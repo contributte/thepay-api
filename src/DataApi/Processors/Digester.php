@@ -6,6 +6,7 @@ use Tp\Utils;
 
 class Digester
 {
+
 	final protected function __construct()
 	{
 	}
