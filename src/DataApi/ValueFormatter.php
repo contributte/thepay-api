@@ -4,12 +4,13 @@ namespace Tp\DataApi;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use Tp\InvalidArgumentException;
+use Tp\Exceptions\InvalidArgumentException;
 
 class ValueFormatter
 {
 
 	/**
+	 * @param string $type
 	 * @param mixed  $value
 	 * @return mixed
 	 * @throws InvalidArgumentException
@@ -27,7 +28,7 @@ class ValueFormatter
 
 		$method = 'format' . ucfirst($type);
 		if (method_exists(self::class, $method)) {
-			return static::$method($value);
+			return static::$method($value); /* @phpstan-ignore-line */
 		}
 
 		if (class_exists($type) && $value instanceof $type) {

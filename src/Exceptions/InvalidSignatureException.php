@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tp;
+namespace Tp\Exceptions;
 
 /**
  * Exception thrown when payment signature validation failed.

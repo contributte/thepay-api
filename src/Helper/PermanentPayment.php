@@ -3,7 +3,7 @@
 namespace Tp\Helper;
 
 use SoapClient;
-use Tp\Exception as TpException;
+use Tp\Exceptions\Exception as TpException;
 use Tp\PermanentPayment as TpPermanentPayment;
 use Tp\PermanentPaymentResponse;
 

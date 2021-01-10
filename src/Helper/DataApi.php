@@ -17,8 +17,8 @@ use Tp\DataApi\Responses\GetPaymentStateResponse;
 use Tp\DataApi\Responses\Response;
 use Tp\DataApi\Responses\ResponseFactory;
 use Tp\DataApi\Responses\SetPaymentMethodsResponse;
+use Tp\Exceptions\SoapException;
 use Tp\MerchantConfig;
-use Tp\SoapException;
 
 class DataApi
 {
@@ -65,7 +65,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentInstructionsResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 
@@ -135,7 +134,7 @@ class DataApi
 			$client = new SoapClient($config->dataWebServicesWsdl, $options);
 			$signed = $request->toSignedSoapRequestArray();
 
-			$rawResponse = $client->{$operation}($signed);
+			$rawResponse = $client->{$operation}($signed); /* @phpstan-ignore-line */
 		} catch (SoapFault $e) {
 			throw new SoapException($e->getMessage());
 		}

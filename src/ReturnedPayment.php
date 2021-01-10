@@ -2,6 +2,9 @@
 
 namespace Tp;
 
+use Tp\Exceptions\InvalidSignatureException;
+use Tp\Exceptions\MissingParameterException;
+
 /**
  * Class to handle returned payment callback from ThePay gate.
  */
@@ -175,12 +178,12 @@ class ReturnedPayment extends Payment
 			$args = &$_REQUEST;
 		}
 
-		if (!empty($args['merchantId'])) {
-			$this->requestMerchantId = intval($args['merchantId']);
+		if (($args['merchantId'] ?? '') !== '') {
+			$this->requestMerchantId = (int) $args['merchantId'];
 		}
 
-		if (!empty($args['accountId'])) {
-			$this->requestAccountId = intval($args['accountId']);
+		if (($args['accountId'] ?? '') !== '') {
+			$this->requestAccountId = (int) $args['accountId'];
 		}
 
 		foreach (self::$REQUIRED_ARGS as $arg) {
@@ -188,32 +191,52 @@ class ReturnedPayment extends Payment
 				throw new MissingParameterException($arg);
 			}
 
-			$this->{$arg} = $args[$arg];
+			$this->setProperty($arg, $args[$arg]);
 		}
 
 		foreach (self::$OPTIONAL_ARGS_DEFAULT as $arg => $defaultValue) {
-			$this->{$arg} = $args[$arg] ?? $defaultValue;
+			$this->setProperty($arg, $args[$arg] ?? $defaultValue);
 		}
 
 		foreach (self::$BOOL_ARGS as $key) {
-			if ($this->{$key} !== null) {
-				$this->{$key} = $this->{$key} === '1';
+			$value = $this->getProperty($key);
+			if ($value !== null) {
+				$this->setProperty($key, $value === '1');
 			}
 		}
 
 		foreach (self::$INT_ARGS as $key) {
-			if ($this->{$key} !== null) {
-				$this->{$key} = intval($this->{$key});
+			$value = $this->getProperty($key);
+			if ($value !== null) {
+				$this->setProperty($key, (int) $value);
 			}
 		}
 
 		foreach (self::$FLOAT_ARGS as $key) {
-			if ($this->{$key} !== null) {
-				$this->{$key} = floatval($this->{$key});
+			$value = $this->getProperty($key);
+			if ($value !== null) {
+				$this->setProperty($key, (float) $value);
 			}
 		}
 
 		$this->signature = $args['signature'];
+	}
+
+	/**
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	private function setProperty(string $key, $value): void
+	{
+		$this->{$key} = $value; /* @phpstan-ignore-line */
+	}
+
+	/**
+	 * @return mixed
+	 */
+	private function getProperty(string $key)
+	{
+		return $this->{$key}; /* @phpstan-ignore-line */
 	}
 
 	/**
@@ -244,13 +267,12 @@ class ReturnedPayment extends Payment
 		$out[] = 'merchantId=' . $this->getRequestMerchantId();
 		$out[] = 'accountId=' . $this->getRequestAccountId();
 		foreach (array_merge(self::$REQUIRED_ARGS, self::$OPTIONAL_ARGS) as $property) {
-			if ($this->{$property} !== null) {
-				$value = $this->{$property};
-
+			$value = $this->getProperty($property);
+			if ($value !== null) {
 				if (in_array($property, self::$FLOAT_ARGS, true)) {
 					$value = number_format($value, 2, '.', '');
 				} elseif (in_array($property, self::$BOOL_ARGS, true)) {
-					$value = $value ? '1' : '0';
+					$value = $value === true ? '1' : '0';
 				}
 
 				$out[] = sprintf('%s=%s', $property, $value);

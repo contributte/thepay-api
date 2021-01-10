@@ -38,7 +38,7 @@ class ButtonMerchant extends Merchant
 		?string $buttonText = null
 	): void
 	{
-		if (empty($buttonStyle)) {
+		if ($buttonStyle === '') {
 			$buttonStyle = null;
 		}
 
@@ -83,7 +83,7 @@ class ButtonMerchant extends Merchant
 		$targetUrl = Escaper::htmlEntityEncode(self::buildUrl());
 
 		if ($this->buttonStyle === null) {
-			return "<a href=\"{$targetUrl}\">{$this->buttonText}</a>";
+			return sprintf('<a href="%s">%s</a>', $targetUrl, $this->buttonText);
 		}
 
 		$gateUrl = $this->payment->getMerchantConfig()->gateUrl;
@@ -92,7 +92,7 @@ class ButtonMerchant extends Merchant
 		$src = Escaper::htmlEntityEncode($gateUrl . 'buttons/' . $buttonStyle . '.png');
 		$title = Escaper::htmlEntityEncode($this->buttonText);
 
-		return "<a href=\"{$targetUrl}\"><img src=\"{$src}\" alt=\"{$title}\" title=\"{$title}\" /></a>";
+		return sprintf('<a href="%s"><img src="%s" alt="%s" title="%s" /></a>', $targetUrl, $src, $title, $title);
 	}
 
 }

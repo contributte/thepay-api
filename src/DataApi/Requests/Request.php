@@ -2,28 +2,28 @@
 
 namespace Tp\DataApi\Requests;
 
-use Tp\BadMethodCallException;
 use Tp\DataApi\DataApiObject;
 use Tp\DataApi\Parameters\Signature;
 use Tp\DataApi\Processors\DateTimeDeflater;
+use Tp\Exceptions\BadMethodCallException;
 use Tp\MerchantConfig;
 
 abstract class Request extends DataApiObject
 {
 
 	/** @var MerchantConfig */
-	protected $_config;
+	protected $_merchantConfig;
 
 	protected static $dateTimePaths = [];
 
-	public function __construct(
-		MerchantConfig $config,
+	final public function __construct(
+		MerchantConfig $merchantConfig,
 		array $data = []
 	)
 	{
 		parent::__construct($data);
 
-		$this->_config = $config;
+		$this->_merchantConfig = $merchantConfig;
 	}
 
 	/**
@@ -64,7 +64,7 @@ abstract class Request extends DataApiObject
 		$array = $this->toSoapRequestArray();
 		$signature = Signature::compute(
 			$array,
-			$this->_config->dataApiPassword
+			$this->_merchantConfig->dataApiPassword
 		);
 		$signatureArray = ['signature' => $signature];
 
@@ -76,7 +76,7 @@ abstract class Request extends DataApiObject
 	 */
 	protected function configArray(): array
 	{
-		return ['merchantId' => $this->_config->merchantId];
+		return ['merchantId' => $this->_merchantConfig->merchantId];
 	}
 
 }

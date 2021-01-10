@@ -4,7 +4,7 @@ namespace Tp\DataApi\Processors;
 
 use DateTime;
 use DateTimeImmutable;
-use Tp\InvalidParameterException;
+use Tp\Exceptions\InvalidParameterException;
 
 class DateTimeInflater extends ProcessorWithPaths
 {

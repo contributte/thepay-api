@@ -2,6 +2,8 @@
 
 namespace Tp;
 
+use Tp\Exceptions\InvalidParameterException;
+
 /**
  * Class representing one payment instance.
  */
@@ -62,6 +64,7 @@ class Payment
 	/**
 	 * Customer's billing information.
 	 * Used for 3D secure 2.0 customer authentication of card payments.
+	 *
 	 * @var CustomerBillingData|null
 	 */
 	protected $customerData = null;
@@ -356,7 +359,7 @@ class Payment
 			]);
 
 			if ($customerDataArr) {
-				$input["customerData"] = Escaper::jsonEncode($customerDataArr);
+				$input['customerData'] = Escaper::jsonEncode($customerDataArr);
 			}
 		}
 
@@ -412,13 +415,13 @@ class Payment
 
 		$items[] = 'password=' . $this->getMerchantConfig()->password;
 
-		return self::hashFunction(implode('&', $items));
+		return $this->hashFunction(implode('&', $items));
 	}
 
 	/**
 	 * Function that calculates hash.
 	 */
-	public static function hashFunction(string $str): string
+	public function hashFunction(string $str): string
 	{
 		return md5($str);
 	}

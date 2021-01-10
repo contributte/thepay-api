@@ -17,6 +17,11 @@ class Response extends DataApiObject
 	/** @var int */
 	protected $merchantId;
 
+	final public function __construct(array $data = [])
+	{
+		parent::__construct($data);
+	}
+
 	public static function createFromResponse(
 		array $response
 	)

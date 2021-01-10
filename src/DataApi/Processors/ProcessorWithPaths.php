@@ -11,7 +11,7 @@ abstract class ProcessorWithPaths extends Processor
 	/**
 	 * @param array[] $paths
 	 */
-	protected function __construct(array $paths)
+	final protected function __construct(array $paths)
 	{
 		$this->paths = $paths;
 	}

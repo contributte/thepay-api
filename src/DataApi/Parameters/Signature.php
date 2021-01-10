@@ -3,8 +3,8 @@
 namespace Tp\DataApi\Parameters;
 
 use Tp\DataApi\Processors\Digester;
-use Tp\InvalidSignatureException;
-use Tp\MissingParameterException;
+use Tp\Exceptions\InvalidSignatureException;
+use Tp\Exceptions\MissingParameterException;
 
 class Signature
 {

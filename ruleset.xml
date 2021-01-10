@@ -1,73 +1,31 @@
 <?xml version="1.0"?>
-<ruleset name="Contributte">
-    <!-- Contributte Coding Standard -->
-    <rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
+<ruleset>
+	<!-- Contributte Coding Standard -->
+	<rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
 
-    <!-- Specific rules -->
-    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
-        <properties>
-            <property name="rootNamespaces" type="array" value="
-                src=>Tp
-            "/>
-        </properties>
-    </rule>
+	<!-- Specific rules -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Tp"/>
+				<element key="tests/cases" value="Tests\Tp"/>
+			</property>
+			<property name="extensions" type="array" value="php,phpt"/>
+		</properties>
+	</rule>
 
-    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-        <exclude-pattern>*tests/cases/*</exclude-pattern>
-    </rule>
+	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+		<exclude-pattern>tests/cases/**/*</exclude-pattern>
+	</rule>
 
-    <rule ref="Squiz.Classes.ClassFileName.NoMatch">
-        <exclude-pattern>*tests/cases/*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName">
-        <exclude-pattern>*tests/cases/*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableParameterTypeHintSpecification">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingPropertyTypeHint">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversablePropertyTypeHintSpecification">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
+	<rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
+		<exclude-pattern>src/Helper/DivMerchant\.php</exclude-pattern>
+		<exclude-pattern>src/Helper/RadioMerchant\.php</exclude-pattern>
+	</rule>
 
-    <rule ref="Squiz.Commenting.VariableComment.MissingVar">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-    <rule ref="Squiz.Commenting.VariableComment.Missing">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="Squiz.Commenting.FunctionComment.InvalidTypeHint">
-        <exclude-pattern>src/DataApi/ValueFormatter.php</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName">
-        <exclude-pattern>src/exceptions/*</exclude-pattern>
-    </rule>
-    <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint">
-        <exclude-pattern>*</exclude-pattern>
-        <exclude-pattern>src/DataApi/Responses/Response.php</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing.IncorrectLinesCountBeforeControlStructure">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator.MultiLineTernaryOperatorNotUsed">
-        <exclude-pattern>*</exclude-pattern>
-    </rule>
-
-    <!--Exclude folders -->
-    <exclude-pattern>/tests/tmp</exclude-pattern>
+	<rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+		<exclude-pattern>src/DataApi/Requests/Request\.php</exclude-pattern>
+	</rule>
+	<!--Exclude folders -->
+	<exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>
