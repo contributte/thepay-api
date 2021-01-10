@@ -10,6 +10,7 @@ class ValueFormatter
 {
 
 	/**
+	 * @param string $type
 	 * @param mixed  $value
 	 * @return mixed
 	 * @throws InvalidArgumentException

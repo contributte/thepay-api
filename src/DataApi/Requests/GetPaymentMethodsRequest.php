@@ -21,7 +21,7 @@ class GetPaymentMethodsRequest extends Request
 	protected function configArray(): array
 	{
 		$configArray = parent::configArray();
-		$configArray['accountId'] = $this->_config->accountId;
+		$configArray['accountId'] = $this->merchantConfig->accountId;
 
 		return $configArray;
 	}

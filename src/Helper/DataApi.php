@@ -17,8 +17,8 @@ use Tp\DataApi\Responses\GetPaymentStateResponse;
 use Tp\DataApi\Responses\Response;
 use Tp\DataApi\Responses\ResponseFactory;
 use Tp\DataApi\Responses\SetPaymentMethodsResponse;
-use Tp\MerchantConfig;
 use Tp\Exceptions\SoapException;
+use Tp\MerchantConfig;
 
 class DataApi
 {
@@ -65,7 +65,6 @@ class DataApi
 			$data
 		);
 
-		/** @var GetPaymentInstructionsResponse $response */
 		return self::call(__FUNCTION__, $config, $request);
 	}
 

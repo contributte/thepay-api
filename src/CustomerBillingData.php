@@ -28,32 +28,32 @@ class CustomerBillingData
 	/** @var string|null customer's email */
 	protected $email;
 
-	function getFullName(): ?string
+	public function getFullName(): ?string
 	{
 		return $this->fullName;
 	}
 
-	function getCountry(): ?string
+	public function getCountry(): ?string
 	{
 		return $this->country;
 	}
 
-	function getCity(): ?string
+	public function getCity(): ?string
 	{
 		return $this->city;
 	}
 
-	function getPostcode(): ?string
+	public function getPostcode(): ?string
 	{
 		return $this->postcode;
 	}
 
-	function getStreet(): ?string
+	public function getStreet(): ?string
 	{
 		return $this->street;
 	}
 
-	function getEmail(): ?string
+	public function getEmail(): ?string
 	{
 		return $this->email;
 	}
@@ -61,7 +61,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $fullName full name of customer
 	 */
-	function setFullName(?string $fullName): void
+	public function setFullName(?string $fullName): void
 	{
 		$this->fullName = $fullName;
 	}
@@ -69,7 +69,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $country ISO 3166-1 country code
 	 */
-	function setCountry(?string $country): void
+	public function setCountry(?string $country): void
 	{
 		if ($country !== null && strlen($country) !== 2) {
 			throw new InvalidParameterException('country');
@@ -81,7 +81,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $city name of city
 	 */
-	function setCity(?string $city): void
+	public function setCity(?string $city): void
 	{
 		$this->city = $city;
 	}
@@ -89,7 +89,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $postcode postal code
 	 */
-	function setPostcode(?string $postcode): void
+	public function setPostcode(?string $postcode): void
 	{
 		$this->postcode = $postcode;
 	}
@@ -97,7 +97,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $street street name and number
 	 */
-	function setStreet(?string $street): void
+	public function setStreet(?string $street): void
 	{
 		$this->street = $street;
 	}
@@ -105,7 +105,7 @@ class CustomerBillingData
 	/**
 	 * @param string|null $email customer's email
 	 */
-	function setEmail(?string $email): void
+	public function setEmail(?string $email): void
 	{
 		$this->email = $email;
 	}

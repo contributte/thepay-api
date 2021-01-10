@@ -7,8 +7,8 @@ use Tp\DataApi\Parameters\Signature;
 use Tp\DataApi\Processors\DateTimeInflater;
 use Tp\DataApi\Processors\SoapFlattener;
 use Tp\Exceptions\InvalidSignatureException;
-use Tp\MerchantConfig;
 use Tp\Exceptions\MissingParameterException;
+use Tp\MerchantConfig;
 use Tp\Utils;
 
 class ResponseFactory
