@@ -21,7 +21,12 @@
 	</rule>
 
 	<rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-		<exclude-pattern>src/</exclude-pattern>
+		<exclude-pattern>src/Helper/DivMerchant\.php</exclude-pattern>
+		<exclude-pattern>src/Helper/RadioMerchant\.php</exclude-pattern>
+	</rule>
+
+	<rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
+		<exclude-pattern>src/DataApi/Requests/Request\.php</exclude-pattern>
 	</rule>
 	<!--Exclude folders -->
 	<exclude-pattern>/tests/tmp</exclude-pattern>

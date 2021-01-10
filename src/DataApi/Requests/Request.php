@@ -12,7 +12,7 @@ abstract class Request extends DataApiObject
 {
 
 	/** @var MerchantConfig */
-	protected $merchantConfig;
+	protected $_merchantConfig;
 
 	protected static $dateTimePaths = [];
 
@@ -23,7 +23,7 @@ abstract class Request extends DataApiObject
 	{
 		parent::__construct($data);
 
-		$this->merchantConfig = $merchantConfig;
+		$this->_merchantConfig = $merchantConfig;
 	}
 
 	/**
@@ -64,7 +64,7 @@ abstract class Request extends DataApiObject
 		$array = $this->toSoapRequestArray();
 		$signature = Signature::compute(
 			$array,
-			$this->merchantConfig->dataApiPassword
+			$this->_merchantConfig->dataApiPassword
 		);
 		$signatureArray = ['signature' => $signature];
 
@@ -76,7 +76,7 @@ abstract class Request extends DataApiObject
 	 */
 	protected function configArray(): array
 	{
-		return ['merchantId' => $this->merchantConfig->merchantId];
+		return ['merchantId' => $this->_merchantConfig->merchantId];
 	}
 
 }
