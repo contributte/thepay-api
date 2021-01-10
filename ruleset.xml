@@ -5,8 +5,6 @@
 
 	<!-- Specific rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
-		<exclude-pattern>tests/cases/**/*</exclude-pattern>
-		<exclude-pattern>src/**/*</exclude-pattern>
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Tp"/>
