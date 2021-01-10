@@ -75,7 +75,7 @@ class CustomerBillingData
 	 */
 	function setCountry(?string $country) : void
 	{
-		if ($country !== null && (!is_string($country) || strlen($country) != 2)) {
+		if ($country !== null && strlen($country) !== 2) {
 			throw new InvalidParameterException("country");
 		}
 		$this->country = $country;
