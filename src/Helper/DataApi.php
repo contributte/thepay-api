@@ -18,7 +18,7 @@ use Tp\DataApi\Responses\Response;
 use Tp\DataApi\Responses\ResponseFactory;
 use Tp\DataApi\Responses\SetPaymentMethodsResponse;
 use Tp\MerchantConfig;
-use Tp\SoapException;
+use Tp\Exceptions\SoapException;
 
 class DataApi
 {

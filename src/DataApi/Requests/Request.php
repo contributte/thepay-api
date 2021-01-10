@@ -2,7 +2,7 @@
 
 namespace Tp\DataApi\Requests;
 
-use Tp\BadMethodCallException;
+use Tp\Exceptions\BadMethodCallException;
 use Tp\DataApi\DataApiObject;
 use Tp\DataApi\Parameters\Signature;
 use Tp\DataApi\Processors\DateTimeDeflater;

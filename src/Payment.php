@@ -2,6 +2,8 @@
 
 namespace Tp;
 
+use Tp\Exceptions\InvalidParameterException;
+
 /**
  * Class representing one payment instance.
  */
@@ -62,6 +64,7 @@ class Payment
 	/**
 	 * Customer's billing information.
 	 * Used for 3D secure 2.0 customer authentication of card payments.
+	 *
 	 * @var CustomerBillingData|null
 	 */
 	protected $customerData = null;
@@ -356,7 +359,7 @@ class Payment
 			]);
 
 			if ($customerDataArr) {
-				$input["customerData"] = Escaper::jsonEncode($customerDataArr);
+				$input['customerData'] = Escaper::jsonEncode($customerDataArr);
 			}
 		}
 

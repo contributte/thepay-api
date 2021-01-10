@@ -44,7 +44,7 @@ abstract class DataApiObject implements ArrayAccess
 		$allProperties = $reflection->getProperties();
 		$dataProperties = array_filter(
 			$allProperties,
-			static function (ReflectionProperty $property) : bool {
+			static function (ReflectionProperty $property): bool {
 				return self::filterDataProperties($property);
 			}
 		);

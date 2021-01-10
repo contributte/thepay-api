@@ -4,7 +4,7 @@ namespace Tp\DataApi;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use Tp\InvalidArgumentException;
+use Tp\Exceptions\InvalidArgumentException;
 
 class ValueFormatter
 {

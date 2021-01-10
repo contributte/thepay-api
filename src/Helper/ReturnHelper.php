@@ -3,7 +3,7 @@
 namespace Tp\Helper;
 
 use SoapClient;
-use Tp\Exception;
+use Tp\Exceptions\Exception;
 use Tp\MerchantConfig;
 use Tp\PaymentReturnResponse;
 

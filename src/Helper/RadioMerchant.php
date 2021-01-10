@@ -3,7 +3,7 @@
 namespace Tp\Helper;
 
 use Tp\Escaper;
-use Tp\Exception;
+use Tp\Exceptions\Exception;
 use Tp\MerchantConfig;
 use Tp\Payment;
 

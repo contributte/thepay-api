@@ -2,6 +2,9 @@
 
 namespace Tp;
 
+use Tp\Exceptions\InvalidSignatureException;
+use Tp\Exceptions\MissingParameterException;
+
 /**
  * Class to handle returned payment callback from ThePay gate.
  */

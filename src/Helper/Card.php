@@ -5,7 +5,7 @@ namespace Tp\Helper;
 use SoapClient;
 use Tp\Card\InfoResponse;
 use Tp\Card\PaymentResponse;
-use Tp\Exception;
+use Tp\Exceptions\Exception;
 use Tp\MerchantConfig;
 
 class Card
