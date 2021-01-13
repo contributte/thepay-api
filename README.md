@@ -2,17 +2,19 @@
 
 -----
 
-[![Build Status](https://img.shields.io/travis/contributte/thepay-api.svg?style=flat-square)](https://travis-ci.org/contributte/thepay-api)
-[![Code coverage](https://img.shields.io/coveralls/contributte/thepay-api.svg?style=flat-square)](https://coveralls.io/r/contributte/thepay-api)
-[![Licence](https://img.shields.io/packagist/l/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/thepay-api.svg?style=flat-square)](https://packagist.org/packages/contributte/thepay-api)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
-
-## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/contributte/thepay-api.svg?style=flat-square)](http://bit.ly/ctteg)
+<p align=center>
+  <a href="https://github.com/contributte/thepay-api/actions"><img src="https://badgen.net/github/checks/contributte/thepay-api/master?cache=300"></a>
+  <a href="https://coveralls.io/r/contributte/thepay-api"><img src="https://badgen.net/coveralls/c/github/contributte/thepay-api?cache=300"></a>
+  <a href="https://packagist.org/packages/contributte/thepay-api"><img src="https://badgen.net/packagist/dm/contributte/thepay-api"></a>
+  <a href="https://packagist.org/packages/contributte/thepay-api"><img src="https://badgen.net/packagist/v/contributte/thepay-api"></a>
+</p>
+<p align=center>
+  <a href="https://packagist.org/packages/contributte/thepay-api"><img src="https://badgen.net/packagist/php/contributte/thepay-api"></a>
+  <a href="https://github.com/contributte/thepay-api"><img src="https://badgen.net/github/license/contributte/thepay-api"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
 ## Documentation
 
@@ -23,7 +25,7 @@
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| dev         | `^4.0`  | `master` | `>= 7.1` |
+| dev         | `^4.1`  | `master` | `>= 7.1` |
 | stable      | `^4.0`  | `master` | `>= 7.1` |
 | stable      | `^3.0`  | `master` | `>= 5.6` |
 | stable      | `^2.3`  | `master` | `>= 5.6` |
