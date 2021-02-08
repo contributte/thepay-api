@@ -20,7 +20,7 @@ class RequestFactory
 			$operation
 		);
 
-		return new $className($config, $data); /* @phpstan-ignore-line */
+		return new $className($config, $data);
 	}
 
 }
