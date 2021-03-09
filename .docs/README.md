@@ -7,8 +7,8 @@
 
 ## Install
 
-```
-$ composer require contributte/thepay-api
+```bash
+composer require contributte/thepay-api
 ```
 
 ## Official documentation
