@@ -1,7 +1,7 @@
 .PHONY: install qa cs csf phpstan tests coverage-clover coverage-html
 
 install:
-	composer update
+	composer install
 
 qa: phpstan cs
 
