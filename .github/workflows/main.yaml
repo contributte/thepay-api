@@ -33,7 +33,7 @@ jobs:
 
       - name: "Setup PHP cache environment"
         id: "extcache"
-        uses: "shivammathur/cache-extensions@v1"
+        uses: "shivammathur/cache-extensions@1.5.1"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -92,7 +92,7 @@ jobs:
 
       - name: "Setup PHP cache environment"
         id: "extcache"
-        uses: "shivammathur/cache-extensions@v1"
+        uses: "shivammathur/cache-extensions@1.5.1"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -158,7 +158,7 @@ jobs:
 
       - name: "Setup PHP cache environment"
         id: "extcache"
-        uses: "shivammathur/cache-extensions@v1"
+        uses: "shivammathur/cache-extensions@1.5.1"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -219,7 +219,7 @@ jobs:
 
       - name: "Setup PHP cache environment"
         id: "extcache"
-        uses: "shivammathur/cache-extensions@v1"
+        uses: "shivammathur/cache-extensions@1.5.1"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
