@@ -31,7 +31,7 @@ class PermanentPayment
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new TpException();
 		}
 
@@ -57,7 +57,7 @@ class PermanentPayment
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new TpException();
 		}
 

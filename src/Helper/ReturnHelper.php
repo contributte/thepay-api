@@ -42,7 +42,7 @@ class ReturnHelper
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new Exception();
 		}
 

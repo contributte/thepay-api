@@ -41,7 +41,7 @@ class Card
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new Exception();
 		}
 
@@ -73,7 +73,7 @@ class Card
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new Exception();
 		}
 
@@ -111,7 +111,7 @@ class Card
 			]
 		);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new Exception();
 		}
 
@@ -139,7 +139,7 @@ class Card
 			'signature'  => $signature,
 		]);
 
-		if (!$result) {
+		if ($result === false || $result === null) {
 			throw new Exception();
 		}
 
