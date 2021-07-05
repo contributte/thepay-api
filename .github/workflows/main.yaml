@@ -37,7 +37,7 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
-          key: "${{ env.cache-version }}"
+          key: "${{ env.cache-version }}-qa"
 
       - name: "Cache PHP extensions"
         uses: "actions/cache@v2.1.6"
@@ -96,7 +96,7 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
-          key: "${{ env.cache-version }}"
+          key: "${{ env.cache-version }}-static-analysis"
 
       - name: "Cache PHP extensions"
         uses: "actions/cache@v2.1.6"
@@ -162,7 +162,7 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
-          key: "${{ env.cache-version }}"
+          key: "${{ env.cache-version }} ${{ matrix.composer-args }}"
 
       - name: "Cache PHP extensions"
         uses: "actions/cache@v2.1.6"
