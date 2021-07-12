@@ -10,7 +10,21 @@ updates:
     schedule:
       interval: "daily"
 
+    # Apply default reviewer and label to created
+    # pull requests
+    reviewers:
+      - "trejjam"
+    labels:
+      - "automerge"
+
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+
+    # Apply default reviewer and label to created
+    # pull requests
+    reviewers:
+      - "trejjam"
+    labels:
+      - "automerge"
