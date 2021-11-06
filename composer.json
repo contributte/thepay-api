@@ -16,9 +16,9 @@
     "nette/tester": "^2.3.4",
     "ninjify/qa": "^0.12.0",
     "ninjify/nunjuck": "^0.3.0",
-    "phpstan/phpstan": "^0.12.65",
-    "phpstan/phpstan-deprecation-rules": "^0.12.6",
-    "phpstan/phpstan-strict-rules": "^0.12.7",
+    "phpstan/phpstan": "^1.1",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-strict-rules": "^1.0",
     "phpstan/extension-installer": "^1.1"
   },
   "suggest": {
