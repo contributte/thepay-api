@@ -6,6 +6,7 @@ use ArrayAccess;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
+use ReturnTypeWillChange;
 use Tp\Utils;
 
 abstract class DataApiObject implements ArrayAccess
@@ -128,7 +129,7 @@ abstract class DataApiObject implements ArrayAccess
 	 * @param string $offset
 	 * @return mixed
 	 */
-	#[\ReturnTypeWillChange]
+	#[ReturnTypeWillChange]
 	public function offsetGet($offset)
 	{
 		$getterName = 'get' . ucfirst($offset);

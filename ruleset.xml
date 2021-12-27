@@ -26,6 +26,10 @@
 	<rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
 		<exclude-pattern>src/DataApi/Requests/Request\.php</exclude-pattern>
 	</rule>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse">
+		<exclude-pattern>src/DataApi/DataApiObject\.php</exclude-pattern>
+	</rule>
 	<!--Exclude folders -->
 	<exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>
