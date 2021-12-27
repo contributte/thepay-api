@@ -118,7 +118,7 @@ abstract class DataApiObject implements ArrayAccess
 	 * @param string $offset
 	 * @return bool
 	 */
-	public function offsetExists($offset)
+	public function offsetExists($offset): bool
 	{
 		$keys = static::keys();
 		return in_array($offset, $keys, true);
