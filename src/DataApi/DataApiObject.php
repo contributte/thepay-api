@@ -128,6 +128,7 @@ abstract class DataApiObject implements ArrayAccess
 	 * @param string $offset
 	 * @return mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet($offset)
 	{
 		$getterName = 'get' . ucfirst($offset);
