@@ -134,7 +134,7 @@ class DataApi
 			$client = new SoapClient($config->dataWebServicesWsdl, $options);
 			$signed = $request->toSignedSoapRequestArray();
 
-			$rawResponse = $client->{$operation}($signed); /* @phpstan-ignore-line */
+			$rawResponse = $client->{$operation}($signed);
 		} catch (SoapFault $e) {
 			throw new SoapException($e->getMessage());
 		}
