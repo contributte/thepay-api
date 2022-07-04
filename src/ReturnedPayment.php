@@ -228,7 +228,7 @@ class ReturnedPayment extends Payment
 	 */
 	private function setProperty(string $key, $value): void
 	{
-		$this->{$key} = $value; /* @phpstan-ignore-line */
+		$this->{$key} = $value;
 	}
 
 	/**
@@ -236,7 +236,7 @@ class ReturnedPayment extends Payment
 	 */
 	private function getProperty(string $key)
 	{
-		return $this->{$key}; /* @phpstan-ignore-line */
+		return $this->{$key};
 	}
 
 	/**

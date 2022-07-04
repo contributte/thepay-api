@@ -28,7 +28,7 @@ class ValueFormatter
 
 		$method = 'format' . ucfirst($type);
 		if (method_exists(self::class, $method)) {
-			return static::$method($value); /* @phpstan-ignore-line */
+			return static::$method($value);
 		}
 
 		if (class_exists($type) && $value instanceof $type) {
