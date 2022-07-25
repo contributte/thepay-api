@@ -1,3 +1,17 @@
-includes:
-
 parameters:
+	ignoreErrors:
+		- # object to array
+			message: '~^Variable property access on \$this\(Tp\\DataApi\\DataApiObject\)\.$~'
+			path: %currentWorkingDirectory%/src/DataApi/DataApiObject.php
+		- # offsetGet, offsetSet
+			message: '~^Variable method call on \$this\(Tp\\DataApi\\DataApiObject\)\.$~'
+			path: %currentWorkingDirectory%/src/DataApi/DataApiObject.php
+		- # setProperty, getProperty
+			message: '~^Variable property access on \$this\(Tp\\ReturnedPayment\)\.$~'
+			path: %currentWorkingDirectory%/src/ReturnedPayment.php
+		- # generic formaters
+			message: '~^Variable static method call on Tp\\DataApi\\ValueFormatter\.$~'
+			path: %currentWorkingDirectory%/src/DataApi/ValueFormatter.php
+		- # remote API call
+			message: '~^Variable method call on SoapClient\.$~'
+			path: %currentWorkingDirectory%/src/Helper/DataApi.php

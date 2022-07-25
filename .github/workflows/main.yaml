@@ -9,6 +9,7 @@ on:
       - "*"
   schedule:
     - cron: "0 8 * * 1" # At 08:00 on Monday
+  workflow_dispatch:
 
 env:
   extensions: "soap json hash"
