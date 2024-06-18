@@ -10,7 +10,7 @@
     "ext-json": "*",
     "ext-soap": "*",
     "ext-hash": "*",
-    "nette/utils": "^2.4 | ^3.0"
+    "nette/utils": "^4.0.4"
   },
   "require-dev": {
     "nette/tester": "^2.3.4",
