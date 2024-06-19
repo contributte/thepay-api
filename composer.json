@@ -14,7 +14,7 @@
   },
   "require-dev": {
     "nette/tester": "^2.3.4",
-    "ninjify/qa": "^0.12.0",
+    "ninjify/qa": "^0.13.0",
     "ninjify/nunjuck": "^0.3.0",
     "phpstan/phpstan": "^1.1",
     "phpstan/phpstan-deprecation-rules": "^1.0",
