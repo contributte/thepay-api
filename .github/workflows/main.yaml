@@ -48,7 +48,7 @@ jobs:
           restore-keys: "${{ steps.extcache.outputs.key }}"
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@2.35.5"
+        uses: "shivammathur/setup-php@2.36.0"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -107,7 +107,7 @@ jobs:
           restore-keys: "${{ steps.extcache.outputs.key }}"
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@2.35.5"
+        uses: "shivammathur/setup-php@2.36.0"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -173,7 +173,7 @@ jobs:
           restore-keys: "${{ steps.extcache.outputs.key }}"
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@2.35.5"
+        uses: "shivammathur/setup-php@2.36.0"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
@@ -234,7 +234,7 @@ jobs:
           restore-keys: "${{ steps.extcache.outputs.key }}"
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@2.35.5"
+        uses: "shivammathur/setup-php@2.36.0"
         with:
           php-version: "${{ matrix.php-version }}"
           extensions: "${{ env.extensions }}"
