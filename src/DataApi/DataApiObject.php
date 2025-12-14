@@ -5,6 +5,7 @@ namespace Tp\DataApi;
 use ArrayAccess;
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
 use ReflectionProperty;
 use ReturnTypeWillChange;
 use Tp\Utils;
@@ -49,7 +50,7 @@ abstract class DataApiObject implements ArrayAccess
 				return self::filterDataProperties($property);
 			}
 		);
-		$sortedDataProperties = static::sortDataProperties($dataProperties);
+		$sortedDataProperties = self::sortDataProperties($dataProperties);
 
 		$propertyNames = [];
 		foreach ($sortedDataProperties as $property) {
@@ -149,7 +150,7 @@ abstract class DataApiObject implements ArrayAccess
 			$reflectionMethod = new ReflectionMethod($this, $setterName);
 			$parameterType = $reflectionMethod->getParameters()[0]->getType();
 
-			assert($parameterType !== null);
+			assert($parameterType instanceof ReflectionNamedType);
 
 			switch ($parameterType->getName()) {
 				case 'int':
