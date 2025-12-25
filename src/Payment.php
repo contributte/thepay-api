@@ -358,7 +358,7 @@ class Payment
 				'email'     => $customerData->getEmail(),
 			]);
 
-			if ($customerDataArr) {
+			if ($customerDataArr !== []) {
 				$input['customerData'] = Escaper::jsonEncode($customerDataArr);
 			}
 		}
