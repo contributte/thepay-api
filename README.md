@@ -2,7 +2,7 @@
 
 <p align=center>
   <a href="https://github.com/contributte/thepay-api/actions"><img src="https://badgen.net/github/checks/contributte/thepay-api/master"></a>
-  <a href="https://coveralls.io/r/contributte/thepay-api"><img src="https://badgen.net/coveralls/c/github/contributte/thepay-api"></a>
+  <a href="https://codecov.io/gh/contributte/thepay-api"><img src="https://badgen.net/codecov/c/github/contributte/thepay-api"></a>
   <a href="https://packagist.org/packages/contributte/thepay-api"><img src="https://badgen.net/packagist/dm/contributte/thepay-api"></a>
   <a href="https://packagist.org/packages/contributte/thepay-api"><img src="https://badgen.net/packagist/v/contributte/thepay-api"></a>
 </p>
