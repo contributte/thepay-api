@@ -18,25 +18,23 @@ class ValueFormatter
 	public static function format(string $type, $value)
 	{
 		if (substr($type, -2) === '[]') {
-			return static::formatList(substr($type, 0, -2), $value);
+			return self::formatList(substr($type, 0, -2), $value);
 		}
 
-		$isNull = $value === null;
-		if ($isNull) {
+		if ($value === null) {
 			return null;
 		}
 
-		$method = 'format' . ucfirst($type);
-		if (method_exists(self::class, $method)) {
-			return static::$method($value);
-		}
-
-		if (class_exists($type) && $value instanceof $type) {
-			return $value;
-		}
-
-		$message = 'Unknown type ' . $type . '.';
-		throw new InvalidArgumentException($message);
+		return match ($type) {
+			'int' => self::formatInt($value),
+			'float' => self::formatFloat($value),
+			'bool' => self::formatBool($value),
+			'string' => self::formatString($value),
+			'dateTime' => self::formatDateTime($value),
+			default => class_exists($type) && $value instanceof $type
+				? $value
+				: throw new InvalidArgumentException('Unknown type ' . $type . '.'),
+		};
 	}
 
 	public static function formatInt(?int $value): ?int

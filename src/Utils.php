@@ -50,7 +50,7 @@ class Utils
 	{
 		$count = count($array);
 
-		$range = $count
+		$range = $count > 0
 			? range(0, $count - 1)
 			: [];
 
