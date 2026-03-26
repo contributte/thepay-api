@@ -6,20 +6,16 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.1 || ^8.0",
+    "php": "^8.2",
     "ext-json": "*",
     "ext-soap": "*",
     "ext-hash": "*",
     "nette/utils": "^4.0.4"
   },
   "require-dev": {
-    "nette/tester": "^2.3.4",
-    "ninjify/qa": "^0.13.0",
-    "ninjify/nunjuck": "^0.4.0",
-    "phpstan/phpstan": "^1.1",
-    "phpstan/phpstan-deprecation-rules": "^1.0",
-    "phpstan/phpstan-strict-rules": "^1.0",
-    "phpstan/extension-installer": "^1.1"
+    "contributte/qa": "~0.4.0",
+    "contributte/phpstan": "~0.1.0",
+    "contributte/tester": "~0.4.0"
   },
   "suggest": {
     "contributte/thepay": "to use as a Nette extension"
@@ -31,7 +27,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tp\\": "tests/cases/"
+      "Tests\\": "tests/"
     }
   },
   "minimum-stability": "RC",
