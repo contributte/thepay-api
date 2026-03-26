@@ -22,12 +22,12 @@ class PermanentPayment
 
 		$result = $client->createPermanentPaymentRequest(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $payment->getMerchantData(),
-				'description'  => $payment->getDescription(),
-				'returnUrl'    => $payment->getReturnUrl(),
-				'signature'    => $payment->getSignature(),
+				'description' => $payment->getDescription(),
+				'returnUrl' => $payment->getReturnUrl(),
+				'signature' => $payment->getSignature(),
 			]
 		);
 
@@ -50,10 +50,10 @@ class PermanentPayment
 
 		$result = $client->getPermanentPaymentRequest(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $payment->getMerchantData(),
-				'signature'    => $payment->getSignatureLite(),
+				'signature' => $payment->getSignatureLite(),
 			]
 		);
 

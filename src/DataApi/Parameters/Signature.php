@@ -33,10 +33,7 @@ class Signature
 			throw new MissingParameterException('password');
 		}
 
-		if (
-			$data['password'] === null
-			|| $data['password'] === ''
-		) {
+		if ($data['password'] === null || $data['password'] === '') {
 			throw new MissingParameterException('password');
 		}
 

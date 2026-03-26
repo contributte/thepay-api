@@ -10,12 +10,9 @@ class ValueFormatter
 {
 
 	/**
-	 * @param string $type
-	 * @param mixed  $value
-	 * @return mixed
 	 * @throws InvalidArgumentException
 	 */
-	public static function format(string $type, $value)
+	public static function format(string $type, mixed $value): mixed
 	{
 		if (substr($type, -2) === '[]') {
 			return static::formatList(substr($type, 0, -2), $value);
@@ -36,6 +33,7 @@ class ValueFormatter
 		}
 
 		$message = 'Unknown type ' . $type . '.';
+
 		throw new InvalidArgumentException($message);
 	}
 
@@ -66,10 +64,7 @@ class ValueFormatter
 		return boolval($value);
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public static function formatString($value): ?string
+	public static function formatString(mixed $value): ?string
 	{
 		if ($value === null) {
 			return null;
@@ -78,10 +73,7 @@ class ValueFormatter
 		return strval($value);
 	}
 
-	/**
-	 * @param DateTimeInterface|string|null $value
-	 */
-	public static function formatDateTime($value): ?DateTimeInterface
+	public static function formatDateTime(DateTimeInterface|string|null $value): ?DateTimeInterface
 	{
 		if ($value === null) {
 			return null;

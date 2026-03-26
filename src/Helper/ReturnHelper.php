@@ -10,11 +10,6 @@ use Tp\PaymentReturnResponse;
 class ReturnHelper
 {
 
-	protected static function getSignature(array $data)
-	{
-		return md5(http_build_query(array_filter($data)));
-	}
-
 	public static function returnPayment(
 		MerchantConfig $config,
 		$paymentId,
@@ -25,20 +20,20 @@ class ReturnHelper
 		$signature = static::getSignature(
 			[
 				'merchantId' => $config->merchantId,
-				'accountId'  => $config->accountId,
-				'paymentId'  => $paymentId,
-				'reason'     => $reason,
-				'password'   => $config->password,
+				'accountId' => $config->accountId,
+				'paymentId' => $paymentId,
+				'reason' => $reason,
+				'password' => $config->password,
 			]
 		);
 
 		$result = $client->returnPaymentRequest(
 			[
 				'merchantId' => $config->merchantId,
-				'accountId'  => $config->accountId,
-				'paymentId'  => $paymentId,
-				'reason'     => $reason,
-				'signature'  => $signature,
+				'accountId' => $config->accountId,
+				'paymentId' => $paymentId,
+				'reason' => $reason,
+				'signature' => $signature,
 			]
 		);
 
@@ -47,6 +42,11 @@ class ReturnHelper
 		}
 
 		return new PaymentReturnResponse($result);
+	}
+
+	protected static function getSignature(array $data)
+	{
+		return md5(http_build_query(array_filter($data)));
 	}
 
 }

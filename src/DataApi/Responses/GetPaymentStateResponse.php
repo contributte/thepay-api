@@ -5,8 +5,7 @@ namespace Tp\DataApi\Responses;
 class GetPaymentStateResponse extends Response
 {
 
-	/** @var int|null */
-	protected $state;
+	protected ?int $state = null;
 
 	public static function createFromResponse(
 		array $response

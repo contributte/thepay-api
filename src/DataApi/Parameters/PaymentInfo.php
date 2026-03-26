@@ -7,84 +7,61 @@ use Tp\DataApi\DataApiObject;
 class PaymentInfo extends DataApiObject
 {
 
-	/** @var bool|null */
-	protected $isOffline;
+	protected ?bool $isOffline = null;
 
-	/** @var string|null */
-	protected $paymentPageUrl;
+	protected ?string $paymentPageUrl = null;
 
 	/**
 	 * Only applicable for unpaid payments.
-	 *
-	 * @var string|null
 	 */
-	protected $paymentInfoUrl;
+	protected ?string $paymentInfoUrl = null;
 
 	/**
 	 * Only applicable for unpaid payments.
-	 *
-	 * @var string|null
 	 */
-	protected $methodChangeUrl;
+	protected ?string $methodChangeUrl = null;
 
-	/** @var float|null */
-	protected $value;
+	protected ?float $value = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $accountNumberPrefix;
+	protected ?string $accountNumberPrefix = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $accountNumber;
+	protected ?string $accountNumber = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $bankCode;
+	protected ?string $bankCode = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $vs;
+	protected ?string $vs = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $ss;
+	protected ?string $ss = null;
 
 	/**
 	 * Only applicable for offline payments.
-	 *
-	 * @var string|null
 	 */
-	protected $ebankingUrl;
+	protected ?string $ebankingUrl = null;
 
 	/**
 	 * Only for SuperCash.
-	 *
-	 * @var string|null
 	 */
-	protected $scCode;
+	protected ?string $scCode = null;
 
 	/**
 	 * Only for SuperCash.
-	 *
-	 * @var string|null
 	 */
-	protected $scBarcodeUrl;
+	protected ?string $scBarcodeUrl = null;
 
 	public function getIsOffline(): ?bool
 	{

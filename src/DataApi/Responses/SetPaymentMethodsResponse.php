@@ -7,14 +7,12 @@ use Tp\Utils;
 class SetPaymentMethodsResponse extends Response
 {
 
-	public const STATUS_OK    = 'OK';
+	public const STATUS_OK = 'OK';
 	public const STATUS_ERROR = 'ERROR';
 
-	/** @var int */
-	protected $accountId;
+	protected int $accountId;
 
-	/** @var string|null */
-	protected $status;
+	protected ?string $status = null;
 
 	public static function createFromResponse(
 		array $response

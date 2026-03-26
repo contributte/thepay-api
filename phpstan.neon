@@ -1,4 +1,19 @@
+includes:
+	- vendor/contributte/phpstan/phpstan.neon
+
 parameters:
+	level: 1
+	phpVersion: 80200
+
+	scanDirectories:
+		- src
+
+	fileExtensions:
+		- php
+
+	paths:
+		- src
+
 	ignoreErrors:
 		- # object to array
 			message: '~^Variable property access on \$this\(Tp\\DataApi\\DataApiObject\)\.$~'
@@ -15,3 +30,6 @@ parameters:
 		- # remote API call
 			message: '~^Variable method call on SoapClient\.$~'
 			path: %currentWorkingDirectory%/src/Helper/DataApi.php
+		- # unsafe new static()
+			message: '~^Unsafe usage of new static\(\)\.$~'
+			path: %currentWorkingDirectory%/src/DataApi/Processors/Processor.php

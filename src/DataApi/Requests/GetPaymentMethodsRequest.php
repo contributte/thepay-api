@@ -5,8 +5,7 @@ namespace Tp\DataApi\Requests;
 class GetPaymentMethodsRequest extends Request
 {
 
-	/** @var bool|null */
-	protected $onlyActive;
+	protected ?bool $onlyActive = null;
 
 	public function getOnlyActive(): ?bool
 	{

@@ -7,11 +7,9 @@ use stdClass;
 class PaymentReturnResponse
 {
 
-	/** @var bool */
-	protected $status;
+	protected bool $status;
 
-	/** @var string */
-	protected $errorDescription;
+	protected string $errorDescription;
 
 	public function __construct(stdClass $data)
 	{

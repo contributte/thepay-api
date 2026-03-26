@@ -13,82 +13,70 @@ class Payment
 	/**
 	 * Config containing merchant-specific configuration options.
 	 * Instance of Tp\TpMerchantConfig, passed to the Tp\TpPayment constructor.
-	 *
-	 * @var MerchantConfig
 	 */
-	protected $config;
+	protected MerchantConfig $config;
 
 	/** @var float|null value indicating the amount of money that should be paid. */
-	protected $value = null;
+	protected ?float $value = null;
 
 	/** @var string|null Currency identifier. */
-	protected $currency = null;
+	protected ?string $currency = null;
 
 	/** @var string|null Payment description that should be visible to the customer. */
-	protected $description = null;
+	protected ?string $description = null;
 
 	/**
 	 * Any merchant-specific data, that will be returned to the site after
 	 * the payment has been completed.
-	 *
-	 * @var string|null
 	 */
-	protected $merchantData = null;
+	protected ?string $merchantData = null;
 
 	/**
 	 * URL where to redirect the user after the payment has been completed.
 	 * It defaults to value configured in administration interface, but
 	 * can be overwritten using this property.
-	 *
-	 * @var string|null
 	 */
-	protected $returnUrl = null;
+	protected ?string $returnUrl = null;
 
 	/**
 	 * Target of the “Back to e-shop” button on the offline payment info page.
 	 * If not set, defaults to the account URL. Must be a valid HTTP or HTTPS
 	 * URL.
-	 *
-	 * @var string|null
 	 */
-	protected $backToEshopUrl = null;
+	protected ?string $backToEshopUrl = null;
 
 	/**
 	 * ID of payment method to use for paying. Setting this argument should
 	 * be result of user's selection, not merchant's selection.
-	 *
-	 * @var int|null
 	 */
-	protected $methodId = null;
+	protected ?int $methodId = null;
 
 	/**
 	 * Customer's billing information.
 	 * Used for 3D secure 2.0 customer authentication of card payments.
-	 *
-	 * @var CustomerBillingData|null
 	 */
-	protected $customerData = null;
+	protected ?CustomerBillingData $customerData = null;
 
 	/**
 	 * @var string|null Customer’s e-mail address. Used to send payment info and payment link from the payment info
 	 *      page.
 	 */
-	protected $customerEmail = null;
+	protected ?string $customerEmail = null;
 
 	/**
 	 * @var bool|null If card payment will be charged immediately or only blocked and charged later by paymentDeposit
 	 *      operation.
 	 */
-	protected $deposit = null;
+	protected ?bool $deposit = null;
 
 	/** @var bool|null If card payment is recurring. */
-	protected $isRecurring = null;
+	protected ?bool $isRecurring = null;
 
 	/** @var string|null numerical specific symbol (used only if payment method supports it). */
-	protected $merchantSpecificSymbol = null;
+	protected ?string $merchantSpecificSymbol = null;
 
 	/** @var EetDph|null VAT decomposition for EET */
-	protected $eetDph = null;
+	protected ?EetDph $eetDph = null;
 
 	/**
 	 * Constructor. Create the payment.
@@ -300,7 +288,6 @@ class Payment
 		$this->merchantSpecificSymbol = $merchantSpecificSymbol;
 	}
 
-
 	/**
 	 * @return EetDph VAT decomposition for EET
 	 */
@@ -351,11 +338,11 @@ class Payment
 		if ($customerData !== null) {
 			$customerDataArr = array_filter([
 				'full_name' => $customerData->getFullName(),
-				'country'   => $customerData->getCountry(),
-				'city'      => $customerData->getCity(),
-				'postcode'  => $customerData->getPostcode(),
-				'street'    => $customerData->getStreet(),
-				'email'     => $customerData->getEmail(),
+				'country' => $customerData->getCountry(),
+				'city' => $customerData->getCity(),
+				'postcode' => $customerData->getPostcode(),
+				'street' => $customerData->getStreet(),
+				'email' => $customerData->getEmail(),
 			]);
 
 			if ($customerDataArr) {

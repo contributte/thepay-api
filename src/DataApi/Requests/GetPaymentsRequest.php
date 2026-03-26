@@ -16,14 +16,11 @@ class GetPaymentsRequest extends Request
 		['searchParams', 'finishedOnTo'],
 	];
 
-	/** @var GetPaymentsSearchParams|null */
-	protected $searchParams;
+	protected ?GetPaymentsSearchParams $searchParams = null;
 
-	/** @var PaginationRequest|null */
-	protected $pagination;
+	protected ?PaginationRequest $pagination = null;
 
-	/** @var Ordering|null */
-	protected $ordering;
+	protected ?Ordering $ordering = null;
 
 	public function getSearchParams(): ?GetPaymentsSearchParams
 	{

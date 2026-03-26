@@ -7,14 +7,12 @@ use stdClass;
 class PermanentPaymentResponse
 {
 
-	/** @var bool */
-	protected $status;
+	protected bool $status;
 
-	/** @var string */
-	protected $errorDescription;
+	protected string $errorDescription;
 
 	/** @var PermanentPaymentResponseMethod[] */
-	protected $paymentMethods = [];
+	protected array $paymentMethods = [];
 
 	public function __construct(stdClass $data)
 	{
@@ -41,7 +39,6 @@ class PermanentPaymentResponse
 			}
 		}
 	}
-
 
 	public function getStatus(): bool
 	{

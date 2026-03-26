@@ -8,95 +8,65 @@ use Tp\DataApi\DataApiObject;
 class Payment extends DataApiObject
 {
 
-	/** @var int|null */
-	protected $id;
+	protected ?int $id = null;
 
-	/** @var int|null */
-	protected $account;
+	protected ?int $account = null;
 
-	/** @var int|null */
-	protected $state;
+	protected ?int $state = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $createdOn;
+	protected ?DateTimeImmutable $createdOn = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $finishedOn;
+	protected ?DateTimeImmutable $finishedOn = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $canceledOn;
+	protected ?DateTimeImmutable $canceledOn = null;
 
-	/** @var int|null */
-	protected $payOff;
+	protected ?int $payOff = null;
 
-	/** @var int|null */
-	protected $payOffCancel;
+	protected ?int $payOffCancel = null;
 
-	/** @var float|null */
-	protected $value;
+	protected ?float $value = null;
 
-	/** @var float|null */
-	protected $receivedValue;
+	protected ?float $receivedValue = null;
 
-	/** @var int|null */
-	protected $currency;
+	protected ?int $currency = null;
 
-	/** @var float|null */
-	protected $fee;
+	protected ?float $fee = null;
 
-	/** @var string|null */
-	protected $description;
+	protected ?string $description = null;
 
-	/** @var string|null */
-	protected $merchantData;
+	protected ?string $merchantData = null;
 
-	/** @var int|null */
-	protected $paymentMethod;
+	protected ?int $paymentMethod = null;
 
-	/** @var string|null */
-	protected $specificSymbol;
+	protected ?string $specificSymbol = null;
 
-	/** @var string|null */
-	protected $merchantSpecificSymbol;
+	protected ?string $merchantSpecificSymbol = null;
 
-	/** @var string|null */
-	protected $accountNumber;
+	protected ?string $accountNumber = null;
 
-	/** @var string|null */
-	protected $accountOwnerName;
+	protected ?string $accountOwnerName = null;
 
-	/** @var string|null */
-	protected $returnUrl;
+	protected ?string $returnUrl = null;
 
-	/** @var int|null */
-	protected $permanentPayment;
+	protected ?int $permanentPayment = null;
 
-	/** @var bool|null */
-	protected $deposit;
+	protected ?bool $deposit = null;
 
-	/** @var bool|null */
-	protected $recurring;
+	protected ?bool $recurring = null;
 
-	/** @var string|null */
-	protected $ip;
+	protected ?string $ip = null;
 
-	/** @var string|null */
-	protected $customerEmail;
+	protected ?string $customerEmail = null;
 
-	/** @var string|null */
-	protected $fik;
+	protected ?string $fik = null;
 
-	/** @var string|null */
-	protected $bkp;
+	protected ?string $bkp = null;
 
-	/** @var string|null */
-	protected $pkp;
+	protected ?string $pkp = null;
 
-	/** @var string|null */
-	protected $receiptUrl;
+	protected ?string $receiptUrl = null;
 
-	/** @var bool|null */
-	protected $firstSuccess;
+	protected ?bool $firstSuccess = null;
 
 	public function getId(): ?int
 	{

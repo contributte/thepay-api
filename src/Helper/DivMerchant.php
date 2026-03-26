@@ -17,7 +17,7 @@ class DivMerchant extends Merchant
 	protected $cssUrl;
 
 	/** @var string payment button skin */
-	protected $skin;
+	protected string $skin;
 
 	/**
 	 * Disable default CSS styling for payment button.

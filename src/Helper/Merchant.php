@@ -13,10 +13,8 @@ abstract class Merchant
 	/**
 	 * Payment that should be rendered using the helper. Specify the
 	 * payment as parameter to the helper constructor.
-	 *
-	 * @var Payment
 	 */
-	protected $payment;
+	protected Payment $payment;
 
 	/**
 	 * Constructor. Specify the payment object here.

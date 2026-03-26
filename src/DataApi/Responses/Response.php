@@ -9,13 +9,12 @@ class Response extends DataApiObject
 {
 
 	/** @var array[] */
-	protected static $listPaths = [];
+	protected static array $listPaths = [];
 
 	/** @var array[] */
-	protected static $dateTimePaths = [];
+	protected static array $dateTimePaths = [];
 
-	/** @var int */
-	protected $merchantId;
+	protected int $merchantId;
 
 	final public function __construct(array $data = [])
 	{

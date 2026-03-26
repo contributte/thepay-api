@@ -5,8 +5,7 @@ namespace Tp\DataApi\Requests;
 class GetPaymentStateRequest extends Request
 {
 
-	/** @var int|null */
-	protected $paymentId;
+	protected ?int $paymentId = null;
 
 	public function getPaymentId(): ?int
 	{

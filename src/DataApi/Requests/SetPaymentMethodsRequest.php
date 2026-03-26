@@ -7,14 +7,13 @@ use Tp\DataApi\ValueFormatter;
 class SetPaymentMethodsRequest extends Request
 {
 
-	public const TYPE_ALL       = 'all';
+	public const TYPE_ALL = 'all';
 	public const TYPE_WHITELIST = 'whitelist';
 
-	/** @var string */
-	protected $type = self::TYPE_WHITELIST;
+	protected string $type = self::TYPE_WHITELIST;
 
 	/** @var int[] */
-	protected $paymentMethods = [];
+	protected array $paymentMethods = [];
 
 	public function getType(): string
 	{

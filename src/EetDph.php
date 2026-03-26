@@ -9,43 +9,43 @@ class EetDph
 {
 
 	/** @var float|null Celková částka plnění osvobozených od DPH, ostatních plnění */
-	protected $eetZaklNepodlDph = null;
+	protected ?float $eetZaklNepodlDph = null;
 
 	/** @var float|null Celkový základ daně se základní sazbou DPH */
-	protected $eetZaklDan1 = null;
+	protected ?float $eetZaklDan1 = null;
 
 	/** @var float|null Celková DPH se základní sazbou */
-	protected $eetDan1 = null;
+	protected ?float $eetDan1 = null;
 
 	/** @var float|null Celkový základ daně s první sníženou sazbou DPH */
-	protected $eetZaklDan2 = null;
+	protected ?float $eetZaklDan2 = null;
 
 	/** @var float|null Celková DPH s první sníženou sazbou */
-	protected $eetDan2 = null;
+	protected ?float $eetDan2 = null;
 
 	/** @var float|null Celkový základ daně s druhou sníženou sazbou DPH */
-	protected $eetZaklDan3 = null;
+	protected ?float $eetZaklDan3 = null;
 
 	/** @var float|null Celková DPH s druhou sníženou sazbou */
-	protected $eetDan3 = null;
+	protected ?float $eetDan3 = null;
 
 	/** @var float|null Celková částka v režimu DPH pro cestovní službu */
-	protected $eetCestSluz = null;
+	protected ?float $eetCestSluz = null;
 
 	/** @var float|null Celková částka v režimu DPH pro prodej použitého zboží se základní sazbou */
-	protected $eetPouzitZboz1 = null;
+	protected ?float $eetPouzitZboz1 = null;
 
 	/** @var float|null Celková částka v režimu DPH pro prodej použitého zboží s první sníženou sazbou */
-	protected $eetPouzitZboz2 = null;
+	protected ?float $eetPouzitZboz2 = null;
 
 	/** @var float|null Celková částka v režimu DPH pro prodej použitého zboží s druhou sníženou sazbou */
-	protected $eetPouzitZboz3 = null;
+	protected ?float $eetPouzitZboz3 = null;
 
 	/** @var float|null Celková částka plateb určená k následnému čerpání nebo zúčtování */
-	protected $eetUrcenoCerpZuct = null;
+	protected ?float $eetUrcenoCerpZuct = null;
 
 	/** @var float|null Celková částka plateb, které jsou následným čerpáním nebo zúčtováním platby */
-	protected $eetCerpZuct = null;
+	protected ?float $eetCerpZuct = null;
 
 	public function getZaklNepodlDph(): ?float
 	{

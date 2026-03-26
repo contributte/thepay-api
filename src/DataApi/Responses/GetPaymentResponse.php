@@ -7,14 +7,13 @@ use Tp\DataApi\Parameters\Payment;
 class GetPaymentResponse extends Response
 {
 
-	protected static $dateTimePaths = [
+	protected static array $dateTimePaths = [
 		['payment', 'createdOn'],
 		['payment', 'finishedOn'],
 		['payment', 'canceledOn'],
 	];
 
-	/** @var Payment|null */
-	protected $payment;
+	protected ?Payment $payment = null;
 
 	public static function createFromResponse(
 		array $response

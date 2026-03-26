@@ -11,22 +11,22 @@ class CustomerBillingData
 {
 
 	/** @var string|null full name of customer */
-	protected $fullName;
+	protected ?string $fullName = null;
 
 	/** @var string|null ISO 3166-1 country code */
-	protected $country;
+	protected ?string $country = null;
 
 	/** @var string|null name of city */
-	protected $city;
+	protected ?string $city = null;
 
 	/** @var string|null postal code */
-	protected $postcode;
+	protected ?string $postcode = null;
 
 	/** @var string|null street name and number */
-	protected $street;
+	protected ?string $street = null;
 
 	/** @var string|null customer's email */
-	protected $email;
+	protected ?string $email = null;
 
 	public function getFullName(): ?string
 	{

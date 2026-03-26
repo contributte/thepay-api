@@ -11,74 +11,21 @@ use Tp\Exceptions\MissingParameterException;
 class ReturnedPayment extends Payment
 {
 
-	/** @var int|null merchantId from request */
-	protected $requestMerchantId = null;
-
-	/** @var int|null accountId from request */
-	protected $requestAccountId = null;
-
-	/** @var int Payment status. One of enum values specified in the ThePay API documentation. */
-	protected $status;
-
-	/** @var int Unique payment ID in the ThePay system. */
-	protected $paymentId;
-
-	/** @var mixed Threat rating of the IP address that sent the payment. */
-	protected $ipRating;
-
-	/** @var string For offline payments, variable symbol (or equivalent) that identifies the payment. */
-	protected $variableSymbol;
-
-	/** @var string Signature specified in arguments by ThePay gate. */
-	protected $signature;
-
-	/** @var bool if payment method is offline or online */
-	protected $isOffline;
-
-	/**
-	 * @var bool if payment needs additional confirmation about it's state - for online methods with additional
-	 *      confirmation
-	 */
-	protected $needConfirm;
-
-	/**
-	 * @var bool if actual action is confirmation about payment state - for online methods with additional
-	 *      confirmation
-	 */
-	protected $isConfirm;
-
-	/** @var string|null specific symbol from bank transaction. Used only for permanent payments. */
-	protected $specificSymbol = null;
-
-	/**
-	 * Number of customer's account in full format including bank code.
-	 * Is set only if merchant has turned on this functionality and account number is available for used payment method.
-	 *
-	 * @var string|null
-	 */
-	protected $customerAccountNumber = null;
-
-	/**
-	 * Name of customer's account. Usually name and surname of customer, but it could be arbitrary name
-	 * which he set for his account in internet banking of his bank.
-	 * Is filled only for some payment methods.
-	 *
-	 * @var string|null
-	 */
-	protected $customerAccountName = null;
-
 	/**
 	 * Waiting for payment. Initial state.
 	 */
 	public const STATUS_NOT_PAID = 1;
+
 	/**
 	 * Correctly paid.
 	 */
 	public const STATUS_OK = 2;
+
 	/**
 	 * Canceled by customer.
 	 */
 	public const STATUS_CANCELED = 3;
+
 	/**
 	 * Some error occurred during payment process. Payment is not payed.
 	 */
@@ -106,7 +53,7 @@ class ReturnedPayment extends Payment
 	public const STATUS_CARD_DEPOSIT = 9;
 
 	/** @var string[] */
-	protected static $BOOL_ARGS = [
+	protected static array $BOOL_ARGS = [
 		'isOffline',
 		'needConfirm',
 		'isConfirm',
@@ -115,7 +62,7 @@ class ReturnedPayment extends Payment
 	];
 
 	/** @var string[] */
-	protected static $INT_ARGS = [
+	protected static array $INT_ARGS = [
 		'requestMerchantId',
 		'requestAccountId',
 		'status',
@@ -124,12 +71,12 @@ class ReturnedPayment extends Payment
 	];
 
 	/** @var string[] */
-	protected static $FLOAT_ARGS = [
+	protected static array $FLOAT_ARGS = [
 		'value',
 	];
 
 	/** @var string[] required arguments of incoming request. */
-	protected static $REQUIRED_ARGS = [
+	protected static array $REQUIRED_ARGS = [
 		'value',
 		'currency',
 		'methodId',
@@ -143,7 +90,7 @@ class ReturnedPayment extends Payment
 	];
 
 	/** @var string[] optional arguments of incoming request. */
-	protected static $OPTIONAL_ARGS = [
+	protected static array $OPTIONAL_ARGS = [
 		'isConfirm',
 		'variableSymbol',
 		'specificSymbol',
@@ -154,15 +101,67 @@ class ReturnedPayment extends Payment
 	];
 
 	/** @var null[] default values for optional args */
-	protected static $OPTIONAL_ARGS_DEFAULT = [
-		'isConfirm'             => null,
-		'variableSymbol'        => null,
-		'specificSymbol'        => null,
-		'deposit'               => null,
-		'isRecurring'           => null,
+	protected static array $OPTIONAL_ARGS_DEFAULT = [
+		'isConfirm' => null,
+		'variableSymbol' => null,
+		'specificSymbol' => null,
+		'deposit' => null,
+		'isRecurring' => null,
 		'customerAccountNumber' => null,
-		'customerAccountName'   => null,
+		'customerAccountName' => null,
 	];
+
+	/** @var int|null merchantId from request */
+	protected ?int $requestMerchantId = null;
+
+	/** @var int|null accountId from request */
+	protected ?int $requestAccountId = null;
+
+	/** @var int Payment status. One of enum values specified in the ThePay API documentation. */
+	protected int $status;
+
+	/** @var int Unique payment ID in the ThePay system. */
+	protected int $paymentId;
+
+	/** @var mixed Threat rating of the IP address that sent the payment. */
+	protected mixed $ipRating;
+
+	/** @var string For offline payments, variable symbol (or equivalent) that identifies the payment. */
+	protected string $variableSymbol;
+
+	/** @var string Signature specified in arguments by ThePay gate. */
+	protected string $signature;
+
+	/** @var bool if payment method is offline or online */
+	protected bool $isOffline;
+
+	/**
+	 * @var bool if payment needs additional confirmation about it's state - for online methods with additional
+	 *      confirmation
+	 */
+	protected bool $needConfirm;
+
+	/**
+	 * @var bool if actual action is confirmation about payment state - for online methods with additional
+	 *      confirmation
+	 */
+	protected bool $isConfirm;
+
+	/** @var string|null specific symbol from bank transaction. Used only for permanent payments. */
+	protected ?string $specificSymbol = null;
+
+	/**
+	 * Number of customer's account in full format including bank code.
+	 * Is set only if merchant has turned on this functionality and account number is available for used payment method.
+	 */
+	protected ?string $customerAccountNumber = null;
+
+	/**
+	 * Name of customer's account. Usually name and surname of customer, but it could be arbitrary name
+	 * which he set for his account in internet banking of his bank.
+	 * Is filled only for some payment methods.
+	 */
+	protected ?string $customerAccountName = null;
 
 	/**
 	 * @param array $args array Optional arguments parameter, that can specify the
@@ -220,23 +219,6 @@ class ReturnedPayment extends Payment
 		}
 
 		$this->signature = $args['signature'];
-	}
-
-	/**
-	 * @param string $key
-	 * @param mixed $value
-	 */
-	private function setProperty(string $key, $value): void
-	{
-		$this->{$key} = $value;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	private function getProperty(string $key)
-	{
-		return $this->{$key};
 	}
 
 	/**
@@ -413,6 +395,16 @@ class ReturnedPayment extends Payment
 	public function getCustomerAccountName(): ?string
 	{
 		return $this->customerAccountName;
+	}
+
+	private function setProperty(string $key, mixed $value): void
+	{
+		$this->{$key} = $value;
+	}
+
+	private function getProperty(string $key): mixed
+	{
+		return $this->{$key};
 	}
 
 }

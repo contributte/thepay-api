@@ -10,23 +10,17 @@ use stdClass;
 class InfoResponse extends PaymentResponse
 {
 
-	/** @var string */
-	protected $cardNumberMasked;
+	protected string $cardNumberMasked;
 
-	/** @var string */
-	protected $cardBrand;
+	protected string $cardBrand;
 
-	/** @var string */
-	protected $countryCode;
+	protected string $countryCode;
 
-	/** @var string */
-	protected $bankName;
+	protected string $bankName;
 
-	/** @var string */
-	protected $cardType;
+	protected string $cardType;
 
-	/** @var string */
-	protected $cardLevel;
+	protected string $cardLevel;
 
 	public function __construct(stdClass $data)
 	{

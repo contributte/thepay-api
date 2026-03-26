@@ -7,11 +7,9 @@ use Tp\DataApi\DataApiObject;
 abstract class Pagination extends DataApiObject
 {
 
-	/** @var int|null */
-	protected $page;
+	protected ?int $page = null;
 
-	/** @var int|null */
-	protected $itemsOnPage;
+	protected ?int $itemsOnPage = null;
 
 	public function getPage(): ?int
 	{

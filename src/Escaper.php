@@ -11,10 +11,8 @@ class Escaper
 	 * JSON-encode with all hex options enabled. Results in values insertable
 	 * into inline <scripts>. Note that if used in a HTML attribute (e. g.
 	 * onclick), the JSON string must be encoded to HTML entities as well.
-	 *
-	 * @param mixed $value
 	 */
-	public static function jsonEncode($value): string
+	public static function jsonEncode(mixed $value): string
 	{
 		return Nette\Utils\Json::encode($value, self::jsonEncodeOptions());
 	}
@@ -28,8 +26,7 @@ class Escaper
 		return JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
 	}
 
-	/** @return mixed */
-	public static function jsonDecode(string $json)
+	public static function jsonDecode(string $json): mixed
 	{
 		return Nette\Utils\Json::decode($json);
 	}

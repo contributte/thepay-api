@@ -5,20 +5,15 @@ namespace Tp;
 class PermanentPaymentResponseMethod
 {
 
-	/** @var int */
-	protected $methodId;
+	protected int $methodId;
 
-	/** @var string */
-	protected $methodName;
+	protected string $methodName;
 
-	/** @var string */
-	protected $url;
+	protected string $url;
 
-	/** @var string */
-	protected $accountNumber;
+	protected string $accountNumber;
 
-	/** @var int */
-	protected $vs;
+	protected int $vs;
 
 	public function __construct(
 		int $methodId,

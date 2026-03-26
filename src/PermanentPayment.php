@@ -5,17 +5,13 @@ namespace Tp;
 class PermanentPayment
 {
 
-	/** @var MerchantConfig */
-	protected $config;
+	protected MerchantConfig $config;
 
-	/** @var string|null */
-	protected $merchantData;
+	protected ?string $merchantData = null;
 
-	/** @var string|null */
-	protected $description;
+	protected ?string $description = null;
 
-	/** @var string|null */
-	protected $returnUrl;
+	protected ?string $returnUrl = null;
 
 	public function __construct(
 		MerchantConfig $config,
@@ -73,12 +69,12 @@ class PermanentPayment
 	public function getSignature(): string
 	{
 		$data = [
-			'merchantId'   => $this->getMerchantConfig()->merchantId,
-			'accountId'    => $this->getMerchantConfig()->accountId,
+			'merchantId' => $this->getMerchantConfig()->merchantId,
+			'accountId' => $this->getMerchantConfig()->accountId,
 			'merchantData' => $this->getMerchantData(),
-			'description'  => $this->getDescription(),
-			'returnUrl'    => $this->getReturnUrl(),
-			'password'     => $this->getMerchantConfig()->password,
+			'description' => $this->getDescription(),
+			'returnUrl' => $this->getReturnUrl(),
+			'password' => $this->getMerchantConfig()->password,
 		];
 
 		return md5(
@@ -94,10 +90,10 @@ class PermanentPayment
 	public function getSignatureLite(): string
 	{
 		$data = [
-			'merchantId'   => $this->getMerchantConfig()->merchantId,
-			'accountId'    => $this->getMerchantConfig()->accountId,
+			'merchantId' => $this->getMerchantConfig()->merchantId,
+			'accountId' => $this->getMerchantConfig()->accountId,
 			'merchantData' => $this->getMerchantData(),
-			'password'     => $this->getMerchantConfig()->password,
+			'password' => $this->getMerchantConfig()->password,
 		];
 
 		return md5(

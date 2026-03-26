@@ -9,11 +9,13 @@ class Digester
 
 	final protected function __construct()
 	{
+		// static class
 	}
 
 	public static function process(array $input): string
 	{
 		$instance = new static();
+
 		// Start with an empty path [].
 		return $instance->processHash($input);
 	}
@@ -67,10 +69,8 @@ class Digester
 	/**
 	 * Hashes, lists and booleans are treated specially. Other values are simply
 	 * converted to strings, strings are left untouched.
-	 *
-	 * @param mixed $value
 	 */
-	protected function processItem($value): string
+	protected function processItem(mixed $value): string
 	{
 		if (Utils::isList($value)) {
 			return $this->processList($value);

@@ -6,7 +6,7 @@ abstract class ProcessorWithPaths extends Processor
 {
 
 	/** @var array[] */
-	protected $paths = [];
+	protected array $paths = [];
 
 	/**
 	 * @param array[] $paths

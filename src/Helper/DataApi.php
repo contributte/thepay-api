@@ -92,8 +92,8 @@ class DataApi
 	{
 		$data = [
 			'searchParams' => $searchParams,
-			'pagination'   => $pagination,
-			'ordering'     => $ordering,
+			'pagination' => $pagination,
+			'ordering' => $ordering,
 		];
 		$request = RequestFactory::getRequest(
 			__FUNCTION__,
@@ -111,7 +111,7 @@ class DataApi
 	): SetPaymentMethodsResponse
 	{
 		$data = [
-			'type'           => $type,
+			'type' => $type,
 			'paymentMethods' => $paymentMethods,
 		];
 		$request = RequestFactory::getRequest(

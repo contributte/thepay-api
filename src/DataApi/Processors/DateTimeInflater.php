@@ -13,10 +13,7 @@ class DateTimeInflater extends ProcessorWithPaths
 	{
 		$onPath = $this->onPath($itemPath);
 
-		if (
-			$value !== null
-			&& $onPath
-		) {
+		if ($value !== null && $onPath) {
 			// Pozor, neprojde, pokud časové razítko obsahuje desetinnou část
 			// vteřin. Viz https://bugs.php.net/bug.php?id=51950.
 			$processed = DateTimeImmutable::createFromFormat(DateTime::ISO8601, $value);
@@ -24,6 +21,7 @@ class DateTimeInflater extends ProcessorWithPaths
 				$errorPathArray = $itemPath;
 				array_unshift($errorPathArray, '');
 				$errorPathString = implode('/', $errorPathArray);
+
 				throw new InvalidParameterException($errorPathString);
 			}
 

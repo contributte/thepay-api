@@ -9,21 +9,20 @@ use Tp\DataApi\ValueFormatter;
 class GetPaymentsResponse extends Response
 {
 
-	protected static $listPaths = [
+	protected static array $listPaths = [
 		['payments', 'payment'],
 	];
 
-	protected static $dateTimePaths = [
+	protected static array $dateTimePaths = [
 		['payments', 'createdOn'],
 		['payments', 'finishedOn'],
 		['payments', 'canceledOn'],
 	];
 
 	/** @var Payment[] */
-	protected $payments = [];
+	protected array $payments = [];
 
-	/** @var PaginationResponse|null */
-	protected $pagination;
+	protected ?PaginationResponse $pagination = null;
 
 	public static function createFromResponse(
 		array $response

@@ -7,8 +7,7 @@ use Tp\DataApi\Parameters\PaymentInfo;
 class GetPaymentInstructionsResponse extends Response
 {
 
-	/** @var PaymentInfo|null */
-	protected $paymentInfo;
+	protected ?PaymentInfo $paymentInfo = null;
 
 	public static function createFromResponse(
 		array $response

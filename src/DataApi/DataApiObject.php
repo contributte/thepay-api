@@ -6,7 +6,6 @@ use ArrayAccess;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
-use ReturnTypeWillChange;
 use Tp\Utils;
 
 abstract class DataApiObject implements ArrayAccess
@@ -22,17 +21,6 @@ abstract class DataApiObject implements ArrayAccess
 		}
 	}
 
-	public function toArray(): array
-	{
-		$data = [];
-		$keys = self::keys();
-		foreach ($keys as $name) {
-			$data[$name] = static::demodelizeRecursive($this->{$name});
-		}
-
-		return $data;
-	}
-
 	/**
 	 * @return string[]
 	 */
@@ -45,9 +33,7 @@ abstract class DataApiObject implements ArrayAccess
 		$allProperties = $reflection->getProperties();
 		$dataProperties = array_filter(
 			$allProperties,
-			static function (ReflectionProperty $property): bool {
-				return self::filterDataProperties($property);
-			}
+			static fn (ReflectionProperty $property): bool => self::filterDataProperties($property)
 		);
 		$sortedDataProperties = static::sortDataProperties($dataProperties);
 
@@ -57,6 +43,83 @@ abstract class DataApiObject implements ArrayAccess
 		}
 
 		return $propertyNames;
+	}
+
+	public function toArray(): array
+	{
+		$data = [];
+		$keys = self::keys();
+		foreach ($keys as $name) {
+			$data[$name] = static::demodelizeRecursive($this->{$name});
+		}
+
+		return $data;
+	}
+
+	public function offsetExists(mixed $offset): bool
+	{
+		$keys = static::keys();
+
+		return in_array($offset, $keys, true);
+	}
+
+	public function offsetGet(mixed $offset): mixed
+	{
+		$getterName = 'get' . ucfirst($offset);
+
+		return $this->{$getterName}();
+	}
+
+	public function offsetSet(mixed $offset, mixed $value): void
+	{
+		$setterName = 'set' . ucfirst($offset);
+
+		if ($value !== null && is_string($value)) {
+			$reflectionMethod = new ReflectionMethod($this, $setterName);
+			$parameterType = $reflectionMethod->getParameters()[0]->getType();
+
+			assert($parameterType !== null);
+
+			switch ($parameterType->getName()) {
+				case 'int':
+					$value = intval($value);
+
+					break;
+				case 'float':
+					$value = floatval($value);
+
+					break;
+				case 'bool':
+					$value = $value === '1';
+
+					break;
+			}
+		}
+
+		$this->{$setterName}($value);
+	}
+
+	public function offsetUnset(mixed $offset): void
+	{
+		$this->offsetSet($offset, null);
+	}
+
+	protected static function demodelizeRecursive($value)
+	{
+		if ($value instanceof self) {
+			$demodelized = $value->toArray();
+		} else {
+			if (is_array($value)) {
+				$demodelized = [];
+				foreach ($value as $k => $v) {
+					$demodelized[$k] = static::demodelizeRecursive($v);
+				}
+			} else {
+				$demodelized = $value;
+			}
+		}
+
+		return $demodelized;
 	}
 
 	private static function filterDataProperties(
@@ -93,89 +156,6 @@ abstract class DataApiObject implements ArrayAccess
 		}
 
 		return array_merge($inherited, $own);
-	}
-
-	protected static function demodelizeRecursive($value)
-	{
-		if ($value instanceof self) {
-			$demodelized = $value->toArray();
-		} else {
-			if (is_array($value)) {
-				$demodelized = [];
-				foreach ($value as $k => $v) {
-					$demodelized[$k] = static::demodelizeRecursive($v);
-				}
-			} else {
-				$demodelized = $value;
-			}
-		}
-
-		return $demodelized;
-	}
-
-	/* *** ArrayAccess *** */
-
-	/**
-	 * @param string $offset
-	 * @return bool
-	 */
-	public function offsetExists($offset): bool
-	{
-		$keys = static::keys();
-		return in_array($offset, $keys, true);
-	}
-
-	/**
-	 * @param string $offset
-	 * @return mixed
-	 */
-	#[ReturnTypeWillChange]
-	public function offsetGet($offset)
-	{
-		$getterName = 'get' . ucfirst($offset);
-
-		return $this->{$getterName}();
-	}
-
-	/**
-	 * @param string $offset
-	 * @param mixed  $value
-	 */
-	public function offsetSet($offset, $value): void
-	{
-		$setterName = 'set' . ucfirst($offset);
-
-		if ($value !== null && is_string($value)) {
-			$reflectionMethod = new ReflectionMethod($this, $setterName);
-			$parameterType = $reflectionMethod->getParameters()[0]->getType();
-
-			assert($parameterType !== null);
-
-			switch ($parameterType->getName()) {
-				case 'int':
-					$value = intval($value);
-
-					break;
-				case 'float':
-					$value = floatval($value);
-
-					break;
-				case 'bool':
-					$value = $value === '1';
-
-					break;
-			}
-		}
-
-		$this->{$setterName}($value);
-	}
-
-	/**
-	 * @param string $offset
-	 */
-	public function offsetUnset($offset): void
-	{
-		$this->offsetSet($offset, null);
-	}
+	}/* *** ArrayAccess *** */
 
 }

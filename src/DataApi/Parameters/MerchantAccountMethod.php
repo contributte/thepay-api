@@ -7,14 +7,11 @@ use Tp\DataApi\DataApiObject;
 class MerchantAccountMethod extends DataApiObject
 {
 
-	/** @var int|null */
-	protected $id;
+	protected ?int $id = null;
 
-	/** @var string|null */
-	protected $name;
+	protected ?string $name = null;
 
-	/** @var bool|null */
-	protected $active;
+	protected ?bool $active = null;
 
 	public function getId(): ?int
 	{

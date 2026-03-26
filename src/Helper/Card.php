@@ -11,11 +11,6 @@ use Tp\MerchantConfig;
 class Card
 {
 
-	protected static function getSignature(array $data)
-	{
-		return md5(http_build_query(array_filter($data)));
-	}
-
 	public static function depositPayment(
 		MerchantConfig $config,
 		$merchantData
@@ -25,19 +20,19 @@ class Card
 
 		$signature = static::getSignature(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $merchantData,
-				'password'     => $config->password,
+				'password' => $config->password,
 			]
 		);
 
 		$result = $client->cardDepositPaymentRequest(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $merchantData,
-				'signature'    => $signature,
+				'signature' => $signature,
 			]
 		);
 
@@ -57,19 +52,19 @@ class Card
 
 		$signature = static::getSignature(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $merchantData,
-				'password'     => $config->password,
+				'password' => $config->password,
 			]
 		);
 
 		$result = $client->cardStornoPaymentRequest(
 			[
-				'merchantId'   => $config->merchantId,
-				'accountId'    => $config->accountId,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
 				'merchantData' => $merchantData,
-				'signature'    => $signature,
+				'signature' => $signature,
 			]
 		);
 
@@ -91,23 +86,23 @@ class Card
 
 		$signature = static::getSignature(
 			[
-				'merchantId'      => $config->merchantId,
-				'accountId'       => $config->accountId,
-				'merchantData'    => $merchantData,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
+				'merchantData' => $merchantData,
 				'newMerchantData' => $newMerchantData,
-				'value'           => $value,
-				'password'        => $config->password,
+				'value' => $value,
+				'password' => $config->password,
 			]
 		);
 
 		$result = $client->cardCreateRecurrentPaymentRequest(
 			[
-				'merchantId'      => $config->merchantId,
-				'accountId'       => $config->accountId,
-				'merchantData'    => $merchantData,
+				'merchantId' => $config->merchantId,
+				'accountId' => $config->accountId,
+				'merchantData' => $merchantData,
 				'newMerchantData' => $newMerchantData,
-				'value'           => $value,
-				'signature'       => $signature,
+				'value' => $value,
+				'signature' => $signature,
 			]
 		);
 
@@ -127,16 +122,16 @@ class Card
 
 		$signature = static::getSignature([
 			'merchantId' => $config->merchantId,
-			'accountId'  => $config->accountId,
-			'paymentId'  => $paymentId,
-			'password'   => $config->password,
+			'accountId' => $config->accountId,
+			'paymentId' => $paymentId,
+			'password' => $config->password,
 		]);
 
 		$result = $client->getCardInfoRequest([
 			'merchantId' => $config->merchantId,
-			'accountId'  => $config->accountId,
-			'paymentId'  => $paymentId,
-			'signature'  => $signature,
+			'accountId' => $config->accountId,
+			'paymentId' => $paymentId,
+			'signature' => $signature,
 		]);
 
 		if ($result === false || $result === null) {
@@ -144,6 +139,11 @@ class Card
 		}
 
 		return new InfoResponse($result);
+	}
+
+	protected static function getSignature(array $data)
+	{
+		return md5(http_build_query(array_filter($data)));
 	}
 
 }

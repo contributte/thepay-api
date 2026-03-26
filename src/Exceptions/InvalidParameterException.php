@@ -13,6 +13,7 @@ class InvalidParameterException extends Exception
 	public function __construct(string $parameter)
 	{
 		$this->parameter = $parameter;
+
 		parent::__construct('Invalid parameter value.');
 	}
 

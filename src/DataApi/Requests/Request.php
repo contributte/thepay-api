@@ -11,10 +11,9 @@ use Tp\MerchantConfig;
 abstract class Request extends DataApiObject
 {
 
-	/** @var MerchantConfig */
-	protected $_merchantConfig;
-
 	protected static $dateTimePaths = [];
+
+	protected MerchantConfig $_merchantConfig;
 
 	final public function __construct(
 		MerchantConfig $merchantConfig,

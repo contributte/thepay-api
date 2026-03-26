@@ -10,46 +10,37 @@ class GetPaymentsSearchParams extends DataApiObject
 {
 
 	/** @var int[] */
-	protected $accountId = [];
+	protected array $accountId = [];
 
 	/** @var int[] */
-	protected $state = [];
+	protected array $state = [];
 
 	/** @var int[] */
-	protected $currency = [];
+	protected array $currency = [];
 
-	/** @var float|null */
-	protected $valueFrom;
+	protected ?float $valueFrom = null;
 
-	/** @var float|null */
-	protected $valueTo;
+	protected ?float $valueTo = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $createdOnFrom;
+	protected ?DateTimeImmutable $createdOnFrom = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $createdOnTo;
+	protected ?DateTimeImmutable $createdOnTo = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $finishedOnFrom;
+	protected ?DateTimeImmutable $finishedOnFrom = null;
 
-	/** @var DateTimeImmutable|null */
-	protected $finishedOnTo;
+	protected ?DateTimeImmutable $finishedOnTo = null;
 
 	/** @var int[] */
-	protected $accounting = [];
+	protected array $accounting = [];
 
-	/** @var string|null */
-	protected $description;
+	protected ?string $description = null;
 
-	/** @var string|null */
-	protected $merchantData;
+	protected ?string $merchantData = null;
 
 	/** @var int[] */
-	protected $method = [];
+	protected array $method = [];
 
-	/** @var string|null */
-	protected $specificSymbol;
+	protected ?string $specificSymbol = null;
 
 	/**
 	 * @return int[]

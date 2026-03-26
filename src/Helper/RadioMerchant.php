@@ -14,7 +14,7 @@ class RadioMerchant
 {
 
 	/** @var MerchantConfig merchant configuration */
-	protected $config;
+	protected MerchantConfig $config;
 
 	protected $name;
 
@@ -93,7 +93,7 @@ class RadioMerchant
 	/**
 	 * @return string|int value of radio button that originally represents ThePay payment method
 	 */
-	public function getValue()
+	public function getValue(): string|int
 	{
 		return $this->value;
 	}
@@ -101,7 +101,7 @@ class RadioMerchant
 	/**
 	 * @param string|int $value value of radio button that originally represents ThePay payment method
 	 */
-	public function setValue($value): void
+	public function setValue(string|int $value): void
 	{
 		$this->value = $value;
 	}
@@ -150,13 +150,6 @@ class RadioMerchant
 		return $this->currency;
 	}
 
-	private function createSignature(array $params): string
-	{
-		$str = http_build_query(array_filter(array_merge($params, ['password' => $this->config->password])));
-
-		return md5($str);
-	}
-
 	/**
 	 * Generate HTML code for payment component.
 	 *
@@ -167,11 +160,11 @@ class RadioMerchant
 		$gateUrl = $this->config->gateUrl;
 		$queryArgs = [
 			'merchantId' => $this->config->merchantId,
-			'accountId'  => $this->config->accountId,
-			'name'       => $this->name,
-			'value'      => $this->value,
-			'showIcon'   => $this->showIcon,
-			'selected'   => $this->isTpMethodChosen() ? (int) $_REQUEST['tp_radio_value'] : '',
+			'accountId' => $this->config->accountId,
+			'name' => $this->name,
+			'value' => $this->value,
+			'showIcon' => $this->showIcon,
+			'selected' => $this->isTpMethodChosen() ? (int) $_REQUEST['tp_radio_value'] : '',
 		];
 		// Currency is an optional argument. For compatibility reasons, it is
 		// not present in the query at all if its value is empty.
@@ -222,11 +215,6 @@ class RadioMerchant
 	public function isTpOffline(): bool
 	{
 		return ($_REQUEST['tp_radio_is_offline'] ?? '') !== '';
-	}
-
-	protected function clearCookies(): void
-	{
-		setcookie('tp_selected_val', '', 1);
 	}
 
 	/**
@@ -343,6 +331,18 @@ class RadioMerchant
 		$out .= '<div id="thepay-method-result"></div>';
 
 		return $out;
+	}
+
+	protected function clearCookies(): void
+	{
+		setcookie('tp_selected_val', '', 1);
+	}
+
+	private function createSignature(array $params): string
+	{
+		$str = http_build_query(array_filter(array_merge($params, ['password' => $this->config->password])));
+
+		return md5($str);
 	}
 
 }

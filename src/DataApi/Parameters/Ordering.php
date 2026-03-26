@@ -7,11 +7,9 @@ use Tp\DataApi\DataApiObject;
 class Ordering extends DataApiObject
 {
 
-	/** @var string|null */
-	protected $orderBy;
+	protected ?string $orderBy = null;
 
-	/** @var string|null */
-	protected $orderHow;
+	protected ?string $orderHow = null;
 
 	public function getOrderBy(): ?string
 	{

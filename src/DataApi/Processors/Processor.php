@@ -9,10 +9,13 @@ abstract class Processor
 
 	public static function process(array $input): array
 	{
-		$instance = new static(); /* @phpstan-ignore-line */
+		$instance = new static();
+
 		// Start with an empty path [].
 		return $instance->processHash($input, []);
 	}
+
+	abstract protected function convertValue($value, array $itemPath);
 
 	/**
 	 * @param string[]|int[] $currentPath
@@ -61,7 +64,5 @@ abstract class Processor
 
 		return $processed;
 	}
-
-	abstract protected function convertValue($value, array $itemPath);
 
 }

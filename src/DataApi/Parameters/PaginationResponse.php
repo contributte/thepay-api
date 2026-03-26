@@ -5,8 +5,7 @@ namespace Tp\DataApi\Parameters;
 class PaginationResponse extends Pagination
 {
 
-	/** @var int|null */
-	protected $totalPages;
+	protected ?int $totalPages = null;
 
 	public function getTotalPages(): ?int
 	{

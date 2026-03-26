@@ -8,15 +8,14 @@ use Tp\DataApi\ValueFormatter;
 class GetPaymentMethodsResponse extends Response
 {
 
-	protected static $listPaths = [
+	protected static array $listPaths = [
 		['methods', 'method'],
 	];
 
-	/** @var int|null */
-	protected $accountId;
+	protected ?int $accountId = null;
 
 	/** @var MerchantAccountMethod[] */
-	protected $methods = [];
+	protected array $methods = [];
 
 	public static function createFromResponse(
 		array $response
